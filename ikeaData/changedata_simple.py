@@ -22,7 +22,7 @@ def searching_data(n,start_str,end_str):
     size_data = ''
     for data_rpdi in data_rpd:
         # print(data_rpdi)
-        if start_flag:
+        if start2_flag:
             if data_rpdi == end_str:
                 end_flag = True
                 # print("--------------------------------end-----------------------------")
