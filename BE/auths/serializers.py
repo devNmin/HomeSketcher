@@ -4,18 +4,18 @@ from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from auths.models import User
 
 class RegisterUserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(
-        max_length = 25,
-        min_length = 8,
-        write_only = True
-    )
-    
+    # user_password = serializers.CharField(
+    #     max_length = 25,
+    #     min_length = 8,
+    #     # write_only :  password를 updating, creating 할 때는 사용되지만, serializing 할 때는 포함되지 않도록 하기 위해서
+    #     write_only = True
+    # ),
     class Meta:
         model = User
-        field = [
+        fields = [
             'user_pk',
             'user_email',
-            'user_password',
+            'password',
             'user_name',
             'user_nickname',
             'user_gender',
@@ -38,11 +38,11 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("user_email is already exists")
         return attrs
         
-# query param 
+# signup
 class SignupSwaggerSerializer(serializers.Serializer):
     user_email  = serializers.CharField(help_text='유저 이메일', required=True)
-    user_password = serializers.CharField(help_text='유저 비밀번호', required=True)
+    password = serializers.CharField(help_text='유저 비밀번호', required=True)
     user_name  = serializers.CharField(help_text='유저 이름', required=True)
     user_nickname 	= serializers.CharField(help_text='유저 닉네임', required=True)
     user_gender 	= serializers.IntegerField(help_text='유저 성별', required=True)
-    user_birth 	= serializers.IntegerField(help_text='유저 생년월일', required=True)
+    user_birth 	= serializers.DateField(help_text='유저 생년월일', required=True)
