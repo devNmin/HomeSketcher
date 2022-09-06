@@ -13,12 +13,20 @@ SECRET_KEY = 'django-insecure-om5=wr27(f2j@1%233f$4k#7$0%z=mu@lyrca-$f#81njezrz#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    #App
+    'accounts',
+
+     # 'Library'
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'rest_framework_simplejwt.token_blacklist',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
