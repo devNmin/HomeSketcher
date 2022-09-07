@@ -2,7 +2,7 @@
   height: 60px;
   display: flex;
   align-items: center;
-  background-color: grey;
+  background-color: #FFFAEE;
   position: sticky;
   top: 0;
   z-index: 100;
@@ -23,50 +23,16 @@
 }
 
 .navbar_searchInput {
-  height: 15px;
+  height: 20px;
   padding: 10px;
   border: none;
-  width: 100%;
+  width: 50%;
 }
 
 .navbar_searchIcon {
-  background-color: #cd9042;
+  background-color: transparent;
   padding: 10px;
-  height: 15px;
-}
-
-.navbar_option {
-  display: flex;
-  flex-direction: column;
-  margin-left: 10px;
-  margin-right: 10px;
-  color: white;
-}
-
-.navbar_nav {
-  display: flex;
-  justify-content: space-evenly;
-}
-
-.navbar_optionLineOne {
-  font-size: 10px;
-}
-
-.navbar_optionLineTwo {
-  font-size: 13px;
-  font-weight: 800;
-  margin-top: 3px;
-}
-
-.navbar_optionBasket{
-  display: flex;
-  align-items: center;
-  color: white;
-}
-
-.navbar_optionLineTwo_Basket_count {
-  margin-right: 10px;
-  margin-left: 10px;
+  height: 40px;
 }
 
 .nav ul {
@@ -84,12 +50,12 @@
 
 .nav a {
   text-decoration: none;
-  color: white;
+  color: black;
 }
 
 .nav a:hover,
 .nav a:active {
-  color: #f3cafb;
+  color: grey;
 }
 
 .nav button {
@@ -97,7 +63,7 @@
   background: none;
   border: none;
   padding: 0.5rem 1.5rem;
-  color: white;
+  color: black;
   cursor: pointer;
   /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26); */
   border-radius: 20px;

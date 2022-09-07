@@ -3,7 +3,7 @@ import SearchIcon from '@mui/icons-material/Search';
 
 // npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
-import logo from './Logo.png';
+import logo from '../../assets/Logo.png';
 import styles from './Navbar.module.css';
 
 function Navbar(props) {
@@ -12,7 +12,7 @@ function Navbar(props) {
       <img className={styles.navbar_logo} src={logo} alt="" />
       <div className={styles.navbar_search}>
         <input className={styles.navbar_searchInput} type="text" />
-        <SearchIcon className={styles.navbar_searchIcon} />
+        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />
       </div>
       <nav className={styles.nav}>
         <ul>

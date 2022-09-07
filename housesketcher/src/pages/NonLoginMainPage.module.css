@@ -1,0 +1,50 @@
+.header_section {
+  background-color: rgba(0, 0, 0, 0.26);
+  background-image: url(../assets/nonloginMain.jpg);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 960px;
+  margin-right: -8px;
+  margin-left: -8px;
+  color: white;
+  padding: 3%;
+  padding-left: 5%;
+}
+
+.title_h1 {
+  font-size: 4rem;
+}
+
+.title_h2 {
+  font-size: 2rem;
+}
+
+.title {
+  margin-left: 5%;
+  margin-top: 7%;
+}
+
+.title button {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 25px;
+  padding-left: 25px;
+  background-color: transparent;
+  border: 3px solid;
+  border-color: yellow;
+  border-radius: 6px 6px;
+  color: white;
+  font-size: 24px;
+  margin-top: 30px;
+}
+
+.title button:hover,
+.title button:active {
+  color: yellow;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.26);
+}
+
+.fas {
+  margin-left: 10px;
+}
