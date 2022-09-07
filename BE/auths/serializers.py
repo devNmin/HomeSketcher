@@ -13,7 +13,6 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'user_pk',
             'user_email',
             'password',
             'user_name',
@@ -75,4 +74,4 @@ class LoginSwaggerSerializer(serializers.Serializer):
     user_email  = serializers.CharField(help_text='유저 이메일', required=True)
     user_password = serializers.CharField(help_text='유저 비밀번호', required=True)
     user_password2 = serializers.CharField(help_text='유저 비밀번호2', required=True)
-    
+

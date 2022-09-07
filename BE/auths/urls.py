@@ -14,6 +14,8 @@ urlpatterns = [
     path('login/', LoginAPIView.as_view(), name="login"),
     path('logout/', LogoutAPIView.as_view(), name="logout"),
     path('delete/<int:pk>/', DeleteUserView.as_view() , name="delete"),
+    #토큰 재발급
     path('token_refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    #토큰 유효성 검사
     path('token_verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]

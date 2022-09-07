@@ -1,4 +1,5 @@
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,11 @@ ALLOWED_HOSTS = ['*']
 INSTALLED_APPS = [
     #App
     'accounts',
+    'auths',
 
+    #swagger library
+    'drf_yasg',
+      
      # 'Library'
     'rest_framework',
     'rest_framework_simplejwt',
@@ -34,12 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
-    'drf_yasg',  
-    'rest_framework',  
-    'rest_framework_simplejwt', 
-    'rest_framework_simplejwt.token_blacklist',
     
-    'auths',
 ]
 
 MIDDLEWARE = [
@@ -137,11 +137,26 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    'USER_ID_FIELD': 'user_pk'
+    'AUTH_HEADER_TYPES': ('Bearer','JWT',),
+    'ALGORITHM': 'HS256',
+    'SIGNING_KEY': SECRET_KEY,
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
 }
+
 
 AUTHENTICATION_BACKENDS = (
         'django.contrib.auth.backends.ModelBackend',
     )
 
 AUTH_USER_MODEL = 'auths.User'
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS' :{
+        'Bearer':{
+            'type':'apiKey',
+            'name':'Authorization',
+            'in':'header'
+        }
+    }
+}

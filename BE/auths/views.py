@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
@@ -7,10 +6,11 @@ from rest_framework.response import Response
 from rest_framework import permissions, status, generics
 from .models import User
 from drf_yasg.utils import swagger_auto_schema
-from .returnDto import (
+from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
 )
+
 from .serializers import (
     RegisterUserSerializer,
     SignupSwaggerSerializer,
@@ -55,7 +55,7 @@ class LoginAPIView(APIView):
 
         user = authenticate(
             request, 
-            user_pk=user1.user_pk,
+            id=user1.id,
             password=user_password
         )
     
@@ -90,7 +90,7 @@ class LogoutAPIView(generics.GenericAPIView):
         sz = self.get_serializer(data=request.data)
         sz.is_valid(raise_exception=True)
         sz.save()
-        return Response("로그아웃 되었습니다.", status=status.HTTP_204_NO_CONTENT)
+        return returnSuccessJson("로그아웃 되었습니다.","204", status=status.HTTP_204_NO_CONTENT)
     
 # 회원탈퇴
 class DeleteUserView(APIView):
@@ -99,9 +99,9 @@ class DeleteUserView(APIView):
     @swagger_auto_schema(tags=['회원탈퇴.'], responses={200: 'Success'})
     def delete(self, request, **kwargs):
         if kwargs.get('pk') is None:
-            return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+            return returnErrorJson("invalid request","400", status=status.HTTP_400_BAD_REQUEST)
         else:
             pk = kwargs.get('pk')
-            user_object = User.objects.get(user_pk=pk)
+            user_object = User.objects.get(id=pk)
             user_object.delete()
-            return Response("delete ok", status=status.HTTP_200_OK)
+            return returnSuccessJson("delete ok","200", status=status.HTTP_200_OK)
