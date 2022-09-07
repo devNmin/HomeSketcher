@@ -4,7 +4,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework.response import Response
-from rest_framework import permissions, status
+from rest_framework import permissions, status, generics
 from .models import User
 from drf_yasg.utils import swagger_auto_schema
 from .returnDto import (
@@ -15,7 +15,8 @@ from .serializers import (
     RegisterUserSerializer,
     SignupSwaggerSerializer,
     LoginSerializer,
-    LoginSwaggerSerializer
+    LoginSwaggerSerializer,
+    RefreshTokenSerializer
     )
 
 # Create your views here.
@@ -78,3 +79,29 @@ class LoginAPIView(APIView):
         
         if user is None:
             return returnErrorJson("로그인에 실패하였습니다.", "400", status.HTTP_400_BAD_REQUEST)
+  
+# 로그아웃
+class LogoutAPIView(generics.GenericAPIView):
+    serializer_class = RefreshTokenSerializer
+    permission_classes = (permissions.IsAuthenticated, )
+    
+    @swagger_auto_schema(tags=['로그아웃.'], responses={200: 'Success'})
+    def post(self, request, *args):
+        sz = self.get_serializer(data=request.data)
+        sz.is_valid(raise_exception=True)
+        sz.save()
+        return Response("로그아웃 되었습니다.", status=status.HTTP_204_NO_CONTENT)
+    
+# 회원탈퇴
+class DeleteUserView(APIView):
+    permission_classes = [ IsAuthenticated ]
+
+    @swagger_auto_schema(tags=['회원탈퇴.'], responses={200: 'Success'})
+    def delete(self, request, **kwargs):
+        if kwargs.get('pk') is None:
+            return Response("invalid request", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            pk = kwargs.get('pk')
+            user_object = User.objects.get(user_pk=pk)
+            user_object.delete()
+            return Response("delete ok", status=status.HTTP_200_OK)

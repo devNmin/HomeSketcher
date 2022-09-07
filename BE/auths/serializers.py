@@ -43,6 +43,23 @@ class LoginSerializer(serializers.ModelSerializer):
         model = User
         fields = "__all__"
  
+# 토큰 재발급
+class RefreshTokenSerializer(serializers.Serializer):
+    refresh = serializers.CharField()
+
+    default_error_messages = {
+        'bad_token': 'Token is invalid or expired'
+    }
+
+    def validate(self, attrs):
+        self.token = attrs['refresh']
+        return attrs
+
+    def save(self, **kwargs):
+        try:
+            RefreshToken(self.token).blacklist()
+        except TokenError:
+            self.fail('bad_token')
  
 # signup swagger
 class SignupSwaggerSerializer(serializers.Serializer):
@@ -58,3 +75,4 @@ class LoginSwaggerSerializer(serializers.Serializer):
     user_email  = serializers.CharField(help_text='유저 이메일', required=True)
     user_password = serializers.CharField(help_text='유저 비밀번호', required=True)
     user_password2 = serializers.CharField(help_text='유저 비밀번호2', required=True)
+    
