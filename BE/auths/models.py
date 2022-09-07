@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields import BooleanField
 from django.contrib.auth.models import (
     AbstractBaseUser, PermissionsMixin, BaseUserManager
 )
@@ -11,6 +12,24 @@ select_style_class = (
 select_color_class =(
     
 )
+
+class UserManager(BaseUserManager):
+    def create_user(self, user_email, user_nickname,user_gender, user_birth, password=None):
+        """
+        주어진 이메일, 닉네임, 비밀번호 등 개인정보로 User 인스턴스 생성
+        """
+        if not user_email:
+            raise ValueError(_('Users must have an email address'))
+
+        user = self.model(
+            user_email=self.normalize_email(user_email),
+            user_nickname=user_nickname,
+            user_gender=user_gender,
+            user_birth=user_birth,
+        )
+
+        user.set_password(password)
+        user.save()
 
 # 유저 모델
 class User(AbstractBaseUser):
@@ -27,13 +46,13 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'user_pk' # 기본키
 
     REQUIRED_FIELDS = [
-    'user_email',
-    'password',
     'user_name',
     'user_nickname',
     'user_gender',
     'user_birth',
     ]
     
+    objects = UserManager()
+    
     def __str__(self):
-        return self.user_id
+        return str(self.user_pk)

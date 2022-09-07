@@ -22,13 +22,13 @@ class RegisterUserSerializer(serializers.ModelSerializer):
             'user_birth',
         ]
     
-    # 회원가입
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
         instance.save()
+        
         return instance
     
     # 이메일 중복 체크
@@ -37,8 +37,14 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         if User.objects.filter(user_email=user_email).exists():
             raise serializers.ValidationError("user_email is already exists")
         return attrs
-        
-# signup
+       
+class LoginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = "__all__"
+ 
+ 
+# signup swagger
 class SignupSwaggerSerializer(serializers.Serializer):
     user_email  = serializers.CharField(help_text='유저 이메일', required=True)
     password = serializers.CharField(help_text='유저 비밀번호', required=True)
@@ -46,3 +52,9 @@ class SignupSwaggerSerializer(serializers.Serializer):
     user_nickname 	= serializers.CharField(help_text='유저 닉네임', required=True)
     user_gender 	= serializers.IntegerField(help_text='유저 성별', required=True)
     user_birth 	= serializers.DateField(help_text='유저 생년월일', required=True)
+    
+# login swagger
+class LoginSwaggerSerializer(serializers.Serializer):
+    user_email  = serializers.CharField(help_text='유저 이메일', required=True)
+    user_password = serializers.CharField(help_text='유저 비밀번호', required=True)
+    user_password2 = serializers.CharField(help_text='유저 비밀번호2', required=True)
