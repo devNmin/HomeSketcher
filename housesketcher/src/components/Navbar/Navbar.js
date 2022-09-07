@@ -1,6 +1,8 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 
+// npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
+
 import logo from './Logo.png';
 import styles from './Navbar.module.css';
 
