@@ -1,3 +1,5 @@
+from asyncio.windows_events import NULL
+from unittest import case
 from furnitures.models import Furniture
 from rest_framework import permissions, status
 from rest_framework import generics
@@ -50,5 +52,29 @@ class FurnitureSubFilterAPIView(APIView):
     def get(self,request,category_name):
         res = {}
         res['subCategories'] = category[category_name]
+
+        return Response(res,status=status.HTTP_200_OK)
+
+#가구 label에 따른 가구 데이터를 5개씩 페이지 처리하여 반환하는 API
+class FurnitureLabelAPIView(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request,label,page_num):
+        furnitures = Furniture.objects.all().values()
+        count = furnitures.count() #전체 개수
+        res ={} #응답 데이터
+        res['count'] = count
+        try:
+            #가장 높은 평점을 가진 가구 정보 제공
+            if label == "rate":
+                #furniture-rating 별로 내림차순 정렬
+                res['furnitures'] = furnitures.order_by('-furniture_rating')[page_num*5:page_num*5+5]
+
+            #가장 리뷰수가 많은 가구 정보 제공
+            elif label == "review":
+                res['furnitures'] = furnitures.order_by('furniture_review')[page_num*5:page_num*5+5]
+
+        except:
+            return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
         return Response(res,status=status.HTTP_200_OK)
