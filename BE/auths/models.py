@@ -2,18 +2,22 @@ from django.db import models
 from django.contrib.auth.models import (
     AbstractBaseUser,BaseUserManager
 )
-
-# 선호 스타일
-select_style = (
-    ( 'style1','style1'),
-    ( 'style2','style2'),
+from util.choicesList import (
+    select_color,
+    select_style
 )
 
-#선호 색상
-select_color = (
-    ( 'color1','color1'),
-    ( 'color2','color2'),
-)
+# # 선호 스타일
+# select_style = (
+#     ( 'style1','style1'),
+#     ( 'style2','style2'),
+# )
+
+# #선호 색상
+# select_color = (
+#     ( 'color1','color1'),
+#     ( 'color2','color2'),
+# )
 
 class UserManager(BaseUserManager):
     def create_user(self, user_email, user_nickname,user_gender, user_birth, password=None):
@@ -21,7 +25,7 @@ class UserManager(BaseUserManager):
         주어진 이메일, 닉네임, 비밀번호 등 개인정보로 User 인스턴스 생성
         """
         if not user_email:
-            raise ValueError(_('Users must have an email address'))
+            raise ValueError(('Users must have an email address'))
         user = self.model(
             user_email=self.normalize_email(user_email),
             user_nickname=user_nickname,

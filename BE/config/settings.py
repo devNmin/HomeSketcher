@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     #App
     'accounts',
     'auths',
+    'interests',
 
     #swagger library
     'drf_yasg',
