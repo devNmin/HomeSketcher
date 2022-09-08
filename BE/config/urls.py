@@ -45,4 +45,5 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('auths/', include('auths.urls', namespace="auths")),
     path('interests/', include('interests.urls', namespace="auths")),
+    path('furnitures/',include('furnitures.urls',namespace="furnitures")),
 ]

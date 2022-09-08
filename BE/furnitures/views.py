@@ -1,3 +1,4 @@
+from ctypes import sizeof
 from furnitures.models import Furniture
 from rest_framework import permissions, status
 from rest_framework import generics
@@ -15,16 +16,21 @@ from .serializers import(
     Furniture
 )
 
-#가구 검색 API
-# class FurnitureSearchAPIView(APIView):
-#     def get(self,request,search_name):
-#         if search_name is None:
-#             return returnErrorJson("잘못된 요청 방식입니다. 알맞은 데이터를 보내주세요","400", status=status.HTTP_400_BAD_REQUEST)
-#         else:
-#             try:
-#                 furniture_datas = Furniture.objects.filter(furniture_name=search_name)
-                
-#                 return Response(furniture_datas, status=status.HTTP_200_OK)
-#             except:
-#                 return returnSuccessJson("사용가능한 이메일 입니다","200",status=status.HTTP_200_OK)
+# 가구 검색 API
+class FurnitureSearchAPIView(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request,search_name,page_num):
+        if search_name is None:
+            return returnErrorJson("잘못된 요청 방식입니다. 알맞은 데이터를 보내주세요","400", status=status.HTTP_400_BAD_REQUEST)
+        else:
+            try:
+                furniture_datas =  Furniture.objects.filter(furniture_name__icontains=search_name).values()
+                # print(furniture_datas.count())
+                res ={}
+                res['count'] = furniture_datas.count()
+                res['datas'] = furniture_datas[page_num*20:page_num*20+20]
+                # print(furniture_datas[page_num*20:page_num*20+20].count())
+                return Response(res, status=status.HTTP_200_OK)
+            except:
+                return returnSuccessJson("DB 에러","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
                 
