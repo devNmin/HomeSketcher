@@ -25,6 +25,19 @@ class RegistrationAPIView(APIView):
     
     @swagger_auto_schema(tags=['회원가입.'], request_body=SignupSwaggerSerializer, responses={200: 'Success'})
     def post(self, request):
+        user_email = request.data.get('user_email') # 이메일
+        user_password = request.data.get('password') # 비밀번호
+        user_password2 = request.data.get('password2')
+        
+        if user_email is None:
+            return returnErrorJson("아이디를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
+        if user_password is None:
+            return returnErrorJson("비밀번호를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
+        if user_password2 is None:
+            return returnErrorJson("비밀번호 확인을 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
+        if user_password!=user_password2:
+             return returnErrorJson("비밀번호와 비밀번호 확인이 틀립니다.", "400", status.HTTP_400_BAD_REQUEST)
+         
         serializer = RegisterUserSerializer(data=request.data)
         if serializer.is_valid():
             user = serializer.save()
@@ -40,16 +53,11 @@ class LoginAPIView(APIView):
     def post(self, request):
         user_email = request.data.get('user_email') # 이메일
         user_password = request.data.get('user_password') # 비밀번호
-        user_password2 = request.data.get('user_password2') # 비밀번호 확인
         
         if user_email is None:
             return returnErrorJson("아이디를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
         if user_password is None:
             return returnErrorJson("비밀번호를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
-        if user_password2 is None:
-            return returnErrorJson("비밀번호 확인을 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
-        if user_password!=user_password2:
-             return returnErrorJson("비밀번호와 비밀번호 확인이 틀립니다.", "400", status.HTTP_400_BAD_REQUEST)
                 
         user1 = User.objects.get(user_email=user_email)
 

@@ -5,6 +5,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import permissions, status, generics
 from .models import Interest
 from rest_framework.response import Response
+import random
 from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
@@ -21,7 +22,9 @@ class UserInterestsFormAPIView(APIView):
     @swagger_auto_schema(tags=['취향 폼 데이터 전송.'], responses={200: 'Success'})
     def get(self, request):
         responseList = []
-        list = Interest.objects.all()    
+        list = Interest.objects.all()
+        
+        
         serializer = InterestSerializer(list, many=True)        
         if serializer is not None:
             return Response(data=serializer.data, status=status.HTTP_200_OK)
@@ -32,7 +35,9 @@ class UserInterestResult(APIView):
     permission_classes = [ IsAuthenticated ]
     @swagger_auto_schema(tags=['취향 결과 생성.'], request_body=InterestFormResultSerialiizer, responses={200: 'Success'})
     def post(self, request):
+        img_list=request.data
         return
     @swagger_auto_schema(tags=['취향 결과 업데이트.'], request_body=InterestFormResultSerialiizer, responses={200: 'Success'})
     def put(self, request):
+        img_list=request.data
         return

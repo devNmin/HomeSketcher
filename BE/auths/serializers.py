@@ -64,6 +64,7 @@ class RefreshTokenSerializer(serializers.Serializer):
 class SignupSwaggerSerializer(serializers.Serializer):
     user_email  = serializers.CharField(help_text='유저 이메일', required=True)
     password = serializers.CharField(help_text='유저 비밀번호', required=True)
+    password2 = serializers.CharField(help_text='유저 비밀번호2', required=True)
     user_name  = serializers.CharField(help_text='유저 이름', required=True)
     user_nickname 	= serializers.CharField(help_text='유저 닉네임', required=True)
     user_gender 	= serializers.IntegerField(help_text='유저 성별', required=True)
@@ -73,5 +74,5 @@ class SignupSwaggerSerializer(serializers.Serializer):
 class LoginSwaggerSerializer(serializers.Serializer):
     user_email  = serializers.CharField(help_text='유저 이메일', required=True)
     user_password = serializers.CharField(help_text='유저 비밀번호', required=True)
-    user_password2 = serializers.CharField(help_text='유저 비밀번호2', required=True)
+    
 
