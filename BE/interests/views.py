@@ -22,10 +22,19 @@ class UserInterestsFormAPIView(APIView):
     @swagger_auto_schema(tags=['취향 폼 데이터 전송.'], responses={200: 'Success'})
     def get(self, request):
         responseList = []
-        list = Interest.objects.all()
         
+        styles = ['A', 'B', 'C', 'D']
+        for i in styles:
+            data = Interest.objects.filter(style=i)
+            styleList = list(data)
+            random.shuffle(styleList)
+            if len(styleList) > 5:
+                responseList = responseList + styleList[0:5]
+            elif print('5개 이하의 데이터를 가진 스타일 입니다요')
         
-        serializer = InterestSerializer(list, many=True)        
+        print(responseList)
+        
+        serializer = InterestSerializer(responseList, many=True)        
         if serializer is not None:
             return Response(data=serializer.data, status=status.HTTP_200_OK)
         return returnErrorJson("폼 데이터 전송 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
