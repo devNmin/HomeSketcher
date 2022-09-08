@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     'accounts',
     'auths',
     'interests',
+    'furnitures',
 
     #swagger library
     'drf_yasg',
