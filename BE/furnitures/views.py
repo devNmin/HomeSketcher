@@ -1,4 +1,3 @@
-from ctypes import sizeof
 from furnitures.models import Furniture
 from rest_framework import permissions, status
 from rest_framework import generics
@@ -11,12 +10,14 @@ from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
 )
+from util.choicesList import category
 
 from .serializers import(
     Furniture
 )
 
-# 가구 검색 API
+
+# 가구 검색 API(검색창 검색)
 class FurnitureSearchAPIView(APIView):
     permission_classes=[AllowAny]
     def get(self,request,search_name,page_num):
@@ -33,4 +34,12 @@ class FurnitureSearchAPIView(APIView):
                 return Response(res, status=status.HTTP_200_OK)
             except:
                 return returnSuccessJson("DB 에러","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-                
+
+#가구 대분류 반환 API
+class FurnitureMainFilterAPIView(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request):
+        res = {}
+        res['categories'] = category.keys()
+
+        return Response(res)

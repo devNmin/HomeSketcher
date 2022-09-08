@@ -17,6 +17,7 @@ class Furniture(models.Model):
     furniture_height = models.FloatField(null = False) #가구 높이
     furniture_style = models.CharField(max_length=30, default=0, choices=select_style, null = True) # 선호 스타일
     furniture_color = models.CharField(max_length=30, default=0, choices=select_color, null = True) # 선호 색상
+    # furniture_material = models.CharField(null=True)
     furniture_main = models.CharField(max_length=20,null=False) #가구 대분류
     furniture_sub = models.CharField(max_length = 20, null = False) #가구 소분류
     furniture_condition = models.CharField(max_length=20, null = True) #가구 신제품 여부
