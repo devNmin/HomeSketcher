@@ -1,5 +1,6 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
+import { Link } from 'react-router-dom'
 
 // npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
@@ -17,10 +18,10 @@ function Navbar(props) {
       <nav className={styles.nav}>
         <ul>
           <li>
-            <a href="/">Sign In</a>
+            <Link to = '/login'>Sign In</Link>
           </li>
           <li>
-            <a href="/">Sign Up</a>
+            <Link to ="/register">Sign Up</Link>
           </li>
           <li>
             <button>Logout</button>
