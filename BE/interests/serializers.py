@@ -13,7 +13,6 @@ class InterestSerializer(serializers.ModelSerializer):
         
 # 취향 폼 작성 결과 swagger
 class InterestFormResultSerialiizer(serializers.Serializer):
-    user_pk = serializers.IntegerField() # 선호 스타일
     img_list = serializers.ListField(
         child=serializers.IntegerField()
     )

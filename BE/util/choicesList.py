@@ -9,3 +9,5 @@ select_color = (
     ( 'color1','color1'),
     ( 'color2','color2'),
 )
+
+style = ['A', 'B', 'C', 'D']
