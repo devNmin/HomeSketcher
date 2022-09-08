@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
-import styles from './NonLoginMainPage.module.css'
+import styles from './NonLoginMainPage.module.css';
 import MainCard from '../components/NonLoginMainPage/MainCard';
 import Footer from '../components/Footer/Footer';
 // import image1 from '../assets/image1.png'
@@ -19,9 +19,7 @@ function NonLoginMainPage(props) {
               </h1>
               <h2 className={styles.title_h2}>select your furniture</h2>
               <a href="/">
-                <button type="button">
-                  Sign In
-                </button>
+                <button type="button">Sign In</button>
               </a>
             </div>
           </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-
+import { Link } from 'react-router-dom';
 // npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
 import logo from '../../assets/Logo.png';
@@ -16,6 +16,9 @@ function Navbar(props) {
       </div>
       <nav className={styles.nav}>
         <ul>
+          <li>
+            <Link to="/searchpage">Search Page</Link>
+          </li>
           <li>
             <a href="/">Sign In</a>
           </li>
