@@ -23,14 +23,16 @@ class UserInterestsFormAPIView(APIView):
     def get(self, request):
         responseList = []
         
-        styles = ['A', 'B', 'C', 'D']
-        for i in styles:
-            data = Interest.objects.filter(style=i)
+        styles = Interest.objects.all().values('style').distinct();
+        
+        for style in styles:
+            data = Interest.objects.filter(style=style['style'])
             styleList = list(data)
             random.shuffle(styleList)
             if len(styleList) > 5:
                 responseList = responseList + styleList[0:5]
-            elif print('5개 이하의 데이터를 가진 스타일 입니다요')
+            else: 
+                print('5개 이하의 데이터를 가진 스타일 입니다요')
         
         print(responseList)
         
