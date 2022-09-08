@@ -42,4 +42,13 @@ class FurnitureMainFilterAPIView(APIView):
         res = {}
         res['categories'] = category.keys()
 
-        return Response(res)
+        return Response(res,status=status.HTTP_200_OK)
+
+#가구 대분류에 따른 소분류 반환 API
+class FurnitureSubFilterAPIView(APIView):
+    permission_classes=[AllowAny]
+    def get(self,request,category_name):
+        res = {}
+        res['subCategories'] = category[category_name]
+
+        return Response(res,status=status.HTTP_200_OK)
