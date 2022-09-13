@@ -1,21 +1,90 @@
-import React from "react";
-import { Card, Button } from "react-bootstrap";
-// import styles from './CardPanel.module.css';
+import React, { useEffect, useState } from 'react'
+import './CardPanel.css'
 
-function SubCarousel(props) {
-    return (
-        <Card style={{ width: "18rem" }}>
-          <Card.Img variant="top" src="http://placehold.jp/24/373940/b2aea6/268x180.png" />
-          <Card.Body>
-            <Card.Title>Card Title</Card.Title>
-            <Card.Text>
-              Some quick example text to build on the card title and make up the
-              bulk of the card's content.
-            </Card.Text>
-            <Button variant="info">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-      );
+const Carousel = (props) => {
+  const {children, show, populars} = props
+
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [length, setLength] = useState(populars.length)
+
+  const [touchPosition, setTouchPosition] = useState(null)
+
+  // Set the length to match current children from props
+  useEffect(() => {
+      setLength(populars.length)
+  }, [populars])
+
+  const next = () => {
+      if (currentIndex < (length - show)) {
+          setCurrentIndex(prevState => prevState + 4)
+      }
+  }
+
+  const prev = () => {
+      if (currentIndex > 0) {
+          setCurrentIndex(prevState => prevState - 4)
+      }
+  }
+
+  const handleTouchStart = (e) => {
+      const touchDown = e.touches[0].clientX
+      setTouchPosition(touchDown)
+  }
+
+  const handleTouchMove = (e) => {
+      const touchDown = touchPosition
+
+      if(touchDown === null) {
+          return
+      }
+
+      const currentTouch = e.touches[0].clientX
+      const diff = touchDown - currentTouch
+
+      if (diff > 5) {
+          next()
+      }
+
+      if (diff < -5) {
+          prev()
+      }
+
+      setTouchPosition(null)
+  }
+  
+
+  return (
+      <div className="carousel-container">
+          <div className="carousel-wrapper">
+              {/* You can alwas change the content of the button to other things */}
+              {
+                  currentIndex > 0 &&
+                  <button onClick={prev} className="left-arrow">
+                      &lt;
+                  </button>
+              }
+              <div
+                  className="carousel-content-wrapper"
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+              >
+                  <div
+                      className={`carousel-content show-${show}`}
+                      style={{ transform: `translateX(-${currentIndex * (100 / show)}%)` }}
+                  >
+                      {children}
+                  </div>
+              </div>
+              {/* You can alwas change the content of the button to other things */}
+              {
+                  currentIndex < (length - show) &&
+                  <button onClick={next} className="right-arrow">
+                      &gt;
+                  </button>
+              }
+          </div>
+      </div>
+  )
 }
 
-export default SubCarousel;
+export default Carousel
