@@ -30,7 +30,7 @@ class Interest(models.Model):
     
 class UserStyle(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    style_name = models.CharField(max_length=30, default=0, choices=select_style)
+    style_name = models.CharField(max_length=30, default=0)
     style_cnt =  models.IntegerField()
     
     def __str__(self):
@@ -38,8 +38,8 @@ class UserStyle(models.Model):
     
 class UserColor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    userColor_color = models.CharField(max_length=30, default=0, choices=select_color)
-    usercolor_cnt =  models.IntegerField()
+    color_name = models.CharField(max_length=30, default=0)
+    color_cnt =  models.IntegerField()
     
     def __str__(self):
-        return self.style_name
+        return self.color_name

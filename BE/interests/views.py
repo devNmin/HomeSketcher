@@ -1,10 +1,13 @@
+from asyncio.windows_events import NULL
+import string
 from tkinter import image_names
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework import permissions, status, generics
-from .models import Interest
+from .models import Interest, UserStyle, UserColor
+from auths.models import User
 from rest_framework.response import Response
 import random
 from util.returnDto import (
@@ -12,11 +15,13 @@ from util.returnDto import (
     returnErrorJson,
 )
 from util.choicesList import(
-    style
+    style, color
 )
 from .serializers import(
     InterestSerializer,
     InterestFormResultSerialiizer,
+    InterestStyleInputSerializer,
+    InterestColorInputSerializer,    
 )
 
 # Create your views here.
@@ -46,24 +51,49 @@ class UserInterestsFormAPIView(APIView):
 class UserInterestResult(APIView):
     permission_classes = [ IsAuthenticated ]
     @swagger_auto_schema(tags=['취향 결과 생성.'], request_body=InterestFormResultSerialiizer, responses={200: 'Success'})
-    def post(self, request):
-        currentUser = request.user
+    def post(self, request):       
+        currentUser = User.objects.get(id=request.user.id)
+        currentUserId = request.user.id
         img_list=request.data
-        totalLen = len(img_list)
-        
-        
+    
+        userStyleData = [0 for i in range(len(style))]
+        userColorData = [0 for i in range(len(color))]
         
         for img_id in img_list['img_list']:
             interest = Interest.objects.get(id=img_id)
-            print("+++++++++++++++++++")
-            print(type(interest))
-            print(interest.image_name)
-            print(interest.image_url)
-            print(interest.style)
-            print(interest.color)
-            print("+++++++++++++++++++")
+            styleIndex = style.index(interest.style)
+            colorIndex = color.index(interest.color)
+            userStyleData[styleIndex] = userStyleData[styleIndex] + 1
+            userColorData[colorIndex] = userColorData[colorIndex] + 1
         
-        return returnErrorJson("폼 데이터 전송 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
+        UserStyle.objects.filter(user_id=currentUserId).delete()
+        UserColor.objects.filter(user_id=currentUserId).delete()
+          
+  
+        for i in range(len(userStyleData)):             
+            styleData = {                    
+                'style_name' : style[i],
+                'style_cnt' : userStyleData[i]
+            }         
+            styleSerializer = InterestStyleInputSerializer(data=styleData)          
+            if styleSerializer.is_valid():
+                styleSerializer.save(user=currentUser)
+            else:
+                return returnErrorJson("스타일 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
+
+        for i in range(len(userColorData)):              
+            colorData = {              
+                'color_name' : color[i],
+                'color_cnt' : userColorData[i]
+            }              
+            colorSerializer = InterestColorInputSerializer(data=colorData)            
+            if colorSerializer.is_valid():                
+                colorSerializer.save(user=currentUser) 
+            else:
+                return returnErrorJson("컬러 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
+
+        return returnSuccessJson(f"style: {style[userStyleData.index(max(userStyleData))]} color: {color[userColorData.index(max(userColorData))]}", "200", status.HTTP_200_OK)
+        
     
     @swagger_auto_schema(tags=['취향 결과 업데이트.'], request_body=InterestFormResultSerialiizer, responses={200: 'Success'})
     def put(self, request):
