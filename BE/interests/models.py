@@ -29,7 +29,7 @@ class Interest(models.Model):
         return self.image_name
     
 class UserStyle(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     style_name = models.CharField(max_length=30, default=0)
     style_cnt =  models.IntegerField()
     
@@ -37,7 +37,7 @@ class UserStyle(models.Model):
         return self.style_name
     
 class UserColor(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     color_name = models.CharField(max_length=30, default=0)
     color_cnt =  models.IntegerField()
     
