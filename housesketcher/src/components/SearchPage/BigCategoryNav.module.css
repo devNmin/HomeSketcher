@@ -22,13 +22,13 @@
 .header a {
   text-decoration: none;
   font-size: 1.5rem;
-  color: #fcb8d2;
+  color: black;
 }
 
 .header a:hover,
 .header a:active,
 .header a.active {
-  color: white;
+  color: #f3cd58;
 }
 
 .badge {
