@@ -76,11 +76,6 @@ class EmailCheckAPIView(APIView):
         else:
             try:
                 user_object = User.objects.get(user_email=email)
-                print(user_object)
-                print(user_object.user_email)
-                print(user_object.user_name)
-                print(user_object.user_birth)
-                
                 return returnErrorJson("중복된 이메일 입니다","400", status=status.HTTP_400_BAD_REQUEST)
             except:
                 return returnSuccessJson("사용가능한 이메일 입니다","200",status=status.HTTP_200_OK)

@@ -44,6 +44,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')),
     path('auths/', include('auths.urls', namespace="auths")),
+    path('interests/', include('interests.urls', namespace="auths")),
+    path('furnitures/',include('furnitures.urls',namespace="furnitures")),
     path('interests/', include('interests.urls', namespace="interests")),
     path('likes/', include('likes.urls', namespace="likes")),
 ]
