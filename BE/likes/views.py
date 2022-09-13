@@ -3,21 +3,23 @@ from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
 from likes.models import UserLike
-from serializers import UserLikeSerializer
+from .serializers import UserLikeSerializer
 from rest_framework import status
+from rest_framework.views import APIView
 from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
 )
 # Create your views here.
 
-class UserLikeAPIView():
+class UserLikeAPIView(APIView):
     permission_classes=[IsAuthenticated]
     @swagger_auto_schema(tags=['가구 좋아요'], responses={200: 'Success'})
-    def get(self, request, user_pk, furniture_pk):
+    def get(self, request, furniture_pk):
+        user_pk = request.user.id
         data = {
-            'user_id':user_pk,
-            'furniture_id':furniture_pk,
+            'user':user_pk,
+            'furniture':furniture_pk,
         }
         try:
             serializer = UserLikeSerializer(data=data)
@@ -29,13 +31,14 @@ class UserLikeAPIView():
         except:            
             return returnErrorJson("좋아요 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
-class UserDislikeAPIView():
+class UserDislikeAPIView(APIView):
     permission_classes=[IsAuthenticated]
     @swagger_auto_schema(tags=['가구 좋아요 취소'], responses={200: 'Success'})
-    def get(self, request, user_pk, furniture_pk):
+    def delete(self, request, furniture_pk):
+        user_pk = request.user.id
         data = {
-            'user_id':user_pk,
-            'furniture_id':furniture_pk,
+            'user':user_pk,
+            'furniture':furniture_pk,
         }
         try:
             data = UserLike.objects.get(user_id=user_pk, furniture_id=furniture_pk)

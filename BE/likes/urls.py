@@ -1,12 +1,12 @@
 from django.urls import path
 from .views import(
     UserLikeAPIView,
-    UserDislikeAPIView,
+    UserDislikeAPIView
 )
 
 app_name = 'likes'
 
 urlpatterns=[
-    path('like/<int:user_pk>/<int:furniture_pk>/',UserLikeAPIView.as_view(), name = "user-update"),
-    path('dislike/<int:user_pk>/<int:furniture_pk>',UserDislikeAPIView.as_view(), name = "user-detail"),
+    path('like/<int:furniture_pk>/', UserLikeAPIView.as_view(), name = "like"),
+    path('dislike/<int:furniture_pk>', UserDislikeAPIView.as_view(), name = "dislike"),
 ]
