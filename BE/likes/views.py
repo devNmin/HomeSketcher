@@ -42,4 +42,4 @@ class UserDislikeAPIView():
             data.delete()
             return returnSuccessJson("가구 좋아요 취소 성공.", "200", status.HTTP_200_OK)
         except:            
-            return returnErrorJson("좋아요 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
+            return returnErrorJson("좋아요 취소 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
