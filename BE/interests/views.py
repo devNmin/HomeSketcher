@@ -144,8 +144,13 @@ class UserInterestResult(APIView):
             else:
                 return returnErrorJson("컬러 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
-        return returnSuccessJson(f"style: {style[userStyleData.index(max(userStyleData))]} color: {color[userColorData.index(max(userColorData))]}", "200", status.HTTP_200_OK)
-
+        response = {
+            'style': style[userStyleData.index(max(userStyleData))],
+            'color': color[userColorData.index(max(userColorData))],
+        }
+        serializer = UserInterestDataSerializer(response)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
 class SendUserInterestResult(APIView):
     permission_classes = [ IsAuthenticated ]
     @swagger_auto_schema(tags=['취향 결과.'], responses={200: 'Success'})
