@@ -69,9 +69,9 @@ class EmailCheckAPIView(APIView):
     permission_classes=[AllowAny]
 
     @swagger_auto_schema(tags=['이메일(ID) 중복 검사'], responses={200: 'Success'})
-    def get(self,request,user_pk):
+    def get(self,request,email):
         #pk 값이 url로 들어오지 않으면 잘못된 접근 처리
-        if user_pk is None:
+        if email is None:
             return returnErrorJson("잘못된 요청 방식입니다. 알맞은 데이터를 보내주세요","400", status=status.HTTP_400_BAD_REQUEST)
         else:
             try:
@@ -84,6 +84,3 @@ class EmailCheckAPIView(APIView):
                 return returnErrorJson("중복된 이메일 입니다","400", status=status.HTTP_400_BAD_REQUEST)
             except:
                 return returnSuccessJson("사용가능한 이메일 입니다","200",status=status.HTTP_200_OK)
-                
-                
-                
