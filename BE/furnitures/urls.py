@@ -3,7 +3,8 @@ from .views import(
     FurnitureSearchAPIView,
     FurnitureMainFilterAPIView,
     FurnitureSubFilterAPIView,
-    FurnitureLabelAPIView
+    FurnitureLabelAPIView,
+    FurnitureListAPIView
 )
 
 app_name = 'furnitures'
@@ -13,4 +14,5 @@ urlpatterns=[
     path('filter/main/',FurnitureMainFilterAPIView.as_view(),name="main-categories"),
     path('filter/main/<str:category_name>',FurnitureSubFilterAPIView.as_view(),name="sub-categories"),
     path('label/<str:label>/page/<int:page_num>/',FurnitureLabelAPIView.as_view(),name="labeling-data"),
+    path('search/',FurnitureListAPIView.as_view(),name="furniture-list"),
 ]

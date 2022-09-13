@@ -1,4 +1,5 @@
 from asyncio.windows_events import NULL
+from operator import gt
 from unittest import case
 from furnitures.models import Furniture
 from rest_framework import permissions, status
@@ -78,3 +79,39 @@ class FurnitureLabelAPIView(APIView):
 
 
         return Response(res,status=status.HTTP_200_OK)
+
+#가구 리스트 받는 검색 20개씩 페이징 처리
+class FurnitureListAPIView(APIView):
+    permission_classes = [AllowAny]
+    def post(self,request):
+        page =request.data.get('page') #페이지 번호
+        main = request.data.get('main') #대분류
+        sub = request.data.get('sub') #소분류
+        minPrice = request.data.get('minPrice') #최소 가격 설정
+        maxPrice = request.data.get('maxPrice') #최대 가격 설정
+        width = request.data.get('width') #가로 길이 -> 최대값으로 이거 이하의 값만 반환
+        length = request.data.get('length') #세로 길이 -> 최대값
+        height = request.data.get('height') #높이 -> 최대값
+        print(page,main,sub,minPrice,maxPrice, width, length, height)
+
+        furnitures = Furniture.objects.filter(furniture_main = main,furniture_sub = sub).values()
+
+        #각 값들이 요청 body로 들어왔을 때 조건 적용
+        if(minPrice is not None):
+            furnitures = furnitures.filter(furniture_price__gte = minPrice)
+        if(maxPrice is not None):
+            furnitures = furnitures.filter(furniture_price__lte = maxPrice)
+        if(width is not None):
+            furnitures = furnitures.filter(furniture_width__lte = width)
+        if(length is not None):
+            furnitures = furnitures.filter(furniture_length__lte = length)
+        if(height is not None):
+            furnitures = furnitures.filter(furniture_height__lte = height)
+        
+        furnitures = furnitures[page*20:page*20+20]
+
+        res = {}
+        res['count'] = furnitures.count(),
+        res['furnitures'] = furnitures
+
+        return Response(res, status=status.HTTP_200_OK)
