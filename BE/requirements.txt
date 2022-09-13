@@ -5,6 +5,7 @@ coreapi==2.3.3
 coreschema==0.0.4
 distlib==0.3.5
 Django==3.2.12
+django-cors-headers==3.13.0
 djangorestframework==3.13.1
 djangorestframework-simplejwt==5.2.0
 drf-yasg==1.21.3
