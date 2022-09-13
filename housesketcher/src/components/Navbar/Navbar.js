@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom'
 
@@ -6,8 +6,10 @@ import { Link } from 'react-router-dom'
 
 import logo from '../../assets/Logo.png';
 import styles from './Navbar.module.css';
+import AuthContext from '../../context/AuthContext';
 
 function Navbar(props) {
+  let { user , logoutUser } = useContext(AuthContext)
   return (
     <div className={styles.navbar}>
       <img className={styles.navbar_logo} src={logo} alt="" />
@@ -16,16 +18,20 @@ function Navbar(props) {
         <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />
       </div>
       <nav className={styles.nav}>
-        <ul>
+        <ul>          
+          
+          {user ? (           
+            <li>
+              <button onClick={logoutUser}>Logout</button>
+            </li>
+          ): (
           <li>
-            <Link to = '/login'>Sign In</Link>
+            <Link to = '/login'><button>
+                  Sign In
+            </button>
+              </Link>
           </li>
-          <li>
-            <Link to ="/register">Sign Up</Link>
-          </li>
-          <li>
-            <button>Logout</button>
-          </li>
+          )}        
         </ul>
       </nav>
     </div>

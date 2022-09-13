@@ -25,12 +25,7 @@ function NonLoginMainPage(props) {
                   <button type="button">                 
                     Sign In
                   </button>               
-                </Link>               
-                <Link to = '/register'>
-                  <button type="button">                 
-                      Sign Up
-                  </button>             
-                </Link>
+                </Link>             
             </div>
           </div>
         </div>
