@@ -31,8 +31,6 @@ class Furniture(models.Model):
         'furniture_price',
         'furniture_rating',
         'furniture_review',
-        'furniture_review',
-        'furniture_width',
         'furniture_width',
         'furniture_length',
         'furniture_height',

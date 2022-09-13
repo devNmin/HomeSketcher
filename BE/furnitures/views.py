@@ -16,13 +16,18 @@ from util.returnDto import (
 from util.choicesList import category
 
 from .serializers import(
-    Furniture
+    FurnitureSerializer,
+    FurnitureSwaggerSerializer,
+    FurnitureInfoSwaggerSerializer
 )
 
 
 # 가구 검색 API(검색창 검색)
 class FurnitureSearchAPIView(APIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
+    serializer_class = FurnitureSerializer
+
+    @swagger_auto_schema(tags=['가구 검색 API(검색창 검색)'], responses={200: 'Success'})
     def get(self,request,search_name,page_num):
         if search_name is None:
             return returnErrorJson("잘못된 요청 방식입니다. 알맞은 데이터를 보내주세요","400", status=status.HTTP_400_BAD_REQUEST)
@@ -40,7 +45,10 @@ class FurnitureSearchAPIView(APIView):
 
 #가구 대분류 반환 API
 class FurnitureMainFilterAPIView(APIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
+    serializer_class = FurnitureSerializer
+
+    @swagger_auto_schema(tags=['가구 대분류 반환 API'],  responses={200: 'Success'})
     def get(self,request):
         res = {}
         res['categories'] = category.keys()
@@ -49,7 +57,10 @@ class FurnitureMainFilterAPIView(APIView):
 
 #가구 대분류에 따른 소분류 반환 API
 class FurnitureSubFilterAPIView(APIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
+    serializer_class = FurnitureSerializer
+
+    @swagger_auto_schema(tags=['가구 소분류 반환(대분류 선택 시 요청하는 API)'],  responses={200: 'Success'})
     def get(self,request,category_name):
         res = {}
         res['subCategories'] = category[category_name]
@@ -58,7 +69,10 @@ class FurnitureSubFilterAPIView(APIView):
 
 #가구 label에 따른 가구 데이터를 5개씩 페이지 처리하여 반환하는 API
 class FurnitureLabelAPIView(APIView):
-    permission_classes=[AllowAny]
+    permission_classes=[IsAuthenticated]
+    serializer_class = FurnitureInfoSwaggerSerializer
+
+    @swagger_auto_schema(tags=['가구 label에 따른 데이터 반환(5개씩 페이징)'], responses={200: 'Success'})
     def get(self,request,label,page_num):
         furnitures = Furniture.objects.all().values()
         count = furnitures.count() #전체 개수
@@ -82,7 +96,10 @@ class FurnitureLabelAPIView(APIView):
 
 #가구 리스트 받는 검색 20개씩 페이징 처리
 class FurnitureListAPIView(APIView):
-    permission_classes = [AllowAny]
+    permission_classes=[IsAuthenticated]
+    serializer_class = FurnitureSerializer
+
+    @swagger_auto_schema(tags=['Item Search Page 가구 필터링 검색'], request_body=FurnitureSwaggerSerializer, responses={200: 'Success'})
     def post(self,request):
         page =request.data.get('page') #페이지 번호
         main = request.data.get('main') #대분류
