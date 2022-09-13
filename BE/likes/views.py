@@ -16,8 +16,8 @@ class UserLikeAPIView():
     @swagger_auto_schema(tags=['가구 좋아요'], responses={200: 'Success'})
     def get(self, request, user_pk, furniture_pk):
         data = {
-            'user_pk':user_pk,
-            'furniture_pk':furniture_pk,
+            'user_id':user_pk,
+            'furniture_id':furniture_pk,
         }
         try:
             serializer = UserLikeSerializer(data=data)
@@ -34,8 +34,8 @@ class UserDislikeAPIView():
     @swagger_auto_schema(tags=['가구 좋아요 취소'], responses={200: 'Success'})
     def get(self, request, user_pk, furniture_pk):
         data = {
-            'user_pk':user_pk,
-            'furniture_pk':furniture_pk,
+            'user_id':user_pk,
+            'furniture_id':furniture_pk,
         }
         try:
             data = UserLike.objects.get(user_id=user_pk, furniture_id=furniture_pk)
