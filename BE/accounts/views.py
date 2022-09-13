@@ -79,4 +79,3 @@ class EmailCheckAPIView(APIView):
                 return returnErrorJson("중복된 이메일 입니다","400", status=status.HTTP_400_BAD_REQUEST)
             except:
                 return returnSuccessJson("사용가능한 이메일 입니다","200",status=status.HTTP_200_OK)
-                
