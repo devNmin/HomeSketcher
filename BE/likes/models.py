@@ -1,16 +1,15 @@
 from django.db import models
 from auths.models import User
-# from Furnitures.models import Furniture
+from furnitures.models import Furniture
 
 # Create your models here.
 class UserLike(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    furniture_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    # furniture_id = models.ForeignKey(Furniture, on_delete=models.CASCADE)
+    user= models.ForeignKey(User, on_delete=models.CASCADE)
+    furniture= models.ForeignKey(Furniture, on_delete=models.CASCADE)
     
     REQUIRED_FIELDS = [
-        'user_id',
-        'furniture_id',
+        'user',
+        'furniture',
     ]
     
     def __str__(self):
