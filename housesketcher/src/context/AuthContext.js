@@ -62,7 +62,7 @@ export const AuthProvider = ({children}) => {
         setUser(null)
         localStorage.removeItem('userInfo')
         localStorage.removeItem('authTokens')
-        history.push('/login')
+        history.push('/')
     }
 
     // refresh token 관련 함수

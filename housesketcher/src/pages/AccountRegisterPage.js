@@ -106,13 +106,11 @@ export default function AccountRegisterPage() {
             <div>
               <h5> Name </h5>
               <input type='text' maxLength='10' name='signup_name' ref={nameInput}/>
-            </div>
-
+            </div>            
             <div>
               <h5> Nickname </h5>
               <input type='text' maxLength='10' name='signup_nickname' ref={nicknameInput}/>
             </div>
-
             <div>
               <h5> Gender </h5>
               <label  htmlFor ="male">남성</label>
