@@ -4,11 +4,14 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { FilterContextProvider } from './store/search';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <FilterContextProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </FilterContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
