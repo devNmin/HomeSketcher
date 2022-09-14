@@ -1,9 +1,10 @@
 import React, {useContext, useRef, useState} from 'react'
-import './AccountRegisterPage.css'
+import styles from './AccountRegisterPage.module.css'
 import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import logo from '../assets/Logo.png'
 
 export default function AccountRegisterPage() {
   const {BASE_URL} = useContext(AuthContext)
@@ -79,23 +80,25 @@ export default function AccountRegisterPage() {
 
   }  
 
-  return (       
+  return (
+    <section className={styles.auth}>
+      <img src={logo} alt="" />
       <form onSubmit={submitHandler}>      
         <div className='Signup'>
           <div>
             {/* 아이디 */}
-            <div>
+            <div className={styles.control}>
               <h5> E-mail </h5>
               <input type='email' maxLength='15' name='signup_email' ref={emailInput}/>
               <button onClick={emailcheckHandler}>check</button>               
             </div>
             {/* 비밀번호 */}
-            <div>
+            <div className={styles.control}>
               <h5> Password </h5>
               <input type='password' maxLength='15' name='signup_password' ref={passwordInput}/>
             </div>
             {/* 비밀번호2 */}
-            <div>
+            <div className={styles.control}>
               <h5> Password Check </h5>
               <input type='password' maxLength='15' name='signup_pswCheck' ref={passwordCheckInput}/>
             </div>
@@ -103,37 +106,37 @@ export default function AccountRegisterPage() {
 
           <div id='signup_section'>
             {/* 이름 */}
-            <div>
+            <div className={styles.control}>
               <h5> Name </h5>
               <input type='text' maxLength='10' name='signup_name' ref={nameInput}/>
             </div>
 
-            <div>
+            <div className={styles.control}>
               <h5> Nickname </h5>
               <input type='text' maxLength='10' name='signup_nickname' ref={nicknameInput}/>
             </div>
 
-            <div>
+            <div className={styles.actions}>
               <h5> Gender </h5>
-              <label  htmlFor ="male">남성</label>
-              <input  id="male" type="radio" name="gender" value="0" onChange={handleChange}/>
-              <label  htmlFor ="female">여성</label>
-              <input  id="female" type="radio" name="gender" value="1" onChange={handleChange} />
+              <div>
+                <input className='mx-3' id="male" name="gender" value="male" onChange={handleChange}/>
+                <input  id="female" name="gender" value="female" onChange={handleChange} />
+              </div>
             </div>
-            {/* 생년월일 */}
             <div>
               <h5> Birth </h5>
               <input type='date' maxLength='6' name='signup_birthday' ref={birthInput}/>             
             </div>
             {/* 생년월일 */}
-
+            {/* 생년월일 */}
           </div>
         </div>
         <button type='submit'>Sign Up</button>
+      </form>
         <Link to= '/login'>
           <button>Back</button>
         </Link>
-      </form>
+    </section>
    
 
   )
