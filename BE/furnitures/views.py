@@ -2,6 +2,8 @@ from asyncio.windows_events import NULL
 from operator import gt
 from unittest import case
 from furnitures.models import Furniture
+from likes.models import UserLike
+from auths.models import User
 from rest_framework import permissions, status
 from rest_framework import generics
 from rest_framework.views import APIView
@@ -111,24 +113,43 @@ class FurnitureListAPIView(APIView):
         height = request.data.get('height') #높이 -> 최대값
         print(page,main,sub,minPrice,maxPrice, width, length, height)
 
-        furnitures = Furniture.objects.filter(furniture_main = main,furniture_sub = sub).values()
+        try:
+            furnitures = Furniture.objects.filter(furniture_main = main,furniture_sub = sub).values()
 
-        #각 값들이 요청 body로 들어왔을 때 조건 적용
-        if(minPrice is not None):
-            furnitures = furnitures.filter(furniture_price__gte = minPrice)
-        if(maxPrice is not None):
-            furnitures = furnitures.filter(furniture_price__lte = maxPrice)
-        if(width is not None):
-            furnitures = furnitures.filter(furniture_width__lte = width)
-        if(length is not None):
-            furnitures = furnitures.filter(furniture_length__lte = length)
-        if(height is not None):
-            furnitures = furnitures.filter(furniture_height__lte = height)
+            #각 값들이 요청 body로 들어왔을 때 조건 적용
+            if(minPrice is not None):
+                furnitures = furnitures.filter(furniture_price__gte = minPrice)
+            if(maxPrice is not None):
+                furnitures = furnitures.filter(furniture_price__lte = maxPrice)
+            if(width is not None):
+                furnitures = furnitures.filter(furniture_width__lte = width)
+            if(length is not None):
+                furnitures = furnitures.filter(furniture_length__lte = length)
+            if(height is not None):
+                furnitures = furnitures.filter(furniture_height__lte = height)
+            
+            furnitures = furnitures[page*20:page*20+20]
+
+            res = {}
+            res['count'] = furnitures.count(),
+            res['furnitures'] = furnitures
+
+            return Response(res, status=status.HTTP_200_OK)
+        except:
+            return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
         
-        furnitures = furnitures[page*20:page*20+20]
 
-        res = {}
-        res['count'] = furnitures.count(),
-        res['furnitures'] = furnitures
+#좋아요 표시한 가구 리스트 전송
+class FurnitureLikeAPIView(APIView):
+    permission_classes=[IsAuthenticated]
+    serializer_class = FurnitureSerializer
 
-        return Response(res, status=status.HTTP_200_OK)
+    def get(self,request):
+        id = request.user.id #사용자 pk 정보
+        try:
+            furnitures = Furniture.objects.filter(id__in= UserLike.objects.filter(user = id).values_list('furniture_id')).values()
+            return Response(furnitures,status=status.HTTP_200_OK)
+        
+        except:
+            return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
+        
