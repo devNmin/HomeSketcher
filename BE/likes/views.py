@@ -54,8 +54,6 @@ class FurnitureLikeUsersAPIView(APIView):
     @swagger_auto_schema(tags=['가구 좋아요 유저 목록'], responses={200: 'Success'})
     def get(self, request, furniture_pk):
         likeUserPks = UserLike.objects.filter(furniture_id=furniture_pk)        
-        if len(likeUserPks) == 0:
-            return returnSuccessJson("해당 가구의 좋아요 설정 유저가 없습니다.", "200", status.HTTP_200_OK)
         result = []
         for userPK in likeUserPks:
             user = User.objects.get(id=userPK.user_id)
