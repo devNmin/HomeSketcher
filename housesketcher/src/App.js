@@ -6,6 +6,7 @@ import SearchPage from './pages/SearchPage';
 import LoginPage from './pages/LoginPage';
 import AccountRegisterPage from './pages/AccountRegisterPage'
 import { AuthProvider } from './context/AuthContext'
+import LoginMainPage from './pages/LoginMainPage'
 
 
 function App() {
@@ -20,6 +21,9 @@ function App() {
                     let {userInfo} = useContext(AuthContext) => 현재 유저정보 가져오기 
           */}
           <Switch className="App">
+            <Route exact path= "/loginmain">
+              <LoginMainPage />
+            </Route>
             <Route exact path="/">
               <NonLoginMainPage />
             </Route>

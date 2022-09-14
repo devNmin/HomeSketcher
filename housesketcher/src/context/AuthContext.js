@@ -1,6 +1,22 @@
 import { createContext, useState, useEffect } from 'react';
 // import jwt_decode from "jwt-decode"
 // AuthContext에 유저 정보를 저장하고 userProvider를 통해 어디서부터 어디까지 유저 정보를 사용할지 선택이 가능하다
+// 유저정보 
+// "user": {
+//     "id": 2,
+//     "password": "pbkdf2_sha256$260000$7Pbj3zWtFb2e9GakqnIZKT$/ApSkYK76ttq7UjNGmX+Gf199v6XLrNBjA6l1KLGWWs=",
+//     "last_login": null,
+//     "user_email": "blaa@blaa.com",
+//     "user_name": "권혁림2",
+//     "user_nickname": "2혁림",
+//     "user_gender": 0,
+//     "user_birth": "1997-11-04",
+//     "user_style": "0",
+//     "user_color": "0"
+//   }
+
+
+
 import { useHistory } from 'react-router-dom';
 
 const AuthContext = createContext();
