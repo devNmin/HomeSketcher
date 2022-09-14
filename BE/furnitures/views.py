@@ -144,6 +144,7 @@ class FurnitureLikeAPIView(APIView):
     permission_classes=[IsAuthenticated]
     serializer_class = FurnitureSerializer
 
+    @swagger_auto_schema(tags=['좋아요 표시한 가구 리스트 전송'],  responses={200: 'Success'})
     def get(self,request):
         id = request.user.id #사용자 pk 정보
         try:
