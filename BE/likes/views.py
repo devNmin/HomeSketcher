@@ -55,7 +55,7 @@ class FurnitureLikeUsersAPIView(APIView):
     def get(self, request, furniture_pk):
         likeUserPks = UserLike.objects.filter(furniture_id=furniture_pk)        
         if len(likeUserPks) == 0:
-            return returnErrorJson("해당 가구의 좋아요 설정 유저가 없습니다.", "200", status.HTTP_200_OK)
+            return returnSuccessJson("해당 가구의 좋아요 설정 유저가 없습니다.", "200", status.HTTP_200_OK)
         result = []
         for userPK in likeUserPks:
             user = User.objects.get(id=userPK.user_id)
