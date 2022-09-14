@@ -2,10 +2,12 @@ import imp
 from django.shortcuts import render
 from rest_framework.permissions import IsAuthenticated
 from drf_yasg.utils import swagger_auto_schema
+from auths.models import User
 from likes.models import UserLike
 from .serializers import UserLikeSerializer
 from rest_framework import status
 from rest_framework.views import APIView
+from rest_framework.response import Response
 from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
@@ -46,3 +48,17 @@ class UserDislikeAPIView(APIView):
             return returnSuccessJson("가구 좋아요 취소 성공.", "200", status.HTTP_200_OK)
         except:            
             return returnErrorJson("좋아요 취소 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
+
+class FurnitureLikeUsersAPIView(APIView):
+    permission_classes=[IsAuthenticated]
+    @swagger_auto_schema(tags=['가구 좋아요 유저 목록'], responses={200: 'Success'})
+    def get(self, request, furniture_pk):
+        likeUserPks = UserLike.objects.filter(furniture_id=furniture_pk)        
+        result = []
+        for userPK in likeUserPks:
+            user = User.objects.get(id=userPK.user_id)
+            userData = {"user_id":user.id, "user_name":user.user_name} 
+            print(userData)          
+            result.append(userData)
+            print(result)
+        return Response(data=result, status=status.HTTP_200_OK)
