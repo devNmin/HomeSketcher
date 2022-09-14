@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom'
 
 function LoginPage() {
     let { loginUser } = useContext(AuthContext)
-  
     
     return (
         <div>               
@@ -16,7 +15,6 @@ function LoginPage() {
                 <input type= "password" name = 'userpassword' placeholder='Enter your email'/>
                 <input type= "submit" value= 'Login'/>
             </form>
-
             <Link to ="/register"><button>
                 Create account
             </button>

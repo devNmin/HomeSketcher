@@ -3,6 +3,7 @@ import './AccountRegisterPage.css'
 import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function AccountRegisterPage() {
   const {BASE_URL} = useContext(AuthContext)
@@ -30,16 +31,15 @@ export default function AccountRegisterPage() {
   const emailcheckHandler = async (event) => {
     event.preventDefault();
     const emailsubmit = emailInput.current.value;
-    await axios.get(BASE_URL + `accounts/check/email/`, 
-      {params: {email : emailsubmit}}            
-      ).then(res => {
-      if(res.ok){
-        alert('사용가능한 이메일입니다')    
-
-      } else {
-        alert(`${res.error}`)
-      }
-    })
+    await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`                
+      ).then(res => {    
+      alert('사용가능한 이메일입니다') 
+    
+    }).catch(err => {
+      alert(err.response.data.error);
+    }
+      
+    )
 
   }
   
@@ -120,7 +120,6 @@ export default function AccountRegisterPage() {
               <label  htmlFor ="female">여성</label>
               <input  id="female" type="radio" name="gender" value="1" onChange={handleChange} />
             </div>
-
             {/* 생년월일 */}
             <div>
               <h5> Birth </h5>
@@ -131,6 +130,9 @@ export default function AccountRegisterPage() {
           </div>
         </div>
         <button type='submit'>Sign Up</button>
+        <Link to= '/login'>
+          <button>Back</button>
+        </Link>
       </form>
    
 

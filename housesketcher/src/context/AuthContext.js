@@ -61,10 +61,11 @@ export const AuthProvider = ({children}) => {
         })
         let data = await response.json()
 
-        if(response.status == 200 ){
-            setAuthTokens(data.access)
-            localStorage.setItem('authTokens', JSON.stringify(data.access))
+        if(response.status === 200 ){
+            setAuthTokens({"access" : data.access, "refresh" : authTokens.refresh})
+            localStorage.setItem('authTokens', JSON.stringify({"access" : data.access, "refresh" : authTokens.refresh}))
         }else {
+
             logoutUser()
         }
     
@@ -80,16 +81,17 @@ export const AuthProvider = ({children}) => {
     }
 
     // useEffect를 사용해 5분마다 token refresh하기 
-    // useEffect(() => {
-
-    //     setInterval(() => {
-    //         if(authTokens){
-    //             updateToken()
-    //         }
-    //     }, 2000)
+    useEffect(() => {
+        const four_min = 1000*60*4
+        let interval =  setInterval(() => {
+            if(authTokens){
+                updateToken()
+            }
+        }, four_min)
+        return ()=> clearInterval(interval)
 
         
-    // }, [authTokens, loading])
+    }, [authTokens, loading])
 
     return(
         <AuthContext.Provider value={contextData} >
