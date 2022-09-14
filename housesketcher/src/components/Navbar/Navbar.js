@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
-import { Link } from 'react-router-dom'
-
+import { Link } from 'react-router-dom';
 // npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
 
 import logo from '../../assets/Logo.png';

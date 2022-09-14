@@ -1,6 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar/Navbar';
-import styles from './NonLoginMainPage.module.css'
+import styles from './NonLoginMainPage.module.css';
 import MainCard from '../components/NonLoginMainPage/MainCard';
 import Footer from '../components/Footer/Footer';
 import { Link } from 'react-router-dom';

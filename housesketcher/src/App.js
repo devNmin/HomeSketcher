@@ -2,9 +2,11 @@ import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NonLoginMainPage from './pages/NonLoginMainPage';
+import SearchPage from './pages/SearchPage';
 import LoginPage from './pages/LoginPage';
 import AccountRegisterPage from './pages/AccountRegisterPage'
 import { AuthProvider } from './context/AuthContext'
+
 
 function App() {
   return (
@@ -20,6 +22,9 @@ function App() {
           <Switch className="App">
             <Route exact path="/">
               <NonLoginMainPage />
+            </Route>
+            <Route exact path="/searchpage">
+              <SearchPage />
             </Route>          
             <Route exact path="/login">
               <LoginPage />
