@@ -26,14 +26,7 @@ class UserUpdateAPIView(APIView):
         # 변경할 데이터들
         serializer_data = request.data
 
-        print("=================")
-        print(serializer_data)
-        
-        # user = User.objects.get(id=3)
         user = request.user
-        print(user)
-        print(user.user_name)
-        print("=============")
         
         serializer = self.serializer_class(
             user, data=serializer_data, partial=True
