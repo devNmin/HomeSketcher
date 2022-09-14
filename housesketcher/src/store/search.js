@@ -2,30 +2,28 @@ import { createContext, useState } from 'react';
 
 const FilterContext = createContext({
   categotyFilters: [],
-  addFilter: (categoryFilter) => {},
-  removeFilter: (filterId) => {},
-  isSelectedFilter: (filterId) => {},
+  addFilter: (filterName) => {},
+  removeFilter: (filterName) => {},
+  isSelectedFilter: (filterName) => {},
 });
 
 export function FilterContextProvider(props) {
   const [selectedFilters, setSelectedFilters] = useState([]);
 
-  function addFilterHandler(categoryFilter) {
-    setSelectedFilters((prevSelectedFilters) => {
-      prevSelectedFilters.concat(categoryFilter);
-    });
-  }
+  const addFilterHandler = (filterName) => {
+    setSelectedFilters((prevList) => [...prevList, filterName]);
+  };
 
-  function removeFilterHandler(filterId) {
+  function removeFilterHandler(filterName) {
     setSelectedFilters((prevSelectedFilters) => {
       return prevSelectedFilters.filter(
-        (categoryFilter) => categoryFilter.id !== filterId
+        (categoryFilter) => categoryFilter !== filterName
       );
     });
   }
 
-  function IsSelectedFilterHandler(filterId) {
-    return selectedFilters.some((categoryFilter) => categoryFilter.id === filterId);
+  function IsSelectedFilterHandler(filterName) {
+    return selectedFilters.some((categoryFilter) => categoryFilter === filterName);
   }
 
   const context = {

@@ -1,40 +1,42 @@
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+
 import classes from './BigCategoryNav.module.css';
 
+const BigCategoryList = [
+  'Sofas',
+  'Beds',
+  'Tables',
+  'Chairs',
+  'Media',
+  'Shelves',
+  'Closets',
+  'Kids',
+  'Storage',
+  'Lamps',
+];
+// BigCategoty 선택 ===>>>> api 요청 보냄 ===>>>> 소분류 카테고리 목록 SmallCategoryBox에! 뿌려줌(redux or reactContext)
+// 아무것도 선택하지 않았을 떄 기본 : Sofas
 function BigCategoryNav() {
+  const [bigCategory, setBigCategory] = useState('Sofas');
+  useEffect(() => {
+    console.log('여기', bigCategory);
+  }, [bigCategory]);
+
   return (
     <header className={classes.header}>
       <ul>
-        <li>
-          <Link to="">Sofas</Link>
-        </li>
-        <li>
-          <Link to="">Beds</Link>
-        </li>
-        <li>
-          <Link to="">Tables</Link>
-        </li>
-        <li>
-          <Link to="">Chairs</Link>
-        </li>
-        <li>
-          <Link to="">Media</Link>
-        </li>
-        <li>
-          <Link to="">Shelves</Link>
-        </li>
-        <li>
-          <Link to="">Closets</Link>
-        </li>
-        <li>
-          <Link to="">Kids</Link>
-        </li>
-        <li>
-          <Link to="">Storage</Link>
-        </li>
-        <li>
-          <Link to="">Lamps</Link>
-        </li>
+        {BigCategoryList.map((categoryName) => {
+          return (
+            <li
+              key={categoryName}
+              onClick={() => {
+                setBigCategory(categoryName);
+              }}
+            >
+              {categoryName}
+            </li>
+          );
+        })}
       </ul>
     </header>
   );
