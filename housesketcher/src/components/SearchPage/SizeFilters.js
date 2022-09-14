@@ -4,19 +4,19 @@ function SizeFilters() {
   return (
     <div>
       <hr />
-      <div className={classes.row}>
+      <div className={classes.category_line}>
         <p className={classes.category_name}>Size</p>
-        <form className={classes.row_justify_between}>
+        <form className={classes.row}>
           <div className={classes.row}>
-            <label for="width">Width</label>
+            <label htmlFor="width">Width</label>
             <input type="number" id="width" placeholder="inch" />
           </div>
           <div className={classes.row}>
-            <label for="depth">Depth</label>
+            <label htmlFor="depth">Depth</label>
             <input type="number" id="depth" placeholder="inch" />
           </div>
           <div className={classes.row}>
-            <label for="height">Height</label>
+            <label htmlFor="height">Height</label>
             <input type="number" id="height" placeholder="inch" />
           </div>
         </form>
