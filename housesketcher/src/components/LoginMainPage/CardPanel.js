@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import './CardPanel.css'
+import styles from './CardPanel.module.css'
 
 const Carousel = (props) => {
   const {children, show, populars} = props
@@ -54,22 +54,22 @@ const Carousel = (props) => {
   
 
   return (
-      <div className="carousel-container">
-          <div className="carousel-wrapper">
+      <div className={styles.carousel_container}>
+          <div className={styles.carousel_wrapper}>
               {/* You can alwas change the content of the button to other things */}
               {
                   currentIndex > 0 &&
-                  <button onClick={prev} className="left-arrow">
+                  <button onClick={prev} className={styles.left_arrow}>
                       &lt;
                   </button>
               }
               <div
-                  className="carousel-content-wrapper"
+                  className={styles.carousel_content_wrapper}
                   onTouchStart={handleTouchStart}
                   onTouchMove={handleTouchMove}
               >
                   <div
-                      className={`carousel-content show-${show}`}
+                      className={`${styles.carousel_content} ${styles.show_4}`}
                       style={{ transform: `translateX(-${currentIndex * (100 / show)}%)` }}
                   >
                       {children}
@@ -78,7 +78,7 @@ const Carousel = (props) => {
               {/* You can alwas change the content of the button to other things */}
               {
                   currentIndex < (length - show) &&
-                  <button onClick={next} className="right-arrow">
+                  <button onClick={next} className={styles.right_arrow}>
                       &gt;
                   </button>
               }
