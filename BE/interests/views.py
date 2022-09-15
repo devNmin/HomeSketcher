@@ -36,13 +36,14 @@ class UserInterestsFormAPIView(APIView):
     @swagger_auto_schema(tags=['취향 폼 데이터 전송.'], responses={200: 'Success'})
     def get(self, request):
         responseList = []
-        
+        sendImgLen = 9
         styles = Interest.objects.all().values('style').distinct()
         
         for style in styles:
-            data = Interest.objects.filter(style=style['style']).order_by("?")[:5]
+            data = Interest.objects.filter(style=style['style']).order_by("?")[:sendImgLen]
             styleList = list(data)
-            if len(styleList) >= 5:
+        
+            if len(styleList) >= sendImgLen:
                 responseList = responseList + styleList[0:5]
             else: 
                 print(style['style'], '은 5개 이하의 데이터를 가진 스타일 입니다')

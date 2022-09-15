@@ -6,12 +6,16 @@ from auths.models import User
 
 
 class InterestSerializer(serializers.ModelSerializer):
+    selected = serializers.SerializerMethodField()
+    def get_selected(self, obj):
+        return False
     class Meta:
         model = Interest
-        fields = [
+        fields = (
             'id',
             'image_url',
-        ]
+            'selected'
+        )
         
 class InterestStyleInputSerializer(serializers.ModelSerializer):
     class Meta:

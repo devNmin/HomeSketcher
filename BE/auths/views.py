@@ -2,9 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.contrib.auth.models import update_last_login
 from rest_framework.response import Response
 from rest_framework import permissions, status, generics
 from .models import User
+from datetime import date
 from drf_yasg.utils import swagger_auto_schema
 from util.returnDto import (
     returnSuccessJson,
@@ -60,11 +62,15 @@ class LoginAPIView(APIView):
             return returnErrorJson("비밀번호를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
                 
         user1 = User.objects.get(user_email=user_email)
-
+        # last_login = date.today()
+        # print(last_login.strftime("%Y-%m-%d"))
+        
+        update_last_login(None, user1)   
+            
         user = authenticate(
             request, 
             id=user1.id,
-            password=user_password
+            password=user_password,
         )
     
         if user:
