@@ -114,8 +114,9 @@ class FurnitureListAPIView(APIView):
         print(page,main,sub,minPrice,maxPrice, width, length, height)
 
         try:
-            furnitures = Furniture.objects.filter(furniture_main = main,furniture_sub = sub).values()
-
+            furnitures = Furniture.objects.filter(furniture_main = main).values()
+            if sub is not None:
+                furnitures = Furniture.objects.filter(furniture_sub = sub).values()
             #각 값들이 요청 body로 들어왔을 때 조건 적용
             if(minPrice is not None):
                 furnitures = furnitures.filter(furniture_price__gte = minPrice)

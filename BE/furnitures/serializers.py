@@ -31,7 +31,7 @@ class FurnitureSwaggerSerializer(serializers.Serializer):
     # furniture_review = serializers.IntegerField(help_text="가구 리뷰 수",required=False)
     page = serializers.IntegerField(help_text = "페이지 번호 0부터 줘야함",required = True)
     main = serializers.CharField(help_text="가구 대분류",required=True)
-    sub = serializers.CharField(help_text="가구 소분류",required=True)
+    sub = serializers.CharField(help_text="가구 소분류",required=False)
     minPrice = serializers.FloatField(help_text="가구 최소 가격. 없으면 null",required=False)
     maxPrice = serializers.FloatField(help_text="가구 최대 가격. 없으면 null",required=False)
     width = serializers.FloatField(help_text="가구 가로 길이",required=False)
