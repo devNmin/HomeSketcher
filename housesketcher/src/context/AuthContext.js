@@ -28,12 +28,13 @@ export const AuthProvider = ({children}) => {
     let [user, setUser] = useState(() => localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null)
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
     let BASE_URL = 'http://127.0.0.1:8000/'
-    let [loading, setLoading] = useState(true)
-
+    // let [loading, setLoading] = useState(true)
+    let loading = true
     const history = useHistory()  
 
 
     let loginUser = async (e) => {
+       
         e.preventDefault()
         console.log('Form submitted');
         let response = await fetch( BASE_URL +'auths/login/' , {
@@ -48,9 +49,14 @@ export const AuthProvider = ({children}) => {
         if(response.status === 200) {
             setAuthTokens(data.token)
             setUser(data.user)
+            console.log(data.user);
             localStorage.setItem('authTokens', JSON.stringify(data.token))
             localStorage.setItem('userInfo', JSON.stringify(data.user))
-            history.push('/')    
+            if (data.user.user_style === "0") {
+                history.push('/tasteanalysis')                
+            } else {
+                history.push('/')    
+            }
         }else {
             alert('Login Failed!')
         }
@@ -93,6 +99,7 @@ export const AuthProvider = ({children}) => {
         loginUser : loginUser,
         logoutUser : logoutUser,
         BASE_URL : BASE_URL,
+        authTokens : authTokens,
 
     }
 
@@ -105,7 +112,6 @@ export const AuthProvider = ({children}) => {
             }
         }, four_min)
         return ()=> clearInterval(interval)
-
         
     }, [authTokens, loading])
 
