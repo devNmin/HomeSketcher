@@ -37,6 +37,7 @@ class FurnitureSwaggerSerializer(serializers.Serializer):
     width = serializers.FloatField(help_text="가구 가로 길이",required=False)
     length = serializers.FloatField(help_text="가구 세로 길이",required=False)
     height = serializers.FloatField(help_text="가구 높이",required=False)
+    style = serializers.CharField(help_text="가구 스타일",required=False)
     # furniture_style = serializers.CharField(help_text="가구 스타일",required=False)
     # furniture_color = serializers.CharField(help_text="가구 색상",required=False)
     # furniture_condition = serializers.CharField(help_text = "이 항목은 추가 예정",required=False)

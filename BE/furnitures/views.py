@@ -111,6 +111,7 @@ class FurnitureListAPIView(APIView):
         width = request.data.get('width') #가로 길이 -> 최대값으로 이거 이하의 값만 반환
         length = request.data.get('length') #세로 길이 -> 최대값
         height = request.data.get('height') #높이 -> 최대값
+        style = request.data.get('style') #스타일 
         print(page,main,sub,minPrice,maxPrice, width, length, height)
 
         try:
@@ -128,6 +129,8 @@ class FurnitureListAPIView(APIView):
                 furnitures = furnitures.filter(furniture_length__lte = length)
             if(height is not None):
                 furnitures = furnitures.filter(furniture_height__lte = height)
+            if(style is not None):
+                furnitures = furnitures.filter(furniture_style = style)
             
             furnitures = furnitures[page*20:page*20+20]
 
