@@ -26,7 +26,7 @@ function App() {
             <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
             <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
             <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
-            <PrivateRoute component={AccountRegisterPage} exact path="/register"/>                        
+            <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>                        
           </Switch>
         </AuthProvider>
       </Router>
