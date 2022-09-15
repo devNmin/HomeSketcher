@@ -1,0 +1,36 @@
+.chip {
+  box-sizing: border-box;
+  width: 6rem;
+  height: 2rem;
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  margin-right: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 3px solid #fbd95d;
+  border-radius: 30px;
+}
+.chip p {
+  font-family: 'Plus Jakarta Sans';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 1rem;
+
+  display: flex;
+  text-align: center;
+  letter-spacing: -0.015em;
+
+  margin-top: 0.8rem;
+  color: #fbd95d;
+}
+
+.chip:hover {
+  background: rgba(251, 217, 93, 0.4);
+}
+
+.chip:hover p {
+  color: white;
+}
