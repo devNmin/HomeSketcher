@@ -49,7 +49,8 @@ const FilterContext = createContext({
 export function FilterContextProvider(props) {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [page, setPage] = useState([0]);
-  const [main, setMain] = useState('Sofas & sectionals');
+  const [main, setMain] = useState('Sofas & sectionals'); // 대분류
+  const [sub, setSub] = useState('');
 
   const setPageHandler = (pageNum) => {
     setPage(pageNum);
