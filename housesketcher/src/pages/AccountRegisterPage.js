@@ -89,7 +89,7 @@ export default function AccountRegisterPage() {
             {/* 아이디 */}
             <div className={styles.control}>
               <h5> E-mail </h5>
-              <input type='email' maxLength='15' name='signup_email' ref={emailInput}/>
+              <input type='text' maxLength='15' name='signup_email' ref={emailInput}/>
               <button onClick={emailcheckHandler}>check</button>               
             </div>
             {/* 비밀번호 */}
@@ -117,15 +117,14 @@ export default function AccountRegisterPage() {
             </div>
 
             <div className={styles.actions}>
-              <h5> Gender </h5>
+              <h5> Gender & Birth </h5>
               <div>
-                <input className='mx-3' id="male" name="gender" value="male" onChange={handleChange}/>
-                <input  id="female" name="gender" value="female" onChange={handleChange} />
+                <input className='mx-3' type="text" id="male" name="gender" value="male" onChange={handleChange}/>
+                <input  id="female" type="text" name="gender" value="female" onChange={handleChange} />
+                <input type="date" maxLength='6' name='signup_birthday' ref={birthInput}/>             
               </div>
             </div>
             <div>
-              <h5> Birth </h5>
-              <input type='date' maxLength='6' name='signup_birthday' ref={birthInput}/>             
             </div>
             {/* 생년월일 */}
             {/* 생년월일 */}
@@ -134,7 +133,7 @@ export default function AccountRegisterPage() {
         <button type='submit'>Sign Up</button>
       </form>
         <Link to= '/login'>
-          <button>Back</button>
+          <p>Already Have An Account</p> 
         </Link>
     </section>
    
