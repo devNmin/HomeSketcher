@@ -2,6 +2,7 @@ from dataclasses import field
 from statistics import mode
 from rest_framework import serializers
 from .models import Interest, UserStyle, UserColor
+from auths.models import User
 
 
 class InterestSerializer(serializers.ModelSerializer):
@@ -26,6 +27,14 @@ class InterestColorInputSerializer(serializers.ModelSerializer):
         fields = [
             'color_name',
             'color_cnt'
+        ]
+
+class UserInterestInputSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = [
+            'user_style',
+            'user_color'
         ]
 
 class UserInterestDataSerializer(serializers.Serializer):
