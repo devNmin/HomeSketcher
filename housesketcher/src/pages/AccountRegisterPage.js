@@ -91,7 +91,7 @@ export default function AccountRegisterPage() {
               <h5> E-mail </h5>
               <div className={styles.Email}>
                 <input type='text' maxLength='15' name='signup_email' ref={emailInput}/>
-                <button onClick={emailcheckHandler}>check</button>               
+                <button className={styles.EmailCheck} onClick={emailcheckHandler}>check</button>               
               </div>
             </div>
             {/* 비밀번호 */}
@@ -134,7 +134,7 @@ export default function AccountRegisterPage() {
         </div>
         <button type='submit'>Sign Up</button>
       </form>
-        <Link to= '/login'>
+        <Link className={styles.linkP} to= '/login'>
           <p>Already Have An Account</p> 
         </Link>
     </section>
