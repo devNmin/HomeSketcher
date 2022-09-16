@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import classes from './MainChip.module.css';
-import FilterContext from '../../store/search';
+import FilterContext from '../../context/SearchContext';
 function Chips(props) {
   const filterCtx = useContext(FilterContext);
 

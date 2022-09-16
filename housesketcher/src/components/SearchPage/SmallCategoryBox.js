@@ -7,7 +7,7 @@ import PriceFilters from './PriceFilters';
 import StyleFilters from './StyleFilters';
 
 import classes from './SmallCategoryBox.module.css';
-import FilterContext from '../../store/search';
+import FilterContext from '../../context/SearchContext';
 
 function SmallCategoryBox() {
   const filterCtx = useContext(FilterContext);
