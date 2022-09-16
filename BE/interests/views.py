@@ -1,7 +1,4 @@
-from asyncio.windows_events import NULL
-from tkinter import image_names
 from urllib import response
-from django.shortcuts import render, get_object_or_404
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -68,7 +65,7 @@ class UserInterestResult(APIView):
         for img_id in img_list['img_list']:
             interest = Interest.objects.get(id=img_id)
             styleIndex = style.index(interest.style)
-            colorIndex = color.index(interest.color)
+            colorIndex = color.index(interest.sub_color2)
             userStyleData[styleIndex] = userStyleData[styleIndex] + 1
             userColorData[colorIndex] = userColorData[colorIndex] + 1
         
@@ -125,7 +122,7 @@ class UserInterestResult(APIView):
         for img_id in img_list['img_list']:
             interest = Interest.objects.get(id=img_id)
             styleIndex = style.index(interest.style)
-            colorIndex = color.index(interest.color)
+            colorIndex = color.index(interest.sub_color2)
             userStyleData[styleIndex] = userStyleData[styleIndex] + 1
             userColorData[colorIndex] = userColorData[colorIndex] + 1
         

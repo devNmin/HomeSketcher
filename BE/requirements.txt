@@ -35,3 +35,5 @@ virtualenv==20.16.3
 virtualenv-clone==0.5.7
 virtualenvwrapper==4.8.4
 zipp==3.8.1
+python-dotenv==0.21.0
+mysqlclient==2.1.1

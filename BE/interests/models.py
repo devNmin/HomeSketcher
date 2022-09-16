@@ -2,7 +2,8 @@ from django.db import models
 from auths.models import User
 from util.choicesList import (
     select_color,
-    select_style
+    select_style,
+    select_color_sub
 )
 
 # Create your models here.
@@ -10,19 +11,23 @@ class Interest(models.Model):
     image_name = models.CharField(max_length=255, null=True) #이미지 이름
     image_url = models.CharField(max_length=255, null=True) # 이미지 url
     style = models.CharField(max_length=30, default=0, choices=select_style) # 선호 스타일
-    color = models.CharField(max_length=30, default=0, choices=select_color) # 선호 색상
-    # base_color = models.CharField(max_length=30, default=0, choices=select_color) # 선호 색상
-    # main_color = models.CharField(max_length=30, default=0, choices=select_color) # 선호 색상
-    # point_color = models.CharField(max_length=30, default=0, choices=select_color) # 선호 색상
+    main_color = models.CharField(max_length=30, default=0, choices=select_color_sub) # main color (light, normal, dark)
+    main_color2 = models.CharField(max_length=30, default=0, choices=select_color) # main color
+    sub_color = models.CharField(max_length=30, default=0, choices=select_color_sub) # sub_color (light, normal, dark)
+    sub_color2 = models.CharField(max_length=30, default=0, choices=select_color) # sub_color
+    point_color = models.CharField(max_length=30, default=0, choices=select_color_sub) # point color (light, normal, dark)
+    point_color2 = models.CharField(max_length=30, default=0, choices=select_color) # point color
     
     REQUIRED_FIELDS = [
         'image_name',
         'image_url',
         'style',
-        'color',
-        # 'base_color',
-        # 'main_color',
-        # 'base_cpoint_colorolor',
+        'main_color',
+        'main_color2',
+        'sub_color',
+        'sub_color2',
+        'point_color',
+        'point_color2',
     ]
     
     def __str__(self):
