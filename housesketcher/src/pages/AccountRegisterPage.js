@@ -89,8 +89,10 @@ export default function AccountRegisterPage() {
             {/* 아이디 */}
             <div className={styles.control}>
               <h5> E-mail </h5>
-              <input type='text' maxLength='15' name='signup_email' ref={emailInput}/>
-              <button onClick={emailcheckHandler}>check</button>               
+              <div className={styles.Email}>
+                <input type='text' maxLength='15' name='signup_email' ref={emailInput}/>
+                <button onClick={emailcheckHandler}>check</button>               
+              </div>
             </div>
             {/* 비밀번호 */}
             <div className={styles.control}>

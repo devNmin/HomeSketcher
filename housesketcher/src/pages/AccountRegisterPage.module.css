@@ -128,3 +128,7 @@ input[type=password] {
   background-color: transparent;
   color: #ae82cc;
 }
+
+.Email {
+  display: flex;
+}
