@@ -98,10 +98,10 @@ export function FilterContextProvider(props) {
     setPage(pageNum);
   };
 
-  async function setMainHandler(categoryName) {
-    await setMain(categoryName);
-    await furnitureListHandler();
-  }
+  const setMainHandler = (categoryName) => {
+    console.log('메인 카테고리 변경~~');
+    setMain(categoryName);
+  };
 
   const setSubHandler = (categoryName) => {
     setSub(categoryName);

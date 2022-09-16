@@ -20,7 +20,6 @@ function BigCategoryNav() {
   const [bigCategory, setBigCategory] = useState('Shelves');
   const filterCtx = useContext(SearchContext);
   useEffect(() => {
-    console.log('여기', bigCategory);
     filterCtx.changeMain(bigCategory);
     filterCtx.getSubCategoryList(bigCategory);
   }, [bigCategory]);
