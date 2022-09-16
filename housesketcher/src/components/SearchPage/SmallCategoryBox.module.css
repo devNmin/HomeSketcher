@@ -58,3 +58,16 @@ hr {
   margin-left: 1rem;
   font-size: small;
 }
+
+.item > p {
+  cursor: pointer;
+}
+
+::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input::placeholder {
+  margin-right: 0.2rem;
+}

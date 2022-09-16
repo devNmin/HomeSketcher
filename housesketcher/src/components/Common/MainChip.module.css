@@ -29,6 +29,7 @@
 
 .chip:hover {
   background: rgba(251, 217, 93, 0.4);
+  cursor: pointer;
 }
 
 .chip:hover p {

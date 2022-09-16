@@ -35,6 +35,9 @@ function BigCategoryNav() {
               onClick={() => {
                 setBigCategory(categoryName);
               }}
+              className={
+                categoryName === bigCategory ? classes.selected : classes.unselected
+              }
             >
               {categoryName}
             </li>

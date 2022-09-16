@@ -10,7 +10,7 @@ function SmallCategoryList() {
       <hr />
       <div className={classes.category_line}>
         <p className={classes.category_name}>Category</p>
-        <div>
+        <div className={classes.item}>
           {filterCtx.subCategoryList.map((categoryName) => {
             return (
               <p key={categoryName} onClick={() => {}}>

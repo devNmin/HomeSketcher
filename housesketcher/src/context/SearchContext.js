@@ -58,6 +58,7 @@ const FilterContext = createContext({
 export function FilterContextProvider(props) {
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [subCategoryList, setSubCategoryList] = useState([]);
+  const [furnitureList, setFurnitureList] = useState([]);
 
   const [page, setPage] = useState(0);
   const [main, setMain] = useState('Sofas & sectionals'); // 대분류
@@ -134,6 +135,35 @@ export function FilterContextProvider(props) {
       .then((response) => {
         console.log('리스폰스.data', response.data);
         setSubCategoryList(response.data.subCategories);
+        console.log('context/search/subcategorylisthandler 완료', subCategoryList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const furnitureListHandler = async (elements) => {
+    // 선택된 필터에 있는 것들 아니면 초기화 해야함
+    const data = {
+      page: page,
+      main: main,
+      sub: sub,
+      minPrice: minPrice,
+      maxPrice: maxPrice,
+      width: width,
+      length: length,
+      height: height,
+    };
+    await axios
+      .post(BASE_URL + 'furnitures/search/', {
+        headers: {
+          Authorization: `Bearer ${authTokens.access}`,
+        },
+        data,
+      })
+      .then((response) => {
+        console.log('리스폰스.data', response.data);
+        setFurnitureList(response.data.subCategories);
         console.log('context/search/subcategorylisthandler 완료', subCategoryList);
       })
       .catch((err) => {
