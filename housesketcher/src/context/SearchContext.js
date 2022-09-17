@@ -98,10 +98,9 @@ export function FilterContextProvider(props) {
     setPage(pageNum);
   };
 
-  async function setMainHandler(categoryName) {
-    await setMain(categoryName);
-    await furnitureListHandler();
-  }
+  const setMainHandler = (categoryName) => {
+    setMain((prev) => categoryName);
+  };
 
   const setSubHandler = (categoryName) => {
     setSub(categoryName);
@@ -136,7 +135,7 @@ export function FilterContextProvider(props) {
       })
       .then((response) => {
         if (response.data.subCategories.length > 0) {
-          setSubCategoryList(response.data.subCategories);
+          setSubCategoryList((prev) => response.data.subCategories);
           console.log('context/search/subcategorylisthandler 완료', subCategoryList);
         }
       })
@@ -145,7 +144,7 @@ export function FilterContextProvider(props) {
       });
   };
 
-  const furnitureListHandler = async () => {
+  async function furnitureListHandler() {
     // 선택된 필터에 있는 것들 아니면 초기화 해야함
     const data = {
       page: page,
@@ -156,6 +155,7 @@ export function FilterContextProvider(props) {
       width: width,
       length: length,
       height: height,
+      style: null,
     };
     console.log('데이터', data);
     await axios({
@@ -167,16 +167,22 @@ export function FilterContextProvider(props) {
       data: data,
     })
       .then((response) => {
+        console.log('데이터2', data);
         console.log('카테고리', main);
         console.log('리스폰스.data', response.data.furnitures);
-        setFurnitureList(response.data.furnitures);
+        setFurnitureList(response.data.subCategories);
+        return response.data;
         // setFurnitureList(response.data.subCategories);
         // console.log('context/search/subcategorylisthandler 완료', subCategoryList);
+      })
+      .then((data) => {
+        console.log('here', data);
+        setFurnitureList((prev) => data.furnitures);
       })
       .catch((err) => {
         console.log(err);
       });
-  };
+  }
 
   const context = {
     filters: selectedFilters,
