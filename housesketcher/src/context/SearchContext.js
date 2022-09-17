@@ -63,7 +63,7 @@ export function FilterContextProvider(props) {
   const [furnitureList, setFurnitureList] = useState([]);
 
   const [page, setPage] = useState(0);
-  const [main, setMain] = useState('Sofas & sectionals'); // 대분류
+  const [main, setMain] = useState('Sofas'); // 대분류
   const [sub, setSub] = useState(null);
   const [minPrice, setMinPrice] = useState(null);
   const [maxPrice, setMaxPrice] = useState(null);
