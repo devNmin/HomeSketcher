@@ -2,11 +2,12 @@ import React, {useState, useContext, useEffect} from 'react'
 import axios from 'axios'
 import AuthContext from '../../context/AuthContext'
 import TasteListFirst from './TasteListFirst'
+import TasteListSecond from './TasteListSecond'
 
 
 export default  function TasteCompOne(props) {    
     let [tastelist, setTasteList] = useState([])  
-    let {BASE_URL, authTokens} = useContext(AuthContext)
+    let {BASE_URL, authTokens,} = useContext(AuthContext)
     
     useEffect(() => {
         axios.get(BASE_URL + 'interests/data/', {
@@ -28,10 +29,18 @@ export default  function TasteCompOne(props) {
     // }
           
   return (
-    <div>
-        <p>this is taste selecting page</p>
+    <div >        
+        {/* test 용 총 20개 */}
         <div>
             <TasteListFirst tastelist = {tastelist.slice(0,8)} />
+        </div>
+        <hr />
+        <div>
+            <TasteListSecond tastelist = {tastelist.slice(8,16)}/>
+        </div>
+        <hr />
+        <div>
+
         </div>
           
     </div>

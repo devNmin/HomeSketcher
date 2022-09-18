@@ -26,8 +26,14 @@ function TasteAnalysisPage() {
  return (
     <div>
         <Navbar/>
-        <h3>Select {user.user_nickname}'s</h3>
-        <h3>Interior Taste</h3>
+        <br />
+        <div style={{display :'flex', justifyContent: 'center'}}>
+            <h3>Select {user.user_nickname}'s</h3>          
+        </div>
+        <div style={{display :'flex', justifyContent: 'center'}}>
+            <h3>Interior Taste</h3>
+        </div>
+        <br />
         <TasteCompOne AddTaste = {AddTasteHandler} DeleteTaste = {DeleteTasteHandler} />
         <button onClick={SubmitTasteList}>Submit</button>
     </div>

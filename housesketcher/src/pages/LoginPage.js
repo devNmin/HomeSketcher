@@ -18,7 +18,7 @@ function LoginPage() {
             <Link to ="/register"><button>
                 Create account
             </button>
-              </Link>
+            </Link>
             
         </div>
     )
