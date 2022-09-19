@@ -4,7 +4,7 @@ import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import logo from '../assets/Logo.png'
+import Logo from '../assets/Logo.png'
 
 export default function AccountRegisterPage() {
   const {BASE_URL} = useContext(AuthContext)
@@ -148,6 +148,7 @@ export default function AccountRegisterPage() {
         </Link>
     </section>
    
+       
 
   )
 }

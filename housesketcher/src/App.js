@@ -7,7 +7,8 @@ import LoginPage from './pages/LoginPage';
 import AccountRegisterPage from './pages/AccountRegisterPage'
 import { AuthProvider } from './context/AuthContext'
 import LoginMainPage from './pages/LoginMainPage'
-
+import PrivateRoute from './utils/PrivateRoute'
+import NonPrivateRoute from './utils/NonPrivateRoute'
 
 function App() {
   return (
@@ -21,21 +22,11 @@ function App() {
                     let {userInfo} = useContext(AuthContext) => 현재 유저정보 가져오기 
           */}
           <Switch className="App">
-            <Route exact path= "/loginmain">
-              <LoginMainPage />
-            </Route>
-            <Route exact path="/">
-              <NonLoginMainPage />
-            </Route>
-            <Route exact path="/searchpage">
-              <SearchPage />
-            </Route>          
-            <Route exact path="/login">
-              <LoginPage />
-            </Route>
-            <Route exact path="/register">
-              <AccountRegisterPage />
-            </Route>
+            <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
+            <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
+            <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
+            <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
+            <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>                        
           </Switch>
         </AuthProvider>
       </Router>
