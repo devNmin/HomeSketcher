@@ -33,7 +33,7 @@ class UserInterestsFormAPIView(APIView):
     @swagger_auto_schema(tags=['취향 폼 데이터 전송.'], responses={200: 'Success'})
     def get(self, request):
         responseList = []
-        sendImgLen = 9
+        sendImgLen = 3
         styles = Interest.objects.all().values('style').distinct()
         
         for style in styles:
@@ -41,9 +41,10 @@ class UserInterestsFormAPIView(APIView):
             styleList = list(data)
         
             if len(styleList) >= sendImgLen:
+                print(responseList)
                 responseList = responseList + styleList[0:5]
             else: 
-                print(style['style'], '은 5개 이하의 데이터를 가진 스타일 입니다')
+                print(style['style'], f'은 {sendImgLen}개 이하의 데이터를 가진 스타일 입니다')
         random.shuffle(responseList)
         serializer = InterestSerializer(responseList, many=True)
         if serializer is not None:
