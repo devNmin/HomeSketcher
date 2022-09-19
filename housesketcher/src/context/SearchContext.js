@@ -1,58 +1,26 @@
 import { createContext, useState, useContext } from 'react';
 import AuthContext from './AuthContext';
 import axios from 'axios';
-/* 
-page*	integer
-title: Page
-페이지 번호 0부터 줘야함
 
-main*	string
-title: Main
-minLength: 1
-가구 대분류
-
-sub*	string
-title: Sub
-minLength: 1
-가구 소분류
-
-minPrice	number
-title: Minprice
-가구 최소 가격. 없으면 null
-
-maxPrice	number
-title: Maxprice
-가구 최대 가격. 없으면 null
-
-width	number
-title: Width
-가구 가로 길이
-
-length	number
-title: Length
-가구 세로 길이
-
-height	number
-title: Height
-가구 높이
-
-*/
-// let BASE_URL = 'http://127.0.0.1:8000/';
 const FilterContext = createContext({
-  categotyFilters: [],
+  filters: [],
   subCategorys: [],
   furnitureList: [],
   main: '',
+  page: 0,
+  sub: null,
+  minPrice: null,
+  maxPrice: null,
+  width: null,
+  length: null,
+  height: null,
   addFilter: (filterName) => {},
   removeFilter: (filterName) => {},
   changePage: (pageNum) => {},
   changeMain: (categoryName) => {},
   changeSub: (categoryName) => {},
-  changeMinPrice: (price) => {},
-  changeMaxPrice: (price) => {},
-  changeWidth: (size) => {},
-  changeLength: (size) => {},
-  changeHeight: (size) => {},
+  changePrice: (price) => {},
+  changeSize: (size) => {},
 
   getSubCategoryList: (categoryName) => {},
   getFurnitureList: () => {},
@@ -102,36 +70,38 @@ export function FilterContextProvider(props) {
   };
 
   const setMainHandler = (categoryName) => {
-    console.log('setMain 넣을 값', categoryName);
-    setMain((prev) => {
-      prev = categoryName;
-      return categoryName;
-    });
-    console.log('setMain  실행 후', main);
+    setMain(categoryName);
   };
+  // state 최신값을 사용하기 위해서는 useeffect 실행 조건에 main값을 넣어줘야함
 
   const setSubHandler = (categoryName) => {
     setSub(categoryName);
   };
 
-  const setMinPriceHandler = (price) => {
-    setMinPrice(price);
+  const setPriceHandler = (price) => {
+    let minp = price.minp;
+    let maxp = price.maxp;
+    setMinPrice(minp);
+    setMaxPrice(maxp);
   };
 
-  const setMaxPriceHandler = (price) => {
-    setMaxPrice(price);
-  };
-
-  const setWidthHandler = (size) => {
-    setWidth(size);
-  };
-
-  const setLengthHandler = (size) => {
-    setLength(size);
-  };
-
-  const setHeightHandler = (size) => {
-    setHeight(size);
+  const setSizeHandler = (size) => {
+    console.log('여기', size);
+    let width = size.width;
+    let length = size.length;
+    let height = size.height;
+    if (width === 0) {
+      width = null;
+    }
+    if (length === 0) {
+      length = null;
+    }
+    if (height === 0) {
+      height = null;
+    }
+    setWidth(width);
+    setLength(length);
+    setHeight(height);
   };
 
   const SubCategoryListHandler = async (categoryName) => {
@@ -143,7 +113,7 @@ export function FilterContextProvider(props) {
       })
       .then((response) => {
         if (response.data.subCategories.length > 0) {
-          setSubCategoryList((prev) => response.data.subCategories);
+          setSubCategoryList(response.data.subCategories);
         }
       })
       .catch((err) => {
@@ -164,6 +134,7 @@ export function FilterContextProvider(props) {
       height: height,
       style: null,
     };
+    console.log('furniture', data);
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
@@ -182,20 +153,24 @@ export function FilterContextProvider(props) {
 
   const context = {
     filters: selectedFilters,
-    main: main,
     subCategoryList: subCategoryList,
     furnitureList: furnitureList,
+    main: main,
+    page: page,
+    sub: sub,
+    minPrice: minPrice,
+    maxPrice: maxPrice,
+    width: width,
+    length: length,
+    height: height,
     addFilter: addFilterHandler,
     removeFilter: removeFilterHandler,
     isSelectedFilter: IsSelectedFilterHandler,
     changePage: setPageHandler,
     changeMain: setMainHandler,
     changeSub: setSubHandler,
-    changeMinPrice: setMinPriceHandler,
-    changeMaxPrice: setMaxPriceHandler,
-    changeWidth: setWidthHandler,
-    changeLength: setLengthHandler,
-    changeHeight: setHeightHandler,
+    changePrice: setPriceHandler,
+    changeSize: setSizeHandler,
     getSubCategoryList: SubCategoryListHandler,
     getFurnitureList: furnitureListHandler,
   };

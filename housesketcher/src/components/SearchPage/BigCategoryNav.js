@@ -22,7 +22,6 @@ function BigCategoryNav() {
   const filterCtx = useContext(SearchContext);
 
   useEffect(() => {
-    console.log('BigCategoryNav render');
     const changeMainAndSub = async () => {
       setIsLoding(true);
       await filterCtx.changeMain(bigCategory);

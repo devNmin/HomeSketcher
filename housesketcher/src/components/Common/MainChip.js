@@ -1,16 +1,16 @@
 import { useContext } from 'react';
 
 import classes from './MainChip.module.css';
-import FilterContext from '../../context/SearchContext';
+import SearchContext from '../../context/SearchContext';
 function Chips(props) {
-  const filterCtx = useContext(FilterContext);
+  const searchCtx = useContext(SearchContext);
 
-  const isSelectedFilter = filterCtx.isSelectedFilter(props.name);
+  const isSelectedFilter = searchCtx.isSelectedFilter(props.name);
   const filterSelectHandler = function () {
     if (isSelectedFilter) {
-      filterCtx.removeFilter(props.name);
+      searchCtx.removeFilter(props.name);
     } else {
-      filterCtx.addFilter(props.name);
+      searchCtx.addFilter(props.name);
     }
   };
 
