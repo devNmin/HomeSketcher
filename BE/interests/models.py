@@ -9,7 +9,7 @@ from util.choicesList import (
 # Create your models here.
 class Interest(models.Model):
     image_name = models.CharField(max_length=255, null=True) #이미지 이름
-    image_url = models.CharField(max_length=255, null=True) # 이미지 url
+    image_url = models.TextField(null=True) # 이미지 url
     style = models.CharField(max_length=30, default=0, choices=select_style) # 선호 스타일
     main_color = models.CharField(max_length=30, default=0, choices=select_color_sub) # main color (light, normal, dark)
     main_color2 = models.CharField(max_length=30, default=0, choices=select_color) # main color

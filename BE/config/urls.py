@@ -34,7 +34,8 @@ schema_view = get_schema_view(
     permission_classes=[permissions.AllowAny],
 )
 
-urlpatterns = [
+
+api_urlpatterns = ([
     # swagger
     path(r'swagger(?P<format>\.json|\.yaml)', schema_view.without_ui(cache_timeout=0), name='schema-json'),
     path(r'swagger', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
@@ -48,4 +49,8 @@ urlpatterns = [
     path('furnitures/',include('furnitures.urls',namespace="furnitures")),
     path('interests/', include('interests.urls', namespace="interests")),
     path('likes/', include('likes.urls', namespace="likes")),
+],'api/v1')
+
+urlpatterns=[
+    path('api/v1/',include(api_urlpatterns))
 ]
