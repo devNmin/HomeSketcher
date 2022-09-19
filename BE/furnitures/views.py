@@ -6,7 +6,9 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
-
+from django_redis import get_redis_connection
+from datetime import datetime
+import json
 from drf_yasg.utils import swagger_auto_schema
 from util.returnDto import (
     returnSuccessJson,
@@ -19,6 +21,7 @@ from .serializers import(
     FurnitureSwaggerSerializer,
     FurnitureInfoSwaggerSerializer
 )
+import pandas as pd 
 
 
 # 가구 검색 API(검색창 검색)
@@ -155,3 +158,29 @@ class FurnitureLikeAPIView(APIView):
         except:
             return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
         
+class FurnitureClickAPIView(APIView):      
+    @swagger_auto_schema(tags=['가구 클릭'],  responses={200: 'Success'})  
+    def get(self, request, furniture_pk):   
+        try:
+            con = get_redis_connection("default")
+            pk = con.llen("clickList")+1
+            data = {
+                'furniture_id':furniture_pk,
+                'user_id' : request.user.id,
+                'time' : datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            }
+            con.lpush('clickList', str(data))
+            # test11 = str(data)
+            # json_acceptable_string = test11.replace("'", "\"")
+            # print("tttt", json.loads(json_acceptable_string))
+            # print("tttt", type(json.loads(json_acceptable_string)))
+            # print(con.lrange("clickList", 0, con.llen("clickList")))
+            # test = con.lrange("clickList", 0, -1)
+            # for item in test:
+                # print(item.decode())
+            # print("test", test)
+            # test1_df = pd.DataFrame(test)
+            # test1_df.to_csv('test1_df.csv')
+            return returnSuccessJson("성공","200", status.HTTP_200_OK)
+        except:
+            return returnErrorJson("서버 오류","500",status.HTTP_500_INTERNAL_SERVER_ERROR)
