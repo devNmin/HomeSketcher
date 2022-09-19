@@ -37,11 +37,8 @@ export default  function TasteCompOne(props) {
         <hr />
         <div>
             <TasteListSecond tastelist = {tastelist.slice(8,16)}/>
-        </div>
-        <hr />
-        <div>
-
-        </div>
+        </div>      
+        
           
     </div>
   )
