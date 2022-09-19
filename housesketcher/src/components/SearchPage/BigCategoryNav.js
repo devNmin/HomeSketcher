@@ -22,20 +22,19 @@ function BigCategoryNav() {
   const filterCtx = useContext(SearchContext);
 
   useEffect(() => {
+    console.log('BigCategoryNav render');
     const changeMainAndSub = async () => {
       setIsLoding(true);
       await filterCtx.changeMain(bigCategory);
       await filterCtx.getSubCategoryList(bigCategory);
       await filterCtx.getFurnitureList();
 
-      console.log(filterCtx.furnitureList.length);
       if (filterCtx.furnitureList.length > 0) {
-        console.log('로딩완료?');
         setIsLoding(false);
       }
     };
     changeMainAndSub();
-  }, [bigCategory]);
+  }, [bigCategory, filterCtx.main]);
 
   // if (isLoading) {
   //   return (
@@ -56,7 +55,9 @@ function BigCategoryNav() {
                 setBigCategory(categoryName);
               }}
               className={
-                categoryName === bigCategory ? classes.selected : classes.unselected
+                categoryName === bigCategory
+                  ? classes.selected
+                  : classes.unselected
               }
             >
               {categoryName}

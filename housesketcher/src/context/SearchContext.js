@@ -42,6 +42,7 @@ const FilterContext = createContext({
   categotyFilters: [],
   subCategorys: [],
   furnitureList: [],
+  main: '',
   addFilter: (filterName) => {},
   removeFilter: (filterName) => {},
   changePage: (pageNum) => {},
@@ -101,7 +102,12 @@ export function FilterContextProvider(props) {
   };
 
   const setMainHandler = (categoryName) => {
-    setMain((prev) => categoryName);
+    console.log('setMain 넣을 값', categoryName);
+    setMain((prev) => {
+      prev = categoryName;
+      return categoryName;
+    });
+    console.log('setMain  실행 후', main);
   };
 
   const setSubHandler = (categoryName) => {
@@ -138,10 +144,6 @@ export function FilterContextProvider(props) {
       .then((response) => {
         if (response.data.subCategories.length > 0) {
           setSubCategoryList((prev) => response.data.subCategories);
-          console.log(
-            'context/search/subcategorylisthandler 완료',
-            subCategoryList
-          );
         }
       })
       .catch((err) => {
@@ -162,7 +164,6 @@ export function FilterContextProvider(props) {
       height: height,
       style: null,
     };
-    console.log('데이터', data);
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
@@ -172,8 +173,6 @@ export function FilterContextProvider(props) {
       data: data,
     })
       .then((response) => {
-        console.log('카테고리', main);
-        console.log('리스폰스.data', response.data.furnitures);
         setFurnitureList(response.data.furnitures);
       })
       .catch((err) => {
@@ -183,6 +182,7 @@ export function FilterContextProvider(props) {
 
   const context = {
     filters: selectedFilters,
+    main: main,
     subCategoryList: subCategoryList,
     furnitureList: furnitureList,
     addFilter: addFilterHandler,
