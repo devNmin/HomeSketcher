@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import Logo from '../assets/Logo.png'
 
 export default function AccountRegisterPage() {
   const {BASE_URL} = useContext(AuthContext)
@@ -79,7 +80,7 @@ export default function AccountRegisterPage() {
 
   }  
 
-  return (       
+  return (  
       <form onSubmit={submitHandler}>      
         <div className='Signup'>
           <div>
@@ -106,13 +107,11 @@ export default function AccountRegisterPage() {
             <div>
               <h5> Name </h5>
               <input type='text' maxLength='10' name='signup_name' ref={nameInput}/>
-            </div>
-
+            </div>            
             <div>
               <h5> Nickname </h5>
               <input type='text' maxLength='10' name='signup_nickname' ref={nicknameInput}/>
             </div>
-
             <div>
               <h5> Gender </h5>
               <label  htmlFor ="male">남성</label>
@@ -135,6 +134,7 @@ export default function AccountRegisterPage() {
         </Link>
       </form>
    
+       
 
   )
 }
