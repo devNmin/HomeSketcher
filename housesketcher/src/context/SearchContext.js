@@ -60,9 +60,7 @@ export function FilterContextProvider(props) {
   }
 
   function IsSelectedFilterHandler(filterName) {
-    return selectedFilters.some(
-      (categoryFilter) => categoryFilter === filterName
-    );
+    return selectedFilters.some((categoryFilter) => categoryFilter === filterName);
   }
 
   const setPageHandler = (pageNum) => {
@@ -90,13 +88,13 @@ export function FilterContextProvider(props) {
     let width = size.width;
     let length = size.length;
     let height = size.height;
-    if (width === 0) {
+    if (width === '') {
       width = null;
     }
-    if (length === 0) {
+    if (length === '') {
       length = null;
     }
-    if (height === 0) {
+    if (height === '') {
       height = null;
     }
     setWidth(width);
@@ -176,9 +174,7 @@ export function FilterContextProvider(props) {
   };
 
   return (
-    <FilterContext.Provider value={context}>
-      {props.children}
-    </FilterContext.Provider>
+    <FilterContext.Provider value={context}>{props.children}</FilterContext.Provider>
   );
 }
 
