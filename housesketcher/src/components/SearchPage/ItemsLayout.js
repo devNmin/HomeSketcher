@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import SearchContext from '../../context/SearchContext';
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
