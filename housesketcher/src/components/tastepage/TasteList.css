@@ -1,7 +1,7 @@
 .tasteselectimage {
-    transition: all 0.32s linear;
+    transition: all 0.1s linear;
 }
 
 .tasteselectimage:hover {
-    transform: scale(1.08);
+    transform: scale(1.0);
 }

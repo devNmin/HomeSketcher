@@ -8,7 +8,8 @@ import TasteListSecond from './TasteListSecond'
 export default  function TasteCompOne(props) {    
     let [tastelist, setTasteList] = useState([])  
     let {BASE_URL, authTokens,} = useContext(AuthContext)
-    
+    let tasteIdList = props.tasteIdList
+
     useEffect(() => {
         axios.get(BASE_URL + 'interests/data/', {
             headers :{
@@ -32,12 +33,12 @@ export default  function TasteCompOne(props) {
     <div >        
         {/* test 용 총 20개 */}
         <div>
-            <TasteListFirst tastelist = {tastelist.slice(0,8)} />
+            <TasteListFirst tastelist = {tastelist} saveTaste = {saveTasteHandler} tasteId = {tasteIdList} />
         </div>
-        <hr />
-        <div>
+        <br />
+        {/* <div>
             <TasteListSecond tastelist = {tastelist.slice(8,16)}/>
-        </div>      
+        </div>       */}
         
           
     </div>
