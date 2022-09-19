@@ -6,22 +6,30 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/Logo.png';
 import styles from './Navbar.module.css';
 import AuthContext from '../../context/AuthContext';
+import Navbutton from './Navbutton'
+import { padding } from '@mui/system';
+
 
 function Navbar(props) {
-  let { user , logoutUser } = useContext(AuthContext)
+  let { user  } = useContext(AuthContext)
+
   return (
     <div className={styles.navbar}>
       <img className={styles.navbar_logo} src={logo} alt="" />
-      <div className={styles.navbar_search}>
+      {user && <div className={styles.navbar_search}>
         <input className={styles.navbar_searchInput} type="text" />
-        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />
-      </div>
+        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" /> 
+             
+      </div>}
+      
       <nav className={styles.nav}>
-        <ul>          
+        <ul>         
           
-          {user ? (           
+          {user ? (                    
             <li>
-              <button onClick={logoutUser}>Logout</button>
+              <Navbutton />
+              {/* <button><b>Hello, {user.user_nickname}</b></button> */}
+              {/* <button onClick={logoutUser}>Logout</button> */}
             </li>
           ): (
           <li>
@@ -32,7 +40,7 @@ function Navbar(props) {
           </li>
           )}        
         </ul>
-      </nav>
+      </nav>     
     </div>
   );
 }

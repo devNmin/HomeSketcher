@@ -1,4 +1,4 @@
-import { Route, Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NonLoginMainPage from './pages/NonLoginMainPage';
@@ -9,6 +9,7 @@ import { AuthProvider } from './context/AuthContext'
 import LoginMainPage from './pages/LoginMainPage'
 import PrivateRoute from './utils/PrivateRoute'
 import NonPrivateRoute from './utils/NonPrivateRoute'
+import TasteAnalysisPage from './pages/TasteAnalysis'
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
             <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
             <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
             <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
-            <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>                        
+            <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>
+            <PrivateRoute component= {TasteAnalysisPage} exact path = '/tasteanalysis'/>                        
           </Switch>
         </AuthProvider>
       </Router>

@@ -25,13 +25,14 @@ export const AuthProvider = ({children}) => {
     // 콜백을 쓰는 이유는 안 쓸 경우 페이지가 로드 될때마다 계속 작동하기 때문에 
     let [user, setUser] = useState(() => localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null)
     let [authTokens, setAuthTokens] = useState(() => localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')) : null)
-    let BASE_URL = 'http://j7b304.p.ssafy.io:8001/'
-    let [loading, setLoading] = useState(true)
-
+    let BASE_URL = 'http://j7b304.p.ssafy.io:8001/api/v1/'
+    // let [loading, setLoading] = useState(true)
+    let loading = true
     const history = useHistory()  
 
 
     let loginUser = async (e) => {
+       
         e.preventDefault()
         console.log('Form submitted');
         let response = await fetch( BASE_URL +'auths/login/' , {
@@ -46,9 +47,14 @@ export const AuthProvider = ({children}) => {
         if(response.status === 200) {
             setAuthTokens(data.token)
             setUser(data.user)
+            console.log(data.user);
             localStorage.setItem('authTokens', JSON.stringify(data.token))
             localStorage.setItem('userInfo', JSON.stringify(data.user))
-            history.push('/')    
+            if (data.user.user_style === "0") {
+                history.push('/tasteanalysis')                
+            } else {
+                history.push('/')    
+            }
         }else {
             alert('Login Failed!')
         }
