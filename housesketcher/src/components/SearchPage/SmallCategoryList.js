@@ -4,7 +4,13 @@ import classes from './SmallCategoryBox.module.css';
 import SearchContext from '../../context/SearchContext';
 
 function SmallCategoryList() {
-  const filterCtx = useContext(SearchContext);
+  const searchCtx = useContext(SearchContext);
+  const [subCategory, setSubCategory] = useState(null);
+
+  useEffect(() => {
+    searchCtx.changeSub(subCategory);
+    searchCtx.getFurnitureList();
+  }, [subCategory]);
 
   return (
     <div>
@@ -12,9 +18,14 @@ function SmallCategoryList() {
       <div className={classes.category_line}>
         <p className={classes.category_name}>Category</p>
         <div className={classes.item}>
-          {filterCtx.subCategoryList.map((categoryName) => {
+          {searchCtx.subCategoryList.map((categoryName) => {
             return (
-              <p key={categoryName} onClick={() => {}}>
+              <p
+                key={categoryName}
+                onClick={() => {
+                  setSubCategory(categoryName);
+                }}
+              >
                 {categoryName}
               </p>
             );

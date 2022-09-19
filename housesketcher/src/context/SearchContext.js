@@ -3,6 +3,7 @@ import AuthContext from './AuthContext';
 import axios from 'axios';
 
 const FilterContext = createContext({
+  isLoading: false,
   filters: [],
   subCategorys: [],
   furnitureList: [],
@@ -27,6 +28,7 @@ const FilterContext = createContext({
 });
 
 export function FilterContextProvider(props) {
+  const [isLoading, setIsLoding] = useState([false]);
   const [selectedFilters, setSelectedFilters] = useState([]);
   const [subCategoryList, setSubCategoryList] = useState([]);
   const [furnitureList, setFurnitureList] = useState([]);
@@ -121,6 +123,7 @@ export function FilterContextProvider(props) {
 
   const furnitureListHandler = async () => {
     // 선택된 필터에 있는 것들 아니면 초기화 해야함
+
     const data = {
       page: page,
       main: main,
@@ -150,6 +153,7 @@ export function FilterContextProvider(props) {
   };
 
   const context = {
+    isLoading: isLoading,
     filters: selectedFilters,
     subCategoryList: subCategoryList,
     furnitureList: furnitureList,

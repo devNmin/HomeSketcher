@@ -9,16 +9,19 @@ function ItemsLayout() {
   console.log(items);
 
   return (
-    <div className={classes.display_flex}>
-      {items.map((item) => {
-        return (
-          <div key={item.id} onClick={() => {}}>
-            <img src={item.furniture_image} />
-            <p>{item.furniture_name}</p>
-          </div>
-        );
-      })}
-    </div>
+    <>
+      <div className={classes.display_flex}>
+        {items.map((item) => {
+          return (
+            <div key={item.id} onClick={() => {}}>
+              <img src={item.furniture_image} />
+              <p>{item.furniture_name}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div className={classes.blank}></div>
+    </>
   );
 }
 

@@ -58,9 +58,16 @@ hr {
   margin-left: 1rem;
   font-size: small;
 }
+.item {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
 
 .item > p {
   cursor: pointer;
+  width: 18rem;
+  margin-left: 1.2rem;
 }
 
 ::-webkit-inner-spin-button {
@@ -78,4 +85,16 @@ input::placeholder {
   color: white;
   border: 0;
   height: 2rem;
+}
+
+.styleName_row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.styleName_row > p {
+  width: 8rem;
+  margin-left: 1.2rem;
+  cursor: pointer;
 }
