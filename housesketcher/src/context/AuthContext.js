@@ -90,45 +90,13 @@ export const AuthProvider = ({children}) => {
         }
     
     }
-  };
-
-  let logoutUser = () => {
-    setAuthTokens(null);
-    setUser(null);
-    localStorage.removeItem('userInfo');
-    localStorage.removeItem('authTokens');
-    history.push('/login');
-  };
-
-  // refresh token 관련 함수
-  let updateToken = async (e) => {
-    console.log('refresh submitted');
-    let response = await fetch(BASE_URL + 'auths/token_refresh/', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ refresh: authTokens.refresh }),
-    });
-    let data = await response.json();
-
-    if (response.status === 200) {
-      setAuthTokens({ access: data.access, refresh: authTokens.refresh });
-      localStorage.setItem(
-        'authTokens',
-        JSON.stringify({ access: data.access, refresh: authTokens.refresh })
-      );
-    } else {
-      logoutUser();
-    }
-  };
-
-  // 로그인 함수를 생성한 후 이를 contextData에 담아서 사용이 가능하게 한다.
+    // 로그인 함수를 생성한 후 이를 contextData에 담아서 사용이 가능하게 한다.
   let contextData = {
     user: user,
     loginUser: loginUser,
     logoutUser: logoutUser,
     BASE_URL: BASE_URL,
+    authTokens : authTokens
   };
 
   // useEffect를 사용해 5분마다 token refresh하기
@@ -145,4 +113,9 @@ export const AuthProvider = ({children}) => {
   return (
     <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>
   );
-};
+  };
+
+ 
+  
+  
+

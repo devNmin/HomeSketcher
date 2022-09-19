@@ -7,7 +7,7 @@ import TasteListSecond from './TasteListSecond'
 
 export default  function TasteCompOne(props) {    
     let [tastelist, setTasteList] = useState([])  
-    let {BASE_URL, authTokens,} = useContext(AuthContext)
+    let {BASE_URL, authTokens} = useContext(AuthContext)
     let tasteIdList = props.tasteIdList
 
     useEffect(() => {
