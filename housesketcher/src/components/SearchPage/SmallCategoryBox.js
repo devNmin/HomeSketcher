@@ -1,32 +1,28 @@
-import { useState } from 'react';
+import { useContext } from 'react';
 
-import MainChip from '../Common/MainChip';
+import CategoryFilters from './CategoryFilters';
+import SmallCategoryList from './SmallCategoryList';
+import SizeFilters from './SizeFilters';
+import PriceFilters from './PriceFilters';
+import StyleFilters from './StyleFilters';
+import FilterRequestButton from './FilterRequestButton';
 
 import classes from './SmallCategoryBox.module.css';
+import SearchContext from '../../context/SearchContext';
 
 function SmallCategoryBox() {
-  const [isSelected, setIsSelected] = useState([]);
-  function selectHandler(name) {
-    setIsSelected.push(name);
-    console.log(isSelected);
-  }
+  const searchCtx = useContext(SearchContext);
 
   return (
     <div className={classes.container}>
       <div className={classes.category_box}>
-        <div className={classes.row}>
-          <p className={classes.category_name}>Select Detail</p>
-          <div className={classes.row_justify_between}>
-            <div className={classes.row}>
-              <MainChip name="Size" onClick={selectHandler} />
-              <MainChip name="Price" onClick={selectHandler} />
-            </div>
-            <div className={classes.row}>
-              <MainChip name="Style" onClick={selectHandler} />
-              <MainChip name="Liked" onClick={selectHandler} />
-            </div>
-          </div>
-        </div>
+        <CategoryFilters />
+        <SmallCategoryList />
+
+        {searchCtx.isSelectedFilter('Size') && <SizeFilters />}
+        {searchCtx.isSelectedFilter('Price') && <PriceFilters />}
+        {searchCtx.isSelectedFilter('Style') && <StyleFilters />}
+        {searchCtx.filters.length > 0 && <FilterRequestButton />}
       </div>
     </div>
   );
