@@ -17,6 +17,5 @@ RUN pip3 install --upgrade pip
 RUN pip3 install -r requirements.txt 
 
 EXPOSE 8001
-# CMD ["python", "manage.py", "makemigrations"]
-# CMD ["python", "manage.py", "migrate"]
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8001"]
+
+CMD ["python", "manage.py","runsslserver", "0.0.0.0:8001","--certificate" ,"/etc/letsencrypt/live/j7b304.p.ssafy.io/cert.pem","--key","/etc/letsencrypt/live/j7b304.p.ssafy.io/privkey.pem"]
