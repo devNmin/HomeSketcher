@@ -5,6 +5,7 @@ import SearchContext from '../../context/SearchContext';
 
 function SmallCategoryList() {
   const filterCtx = useContext(SearchContext);
+
   return (
     <div>
       <hr />

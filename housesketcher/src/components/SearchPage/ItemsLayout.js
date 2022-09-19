@@ -2,13 +2,12 @@ import { useState, useEffect, useContext } from 'react';
 import SearchContext from '../../context/SearchContext';
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
-  useEffect(() => {
-    const items = filterCtx.furnitureList;
-  }, []);
+
+  const items = filterCtx.furnitureList;
 
   return (
     <div>
-      {filterCtx.furnitureList.map((item) => {
+      {items.map((item) => {
         return (
           <p key={item.id} onClick={() => {}}>
             {item.furniture_name}
