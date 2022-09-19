@@ -54,6 +54,13 @@ export default function AccountRegisterPage() {
     const namesubmit = nameInput.current.value;
     const nicknamesubmit = nicknameInput.current.value;
     const brithsubmit = birthInput.current.value;
+    console.log(JSON.stringify({ "user_email": emailsubmit,
+    "password": passwordsubmit,
+    "password2": passwordchecksubmit,
+    "user_name": namesubmit,
+    "user_nickname": nicknamesubmit,
+    "user_gender": formData.gender,
+    "user_birth": brithsubmit}));
 
     await fetch(BASE_URL + 'auths/signup/', {
         method : 'POST',
@@ -90,7 +97,7 @@ export default function AccountRegisterPage() {
             <div className={styles.control}>
               <h5> E-mail </h5>
               <div className={styles.Email}>
-                <input type='text' maxLength='15' name='signup_email' ref={emailInput}/>
+                <input type='text' maxLength='20' name='signup_email' ref={emailInput}/>
                 <button className={styles.EmailCheck} onClick={emailcheckHandler}>check</button>               
               </div>
             </div>
@@ -121,8 +128,10 @@ export default function AccountRegisterPage() {
             <div className={styles.actions}>
               <h5> Gender & Birth </h5>
               <div>
-                <input className='mx-3' type="text" id="male" name="gender" value="male" onChange={handleChange}/>
-                <input  id="female" type="text" name="gender" value="female" onChange={handleChange} />
+                <label>남자</label>
+                <input className='mx-3' type="radio" id="male" name="gender" value="0" onChange={handleChange}/>
+                <label>여자</label>
+                <input  id="female" type="radio" name="gender" value="1" onChange={handleChange} />
                 <input type="date" maxLength='6' name='signup_birthday' ref={birthInput}/>             
               </div>
             </div>
