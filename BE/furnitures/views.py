@@ -23,6 +23,8 @@ from .serializers import(
 )
 import pandas as pd 
 
+from django.db.models import Subquery,Count
+from likes.models import UserLike
 
 # 가구 검색 API(검색창 검색)
 class FurnitureSearchAPIView(APIView):
@@ -112,6 +114,11 @@ class FurnitureListAPIView(APIView):
         length = request.data.get('length') #세로 길이 -> 최대값
         height = request.data.get('height') #높이 -> 최대값
         style = request.data.get('style') #스타일 
+        byPrice = request.data.get('byPrice') #가격 높낮이 순. 높은순 high, 낮은순 low, 없으면 null
+        like = request.data.get('like') #좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
+
+        #하트 많고 작은 순
+
         print(page,main,sub,minPrice,maxPrice, width, length, height)
 
         try:
@@ -120,22 +127,35 @@ class FurnitureListAPIView(APIView):
                 furnitures = Furniture.objects.filter(furniture_sub = sub).values()
             #각 값들이 요청 body로 들어왔을 때 조건 적용
             if(minPrice is not None):
-                furnitures = furnitures.filter(furniture_price__gte = minPrice)
+                furnitures = furnitures.filter(furniture_price__gte = minPrice).values()
             if(maxPrice is not None):
-                furnitures = furnitures.filter(furniture_price__lte = maxPrice)
+                furnitures = furnitures.filter(furniture_price__lte = maxPrice).values()
             if(width is not None):
-                furnitures = furnitures.filter(furniture_width__lte = width)
+                furnitures = furnitures.filter(furniture_width__lte = width).values()
             if(length is not None):
-                furnitures = furnitures.filter(furniture_length__lte = length)
+                furnitures = furnitures.filter(furniture_length__lte = length).values()
             if(height is not None):
-                furnitures = furnitures.filter(furniture_height__lte = height)
+                furnitures = furnitures.filter(furniture_height__lte = height).values()
             if(style is not None):
-                furnitures = furnitures.filter(furniture_style = style)
+                furnitures = furnitures.filter(furniture_style = style).values()
+            if byPrice is not None:
+                if byPrice == 'high':
+                    furnitures = furnitures.order_by('-furniture_price').values()
+                else:
+                    furnitures = furnitures.order_by('furniture_price').values()
+            if like is not None:
+                if like == 'high':
+                    furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('-cnt')
+                else:
+                    furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('cnt')  
+
             
+            count = furnitures.count()
             furnitures = furnitures[page*20:page*20+20]
 
+
             res = {}
-            res['count'] = furnitures.count(),
+            res['count'] = count,
             res['furnitures'] = furnitures
 
             return Response(res, status=status.HTTP_200_OK)
