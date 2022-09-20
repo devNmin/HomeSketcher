@@ -3,6 +3,8 @@ import CardPanel from './CardPanel'
 // import logo from '../../assets/Logo.png'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import LikeFurniture from '../Like/LikeFurniture'
+
 
 function SubCarousel(props) {
   const [populars, setPopulars] = useState([])
@@ -17,7 +19,7 @@ function SubCarousel(props) {
   useEffect(() => {
     getPopulars();
   }, [])
-  console.log(populars)
+  // console.log(populars)
   return (
     <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
       <h1>popular</h1>
@@ -27,14 +29,8 @@ function SubCarousel(props) {
         populars={populars}
       >
           {populars.map((popular) => (
-            <div key={popular.id}>
-              <a href={popular.url}>
-                <img src={popular.medium_cover_image} alt="" />
-              </a>
-              <h6>
-                {popular.title}
-              </h6>
-            </div>
+            <LikeFurniture popular = {popular}>              
+            </LikeFurniture>
           ))}
         {/* <div>
           <div style={{ padding: 20 }}>

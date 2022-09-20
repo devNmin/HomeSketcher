@@ -25,8 +25,8 @@ function TasteAnalysisPage() {
             }
              
         }).then(res => {
-            alert('HomeSketcher에 오신걸 환영합니다!')
-            history.push('/loginmain')
+            alert('Your Interior Taste Complete!')
+            history.push('/loginmain').then((() =>window.scrollTo(0,0) ))
         })
 
         console.log(tastelist);

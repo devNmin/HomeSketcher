@@ -3,10 +3,16 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import AuthContext from '../../context/AuthContext';
 import {useContext} from 'react'
+import { useHistory } from 'react-router-dom';
 
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   let {user , logoutUser} = useContext(AuthContext)
+  const hisory = useHistory()
+
+  const retestClickHandler = () => {
+    hisory.push('/tasteanalysis')
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -35,7 +41,7 @@ export default function BasicPopover() {
         }}
       >
         <Typography sx={{ p: 2 }} >
-            <p style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Retest</p>
+            <p onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Retest</p>
             <hr />
             <p style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Edit Profile</p>
             <hr />

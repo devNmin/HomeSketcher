@@ -10,6 +10,7 @@ import LoginMainPage from './pages/LoginMainPage'
 import PrivateRoute from './utils/PrivateRoute'
 import NonPrivateRoute from './utils/NonPrivateRoute'
 import TasteAnalysisPage from './pages/TasteAnalysis'
+import ScrollToTop from './hooks/ScrollToTop';
 
 function App() {
   return (
@@ -22,14 +23,17 @@ function App() {
             함수 안 let {authTokens} = useContext(AuthContext) => token 가져오기 authTokens.access 
                     let {userInfo} = useContext(AuthContext) => 현재 유저정보 가져오기 
           */}
-          <Switch className="App">
-            <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
-            <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
-            <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
-            <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
-            <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>
-            <PrivateRoute component= {TasteAnalysisPage} exact path = '/tasteanalysis'/>                        
-          </Switch>
+          <ScrollToTop>
+            <Switch className="App">
+              <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
+              <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
+              <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
+              <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
+              <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>
+              <PrivateRoute component= {TasteAnalysisPage} exact path = '/tasteanalysis'/>                        
+            </Switch>
+          </ScrollToTop>
+
         </AuthProvider>
       </Router>
     </div>

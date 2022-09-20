@@ -32,12 +32,7 @@ function Navbar(props) {
               {/* <button onClick={logoutUser}>Logout</button> */}
             </li>
           ): (
-          <li>
-            <Link to = '/login'><button>
-                  Sign In
-            </button>
-              </Link>
-          </li>
+          null
           )}        
         </ul>
       </nav>     
