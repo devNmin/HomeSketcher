@@ -13,6 +13,17 @@ function Pagnation() {
   } else if (pageNum - 1 < 0) {
     pages = [pageNum - 1, pageNum, pageNum + 1, pageNum + 2, pageNum + 3];
   }
+  for (let val of pages) {
+    if (val > items.length - 1) {
+      pages = pages.filter((element) => element !== val);
+    }
+  }
+  console.log('페이지스', pages);
+  // if (pageNum + 1 > items.length - 2) {
+  //   const idx = pages.indexOf(pageNum + 1);
+  //   if (idx > 0) {
+  //     pages = pages.slice(0, idx)
+  //   } else if (pageNum + 2 > items)
 
   // items에는 pageNum -2 -1, pageNum, pageNum + 1 + 2의 값이 들어가야함
   // items -2가 0 이상이 아니면 pageNum +3 +4 추가
@@ -21,6 +32,15 @@ function Pagnation() {
 
   useEffect(() => {
     items = searchCtx.totalPage;
+    if (pageNum - 2 < 0) {
+      pages = [pageNum, pageNum + 1, pageNum + 2, pageNum + 3, pageNum + 4];
+    } else if (pageNum - 1 < 0) {
+      pages = [pageNum - 1, pageNum, pageNum + 1, pageNum + 2, pageNum + 3];
+    }
+
+    pages = pages.filter((element) => element < items.length);
+
+    console.log('페이지스', pages);
   }, [pageNum, items]);
 
   return (
@@ -28,7 +48,7 @@ function Pagnation() {
       <div className={classes.page_num}>
         <p>&lt;</p>
       </div>
-      {items.map((pageNum) => {
+      {pages.map((pageNum) => {
         return (
           <div className={classes.page_num} key={pageNum}>
             <p
