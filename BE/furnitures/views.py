@@ -1,4 +1,3 @@
-from tkinter.messagebox import NO
 from furnitures.models import Furniture
 from likes.models import UserLike
 from auths.models import User
@@ -24,6 +23,8 @@ from .serializers import(
 )
 import pandas as pd 
 
+from django.db.models import Subquery,Count
+from likes.models import UserLike
 
 # 가구 검색 API(검색창 검색)
 class FurnitureSearchAPIView(APIView):
@@ -36,8 +37,9 @@ class FurnitureSearchAPIView(APIView):
             return returnErrorJson("잘못된 요청 방식입니다. 알맞은 데이터를 보내주세요","400", status=status.HTTP_400_BAD_REQUEST)
         else:
             try:
-                furniture_datas = Furniture.objects.filter(furniture_name__icontains=search_name)[page_num*20:page_num*20+20].values()
-                # print(furniture_datas.count())
+                furniture_datas =  Furniture.objects.filter(furniture_name__icontains=search_name).values()
+                count = furniture_datas.count()
+                furniture_datas = furniture_datas[page_num*20:page_num*20+20].values()
                 
                 # 좋아요 여부 가져오기
                 userId = request.user.id
@@ -50,9 +52,10 @@ class FurnitureSearchAPIView(APIView):
                         furniture['like']=True
                     except:
                         furniture['like']=False
-                        
+
+
                 res ={}
-                res['count'] = furniture_datas.count()
+                res['count'] = count
                 res['datas'] = furnitureValuses
                 # print(furniture_datas[page_num*20:page_num*20+20].count())
                 return Response(res, status=status.HTTP_200_OK)
@@ -98,36 +101,11 @@ class FurnitureLabelAPIView(APIView):
             #가장 높은 평점을 가진 가구 정보 제공
             if label == "rate":
                 #furniture-rating 별로 내림차순 정렬
-                furniture_datas = furnitures.order_by('-furniture_rating')[:20]
-                # 좋아요 여부 가져오기
-                userId = request.user.id
-                furnitureValuses = furniture_datas.values()
-                for furniture in furnitureValuses:
-                    pk = furniture['id']
-                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                    try:
-                        like[0]
-                        furniture['like']=True
-                    except:
-                        furniture['like']=False
-                res['furnitures'] = furnitureValuses
+                res['furnitures'] = furnitures.order_by('-furniture_rating')[:20]
 
             #가장 리뷰수가 많은 가구 정보 제공
             elif label == "review":
-                furniture_datas = furnitures.order_by('furniture_review')[:20]
-                
-                # 좋아요 여부 가져오기
-                userId = request.user.id
-                furnitureValuses = furniture_datas.values()
-                for furniture in furnitureValuses:
-                    pk = furniture['id']
-                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                    try:
-                        like[0]
-                        furniture['like']=True
-                    except:
-                        furniture['like']=False
-                res['furnitures'] = furnitureValuses
+                res['furnitures'] = furnitures.order_by('furniture_review')[:20]
 
         except:
             return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -151,7 +129,12 @@ class FurnitureListAPIView(APIView):
         length = request.data.get('length') #세로 길이 -> 최대값
         height = request.data.get('height') #높이 -> 최대값
         style = request.data.get('style') #스타일 
-        # print(page,main,sub,minPrice,maxPrice, width, length, height)
+        byPrice = request.data.get('byPrice') #가격 높낮이 순. 높은순 high, 낮은순 low, 없으면 null
+        like = request.data.get('like') #좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
+
+        #하트 많고 작은 순
+
+        print(page,main,sub,minPrice,maxPrice, width, length, height)
 
         try:
             furnitures = Furniture.objects.filter(furniture_main = main).values()
@@ -159,37 +142,44 @@ class FurnitureListAPIView(APIView):
                 furnitures = Furniture.objects.filter(furniture_sub = sub).values()
             #각 값들이 요청 body로 들어왔을 때 조건 적용
             if(minPrice is not None):
-                furnitures = furnitures.filter(furniture_price__gte = minPrice)
+                furnitures = furnitures.filter(furniture_price__gte = minPrice).values()
             if(maxPrice is not None):
-                furnitures = furnitures.filter(furniture_price__lte = maxPrice)
+                furnitures = furnitures.filter(furniture_price__lte = maxPrice).values()
             if(width is not None):
-                furnitures = furnitures.filter(furniture_width__lte = width)
+                furnitures = furnitures.filter(furniture_width__lte = width).values()
             if(length is not None):
-                furnitures = furnitures.filter(furniture_length__lte = length)
+                furnitures = furnitures.filter(furniture_length__lte = length).values()
             if(height is not None):
-                furnitures = furnitures.filter(furniture_height__lte = height)
+                furnitures = furnitures.filter(furniture_height__lte = height).values()
             if(style is not None):
-                furnitures = furnitures.filter(furniture_style = style)
+                furnitures = furnitures.filter(furniture_style = style).values()
+            if byPrice is not None:
+                if byPrice == 'high':
+                    furnitures = furnitures.order_by('-furniture_price').values()
+                else:
+                    furnitures = furnitures.order_by('furniture_price').values()
+
+
+            # 이런 쿼리문 만드려고 아래와 같이 ORM 작성
+            # select furnitures_furniture.*, count(total_likes.furniture_id) from furnitures_furniture
+            # inner join likes_userlike as total_likes
+            # where furnitures_furniture.id = total_likes.furniture_id
+            # group by furnitures_furniture.id;
+            if like is not None:
+                if like == 'high':
+                    furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('-cnt')
+                else:
+                    furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('cnt')  
+
             
+            count = furnitures.count()
             furnitures = furnitures[page*20:page*20+20]
-            
-            # 좋아요 여부 가져오기
-            userId = request.user.id
-            furnitureValuses = furnitures.values()
-            for furniture in furnitureValuses:
-                pk = furniture['id']
-                like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                try:
-                    like[0]
-                    furniture['like']=True
-                except:
-                    furniture['like']=False
-                print(furniture)
-                
+
+
             res = {}
-            res['count'] = furnitures.count(),
-            res['furnitures'] = furnitureValuses
-            
+            res['count'] = count,
+            res['furnitures'] = furnitures
+
             return Response(res, status=status.HTTP_200_OK)
         except:
             return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
@@ -209,8 +199,7 @@ class FurnitureLikeAPIView(APIView):
         
         except:
             return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
-
-# 가구 클릭시 조회수 증가 
+        
 class FurnitureClickAPIView(APIView):      
     @swagger_auto_schema(tags=['가구 클릭'],  responses={200: 'Success'})  
     def get(self, request, furniture_pk):   
