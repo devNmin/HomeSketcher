@@ -22,6 +22,7 @@ const FilterContext = createContext({
   changeSub: (categoryName) => {},
   changePrice: (price) => {},
   changeSize: (size) => {},
+  changeStyle: (size) => {},
 
   getSubCategoryList: (categoryName) => {},
   getFurnitureList: () => {},
@@ -41,6 +42,7 @@ export function FilterContextProvider(props) {
   const [width, setWidth] = useState(null);
   const [length, setLength] = useState(null);
   const [height, setHeight] = useState(null);
+  const [style, setStyle] = useState(null);
 
   let { BASE_URL } = useContext(AuthContext);
   let [authTokens, setAuthTokens] = useState(() =>
@@ -86,7 +88,6 @@ export function FilterContextProvider(props) {
   };
 
   const setSizeHandler = (size) => {
-    console.log('여기', size);
     let width = size.width;
     let length = size.length;
     let height = size.height;
@@ -102,6 +103,10 @@ export function FilterContextProvider(props) {
     setWidth(width);
     setLength(length);
     setHeight(height);
+  };
+
+  const setStyleHandler = (styleName) => {
+    setStyle(styleName);
   };
 
   const SubCategoryListHandler = async (categoryName) => {
@@ -123,7 +128,6 @@ export function FilterContextProvider(props) {
 
   const furnitureListHandler = async () => {
     // 선택된 필터에 있는 것들 아니면 초기화 해야함
-
     const data = {
       page: page,
       main: main,
@@ -133,9 +137,8 @@ export function FilterContextProvider(props) {
       width: width,
       length: length,
       height: height,
-      style: null,
+      style: style,
     };
-    console.log('furniture', data);
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
@@ -173,6 +176,7 @@ export function FilterContextProvider(props) {
     changeSub: setSubHandler,
     changePrice: setPriceHandler,
     changeSize: setSizeHandler,
+    changeStyle: setStyleHandler,
     getSubCategoryList: SubCategoryListHandler,
     getFurnitureList: furnitureListHandler,
   };

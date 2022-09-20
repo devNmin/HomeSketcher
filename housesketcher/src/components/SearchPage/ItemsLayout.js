@@ -4,9 +4,7 @@ import classes from './itemsLayout.module.css';
 
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
-
   const items = filterCtx.furnitureList;
-  console.log(items);
 
   return (
     <>

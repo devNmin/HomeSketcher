@@ -1,5 +1,6 @@
-import MainChip from '../Common/MainChip';
+import { useState, useEffect, useContext } from 'react';
 import classes from './SmallCategoryBox.module.css';
+import SearchContext from '../../context/SearchContext';
 
 const StyleList = [
   'Modern',
@@ -13,6 +14,14 @@ const StyleList = [
 ];
 
 function StyleFilters() {
+  const searchCtx = useContext(SearchContext);
+  const [styleName, setStyleName] = useState(null);
+
+  useEffect(() => {
+    searchCtx.changeStyle(styleName);
+    searchCtx.getFurnitureList();
+  }, [styleName]);
+
   return (
     <div>
       <hr />
@@ -20,7 +29,16 @@ function StyleFilters() {
         <p className={classes.category_name}>Style</p>
         <div className={classes.styleName_row}>
           {StyleList.map((styleName) => {
-            return <p key={styleName}>{styleName}</p>;
+            return (
+              <p
+                key={styleName}
+                onClick={() => {
+                  setStyleName(styleName);
+                }}
+              >
+                {styleName}
+              </p>
+            );
           })}
         </div>
       </div>
