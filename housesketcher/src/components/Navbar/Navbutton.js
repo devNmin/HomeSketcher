@@ -30,6 +30,7 @@ export default function BasicPopover() {
       <button aria-describedby={id} variant="contained" onClick={handleClick}>
         <b>Hello, {user.user_nickname}</b>
       </button>
+      <div>
       <Popover
         id={id}
         open={open}
@@ -40,14 +41,19 @@ export default function BasicPopover() {
           horizontal: 'left',
         }}
       >
+      <div>
         <Typography sx={{ p: 2 }} >
             <p onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Retest</p>
             <hr />
             <p style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Edit Profile</p>
             <hr />
             <p onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Logout</p>            
-            </Typography>
+        </Typography>
+
+      </div>
       </Popover>
+
+      </div>
     </div>
   );
 }

@@ -29,7 +29,7 @@ function SubCarousel(props) {
         populars={populars}
       >
           {populars.map((popular) => (
-            <LikeFurniture popular = {popular}>              
+            <LikeFurniture furniture = {popular}>              
             </LikeFurniture>
           ))}
         {/* <div>
