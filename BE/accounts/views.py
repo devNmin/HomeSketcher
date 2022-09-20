@@ -4,6 +4,8 @@ from rest_framework import generics
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
+from django.core import serializers
+import json
 
 from drf_yasg.utils import swagger_auto_schema
 from util.returnDto import (
@@ -38,14 +40,28 @@ class UserUpdateAPIView(APIView):
             return returnErrorJson("잘못된 요청 방식입니다. 알맞은 데이터를 보내주세요","400", status=status.HTTP_400_BAD_REQUEST)
 
 #회원 상세 정보 조회
-class UserRetrieveAPIView(generics.RetrieveAPIView):
+class UserRetrieveAPIView(APIView):
     permission_classes=[IsAuthenticated]
-    queryset = User.objects.all()
     serializer_class = UserSerializer
-
+    
     @swagger_auto_schema(tags=['회원 상세 정보 조회'], responses={200: 'Success'})
     def get(self, request, *args, **kwargs):
-        return super().get(request, *args, **kwargs)
+        user = request.user
+        
+        user_info = User.objects.get(pk=user.id)
+        
+        res={}
+        res['pk'] = user_info.pk
+        res['last_login'] = user_info.last_login
+        res['user_email'] = user_info.user_email
+        res['user_name'] = user_info.user_name
+        res['user_nickname'] = user_info.user_nickname
+        res['user_gender'] = user_info.user_gender
+        res['user_birth'] = user_info.user_birth
+        res['user_style'] = user_info.user_style
+        res['user_color'] = user_info.user_color
+        
+        return Response(res,status=status.HTTP_200_OK)
 
 # 회원 전체 조회
 class UserListAPIView(generics.ListAPIView):
