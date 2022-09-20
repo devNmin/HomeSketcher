@@ -22,6 +22,7 @@ from .serializers import(
     FurnitureSwaggerSerializer,
     FurnitureInfoSwaggerSerializer
 )
+import time
 import pandas as pd 
 
 
@@ -224,6 +225,16 @@ class FurnitureClickAPIView(APIView):
             }
             con.lpush('clickList', str(data))
             
+            # 최근 본 가구 5개 저장 - redis sorted sets
+            now = int(time.time() * 60 * 60 * 24 * 30)
+            dict = {}
+            dict[furniture_pk] = now
+            con.zadd(request.user.id, dict)
+            con.zremrangebyrank(request.user.id, -6, -6)
+            # print(con.zscore(request.user.id, furniture_pk)) // 해당 가구의 클릭 시간
+            # print(con.zrange(request.user.id, 0, -1)) // 해당 유저의 최신 5개 (오래된거 부터 나옴)
+            
+           
             return returnSuccessJson("성공","200", status.HTTP_200_OK)
         except:
             return returnErrorJson("서버 오류","500",status.HTTP_500_INTERNAL_SERVER_ERROR)
