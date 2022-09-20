@@ -175,9 +175,16 @@ class FurnitureClickAPIView(APIView):
             # print("tttt", json.loads(json_acceptable_string))
             # print("tttt", type(json.loads(json_acceptable_string)))
             # print(con.lrange("clickList", 0, con.llen("clickList")))
+            # ----------------------- 데이터 형식 --------------------
+            # strData = "["
             # test = con.lrange("clickList", 0, -1)
             # for item in test:
-                # print(item.decode())
+            #     strData += item.decode() + ", "
+            #     print(item.decode())
+            # result = strData[:-2]
+            # result += "]" 
+            # print("result" , result)
+            # ----------------------- 데이터 형식 --------------------
             # print("test", test)
             # test1_df = pd.DataFrame(test)
             # test1_df.to_csv('test1_df.csv')
