@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import SearchContext from '../../context/SearchContext';
+import Pagnation from './Pagnation';
 import classes from './itemsLayout.module.css';
 
 function ItemsLayout() {
@@ -18,6 +19,7 @@ function ItemsLayout() {
           );
         })}
       </div>
+      <Pagnation></Pagnation>
       <div className={classes.blank}></div>
     </>
   );

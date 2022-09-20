@@ -7,6 +7,7 @@ const FilterContext = createContext({
   filters: [],
   subCategorys: [],
   furnitureList: [],
+  totalPage: [],
   main: '',
   page: 0,
   sub: null,
@@ -15,6 +16,7 @@ const FilterContext = createContext({
   width: null,
   length: null,
   height: null,
+
   addFilter: (filterName) => {},
   removeFilter: (filterName) => {},
   changePage: (pageNum) => {},
@@ -35,6 +37,8 @@ export function FilterContextProvider(props) {
   const [furnitureList, setFurnitureList] = useState([]);
 
   const [page, setPage] = useState(0);
+  const [totalPage, setTotalPage] = useState([]);
+
   const [main, setMain] = useState('Shelves'); // 대분류
   const [sub, setSub] = useState(null);
   const [minPrice, setMinPrice] = useState(null);
@@ -149,6 +153,16 @@ export function FilterContextProvider(props) {
     })
       .then((response) => {
         setFurnitureList(response.data.furnitures);
+        let totalP = parseInt(response.data.count / 20);
+        if (response.data.count % 20 === 0) {
+          totalP = totalP - 1;
+        }
+        let pages = [];
+        for (let i = 0; i <= totalP; i++) {
+          pages.push(i);
+        }
+        setTotalPage(pages);
+        console.log('set후에', totalPage);
       })
       .catch((err) => {
         console.log(err);
@@ -160,6 +174,7 @@ export function FilterContextProvider(props) {
     filters: selectedFilters,
     subCategoryList: subCategoryList,
     furnitureList: furnitureList,
+    totalPage: totalPage,
     main: main,
     page: page,
     sub: sub,
@@ -168,6 +183,7 @@ export function FilterContextProvider(props) {
     width: width,
     length: length,
     height: height,
+
     addFilter: addFilterHandler,
     removeFilter: removeFilterHandler,
     isSelectedFilter: IsSelectedFilterHandler,

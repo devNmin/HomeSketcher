@@ -13,6 +13,7 @@ hr {
 .category_box {
   width: 50rem;
   border: 1px solid black;
+  margin-bottom: 5rem;
 }
 
 .category_line {
