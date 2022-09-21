@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import logo from '../assets/Logo.png'
 
 
 export default function AccountRegisterPage() {
@@ -88,8 +89,14 @@ export default function AccountRegisterPage() {
   }  
 
   return (
+    <div>
+      <div style={{display:'flex', justifyContent : "center"}}>
+        <img src= {logo} alt=""  style={{width : '15%', height: '15%'}}/>
+
+      </div>
     <section className={styles.auth}>
-    <form onSubmit={submitHandler}>      
+    <form onSubmit={submitHandler}>
+        
         <div className='Signup'>
           <div>
             {/* 아이디 */}
@@ -126,12 +133,16 @@ export default function AccountRegisterPage() {
 
             <div className={styles.actions}>
               <h5> Gender & Birth </h5>
-              <div>
+              <div style={{display:'flex', justifyContent : "center"}}>
+                <div style={{ marginRight : '20px'}}>
                 <label>남자</label>
                 <input className='mx-3' type="radio" id="male" name="gender" value="0" onChange={handleChange}/>
                 <label>여자</label>
                 <input  id="female" type="radio" name="gender" value="1" onChange={handleChange} />
-                <input type="date" maxLength='6' name='signup_birthday' ref={birthInput}/>             
+                </div>
+                      
+
+                <input style={{ marginLeft : '20px'}} type="date" maxLength='6' name='signup_birthday' ref={birthInput}/>             
               </div>
             </div>
             <div>
@@ -146,6 +157,8 @@ export default function AccountRegisterPage() {
           <p>Already Have An Account</p> 
         </Link>
     </section>
+
+    </div>
    
        
 

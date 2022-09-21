@@ -10,7 +10,7 @@ function SmallCategoryList() {
   useEffect(() => {
     searchCtx.changeSub(subCategory);
     searchCtx.getFurnitureList();
-  }, [subCategory]);
+  }, [subCategory, searchCtx.sub, searchCtx.main]);
 
   return (
     <div>
@@ -25,6 +25,7 @@ function SmallCategoryList() {
                 onClick={() => {
                   setSubCategory(categoryName);
                 }}
+                className={searchCtx.sub === categoryName ? classes.bold : null}
               >
                 {categoryName}
               </p>

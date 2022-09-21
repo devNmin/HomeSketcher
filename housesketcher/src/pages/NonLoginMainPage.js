@@ -18,9 +18,11 @@ function NonLoginMainPage(props) {
             <div className={styles.title}>
               <h1 className={styles.title_h1}>
                 Sketch
-                <br /> Your Dream
               </h1>
-              <h2 className={styles.title_h2}>select your furniture</h2>
+              <h1 className={styles.title_h1_2}>
+                Your Dream
+              </h1>
+              <h2 className={styles.title_h2}>Changing your space changes your life</h2>
                 <Link to= '/login'>
                   <button type="button">                 
                     Sign In

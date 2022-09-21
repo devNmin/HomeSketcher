@@ -7,6 +7,7 @@ const FilterContext = createContext({
   filters: [],
   subCategorys: [],
   furnitureList: [],
+  totalPage: [],
   main: '',
   page: 0,
   sub: null,
@@ -15,16 +16,23 @@ const FilterContext = createContext({
   width: null,
   length: null,
   height: null,
+  byLike: null,
+  byPrice: null,
+
   addFilter: (filterName) => {},
   removeFilter: (filterName) => {},
+  isSelectedFilter: (filterName) => {},
   changePage: (pageNum) => {},
   changeMain: (categoryName) => {},
   changeSub: (categoryName) => {},
   changePrice: (price) => {},
   changeSize: (size) => {},
+  changeStyle: (size) => {},
+  changeSort: (sortName, direction) => {},
 
   getSubCategoryList: (categoryName) => {},
   getFurnitureList: () => {},
+  getLikedFurnutyreList: () => {},
 });
 
 export function FilterContextProvider(props) {
@@ -34,6 +42,8 @@ export function FilterContextProvider(props) {
   const [furnitureList, setFurnitureList] = useState([]);
 
   const [page, setPage] = useState(0);
+  const [totalPage, setTotalPage] = useState([]);
+
   const [main, setMain] = useState('Shelves'); // 대분류
   const [sub, setSub] = useState(null);
   const [minPrice, setMinPrice] = useState(null);
@@ -41,6 +51,9 @@ export function FilterContextProvider(props) {
   const [width, setWidth] = useState(null);
   const [length, setLength] = useState(null);
   const [height, setHeight] = useState(null);
+  const [style, setStyle] = useState(null);
+  const [byPrice, setByPrice] = useState(null);
+  const [byLike, setByLike] = useState(null);
 
   let { BASE_URL } = useContext(AuthContext);
   let [authTokens, setAuthTokens] = useState(() =>
@@ -71,6 +84,9 @@ export function FilterContextProvider(props) {
 
   const setMainHandler = (categoryName) => {
     setMain(categoryName);
+    setSub(null);
+    setPage(0);
+    setSelectedFilters([]);
   };
   // state 최신값을 사용하기 위해서는 useeffect 실행 조건에 main값을 넣어줘야함
 
@@ -86,7 +102,6 @@ export function FilterContextProvider(props) {
   };
 
   const setSizeHandler = (size) => {
-    console.log('여기', size);
     let width = size.width;
     let length = size.length;
     let height = size.height;
@@ -102,6 +117,18 @@ export function FilterContextProvider(props) {
     setWidth(width);
     setLength(length);
     setHeight(height);
+  };
+
+  const setStyleHandler = (styleName) => {
+    setStyle(styleName);
+  };
+
+  const setSortHandler = (sortName, direction) => {
+    if (sortName === 'byPrice') {
+      setByPrice(direction);
+    } else if (sortName === 'byLike') {
+      setByLike(direction);
+    }
   };
 
   const SubCategoryListHandler = async (categoryName) => {
@@ -123,7 +150,6 @@ export function FilterContextProvider(props) {
 
   const furnitureListHandler = async () => {
     // 선택된 필터에 있는 것들 아니면 초기화 해야함
-
     const data = {
       page: page,
       main: main,
@@ -133,9 +159,24 @@ export function FilterContextProvider(props) {
       width: width,
       length: length,
       height: height,
-      style: null,
+      style: style,
+      byPrice: byPrice,
+      byLike: byLike,
     };
-    console.log('furniture', data);
+    if (!IsSelectedFilterHandler('Size')) {
+      data.width = null;
+      data.length = null;
+      data.height = null;
+    }
+    if (!IsSelectedFilterHandler('Price')) {
+      data.minPrice = null;
+      data.maxPrice = null;
+    }
+    if (!IsSelectedFilterHandler('Style')) {
+      data.style = null;
+    }
+    // 뭔가 가끔씩 요청이 안되는 느낌.
+    // console.log('소 카테고리', data.sub);
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
@@ -145,7 +186,33 @@ export function FilterContextProvider(props) {
       data: data,
     })
       .then((response) => {
+        // console.log('받은 가구 첫번째', response.data.furnitures[0]);
         setFurnitureList(response.data.furnitures);
+        let totalP = parseInt(response.data.count / 20);
+        if (response.data.count % 20 === 0) {
+          totalP = totalP - 1;
+        }
+        let pages = [];
+        for (let i = 0; i <= totalP; i++) {
+          pages.push(i);
+        }
+        setTotalPage(pages);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const likedFurnitureHandler = async () => {
+    await axios({
+      method: 'get',
+      url: BASE_URL + 'furnitures/like/',
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`,
+      },
+    })
+      .then((response) => {
+        setFurnitureList(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -157,6 +224,7 @@ export function FilterContextProvider(props) {
     filters: selectedFilters,
     subCategoryList: subCategoryList,
     furnitureList: furnitureList,
+    totalPage: totalPage,
     main: main,
     page: page,
     sub: sub,
@@ -165,6 +233,9 @@ export function FilterContextProvider(props) {
     width: width,
     length: length,
     height: height,
+    byLike: byLike,
+    byPrice: byPrice,
+
     addFilter: addFilterHandler,
     removeFilter: removeFilterHandler,
     isSelectedFilter: IsSelectedFilterHandler,
@@ -173,8 +244,11 @@ export function FilterContextProvider(props) {
     changeSub: setSubHandler,
     changePrice: setPriceHandler,
     changeSize: setSizeHandler,
+    changeStyle: setStyleHandler,
+    changeSort: setSortHandler,
     getSubCategoryList: SubCategoryListHandler,
     getFurnitureList: furnitureListHandler,
+    getLikedFurnutyreList: likedFurnitureHandler,
   };
 
   return (

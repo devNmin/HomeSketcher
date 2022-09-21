@@ -1,40 +1,72 @@
 import CardPanel from './CardPanel'
+import axios from 'axios'
+import AuthContext from '../../context/AuthContext'
 // import { Link } from 'react-router-dom'
 // import logo from '../../assets/Logo.png'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useState } from 'react'
+import LikeFurniture from '../Like/LikeFurniture'
+
 
 function SubCarousel(props) {
   const [populars, setPopulars] = useState([])
+  const [recommends, setRecommends] = useState([])
+  const [mostReviews, setMostReviews] = useState([])
+  const [latests, setLatests] = useState([])
+
+
+  let {BASE_URL, authTokens} = useContext(AuthContext)
+
   const getPopulars = async () => {
-    const response = await fetch(
-      "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year"
-    )
-    const json = await response.json();
-    setPopulars(json.data.movies);
+    const response = await axios.get(BASE_URL + 'furnitures/label/rate/', {
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`
+      }
+    })
+    const popularData = await response.data;    
+    setPopulars(popularData.furnitures);
   }
+
+  const getRecommends = async () => {
+    const response = await axios.get(BASE_URL + 'recommendations/recomUser/', {
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`
+      }
+    })
+    const recommendData = await response.data;    
+    console.log(recommendData);
+    setRecommends(recommendData);
+  }
+
+  const getMostReviews = async () => {
+    const response = await axios.get(BASE_URL + 'furnitures/label/review/', {
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`
+      }
+    })    
+    const reviewData = await response.data;    
+    setMostReviews(reviewData.furnitures);
+  }
+
 
   useEffect(() => {
     getPopulars();
+    getRecommends();
+    getMostReviews();
   }, [])
-  console.log(populars)
+  // console.log(populars)
   return (
-    <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-      <h1>popular</h1>
+    <div>
+      <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+      <h1>Popular</h1>
       <br />
       <CardPanel
         show={4}
         populars={populars}
       >
           {populars.map((popular) => (
-            <div key={popular.id}>
-              <a href={popular.url}>
-                <img src={popular.medium_cover_image} alt="" />
-              </a>
-              <h6>
-                {popular.title}
-              </h6>
-            </div>
+            <LikeFurniture key= {popular.id} furniture = {popular}>              
+            </LikeFurniture>
           ))}
         {/* <div>
           <div style={{ padding: 20 }}>
@@ -75,6 +107,48 @@ function SubCarousel(props) {
           </div>
         </div> */}
       </CardPanel>
+      </div>
+
+      <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+      <h1>Recommended</h1>
+      <br />
+      <CardPanel
+        show={4}
+        populars={recommends}>
+          {recommends.map((recommend) => (
+            <LikeFurniture key= {recommend.id} furniture = {recommend}>              
+            </LikeFurniture>
+          ))}        
+      </CardPanel>
+      </div>
+
+      <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+      <h1>Most Reviews</h1>
+      <br />
+      <CardPanel
+        show={4}
+        populars={mostReviews}>
+          {mostReviews.map((mostReview) => (
+            <LikeFurniture key= {mostReview.id} furniture = {mostReview}>              
+            </LikeFurniture>
+          ))}        
+      </CardPanel>
+      </div>
+
+      <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+      <h1>Latest</h1>
+      <br />
+      <CardPanel
+        show={4}
+        populars={populars}>
+          {populars.map((popular) => (
+            <LikeFurniture key= {popular.id} furniture = {popular}>              
+            </LikeFurniture>
+          ))}        
+      </CardPanel>
+      </div>
+
+      
     </div>
   )
 }

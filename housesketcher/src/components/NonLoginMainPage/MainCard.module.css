@@ -37,6 +37,10 @@
   margin: 0;
 }
 
+.main_card img {
+  width: 500px;
+}
+
 
 .left {
   margin-left: 5rem;
