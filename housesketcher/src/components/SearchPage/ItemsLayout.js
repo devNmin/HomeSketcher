@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import SearchContext from '../../context/SearchContext';
 import Pagnation from './Pagnation';
 import classes from './itemsLayout.module.css';
+import LikeFurniture from '../Like/LikeFurniture';
 
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
@@ -18,10 +19,8 @@ function ItemsLayout() {
       <div className={classes.display_flex}>
         {items.map((item) => {
           return (
-            <div key={item.id} onClick={() => {}}>
-              <img src={item.furniture_image} />
-              <p>{item.furniture_name}</p>
-            </div>
+            <LikeFurniture key={item.id} furniture = {item} onClick={() => {}}>              
+            </LikeFurniture>
           );
         })}
       </div>
