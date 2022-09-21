@@ -1,3 +1,4 @@
+from tkinter import FALSE
 from furnitures.models import Furniture
 from likes.models import UserLike
 from auths.models import User
@@ -21,6 +22,7 @@ from .serializers import(
     FurnitureSwaggerSerializer,
     FurnitureInfoSwaggerSerializer
 )
+import time
 import pandas as pd 
 
 from django.db.models import Subquery,Count
@@ -101,11 +103,34 @@ class FurnitureLabelAPIView(APIView):
             #가장 높은 평점을 가진 가구 정보 제공
             if label == "rate":
                 #furniture-rating 별로 내림차순 정렬
-                res['furnitures'] = furnitures.order_by('-furniture_rating')[:20]
+                # 좋아요 여부 가져오기
+                furniture_datas = furnitures.order_by('-furniture_rating')[:20]
+                userId = request.user.id
+                furnitureValuses = furniture_datas.values()
+                for furniture in furnitureValuses:
+                    pk = furniture['id']
+                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
+                    try:
+                        like[0]
+                        furniture['like']=True
+                    except:
+                        furniture['like']=False
+                res['furnitures'] = furnitureValuses
 
             #가장 리뷰수가 많은 가구 정보 제공
             elif label == "review":
-                res['furnitures'] = furnitures.order_by('furniture_review')[:20]
+                furniture_datas =  furnitures.order_by('furniture_review')[:20]
+                userId = request.user.id
+                furnitureValuses = furniture_datas.values()
+                for furniture in furnitureValuses:
+                    pk = furniture['id']
+                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
+                    try:
+                        like[0]
+                        furniture['like']=True
+                    except:
+                        furniture['like']=False
+                res['furnitures'] = furnitureValuses
 
         except:
             return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -171,14 +196,24 @@ class FurnitureListAPIView(APIView):
                 else:
                     furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('cnt')  
 
-            
             count = furnitures.count()
             furnitures = furnitures[page*20:page*20+20]
 
-
+            furniture_datas = furnitures
+            userId = request.user.id
+            furnitureValuses = furniture_datas.values()
+            for furniture in furnitureValuses:
+                pk = furniture['id']
+                like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
+                try:
+                    like[0]
+                    furniture['like']=True
+                except:
+                    furniture['like']=FALSE
+            
             res = {}
             res['count'] = count,
-            res['furnitures'] = furnitures
+            res['furnitures'] = furnitureValuses
 
             return Response(res, status=status.HTTP_200_OK)
         except:
@@ -212,24 +247,17 @@ class FurnitureClickAPIView(APIView):
                 'time' : datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             }
             con.lpush('clickList', str(data))
-            # test11 = str(data)
-            # json_acceptable_string = test11.replace("'", "\"")
-            # print("tttt", json.loads(json_acceptable_string))
-            # print("tttt", type(json.loads(json_acceptable_string)))
-            # print(con.lrange("clickList", 0, con.llen("clickList")))
-            # ----------------------- 데이터 형식 --------------------
-            # strData = "["
-            # test = con.lrange("clickList", 0, -1)
-            # for item in test:
-            #     strData += item.decode() + ", "
-            #     print(item.decode())
-            # result = strData[:-2]
-            # result += "]" 
-            # print("result" , result)
-            # ----------------------- 데이터 형식 --------------------
-            # print("test", test)
-            # test1_df = pd.DataFrame(test)
-            # test1_df.to_csv('test1_df.csv')
+            
+            # 최근 본 가구 5개 저장 - redis sorted sets
+            now = int(time.time() * 60 * 60 * 24 * 30)
+            dict = {}
+            dict[furniture_pk] = now
+            con.zadd(request.user.id, dict)
+            con.zremrangebyrank(request.user.id, -6, -6)
+            # print(con.zscore(request.user.id, furniture_pk)) // 해당 가구의 클릭 시간
+            # print(con.zrange(request.user.id, 0, -1)) // 해당 유저의 최신 5개 (오래된거 부터 나옴)
+            
+           
             return returnSuccessJson("성공","200", status.HTTP_200_OK)
         except:
             return returnErrorJson("서버 오류","500",status.HTTP_500_INTERNAL_SERVER_ERROR)
