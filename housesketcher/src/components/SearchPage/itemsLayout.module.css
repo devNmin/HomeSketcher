@@ -1,0 +1,22 @@
+img {
+  width: 20rem;
+  height: 20rem;
+}
+
+.display_flex {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.display_flex p {
+  width: 16rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: bold;
+  text-align: center;
+}
+.blank {
+  height: 30rem;
+}

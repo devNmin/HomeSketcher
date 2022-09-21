@@ -1,0 +1,67 @@
+.Category {
+  background-color: white;
+  color: black;
+  margin-left: -8px;
+  margin-right: -8px;
+  margin-top: 0px;
+  padding: 4%;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  user-select: none;
+}
+
+.Category hr {
+  width: 80%;
+  height: 5px;
+  margin: 0px auto;
+  text-align: center;
+}
+
+.main_card {
+  display: flex;
+  justify-content: space-around;
+  width: 80vw;
+  margin: 5rem auto;
+}
+
+.main_card h3 {
+  font-size: 2rem;
+  letter-spacing: 1rem;
+  margin: 0;
+}
+
+.main_card p {
+  font-size: 1.25rem;
+  letter-spacing: 0.5rem;
+  margin: 0;
+}
+
+
+.left {
+  margin-left: 5rem;
+  margin-right: 4rem;
+}
+
+.right {
+  margin: auto 0;
+  width: 65%;
+}
+
+.second_text {
+  margin: auto 0;
+  width: 65%;
+  text-align: end;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.second_img {
+  margin-right: 5rem;
+  margin-left: 4rem;
+}
+
+.content {
+  margin: 1.5rem 0;
+}
