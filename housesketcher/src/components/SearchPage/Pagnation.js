@@ -49,7 +49,13 @@ function Pagnation() {
   return (
     <div className={classes.pagenation_contatiner}>
       <div className={classes.page_num}>
-        <p>&lt;</p>
+        <p
+          onClick={() => {
+            setPageNum(0);
+          }}
+        >
+          &lt;&lt;
+        </p>
       </div>
       {pages.map((pageNum) => {
         return (
@@ -65,7 +71,13 @@ function Pagnation() {
         );
       })}
       <div className={classes.page_num}>
-        <p>&gt;</p>
+        <p
+          onClick={() => {
+            setPageNum(items.length - 1);
+          }}
+        >
+          &gt;&gt;
+        </p>
       </div>
     </div>
   );
