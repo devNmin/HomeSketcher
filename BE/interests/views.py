@@ -8,13 +8,16 @@ from .models import Interest, UserStyle, UserColor
 from django.http import JsonResponse
 from auths.models import User
 from rest_framework.response import Response
-import random
+import random , datetime
 from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
 )
 from util.choicesList import(
     style, color
+)
+from util.recom import(
+    add_new_member,
 )
 from .serializers import(
     InterestSerializer,
@@ -106,7 +109,15 @@ class UserInterestResult(APIView):
         if UserSerializer.is_valid():
             UserSerializer.save()
         serializer = UserInterestDataSerializer(response)
-      
+
+        # pk, style, color, age, gender, category
+        # currentUser
+        age = datetime.datetime.today().year - currentUser.user_birth.year
+        age = (age//10)*10
+
+        user_new = [currentUser.id,userdata['user_style'],userdata['user_color'],str(age),1,'X']
+        print(user_new)
+        add_new_member(user_new)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
     
