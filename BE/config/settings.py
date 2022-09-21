@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'interests',
     'furnitures',
     'likes',
-
+    'recommendations',
     #swagger library
     'drf_yasg',
       
@@ -101,7 +101,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': MYSQL_SECRET,
         'HOST': 'mysql',
-        # 'HOST' : 'j7b304.p.ssafy.io',
+        #'HOST' : 'j7b304.p.ssafy.io',
         'PORT': '3306',
     }
 }
@@ -181,7 +181,8 @@ SWAGGER_SETTINGS = {
             'name':'Authorization',
             'in':'header'
         }
-    }
+    },
+    'USE_SESSION_AUTH':False
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
