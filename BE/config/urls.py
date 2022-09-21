@@ -49,6 +49,7 @@ api_urlpatterns = ([
     path('furnitures/',include('furnitures.urls',namespace="furnitures")),
     path('interests/', include('interests.urls', namespace="interests")),
     path('likes/', include('likes.urls', namespace="likes")),
+    path('recommendations/', include('recommendations.urls', namespace="recommendations")),
 ],'api/v1')
 
 urlpatterns=[

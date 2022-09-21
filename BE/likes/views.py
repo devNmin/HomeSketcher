@@ -24,12 +24,16 @@ class UserLikeAPIView(APIView):
             'furniture':furniture_pk,
         }
         try:
-            serializer = UserLikeSerializer(data=data)
-            if serializer.is_valid():
-                serializer.save()
-                return returnSuccessJson("가구 좋아요 성공.", "200", status.HTTP_200_OK)
+            existsCheck = UserLike.objects.filter(user_id=user_pk, furniture_id=furniture_pk)
+            if existsCheck.exists():
+                return returnSuccessJson("이미 좋아요한 가구 입니다..", "200", status.HTTP_200_OK)
             else:
-                return returnErrorJson("유효하지 않은 데이터", "400", status.HTTP_400_BAD_REQUEST) 
+                serializer = UserLikeSerializer(data=data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return returnSuccessJson("가구 좋아요 성공.", "200", status.HTTP_200_OK)
+                else:
+                    return returnErrorJson("유효하지 않은 데이터", "400", status.HTTP_400_BAD_REQUEST) 
         except:            
             return returnErrorJson("좋아요 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
