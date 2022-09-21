@@ -9,6 +9,7 @@
   justify-content: space-between;
 }
 
+
 .navbar_logo{
   width: 100px;
   object-fit: contain;
@@ -20,10 +21,18 @@
   display: flex;
   flex: 1;
   align-items: center;
-  border-radius: 20px;
+  /* border-radius: 20px; */
+  text-decoration: none;
 }
 
-.navbar_searchInput {
+.navbar_search a{
+  text-decoration: none;
+  color: black;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+/* .navbar_searchInput {
   height: 20px;
   padding: 10px;
   border: none;
@@ -34,7 +43,7 @@
   background-color: transparent;
   padding: 10px;
   height: 40px;
-}
+} */
 
 .nav ul {
   list-style: none;
