@@ -4,8 +4,8 @@ from .views import(
 
 )
 
-app_name = 'recom'
+app_name = 'recommendations'
 
 urlpatterns=[
-    path('/',RecomListAPIView.as_view(), name = "recom-user"),
+    path('recomUser/',RecomListAPIView.as_view(), name = "recom-user"),
 ]
