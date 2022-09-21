@@ -30,7 +30,7 @@ INSTALLED_APPS = [
     'interests',
     'furnitures',
     'likes',
-
+    'recommendations',
     #swagger library
     'drf_yasg',
       
