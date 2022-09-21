@@ -12,6 +12,8 @@ function Pagnation() {
     pages = [pageNum, pageNum + 1, pageNum + 2, pageNum + 3, pageNum + 4];
   } else if (pageNum - 1 < 0) {
     pages = [pageNum - 1, pageNum, pageNum + 1, pageNum + 2, pageNum + 3];
+  } else {
+    pages = [pageNum - 2, pageNum - 1, pageNum, pageNum + 1, pageNum + 2];
   }
   for (let val of pages) {
     if (val > items.length - 1) {
@@ -41,7 +43,8 @@ function Pagnation() {
     pages = pages.filter((element) => element < items.length);
 
     searchCtx.changePage(pageNum);
-  }, [pageNum, items]);
+    searchCtx.getFurnitureList();
+  }, [pageNum, items, searchCtx.page]);
 
   return (
     <div className={classes.pagenation_contatiner}>

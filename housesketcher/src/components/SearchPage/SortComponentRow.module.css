@@ -1,3 +1,40 @@
+hr {
+  margin: 0;
+  width: 3rem;
+}
+.row_width {
+  width: 80%;
+  justify-content: center;
+}
+.flex_around {
+  display: flex;
+  justify-content: space-around;
+}
 .display_flex {
   display: flex;
+}
+
+.category_name {
+  width: 30rem;
+}
+
+.sort_name {
+  margin-left: 2rem;
+}
+.sort_name > p {
+  margin-bottom: 0;
+  margin-top: 0.2rem;
+  font-size: small;
+}
+.sort_name > div {
+  display: none;
+}
+.sort_name:hover > div {
+  display: block;
+  position: absolute;
+  margin: 0;
+}
+.sort_name:hover > div > p {
+  font-size: small;
+  margin: 0;
 }

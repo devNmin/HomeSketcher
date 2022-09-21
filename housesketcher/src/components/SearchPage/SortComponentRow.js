@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import classes from './SortComponentRow.module.css';
 import SearchContext from '../../context/SearchContext';
+import { collapseClasses } from '@mui/material';
 
 /* 
 byPrice	string
@@ -21,26 +22,39 @@ function SortComponentRow() {
   const [sortName, setsortName] = useState(null);
   const [sortDetail, setSortDetail] = useState(null);
   return (
-    <div className={classes.display_flex}>
-      <p>{searchCtx.main}</p>
-      <div>
-        <p>Sort</p>
-        <div>
+    <div className={classes.row_width}>
+      <div className={(classes.flex_around, classes.justify_around)}>
+        <p className={classes.category_name}>
+          {searchCtx.sub ? searchCtx.sub : searchCtx.main}
+        </p>
+        <div className={classes.display_flex}>
+          <p>Sort</p>
           <div>
             <div>
-              <p>{sortName}</p>
-              <hr />
+              <div className={classes.sort_name}>
+                <p>{sortName ? sortName : 'Null'}</p>
+                <hr />
+                <div>
+                  {Object.keys(SortName).map((name) => {
+                    return (
+                      <p
+                        key={name}
+                        onClick={() => {
+                          setsortName(name);
+                        }}
+                      >
+                        {name}
+                      </p>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
             <div>
-              {Object.keys(SortName).map((name) => {
-                return <p key={name}>{name}</p>;
-              })}
-            </div>
-          </div>
-          <div>
-            <div>
-              <p>{sortDetail}</p>
-              <hr />
+              <div>
+                <p>{sortDetail}</p>
+                <hr />
+              </div>
             </div>
           </div>
         </div>
