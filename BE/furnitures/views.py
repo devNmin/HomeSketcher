@@ -23,6 +23,7 @@ from .serializers import(
     FurnitureInfoSwaggerSerializer
 )
 import time
+from util.furnitureAddLike import addLike
 import pandas as pd 
 
 from django.db.models import Subquery,Count
@@ -44,21 +45,11 @@ class FurnitureSearchAPIView(APIView):
                 furniture_datas = furniture_datas[page_num*20:page_num*20+20].values()
                 
                 # 좋아요 여부 가져오기
-                userId = request.user.id
                 furnitureValuses = furniture_datas.values()
-                for furniture in furnitureValuses:
-                    pk = furniture['id']
-                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                    try:
-                        like[0]
-                        furniture['like']=True
-                    except:
-                        furniture['like']=False
-
-
+                
                 res ={}
                 res['count'] = count
-                res['datas'] = furnitureValuses
+                res['datas'] = addLike(furnitureValuses, request.user.id)
                 # print(furniture_datas[page_num*20:page_num*20+20].count())
                 return Response(res, status=status.HTTP_200_OK)
             except:
@@ -105,33 +96,14 @@ class FurnitureLabelAPIView(APIView):
                 #furniture-rating 별로 내림차순 정렬
                 # 좋아요 여부 가져오기
                 furniture_datas = furnitures.order_by('-furniture_rating')[:20]
-                userId = request.user.id
                 furnitureValuses = furniture_datas.values()
-                for furniture in furnitureValuses:
-                    pk = furniture['id']
-                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                    try:
-                        like[0]
-                        furniture['like']=True
-                    except:
-                        furniture['like']=False
-                res['furnitures'] = furnitureValuses
+                res['furnitures'] = addLike(furnitureValuses, request.user.id)
 
             #가장 리뷰수가 많은 가구 정보 제공
             elif label == "review":
                 furniture_datas =  furnitures.order_by('furniture_review')[:20]
-                userId = request.user.id
                 furnitureValuses = furniture_datas.values()
-                for furniture in furnitureValuses:
-                    pk = furniture['id']
-                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                    try:
-                        like[0]
-                        furniture['like']=True
-                    except:
-                        furniture['like']=False
-                res['furnitures'] = furnitureValuses
-
+                res['furnitures'] = addLike(furnitureValuses, request.user.id)
         except:
             return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
@@ -202,21 +174,11 @@ class FurnitureListAPIView(APIView):
             count = furnitures.count()
             furnitures = furnitures[page*20:page*20+20]
 
-            furniture_datas = furnitures
-            userId = request.user.id
-            furnitureValuses = furniture_datas.values()
-            for furniture in furnitureValuses:
-                pk = furniture['id']
-                like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
-                try:
-                    like[0]
-                    furniture['like']=True
-                except:
-                    furniture['like']=FALSE
+            furnitureValuses = furnitures.values()
             
             res = {}
             res['count'] = count,
-            res['furnitures'] = furnitureValuses
+            res['furnitures'] = addLike(furnitureValuses, request.user.id)
 
             return Response(res, status=status.HTTP_200_OK)
         except:
@@ -251,14 +213,12 @@ class FurnitureClickAPIView(APIView):
             }
             con.lpush('clickList', str(data))
             
-            # 최근 본 가구 5개 저장 - redis sorted sets
+            # 최근 본 가구 10개 저장 - redis sorted sets
             now = int(time.time() * 60 * 60 * 24 * 30)
             dict = {}
             dict[furniture_pk] = now
             con.zadd(request.user.id, dict)
-            con.zremrangebyrank(request.user.id, -6, -6)
-            # print(con.zscore(request.user.id, furniture_pk)) // 해당 가구의 클릭 시간
-            # print(con.zrange(request.user.id, 0, -1)) // 해당 유저의 최신 5개 (오래된거 부터 나옴)
+            con.zremrangebyrank(request.user.id, -11, -11)
             
            
             return returnSuccessJson("성공","200", status.HTTP_200_OK)
