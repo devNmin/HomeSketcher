@@ -1,4 +1,19 @@
+.carousel_inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
 .carousel img {
     height: 480px;
-    color: white;
+    color: black;
+}
+
+.carousel h3 {
+    color: black;
+    align-items: left;
+}
+
+.carousel p {
+    color: black;
 }
