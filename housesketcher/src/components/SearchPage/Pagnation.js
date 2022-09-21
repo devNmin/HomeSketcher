@@ -20,10 +20,6 @@ function Pagnation() {
       pages = pages.filter((element) => element !== val);
     }
   }
-  // items에는 pageNum -2 -1, pageNum, pageNum + 1 + 2의 값이 들어가야함
-  // items -2가 0 이상이 아니면 pageNum +3 +4 추가
-  // items의 마지막 값은 총 데이터수 // 20 까지(0부터 시작이니까)
-  // 총 데이터 수 % 20 === 0 이면 총 {(데이터수 //20) -1}
 
   useEffect(() => {
     items = searchCtx.totalPage;
