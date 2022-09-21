@@ -30,11 +30,9 @@ function SizeFilters() {
     } else {
       maxSize.height = null;
     }
-    console.log('필터', maxSize);
     SearchCtx.changeSize(maxSize);
   };
   useEffect(() => {
-    console.log('useeffect', maxSize);
     SearchCtx.changeSize(maxSize);
   }, [maxSize, SearchCtx.width, SearchCtx.length, SearchCtx.height]);
 

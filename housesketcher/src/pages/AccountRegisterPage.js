@@ -6,6 +6,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.png'
 
+
 export default function AccountRegisterPage() {
   const {BASE_URL} = useContext(AuthContext)
   const emailInput = useRef();
@@ -94,8 +95,8 @@ export default function AccountRegisterPage() {
 
       </div>
     <section className={styles.auth}>
-    
-    <form onSubmit={submitHandler}>      
+    <form onSubmit={submitHandler}>
+    <img src={logo} alt="" />      
         <div className='Signup'>
           <div>
             {/* 아이디 */}

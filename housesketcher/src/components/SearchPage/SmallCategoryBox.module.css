@@ -13,6 +13,7 @@ hr {
 .category_box {
   width: 50rem;
   border: 1px solid black;
+  margin-bottom: 5rem;
 }
 
 .category_line {
@@ -29,7 +30,6 @@ hr {
   font-family: 'Plus Jakarta Sans';
   font-style: normal;
   font-weight: 700;
-
   margin-bottom: 0;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -49,13 +49,12 @@ hr {
 
 .row input {
   width: 7rem;
-  margin-left: 0.6rem;
+  margin-left: 1.2rem;
   margin-right: 1rem;
   text-align: end;
 }
 .row label {
   width: 2.4rem;
-  margin-left: 1rem;
   font-size: small;
 }
 .item {
@@ -68,6 +67,7 @@ hr {
   cursor: pointer;
   width: 18rem;
   margin-left: 1.2rem;
+  font-size: small;
 }
 
 ::-webkit-inner-spin-button {
@@ -80,21 +80,26 @@ input::placeholder {
 }
 
 .request_button {
-  width: 90%;
+  width: 80%;
   background-color: #f3cd58;
   color: white;
   border: 0;
   height: 2rem;
+  line-height: 1rem;
+  margin-right: 1rem;
 }
 
 .styleName_row {
   display: flex;
   width: 100%;
   flex-wrap: wrap;
+  margin-top: 0.5rem;
 }
 
 .styleName_row > p {
   width: 8rem;
   margin-left: 1.2rem;
   cursor: pointer;
+  line-height: 1rem;
+  font-size: small;
 }
