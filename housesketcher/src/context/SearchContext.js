@@ -26,6 +26,7 @@ const FilterContext = createContext({
   changePrice: (price) => {},
   changeSize: (size) => {},
   changeStyle: (size) => {},
+  changeSort: (sortName, direction) => {},
 
   getSubCategoryList: (categoryName) => {},
   getFurnitureList: () => {},
@@ -48,6 +49,8 @@ export function FilterContextProvider(props) {
   const [length, setLength] = useState(null);
   const [height, setHeight] = useState(null);
   const [style, setStyle] = useState(null);
+  const [byPrice, setByPrice] = useState(null);
+  const [byLike, setByLike] = useState(null);
 
   let { BASE_URL } = useContext(AuthContext);
   let [authTokens, setAuthTokens] = useState(() =>
@@ -80,6 +83,7 @@ export function FilterContextProvider(props) {
     setMain(categoryName);
     setSub(null);
     setPage(0);
+    setSelectedFilters([]);
   };
   // state 최신값을 사용하기 위해서는 useeffect 실행 조건에 main값을 넣어줘야함
 
@@ -116,6 +120,14 @@ export function FilterContextProvider(props) {
     setStyle(styleName);
   };
 
+  const setSortHandler = (sortName, direction) => {
+    if (sortName === 'byPrice') {
+      setByPrice(direction);
+    } else if (sortName === 'byLike') {
+      setByLike(direction);
+    }
+  };
+
   const SubCategoryListHandler = async (categoryName) => {
     await axios
       .get(BASE_URL + `furnitures/filter/main/${categoryName}`, {
@@ -145,8 +157,8 @@ export function FilterContextProvider(props) {
       length: length,
       height: height,
       style: style,
-      byPrice: null,
-      byLike: null,
+      byPrice: byPrice,
+      byLike: byLike,
     };
     if (!IsSelectedFilterHandler('Size')) {
       data.width = null;
@@ -209,6 +221,7 @@ export function FilterContextProvider(props) {
     changePrice: setPriceHandler,
     changeSize: setSizeHandler,
     changeStyle: setStyleHandler,
+    changeSort: setSortHandler,
     getSubCategoryList: SubCategoryListHandler,
     getFurnitureList: furnitureListHandler,
   };
