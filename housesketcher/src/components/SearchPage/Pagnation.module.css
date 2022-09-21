@@ -1,0 +1,17 @@
+.pagenation_contatiner {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 10rem;
+}
+
+.page_num {
+  text-align: center;
+  font-weight: bold;
+  border: 1px solid rgb(192, 192, 192);
+  width: 1.4rem;
+}
+
+.page_num > p {
+  margin: 0;
+}

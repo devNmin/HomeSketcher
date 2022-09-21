@@ -35,11 +35,11 @@ export default function BasicPopover() {
         }}
       >
         <Typography sx={{ p: 2 }} >
-            <p>Retest</p>
+            <p style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Retest</p>
             <hr />
-            <p>Edit Profile</p>
+            <p style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Edit Profile</p>
             <hr />
-            <p onClick={logoutUser}>Logout</p>            
+            <p onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Logout</p>            
             </Typography>
       </Popover>
     </div>

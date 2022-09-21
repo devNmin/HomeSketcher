@@ -1,12 +1,11 @@
 import { useContext } from 'react';
 import SearchContext from '../../context/SearchContext';
+import Pagnation from './Pagnation';
 import classes from './itemsLayout.module.css';
 
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
-
   const items = filterCtx.furnitureList;
-  console.log(items);
 
   return (
     <>
@@ -20,6 +19,7 @@ function ItemsLayout() {
           );
         })}
       </div>
+      <Pagnation></Pagnation>
       <div className={classes.blank}></div>
     </>
   );
