@@ -160,7 +160,6 @@ export function FilterContextProvider(props) {
     if (!IsSelectedFilterHandler('Style')) {
       data.style = null;
     }
-    console.log(data);
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',

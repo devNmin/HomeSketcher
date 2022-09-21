@@ -20,13 +20,6 @@ function Pagnation() {
       pages = pages.filter((element) => element !== val);
     }
   }
-
-  // if (pageNum + 1 > items.length - 2) {
-  //   const idx = pages.indexOf(pageNum + 1);
-  //   if (idx > 0) {
-  //     pages = pages.slice(0, idx)
-  //   } else if (pageNum + 2 > items)
-
   // items에는 pageNum -2 -1, pageNum, pageNum + 1 + 2의 값이 들어가야함
   // items -2가 0 이상이 아니면 pageNum +3 +4 추가
   // items의 마지막 값은 총 데이터수 // 20 까지(0부터 시작이니까)
@@ -34,12 +27,6 @@ function Pagnation() {
 
   useEffect(() => {
     items = searchCtx.totalPage;
-    if (pageNum - 2 < 0) {
-      pages = [pageNum, pageNum + 1, pageNum + 2, pageNum + 3, pageNum + 4];
-    } else if (pageNum - 1 < 0) {
-      pages = [pageNum - 1, pageNum, pageNum + 1, pageNum + 2, pageNum + 3];
-    }
-
     pages = pages.filter((element) => element < items.length);
 
     searchCtx.changePage(pageNum);
