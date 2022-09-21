@@ -6,7 +6,13 @@ import classes from './itemsLayout.module.css';
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
   const items = filterCtx.furnitureList;
-
+  if (!items.length) {
+    return (
+      <div className={classes.display_flex}>
+        <h2>No results were found for your search</h2>
+      </div>
+    );
+  }
   return (
     <>
       <div className={classes.display_flex}>
