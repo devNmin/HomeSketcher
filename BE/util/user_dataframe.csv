@@ -1,0 +1,2005 @@
+user_pk,user_style,user_color,user_age,user_gender,user_interest
+0,Modern,black,0,0,X
+1,Minimal,pink,40,0,Café chairs
+2,Mediterranean,orange,60,1,Ceiling lights
+3,Natural,green,30,0,Fitted wardrobes
+4,Antique,pink,20,0,Upholstered beds
+5,Antique,white,30,1,Makeup vanities & dressing tables
+6,Antique,white,20,1,Kitchen pantry storage
+7,Vintage,red,20,0,Step stools & step ladders
+8,Vintage,purple,10,1,Sectionals
+9,Mediterranean,blue,60,0,Leather & faux leather sofas
+10,Mediterranean,gray,20,1,"Buffet tables, sideboard buffets & buffet cabinets"
+11,Provence,green,40,0,Cribs
+12,Minimal,indigo,10,0,Kids tables
+13,Modern,blue,40,1,Fitted wardrobes
+14,Mediterranean,brown,10,1,Floor lamps
+15,Natural,orange,30,1,Drawer units
+16,North European,pink,40,0,Chair pads
+17,Modern,gray,10,0,Hinged wardrobes
+18,North European,green,20,1,Step stools & step ladders
+19,Modern,pink,40,0,Ceiling lights
+20,Vintage,indigo,30,1,Storage shelves & units
+21,North European,brown,50,0,Dining room cabinets & cupboards
+22,Minimal,black,10,1,Sofa & armchairs covers
+23,Modern,purple,60,1,Nightstands
+24,Natural,blue,40,0,Under bed storage
+25,Vintage,gray,50,0,Dining sets
+26,Mediterranean,orange,50,1,Walk in wardrobes
+27,Antique,pink,10,0,Hinged wardrobes
+28,Minimal,indigo,60,0,Cube storage
+29,Modern,indigo,40,1,Fabric sofas
+30,Mediterranean,pink,10,0,Cube storage
+31,Natural,blue,60,0,Sleeper sofas
+32,Minimal,pink,30,1,Ottomans
+33,Antique,orange,10,1,Children's dressers and chests
+34,Vintage,blue,40,1,Filing cabinets & storage cabinets
+35,Natural,green,30,0,Bar stools & chairs
+36,Modern,indigo,60,1,High chairs
+37,Provence,white,50,1,Guest beds & daybeds
+38,Provence,white,50,0,Café tables
+39,Vintage,red,60,1,Open wardrobes
+40,Natural,green,30,1,Kids lighting
+41,Mediterranean,white,40,1,Table lamps
+42,Mediterranean,purple,60,0,Twin beds
+43,Minimal,blue,60,0,Children's wardrobes
+44,Antique,purple,40,0,Fabric sofas
+45,Vintage,orange,10,0,Bar stools & chairs
+46,Natural,red,40,0,Sofa legs
+47,Modern,white,50,0,Desk chairs
+48,Antique,green,30,1,Kids beds
+49,Vintage,gray,30,0,Solitaire wardrobes
+50,Modern,black,10,0,Upholstered beds
+51,Modern,white,40,0,Kids tables
+52,Modern,blue,60,1,Kids beds
+53,Mediterranean,purple,50,1,Chests of drawers
+54,North European,yellow,30,1,Desk chairs
+55,Mediterranean,white,10,1,Kids tables
+56,Vintage,black,40,1,Bookcases
+57,Provence,blue,50,0,Kids lighting
+58,Provence,purple,30,0,Café chairs
+59,Minimal,purple,40,0,Cribs
+60,Vintage,blue,50,1,Changing tables
+61,Mediterranean,white,20,0,Console tables & sofa tables
+62,Modern,orange,20,0,Storage shelves & units
+63,Mediterranean,brown,40,1,Desk lamps
+64,Modern,black,40,1,Accent tables
+65,Minimal,black,30,1,Step stools & step ladders
+66,Modern,blue,60,1,Wall lamps
+67,North European,green,50,0,Accent tables
+68,Antique,indigo,30,0,Cube storage
+69,Provence,orange,40,1,Dining tables
+70,Provence,yellow,60,1,Changing tables
+71,Minimal,pink,50,1,Kitchen pantry storage
+72,North European,green,40,1,Under bed storage
+73,Antique,green,40,1,Dining room cabinets & cupboards
+74,Provence,pink,60,0,Café chairs
+75,Mediterranean,gray,30,1,Sofa accessories
+76,Modern,indigo,30,1,Dining room cabinets & cupboards
+77,Minimal,purple,30,1,Changing tables
+78,Mediterranean,white,10,0,Sofa accessories
+79,Natural,purple,50,0,BEKANT conference & meeting tables
+80,Mediterranean,brown,60,0,Cube storage
+81,Natural,yellow,50,1,Beds with storage
+82,Mediterranean,orange,40,0,Hinged wardrobes
+83,Minimal,blue,10,1,Step stools & step ladders
+84,Minimal,blue,50,1,BEKANT conference & meeting tables
+85,Provence,green,60,1,Accent tables
+86,Natural,gray,40,1,Desk chairs
+87,Minimal,red,40,1,Dining chairs
+88,Provence,blue,50,0,Leather & faux leather sofas
+89,Mediterranean,pink,10,0,Stools & benches
+90,Modern,pink,60,0,Fabric sofas
+91,North European,gray,10,1,Desks & computer desks
+92,Minimal,black,60,1,Sofa & armchairs covers
+93,Mediterranean,indigo,10,1,Headboards
+94,Vintage,pink,20,0,"Shades, bases & cords"
+95,Minimal,brown,50,0,Accent tables
+96,Mediterranean,brown,10,1,Walk in wardrobes
+97,Antique,indigo,40,1,Hinged wardrobes
+98,Vintage,brown,20,1,Headboards
+99,Minimal,brown,10,1,Sofa legs
+100,Mediterranean,pink,60,0,Desks & computer desks
+101,Natural,indigo,50,1,Bed legs
+102,Modern,brown,60,0,Cribs
+103,Modern,pink,30,1,Dining chairs
+104,Vintage,purple,40,1,Kids chairs
+105,Provence,indigo,50,1,Nightstands
+106,Minimal,white,20,0,Makeup vanities & dressing tables
+107,Mediterranean,gray,20,0,Console tables & sofa tables
+108,Natural,black,30,1,Sliding wardrobes
+109,Antique,white,10,0,Sleeper sofas
+110,Provence,purple,20,1,Café chairs
+111,Antique,pink,60,1,Leather & faux leather sofas
+112,Provence,pink,10,0,Storage shelves & units
+113,Antique,blue,20,1,Cube storage
+114,Mediterranean,white,30,0,Cube storage
+115,Provence,gray,50,0,Cribs
+116,Antique,green,30,0,Children's wardrobes
+117,Modern,red,30,0,Kids tables
+118,Antique,indigo,30,0,Sofa & armchairs covers
+119,Vintage,brown,20,0,Hinged wardrobes
+120,North European,gray,20,0,Accent tables
+121,Mediterranean,blue,40,0,Chests of drawers
+122,Provence,purple,50,1,Changing tables
+123,Vintage,indigo,50,0,Closet lighting
+124,Natural,blue,60,1,Ceiling lights
+125,Minimal,black,40,1,Kids beds
+126,Mediterranean,red,40,1,Sofa & armchairs covers
+127,Mediterranean,indigo,30,1,Kids tables
+128,Modern,red,40,0,Sofa legs
+129,Mediterranean,pink,10,1,Shelf units & cube storage
+130,Antique,red,40,1,Ottomans
+131,Vintage,green,50,0,Fitted wardrobes
+132,Provence,green,60,1,Hinged wardrobes
+133,Modern,purple,50,0,Desk chairs
+134,Mediterranean,orange,60,1,Wall lamps
+135,Modern,gray,60,0,Kids beds
+136,Minimal,pink,30,0,Changing tables
+137,Mediterranean,indigo,20,1,Fitted wardrobes
+138,North European,black,40,1,Solitaire wardrobes
+139,Vintage,blue,40,1,Chair pads
+140,Antique,pink,50,1,Sofa legs
+141,Modern,orange,40,1,Changing tables
+142,Mediterranean,yellow,50,0,Kids beds
+143,Modern,blue,40,0,Makeup vanities & dressing tables
+144,Minimal,pink,10,0,Bed legs
+145,North European,black,10,1,Kitchen pantry storage
+146,Vintage,red,30,0,Sofa & armchairs covers
+147,Vintage,yellow,40,1,Step stools & step ladders
+148,Vintage,green,50,1,Under bed storage
+149,Mediterranean,black,40,0,Headboards
+150,Mediterranean,pink,20,0,Beds with storage
+151,Antique,pink,60,1,Fabric sofas
+152,Modern,brown,50,0,Fabric sofas
+153,Minimal,brown,50,0,Changing tables
+154,Antique,gray,10,1,Desk chairs
+155,Antique,black,20,1,Shelf units & cube storage
+156,North European,white,50,1,Sleeper sofas
+157,North European,gray,40,1,Stools & benches
+158,Natural,white,50,0,Stools & benches
+159,Modern,blue,30,0,Bookcases
+160,North European,blue,60,0,Filing cabinets & storage cabinets
+161,Modern,brown,60,1,Hinged wardrobes
+162,Antique,white,60,0,Kids beds
+163,Vintage,white,30,1,Display cabinets
+164,Vintage,gray,10,0,Children's wardrobes
+165,North European,brown,10,0,Floor lamps
+166,Provence,purple,20,0,Desk chairs
+167,Mediterranean,red,30,0,Children's wardrobes
+168,Provence,white,60,1,Stools & benches
+169,Vintage,red,60,1,Leather & faux leather sofas
+170,Minimal,pink,50,1,Nightstands
+171,Minimal,orange,40,1,Kids stools & benches
+172,Minimal,red,50,0,TV stands & benches
+173,Provence,indigo,40,0,TV & media storage
+174,Modern,purple,10,0,TV stands & benches
+175,Natural,red,60,1,Storage shelves & units
+176,Minimal,black,10,1,Kids stools & benches
+177,Mediterranean,purple,60,1,"Full, Queen and King size platform beds"
+178,Mediterranean,indigo,40,1,Leather & faux leather sofas
+179,Antique,yellow,10,0,TV & media storage
+180,Modern,black,40,0,Closet lighting
+181,Mediterranean,white,30,0,Accent tables
+182,Modern,green,30,1,Bar tables
+183,Modern,blue,20,1,Children's dressers and chests
+184,Antique,yellow,60,1,Children's dressers and chests
+185,North European,white,50,0,Walk in wardrobes
+186,Provence,black,30,1,Kids lighting
+187,Vintage,gray,50,0,Children's dressers and chests
+188,Modern,black,50,0,"Shades, bases & cords"
+189,Provence,blue,50,0,Console tables & sofa tables
+190,Natural,brown,50,0,Table lamps
+191,Natural,orange,60,0,Storage shelves & units
+192,Provence,red,40,0,Accent tables
+193,Provence,orange,30,0,Storage shelves & units
+194,Vintage,brown,60,0,Headboards
+195,Mediterranean,purple,30,1,Leather & faux leather sofas
+196,Provence,blue,40,0,TV stands & benches
+197,Mediterranean,brown,10,1,BEKANT conference & meeting tables
+198,Vintage,red,40,1,Café tables
+199,Minimal,yellow,60,1,Dining room cabinets & cupboards
+200,Natural,orange,20,0,High chairs
+201,Provence,pink,60,0,Cribs
+202,Provence,red,50,1,Cribs
+203,Mediterranean,brown,30,1,Kids stools & benches
+204,Natural,pink,30,0,Guest beds & daybeds
+205,Antique,pink,40,0,Kids beds
+206,Antique,indigo,20,1,"Shades, bases & cords"
+207,Minimal,orange,60,1,Café tables
+208,Antique,white,30,0,Fitted wardrobes
+209,Natural,white,10,0,Dining chairs
+210,Mediterranean,red,60,1,Ottomans
+211,Vintage,blue,10,1,Children's dressers and chests
+212,North European,gray,10,0,Sliding wardrobes
+213,Antique,orange,40,0,Dining sets
+214,Provence,brown,40,0,Dining sets
+215,Minimal,indigo,10,1,Desk chairs
+216,Mediterranean,gray,10,1,Fabric sofas
+217,Provence,orange,10,0,Nightstands
+218,Modern,pink,40,1,Dining tables
+219,Provence,orange,10,0,Wall lamps
+220,Minimal,orange,20,0,Desk chairs
+221,North European,white,50,0,Kids stools & benches
+222,Modern,gray,30,1,Desk chairs
+223,Mediterranean,purple,40,1,Cribs
+224,Minimal,red,30,0,Sliding wardrobes
+225,Provence,pink,40,1,Console tables & sofa tables
+226,Provence,green,10,1,"Buffet tables, sideboard buffets & buffet cabinets"
+227,Minimal,black,50,0,Solitaire wardrobes
+228,Antique,indigo,30,1,Chair pads
+229,North European,pink,50,0,Children's wardrobes
+230,Mediterranean,black,30,0,Chests of drawers
+231,Minimal,blue,30,1,Desk lamps
+232,Vintage,gray,40,0,Children's dressers and chests
+233,Minimal,black,60,1,Cribs
+234,Provence,brown,50,0,Kids chairs
+235,North European,red,20,1,Storage shelves & units
+236,North European,green,30,0,Table lamps
+237,Mediterranean,red,50,1,Bookcases
+238,North European,black,40,0,Console tables & sofa tables
+239,Minimal,indigo,10,1,Dining room cabinets & cupboards
+240,Modern,orange,40,1,Twin beds
+241,Modern,green,40,1,Nightstands
+242,Natural,white,20,0,Sliding wardrobes
+243,North European,orange,20,0,Bed legs
+244,Antique,white,40,0,Bed legs
+245,North European,blue,30,1,Sliding wardrobes
+246,Provence,purple,40,0,Headboards
+247,North European,green,60,0,Stools & benches
+248,Minimal,indigo,20,1,"Full, Queen and King size platform beds"
+249,Provence,black,50,1,Upholstered beds
+250,North European,gray,20,0,Solitaire wardrobes
+251,Provence,black,20,1,Headboards
+252,Modern,brown,40,0,Wall lamps
+253,Vintage,blue,10,1,Cube storage
+254,Mediterranean,brown,40,0,Hinged wardrobes
+255,Mediterranean,purple,20,0,Hinged wardrobes
+256,Mediterranean,indigo,40,0,Cube storage
+257,Modern,black,20,1,Floor lamps
+258,Modern,black,10,0,Closet lighting
+259,Provence,blue,30,0,Sectionals
+260,Provence,gray,20,0,Beds with storage
+261,Modern,white,40,0,Toy storage
+262,Antique,white,30,1,Cube storage
+263,Antique,blue,50,0,Walk in wardrobes
+264,Antique,yellow,60,1,Café tables
+265,Mediterranean,red,40,0,Sleeper sofas
+266,Modern,red,40,0,Bar stools & chairs
+267,Provence,brown,10,0,Bar stools & chairs
+268,Provence,red,20,0,Bar tables
+269,Vintage,green,10,1,Kids lighting
+270,Natural,purple,20,0,Drawer units
+271,Antique,green,20,0,Sliding wardrobes
+272,Vintage,blue,10,0,Open wardrobes
+273,Provence,brown,10,1,Cribs
+274,Modern,gray,30,0,Headboards
+275,Modern,white,60,0,Upholstered beds
+276,Mediterranean,blue,20,0,Accent tables
+277,Vintage,red,50,0,Nightstands
+278,Provence,white,30,0,Bar tables
+279,Minimal,indigo,20,1,Hinged wardrobes
+280,Minimal,black,20,0,Toy storage
+281,Mediterranean,green,30,1,Step stools & step ladders
+282,Provence,orange,50,1,Chests of drawers
+283,Mediterranean,red,60,0,Sliding wardrobes
+284,Natural,orange,40,0,Desk chairs
+285,Vintage,white,10,0,Walk in wardrobes
+286,Antique,blue,10,0,Kitchen pantry storage
+287,Minimal,yellow,30,0,Dining tables
+288,Minimal,black,30,1,"Full, Queen and King size platform beds"
+289,Modern,pink,40,0,Hinged wardrobes
+290,Vintage,blue,30,1,Kids tables
+291,Mediterranean,blue,10,0,Sofa accessories
+292,North European,black,20,1,Sectionals
+293,Mediterranean,black,10,1,Headboards
+294,North European,brown,60,1,Wall lamps
+295,Provence,white,10,1,Kids tables
+296,Modern,white,10,1,Chests of drawers
+297,Provence,blue,10,0,Cube storage
+298,Modern,black,30,1,Nightstands
+299,Minimal,black,40,1,Desks & computer desks
+300,Vintage,brown,50,1,Café tables
+301,Natural,orange,50,0,Desks & computer desks
+302,Antique,orange,60,0,Dining room cabinets & cupboards
+303,Minimal,green,40,0,Step stools & step ladders
+304,Minimal,red,60,1,Dining room cabinets & cupboards
+305,Modern,green,10,0,BEKANT conference & meeting tables
+306,Mediterranean,pink,40,0,Upholstered beds
+307,North European,brown,30,0,Sleeper sofas
+308,Provence,purple,60,0,Kids tables
+309,Provence,white,50,1,Kids tables
+310,Antique,purple,60,1,Kids stools & benches
+311,Modern,blue,60,0,Console tables & sofa tables
+312,Provence,brown,30,1,Fitted wardrobes
+313,Modern,brown,30,0,Nightstands
+314,Natural,blue,30,1,Cribs
+315,Modern,yellow,50,0,Chair pads
+316,Mediterranean,indigo,60,1,Café chairs
+317,Provence,orange,50,0,Beds with storage
+318,Modern,black,20,0,Sleeper sofas
+319,Modern,gray,30,0,Walk in wardrobes
+320,Modern,purple,50,0,Children's dressers and chests
+321,North European,yellow,30,1,Table lamps
+322,Vintage,orange,40,0,Kids beds
+323,Natural,purple,60,0,Twin beds
+324,Mediterranean,red,40,1,Sofa legs
+325,Antique,pink,40,0,Guest beds & daybeds
+326,North European,white,20,0,Makeup vanities & dressing tables
+327,Modern,indigo,30,1,Kids tables
+328,Minimal,purple,50,0,"Full, Queen and King size platform beds"
+329,Modern,black,30,0,Guest beds & daybeds
+330,Modern,pink,40,0,Chair pads
+331,Modern,gray,20,0,Headboards
+332,Modern,blue,20,1,Wall lamps
+333,Vintage,pink,30,1,Shelf units & cube storage
+334,Antique,gray,60,1,Nightstands
+335,Mediterranean,black,30,0,Toy storage
+336,North European,white,20,1,Chair pads
+337,Mediterranean,white,60,0,Hinged wardrobes
+338,Mediterranean,green,20,0,BEKANT conference & meeting tables
+339,Vintage,red,60,0,High chairs
+340,Antique,white,60,0,Nightstands
+341,Provence,yellow,50,0,Toy storage
+342,Mediterranean,pink,50,1,Sofa accessories
+343,North European,purple,40,0,Headboards
+344,Vintage,black,20,0,Upholstered beds
+345,Mediterranean,indigo,60,0,Ottomans
+346,Natural,gray,60,0,Café chairs
+347,North European,purple,20,0,Fabric sofas
+348,Vintage,white,30,1,Sofa legs
+349,Vintage,green,40,1,Filing cabinets & storage cabinets
+350,Provence,blue,40,0,Open wardrobes
+351,Mediterranean,orange,20,1,Drawer units
+352,Modern,yellow,20,0,Dining chairs
+353,Provence,blue,20,1,BEKANT conference & meeting tables
+354,Vintage,indigo,60,0,Fabric sofas
+355,Modern,gray,50,1,Kids lighting
+356,Modern,white,50,0,Fitted wardrobes
+357,Modern,pink,10,0,Storage shelves & units
+358,Mediterranean,gray,20,0,Hinged wardrobes
+359,Modern,green,10,0,Wall lamps
+360,Provence,gray,20,1,"Full, Queen and King size platform beds"
+361,Vintage,yellow,50,0,Sectionals
+362,Natural,red,40,1,Ottomans
+363,Vintage,red,30,1,Beds with storage
+364,Modern,purple,50,1,Ottomans
+365,Mediterranean,brown,60,0,"Full, Queen and King size platform beds"
+366,Mediterranean,yellow,60,1,High chairs
+367,North European,black,40,1,Wall lamps
+368,Minimal,red,10,0,Under bed storage
+369,Antique,brown,20,1,TV stands & benches
+370,Modern,black,40,1,Dining sets
+371,Modern,gray,40,1,Cube storage
+372,Mediterranean,black,30,1,"Full, Queen and King size platform beds"
+373,Natural,gray,60,0,Step stools & step ladders
+374,Natural,white,20,1,Under bed storage
+375,Vintage,indigo,50,1,Chair pads
+376,Minimal,orange,20,0,Bar tables
+377,Provence,red,30,0,"Shades, bases & cords"
+378,Provence,white,60,1,Children's wardrobes
+379,Antique,green,50,1,Beds with storage
+380,Natural,gray,30,0,Desks & computer desks
+381,Provence,gray,40,1,Kids tables
+382,Minimal,orange,60,1,Upholstered beds
+383,Natural,pink,10,1,Cribs
+384,Mediterranean,yellow,30,0,Kids stools & benches
+385,Provence,orange,40,0,Open wardrobes
+386,North European,indigo,60,1,Guest beds & daybeds
+387,Modern,gray,20,0,Kids stools & benches
+388,Vintage,indigo,40,1,Table lamps
+389,Minimal,pink,10,0,Cribs
+390,Provence,indigo,50,1,Leather & faux leather sofas
+391,Modern,pink,50,1,Dining room cabinets & cupboards
+392,Provence,yellow,40,0,Beds with storage
+393,Mediterranean,indigo,50,1,Children's dressers and chests
+394,Minimal,orange,10,0,Children's wardrobes
+395,North European,purple,30,0,Café tables
+396,Vintage,black,10,0,Cube storage
+397,Minimal,indigo,20,0,Leather & faux leather sofas
+398,Minimal,blue,20,0,TV stands & benches
+399,Provence,black,30,0,Stools & benches
+400,Minimal,white,10,1,Beds with storage
+401,Antique,black,50,0,Bookcases
+402,Minimal,black,50,1,Children's wardrobes
+403,Minimal,pink,30,1,Display cabinets
+404,Antique,black,20,0,Console tables & sofa tables
+405,Antique,brown,10,1,Sleeper sofas
+406,Provence,white,40,0,Desk chairs
+407,Provence,gray,20,0,Kids stools & benches
+408,Antique,blue,50,0,Leather & faux leather sofas
+409,Minimal,indigo,10,0,Children's wardrobes
+410,Antique,green,60,1,Kitchen pantry storage
+411,Modern,red,30,1,Floor lamps
+412,Mediterranean,blue,60,1,Café tables
+413,Antique,purple,20,1,Kids beds
+414,Vintage,yellow,50,0,Table lamps
+415,Provence,indigo,30,1,Stools & benches
+416,Minimal,pink,40,0,Under bed storage
+417,Antique,pink,20,1,Bar tables
+418,Natural,black,40,0,Guest beds & daybeds
+419,Provence,yellow,20,0,Table lamps
+420,North European,indigo,10,1,Upholstered beds
+421,Mediterranean,white,10,1,Bar stools & chairs
+422,Vintage,white,10,0,Children's dressers and chests
+423,North European,black,50,0,Sliding wardrobes
+424,Provence,indigo,40,0,Hinged wardrobes
+425,Natural,white,60,1,Hinged wardrobes
+426,Mediterranean,black,50,1,Under bed storage
+427,Natural,pink,30,1,Console tables & sofa tables
+428,Provence,brown,30,0,Kids lighting
+429,Mediterranean,white,60,0,Filing cabinets & storage cabinets
+430,North European,red,60,1,Beds with storage
+431,Natural,purple,60,0,Toy storage
+432,Mediterranean,pink,10,1,"Full, Queen and King size platform beds"
+433,North European,indigo,10,0,Filing cabinets & storage cabinets
+434,Mediterranean,red,60,0,Sliding wardrobes
+435,Mediterranean,indigo,60,1,Sofa & armchairs covers
+436,Antique,gray,50,0,Headboards
+437,Mediterranean,indigo,50,1,Nightstands
+438,Provence,white,30,0,Beds with storage
+439,Minimal,gray,50,0,TV stands & benches
+440,Modern,gray,50,1,Chair pads
+441,Mediterranean,yellow,20,0,Headboards
+442,Vintage,red,20,1,Kitchen pantry storage
+443,Modern,purple,50,0,Ceiling lights
+444,Minimal,indigo,60,1,Filing cabinets & storage cabinets
+445,Mediterranean,blue,40,0,Guest beds & daybeds
+446,Minimal,pink,40,1,Fitted wardrobes
+447,Natural,gray,50,0,"Shades, bases & cords"
+448,Mediterranean,orange,40,1,Sliding wardrobes
+449,Vintage,gray,60,1,"Buffet tables, sideboard buffets & buffet cabinets"
+450,Mediterranean,blue,10,1,Sofa accessories
+451,Provence,orange,50,0,Console tables & sofa tables
+452,Natural,black,40,1,Stools & benches
+453,Provence,indigo,60,0,Sliding wardrobes
+454,Mediterranean,blue,60,1,Filing cabinets & storage cabinets
+455,Natural,blue,30,1,Sofa accessories
+456,Modern,green,10,0,TV stands & benches
+457,Mediterranean,indigo,60,0,Wall lamps
+458,Natural,gray,60,1,Dining sets
+459,North European,pink,40,1,Storage shelves & units
+460,Natural,gray,30,1,Stools & benches
+461,Antique,pink,20,0,Table lamps
+462,Antique,gray,50,1,Sofa accessories
+463,Mediterranean,gray,10,0,Kids tables
+464,Vintage,white,50,1,Cribs
+465,Antique,pink,10,1,Sofa legs
+466,Mediterranean,red,60,1,Twin beds
+467,Natural,white,40,1,Kids lighting
+468,North European,blue,30,1,Children's dressers and chests
+469,Modern,purple,20,0,Desk lamps
+470,Antique,brown,10,0,Closet lighting
+471,North European,red,60,0,Bookcases
+472,Vintage,indigo,40,1,Drawer units
+473,North European,black,40,1,Children's dressers and chests
+474,Antique,brown,20,0,Kids tables
+475,Provence,purple,10,1,Desks & computer desks
+476,Vintage,red,50,0,"Full, Queen and King size platform beds"
+477,Antique,indigo,10,1,Desks & computer desks
+478,Vintage,yellow,30,0,BEKANT conference & meeting tables
+479,North European,yellow,10,1,Sofa legs
+480,Natural,yellow,20,1,Fitted wardrobes
+481,Mediterranean,indigo,60,0,Twin beds
+482,Antique,blue,10,1,Under bed storage
+483,Vintage,red,20,0,Ottomans
+484,Vintage,purple,50,1,Headboards
+485,Minimal,blue,30,0,Changing tables
+486,Antique,orange,10,0,Sliding wardrobes
+487,Provence,indigo,40,1,Headboards
+488,Vintage,gray,20,1,Step stools & step ladders
+489,Antique,green,30,0,Cribs
+490,Provence,indigo,10,1,Café tables
+491,Antique,blue,20,0,Storage shelves & units
+492,Minimal,gray,60,1,Sofa accessories
+493,Antique,green,20,1,Kids lighting
+494,Minimal,red,50,1,BEKANT conference & meeting tables
+495,Mediterranean,pink,50,1,Dining chairs
+496,Provence,pink,10,0,Makeup vanities & dressing tables
+497,Antique,red,30,0,Console tables & sofa tables
+498,Minimal,purple,30,0,Shelf units & cube storage
+499,Antique,red,10,0,TV & media storage
+500,Natural,gray,20,1,Desk lamps
+501,Modern,yellow,20,1,Sliding wardrobes
+502,Modern,red,30,0,Dining chairs
+503,Antique,purple,40,0,Ottomans
+504,Vintage,green,40,0,Ceiling lights
+505,Mediterranean,green,40,0,Console tables & sofa tables
+506,Natural,green,60,1,TV stands & benches
+507,Mediterranean,white,10,0,Sofa & armchairs covers
+508,Mediterranean,white,20,1,"Buffet tables, sideboard buffets & buffet cabinets"
+509,Antique,blue,50,1,Bookcases
+510,Natural,blue,30,0,Table lamps
+511,Antique,pink,10,0,"Shades, bases & cords"
+512,Modern,red,40,1,Kids beds
+513,Antique,pink,20,0,Children's wardrobes
+514,Natural,white,60,1,Storage shelves & units
+515,Provence,gray,50,1,Closet lighting
+516,Vintage,gray,60,1,Desks & computer desks
+517,Provence,gray,30,0,Makeup vanities & dressing tables
+518,Minimal,purple,40,1,Bar tables
+519,Minimal,black,40,0,Beds with storage
+520,Minimal,orange,20,1,Wall lamps
+521,North European,orange,30,0,Desk lamps
+522,Modern,brown,30,0,Sleeper sofas
+523,Vintage,yellow,30,1,Sofa accessories
+524,Antique,brown,40,0,Dining sets
+525,North European,white,50,1,High chairs
+526,Minimal,red,40,0,Display cabinets
+527,North European,gray,20,0,Kids tables
+528,Natural,yellow,30,0,Kids beds
+529,Modern,brown,60,1,Children's dressers and chests
+530,Provence,green,40,1,Under bed storage
+531,Natural,blue,20,0,Ottomans
+532,Minimal,pink,20,1,Cube storage
+533,Modern,purple,30,0,Toy storage
+534,North European,brown,40,0,Ottomans
+535,Minimal,purple,10,1,Fitted wardrobes
+536,Minimal,black,30,0,Dining room cabinets & cupboards
+537,North European,green,50,0,"Full, Queen and King size platform beds"
+538,North European,gray,10,1,"Buffet tables, sideboard buffets & buffet cabinets"
+539,Provence,purple,60,0,Cube storage
+540,Natural,blue,20,0,Kids chairs
+541,Modern,gray,30,1,Accent tables
+542,Antique,blue,30,1,Dining room cabinets & cupboards
+543,Antique,blue,10,1,Kids beds
+544,Minimal,indigo,10,1,Leather & faux leather sofas
+545,Vintage,brown,20,1,Ceiling lights
+546,Vintage,gray,10,0,"Shades, bases & cords"
+547,Mediterranean,blue,60,0,Sliding wardrobes
+548,Minimal,gray,20,0,Fitted wardrobes
+549,Minimal,purple,30,0,Leather & faux leather sofas
+550,Modern,brown,20,0,Sectionals
+551,Modern,gray,40,0,Twin beds
+552,Natural,purple,50,1,Dining tables
+553,Antique,white,20,0,Under bed storage
+554,Vintage,brown,40,1,Desks & computer desks
+555,Antique,purple,60,0,Closet lighting
+556,Natural,indigo,60,0,Headboards
+557,Mediterranean,white,40,1,Console tables & sofa tables
+558,Antique,brown,20,1,Cube storage
+559,Natural,white,20,0,Dining chairs
+560,North European,white,30,0,Chair pads
+561,Modern,red,40,0,Sectionals
+562,Modern,white,40,1,Kids beds
+563,North European,orange,10,0,Children's wardrobes
+564,Mediterranean,blue,60,0,Ottomans
+565,Minimal,purple,40,0,Changing tables
+566,Modern,green,60,1,Desk lamps
+567,Modern,gray,10,0,Hinged wardrobes
+568,Natural,blue,40,1,"Shades, bases & cords"
+569,Natural,indigo,40,1,Makeup vanities & dressing tables
+570,Minimal,purple,10,0,Walk in wardrobes
+571,Minimal,red,50,1,"Shades, bases & cords"
+572,Mediterranean,purple,50,1,Bed legs
+573,Mediterranean,pink,60,0,Fitted wardrobes
+574,North European,brown,50,1,Twin beds
+575,North European,green,60,1,Sofa legs
+576,Mediterranean,red,50,0,Guest beds & daybeds
+577,Minimal,brown,30,1,Kids beds
+578,Modern,indigo,10,0,Sectionals
+579,Minimal,purple,50,1,Bed legs
+580,Provence,indigo,10,0,Bed legs
+581,Modern,blue,10,0,Kids lighting
+582,Mediterranean,purple,50,1,Under bed storage
+583,Natural,pink,40,1,Upholstered beds
+584,Provence,purple,30,0,Drawer units
+585,Mediterranean,purple,10,0,Kids stools & benches
+586,Minimal,white,10,1,Table lamps
+587,North European,purple,20,0,Bookcases
+588,Modern,black,20,1,Ceiling lights
+589,Modern,pink,30,0,Guest beds & daybeds
+590,Natural,green,40,0,Ottomans
+591,Mediterranean,purple,30,0,"Buffet tables, sideboard buffets & buffet cabinets"
+592,Modern,yellow,50,1,"Full, Queen and King size platform beds"
+593,Modern,indigo,10,1,"Shades, bases & cords"
+594,Antique,yellow,60,1,Leather & faux leather sofas
+595,Natural,white,40,0,Guest beds & daybeds
+596,Minimal,indigo,30,0,Nightstands
+597,North European,blue,20,1,Kids tables
+598,Natural,white,40,0,BEKANT conference & meeting tables
+599,Antique,yellow,20,1,Fitted wardrobes
+600,Antique,yellow,30,0,Kids beds
+601,Mediterranean,red,20,0,Display cabinets
+602,Mediterranean,pink,60,0,Sliding wardrobes
+603,Minimal,indigo,30,0,Sofa & armchairs covers
+604,Minimal,green,60,0,Kids tables
+605,Vintage,green,10,1,Ottomans
+606,North European,indigo,30,0,Kids beds
+607,North European,pink,30,0,Solitaire wardrobes
+608,Antique,white,10,1,Step stools & step ladders
+609,Modern,red,60,1,Fabric sofas
+610,Modern,blue,60,1,Ceiling lights
+611,Vintage,brown,20,0,Sofa & armchairs covers
+612,Minimal,brown,10,0,Filing cabinets & storage cabinets
+613,Modern,purple,20,1,Sleeper sofas
+614,Antique,green,30,1,Floor lamps
+615,Natural,gray,40,0,Dining sets
+616,Antique,white,10,0,Leather & faux leather sofas
+617,Vintage,brown,20,0,Kitchen pantry storage
+618,Vintage,blue,40,0,Fitted wardrobes
+619,Natural,black,30,1,Ottomans
+620,Antique,purple,30,1,TV & media storage
+621,Provence,orange,60,0,Café chairs
+622,North European,brown,50,0,Headboards
+623,Vintage,blue,10,0,"Buffet tables, sideboard buffets & buffet cabinets"
+624,Minimal,indigo,30,1,Children's wardrobes
+625,North European,gray,10,1,Guest beds & daybeds
+626,Natural,red,60,0,Nightstands
+627,Antique,white,20,1,Sofa legs
+628,Antique,blue,10,0,Ottomans
+629,Mediterranean,purple,40,1,Kids beds
+630,Antique,gray,50,0,"Full, Queen and King size platform beds"
+631,Natural,orange,20,1,Ottomans
+632,Antique,yellow,60,0,Ottomans
+633,Natural,indigo,10,0,Accent tables
+634,Natural,purple,30,1,Sofa legs
+635,Antique,gray,40,1,"Buffet tables, sideboard buffets & buffet cabinets"
+636,Vintage,purple,20,1,Dining sets
+637,North European,red,40,0,Kids chairs
+638,Antique,yellow,40,1,Step stools & step ladders
+639,Natural,blue,40,1,Cribs
+640,Antique,blue,20,1,Floor lamps
+641,Antique,purple,60,0,Nightstands
+642,Provence,brown,60,0,Floor lamps
+643,Antique,indigo,10,0,"Full, Queen and King size platform beds"
+644,Provence,indigo,40,0,Bar stools & chairs
+645,Provence,blue,10,0,BEKANT conference & meeting tables
+646,North European,pink,40,1,Step stools & step ladders
+647,Modern,gray,50,1,Dining room cabinets & cupboards
+648,Vintage,brown,60,0,Table lamps
+649,North European,yellow,30,1,Drawer units
+650,North European,pink,20,0,Dining room cabinets & cupboards
+651,Mediterranean,black,40,1,Children's dressers and chests
+652,Mediterranean,indigo,20,1,Hinged wardrobes
+653,Minimal,black,10,1,Desks & computer desks
+654,Antique,orange,60,0,Sectionals
+655,Vintage,black,50,0,Twin beds
+656,Modern,red,20,1,Sleeper sofas
+657,Vintage,yellow,20,0,Beds with storage
+658,Natural,purple,10,1,TV & media storage
+659,Modern,orange,60,1,Hinged wardrobes
+660,North European,pink,30,1,Storage shelves & units
+661,Antique,red,10,0,Nightstands
+662,Minimal,green,20,1,Dining tables
+663,Antique,brown,10,0,Children's wardrobes
+664,Mediterranean,black,60,1,Shelf units & cube storage
+665,Modern,blue,30,0,Under bed storage
+666,North European,yellow,60,1,Desk lamps
+667,North European,red,30,1,Drawer units
+668,Antique,white,20,1,Kids beds
+669,North European,red,50,0,Guest beds & daybeds
+670,Mediterranean,black,20,0,Makeup vanities & dressing tables
+671,Minimal,yellow,20,1,TV stands & benches
+672,Vintage,blue,40,1,Cribs
+673,Vintage,orange,30,1,Desk chairs
+674,Provence,indigo,60,0,Sofa & armchairs covers
+675,Natural,brown,10,1,Cribs
+676,Antique,brown,10,1,Closet lighting
+677,Provence,gray,60,1,Kids chairs
+678,Natural,indigo,50,0,Upholstered beds
+679,Mediterranean,purple,20,0,High chairs
+680,North European,blue,50,1,"Shades, bases & cords"
+681,Modern,red,40,1,Headboards
+682,North European,green,20,0,Accent tables
+683,North European,orange,20,0,Changing tables
+684,North European,blue,10,1,Café chairs
+685,Antique,gray,40,1,Stools & benches
+686,Modern,brown,30,0,Kids beds
+687,Natural,brown,30,1,TV & media storage
+688,Provence,blue,10,0,Dining chairs
+689,Modern,black,20,0,Fabric sofas
+690,Minimal,indigo,60,1,Desks & computer desks
+691,Minimal,orange,30,0,Twin beds
+692,Mediterranean,green,10,0,Fitted wardrobes
+693,North European,white,50,0,"Buffet tables, sideboard buffets & buffet cabinets"
+694,Mediterranean,indigo,60,1,Bar tables
+695,Minimal,white,30,1,Headboards
+696,Natural,pink,30,1,Guest beds & daybeds
+697,Minimal,pink,40,1,BEKANT conference & meeting tables
+698,Minimal,brown,10,1,Dining tables
+699,Modern,indigo,20,1,Leather & faux leather sofas
+700,North European,indigo,30,0,Sectionals
+701,Modern,orange,30,0,Ottomans
+702,North European,indigo,20,0,Storage shelves & units
+703,Modern,red,40,0,BEKANT conference & meeting tables
+704,Natural,brown,40,1,Makeup vanities & dressing tables
+705,North European,orange,20,1,Solitaire wardrobes
+706,Modern,brown,40,0,Console tables & sofa tables
+707,Natural,gray,60,1,Filing cabinets & storage cabinets
+708,North European,blue,30,1,Makeup vanities & dressing tables
+709,Vintage,green,20,1,Kids tables
+710,Mediterranean,pink,60,1,Kitchen pantry storage
+711,Minimal,red,20,1,Café tables
+712,Mediterranean,green,60,0,Walk in wardrobes
+713,Modern,brown,30,0,BEKANT conference & meeting tables
+714,Antique,orange,60,1,Café chairs
+715,Mediterranean,purple,60,1,Sofa & armchairs covers
+716,Minimal,white,60,1,Hinged wardrobes
+717,Minimal,white,40,1,Table lamps
+718,Vintage,brown,30,0,"Full, Queen and King size platform beds"
+719,Vintage,purple,60,1,Kids tables
+720,Mediterranean,brown,10,1,Bookcases
+721,North European,black,50,1,Sofa & armchairs covers
+722,Antique,purple,60,0,Dining chairs
+723,Antique,blue,40,1,Sleeper sofas
+724,Minimal,blue,50,1,Desk lamps
+725,Mediterranean,pink,20,0,Floor lamps
+726,Minimal,gray,40,1,Cube storage
+727,Minimal,green,60,1,Console tables & sofa tables
+728,Mediterranean,yellow,60,1,Closet lighting
+729,Natural,pink,40,0,Nightstands
+730,Mediterranean,yellow,20,1,Floor lamps
+731,North European,gray,20,0,Fabric sofas
+732,Mediterranean,gray,20,0,Filing cabinets & storage cabinets
+733,Natural,blue,40,1,Café tables
+734,Modern,white,50,0,Dining chairs
+735,Minimal,purple,60,1,Beds with storage
+736,Vintage,pink,10,0,TV stands & benches
+737,Mediterranean,blue,10,1,Console tables & sofa tables
+738,North European,gray,40,1,Nightstands
+739,Natural,pink,10,0,Open wardrobes
+740,Antique,indigo,10,0,Floor lamps
+741,Minimal,green,30,0,Fitted wardrobes
+742,Provence,white,10,1,"Buffet tables, sideboard buffets & buffet cabinets"
+743,Minimal,white,10,0,Under bed storage
+744,North European,orange,10,0,Solitaire wardrobes
+745,Vintage,black,20,0,Bed legs
+746,Modern,orange,40,1,Chair pads
+747,Natural,blue,60,0,Desk chairs
+748,Minimal,pink,40,1,Desk chairs
+749,North European,green,30,0,Ceiling lights
+750,Provence,green,10,1,Sofa accessories
+751,Vintage,pink,30,1,Bed legs
+752,North European,brown,10,1,"Buffet tables, sideboard buffets & buffet cabinets"
+753,Minimal,black,40,0,Sofa accessories
+754,Modern,orange,60,0,Sliding wardrobes
+755,North European,orange,30,1,Sofa & armchairs covers
+756,Antique,brown,30,0,Sectionals
+757,Modern,green,60,0,Drawer units
+758,Provence,indigo,30,1,Console tables & sofa tables
+759,Mediterranean,purple,60,1,Upholstered beds
+760,Mediterranean,white,30,1,Storage shelves & units
+761,Vintage,white,10,1,Floor lamps
+762,Vintage,orange,40,0,Sliding wardrobes
+763,Provence,white,40,0,Desk lamps
+764,Vintage,green,20,0,Nightstands
+765,Minimal,purple,60,0,Sleeper sofas
+766,Natural,white,50,0,Shelf units & cube storage
+767,Provence,indigo,60,0,Stools & benches
+768,Antique,black,60,1,Display cabinets
+769,Minimal,brown,50,1,Dining sets
+770,Natural,pink,40,0,Sofa legs
+771,Vintage,purple,30,0,Kids lighting
+772,Vintage,green,20,1,"Full, Queen and King size platform beds"
+773,Mediterranean,brown,50,1,High chairs
+774,Mediterranean,red,10,1,Hinged wardrobes
+775,Minimal,yellow,10,0,Bar tables
+776,Mediterranean,blue,10,0,Kids beds
+777,Minimal,black,40,1,Ceiling lights
+778,Modern,green,10,0,Bookcases
+779,Minimal,yellow,50,0,Café chairs
+780,Antique,pink,20,0,Bar tables
+781,Antique,indigo,60,1,Kids chairs
+782,Mediterranean,blue,40,0,TV stands & benches
+783,Mediterranean,black,60,1,Dining sets
+784,Natural,black,40,1,Sleeper sofas
+785,Antique,orange,60,0,Dining tables
+786,Modern,orange,50,0,Chair pads
+787,Natural,blue,10,1,Ceiling lights
+788,Natural,brown,10,0,Drawer units
+789,Antique,orange,40,1,High chairs
+790,Vintage,gray,10,0,Dining sets
+791,Mediterranean,brown,30,1,Upholstered beds
+792,Mediterranean,purple,20,0,Step stools & step ladders
+793,Antique,gray,50,1,Bed legs
+794,Antique,brown,10,1,Sleeper sofas
+795,Minimal,purple,30,1,Bookcases
+796,Natural,orange,20,1,Open wardrobes
+797,Antique,red,50,0,Shelf units & cube storage
+798,Vintage,black,50,1,Leather & faux leather sofas
+799,Modern,black,20,1,Step stools & step ladders
+800,Modern,green,20,0,Desk lamps
+801,Modern,yellow,30,1,Cube storage
+802,Mediterranean,pink,30,1,Desk chairs
+803,Provence,blue,30,0,Toy storage
+804,North European,gray,60,0,"Shades, bases & cords"
+805,Antique,red,50,0,Under bed storage
+806,Modern,gray,40,1,Headboards
+807,Antique,red,20,0,High chairs
+808,Natural,purple,20,1,Sleeper sofas
+809,North European,white,10,0,Café tables
+810,Antique,white,50,1,Shelf units & cube storage
+811,Vintage,white,40,0,Dining chairs
+812,North European,indigo,20,0,Bar tables
+813,Modern,brown,40,0,Open wardrobes
+814,Provence,red,20,0,Children's wardrobes
+815,Mediterranean,blue,50,1,Ceiling lights
+816,North European,indigo,20,1,Desks & computer desks
+817,Modern,blue,40,1,Makeup vanities & dressing tables
+818,North European,indigo,30,1,Dining sets
+819,Mediterranean,orange,30,1,Bed legs
+820,Provence,brown,30,0,High chairs
+821,Antique,brown,40,0,Under bed storage
+822,Vintage,orange,30,1,"Shades, bases & cords"
+823,Mediterranean,green,60,0,Kids beds
+824,Minimal,black,10,1,Chair pads
+825,North European,pink,60,1,Makeup vanities & dressing tables
+826,Provence,gray,50,1,Sliding wardrobes
+827,North European,green,20,1,Upholstered beds
+828,Antique,purple,20,0,Beds with storage
+829,Mediterranean,orange,50,0,Hinged wardrobes
+830,Mediterranean,red,10,1,Desk lamps
+831,Vintage,green,10,0,Upholstered beds
+832,North European,yellow,50,1,Walk in wardrobes
+833,North European,green,20,0,Console tables & sofa tables
+834,Natural,brown,60,1,Ceiling lights
+835,North European,white,30,1,Open wardrobes
+836,Natural,orange,10,1,Bar stools & chairs
+837,Modern,yellow,60,1,Fabric sofas
+838,Provence,yellow,20,0,Display cabinets
+839,Natural,purple,60,0,Children's dressers and chests
+840,Provence,indigo,20,1,Desks & computer desks
+841,Minimal,yellow,50,1,Desk lamps
+842,Minimal,yellow,40,1,Kids lighting
+843,Mediterranean,purple,20,1,Sofa & armchairs covers
+844,Antique,green,10,0,Kids tables
+845,Modern,brown,10,0,Sliding wardrobes
+846,Antique,brown,50,0,Guest beds & daybeds
+847,Mediterranean,black,20,0,Console tables & sofa tables
+848,Mediterranean,yellow,60,0,Bookcases
+849,Minimal,green,30,1,Closet lighting
+850,Natural,black,10,0,Children's dressers and chests
+851,Antique,purple,50,1,Chests of drawers
+852,Modern,blue,40,1,Kids chairs
+853,Mediterranean,gray,40,1,Children's dressers and chests
+854,Minimal,pink,30,0,Dining tables
+855,Provence,purple,20,1,Café chairs
+856,Antique,brown,50,0,Kids tables
+857,Minimal,pink,50,1,TV & media storage
+858,Mediterranean,blue,20,0,Display cabinets
+859,Modern,purple,10,0,Chair pads
+860,Antique,yellow,40,0,Under bed storage
+861,North European,brown,50,1,Table lamps
+862,Mediterranean,brown,40,1,Solitaire wardrobes
+863,Modern,black,10,1,Children's wardrobes
+864,Natural,yellow,40,0,Kids stools & benches
+865,Minimal,red,60,1,Sofa accessories
+866,North European,green,30,1,Fabric sofas
+867,Provence,gray,60,0,Sliding wardrobes
+868,Natural,pink,20,1,Children's wardrobes
+869,North European,blue,40,1,Kids beds
+870,Natural,pink,50,1,Bar tables
+871,Provence,green,20,1,Toy storage
+872,Mediterranean,yellow,30,1,Kids tables
+873,Antique,black,50,1,Step stools & step ladders
+874,Vintage,brown,50,0,Drawer units
+875,Modern,pink,50,1,Wall lamps
+876,Antique,yellow,10,0,Kitchen pantry storage
+877,Provence,red,50,1,Twin beds
+878,Minimal,yellow,10,0,Bar tables
+879,Modern,orange,40,1,Guest beds & daybeds
+880,Natural,black,40,1,Bookcases
+881,Mediterranean,white,50,1,Twin beds
+882,Mediterranean,blue,40,0,Bar stools & chairs
+883,Mediterranean,red,60,1,Sliding wardrobes
+884,Modern,indigo,50,0,"Buffet tables, sideboard buffets & buffet cabinets"
+885,Vintage,green,60,0,Kids lighting
+886,Minimal,green,30,0,Table lamps
+887,North European,white,20,0,Sleeper sofas
+888,Minimal,pink,50,1,Display cabinets
+889,Antique,indigo,60,0,Dining chairs
+890,Modern,red,30,0,BEKANT conference & meeting tables
+891,Natural,gray,10,1,Display cabinets
+892,Provence,blue,40,0,Beds with storage
+893,Modern,yellow,30,0,Solitaire wardrobes
+894,Antique,white,10,0,Fabric sofas
+895,Antique,pink,40,1,Café tables
+896,Mediterranean,white,40,1,"Buffet tables, sideboard buffets & buffet cabinets"
+897,North European,blue,20,0,Desk lamps
+898,Modern,white,10,0,Dining tables
+899,Antique,purple,20,1,Kids stools & benches
+900,Modern,red,60,1,Toy storage
+901,Mediterranean,orange,30,1,Under bed storage
+902,Provence,indigo,30,1,Dining room cabinets & cupboards
+903,Modern,yellow,50,1,Kids lighting
+904,Modern,orange,20,0,Beds with storage
+905,Vintage,gray,40,0,Makeup vanities & dressing tables
+906,North European,gray,10,1,Closet lighting
+907,Mediterranean,gray,30,0,Makeup vanities & dressing tables
+908,Minimal,white,40,1,Changing tables
+909,Minimal,yellow,30,1,Café chairs
+910,Vintage,black,10,0,Kids chairs
+911,Vintage,indigo,10,1,Shelf units & cube storage
+912,Antique,brown,10,0,Dining room cabinets & cupboards
+913,Mediterranean,gray,20,1,Storage shelves & units
+914,Minimal,orange,50,1,Bar stools & chairs
+915,Natural,green,30,1,Stools & benches
+916,Vintage,red,50,0,"Buffet tables, sideboard buffets & buffet cabinets"
+917,Provence,blue,10,1,Bed legs
+918,Antique,brown,30,1,Fabric sofas
+919,Modern,purple,60,1,Kitchen pantry storage
+920,Minimal,pink,50,1,Kids chairs
+921,Vintage,red,60,1,Hinged wardrobes
+922,North European,purple,40,0,Twin beds
+923,Modern,gray,10,0,Desks & computer desks
+924,Mediterranean,purple,40,0,Cribs
+925,Modern,indigo,10,0,Desk lamps
+926,Minimal,black,30,1,TV stands & benches
+927,Mediterranean,red,30,1,Solitaire wardrobes
+928,Modern,gray,40,0,Bar stools & chairs
+929,North European,blue,30,0,Hinged wardrobes
+930,Natural,yellow,40,0,Headboards
+931,Provence,black,30,0,Desk lamps
+932,North European,black,50,0,Ceiling lights
+933,Antique,red,40,0,Leather & faux leather sofas
+934,Mediterranean,white,40,0,Step stools & step ladders
+935,Provence,yellow,60,0,TV & media storage
+936,Vintage,white,50,1,Fabric sofas
+937,Natural,blue,10,1,Kitchen pantry storage
+938,Minimal,white,50,0,Closet lighting
+939,Mediterranean,brown,20,0,Storage shelves & units
+940,Minimal,gray,60,1,Drawer units
+941,Antique,brown,40,0,Leather & faux leather sofas
+942,Provence,yellow,20,1,Accent tables
+943,North European,blue,60,0,Hinged wardrobes
+944,North European,white,30,1,Chests of drawers
+945,Antique,white,10,0,Makeup vanities & dressing tables
+946,Provence,pink,50,0,"Buffet tables, sideboard buffets & buffet cabinets"
+947,Mediterranean,blue,50,1,Leather & faux leather sofas
+948,Modern,brown,60,1,Kids stools & benches
+949,Antique,gray,20,1,Kids lighting
+950,Modern,white,60,0,Children's dressers and chests
+951,Provence,white,60,1,Makeup vanities & dressing tables
+952,Minimal,brown,60,0,Leather & faux leather sofas
+953,Antique,orange,60,1,Kitchen pantry storage
+954,Mediterranean,blue,40,0,Cribs
+955,Provence,orange,20,0,Floor lamps
+956,Modern,pink,40,0,Beds with storage
+957,North European,black,20,1,Display cabinets
+958,Modern,blue,40,1,Step stools & step ladders
+959,Vintage,green,30,1,Open wardrobes
+960,Vintage,blue,40,1,Ceiling lights
+961,Provence,pink,40,1,Filing cabinets & storage cabinets
+962,Modern,purple,50,1,Walk in wardrobes
+963,Vintage,pink,10,0,High chairs
+964,Mediterranean,white,30,1,Kids beds
+965,Antique,black,50,1,"Full, Queen and King size platform beds"
+966,Minimal,brown,30,1,Upholstered beds
+967,Modern,black,50,1,Sliding wardrobes
+968,Antique,brown,60,1,Open wardrobes
+969,Mediterranean,black,40,0,Toy storage
+970,Natural,purple,50,0,Kids chairs
+971,North European,brown,40,0,Drawer units
+972,Natural,green,10,0,TV stands & benches
+973,Minimal,indigo,20,1,Kids beds
+974,North European,black,30,1,Sofa & armchairs covers
+975,North European,brown,10,1,Headboards
+976,North European,black,20,1,Shelf units & cube storage
+977,Modern,black,50,1,Twin beds
+978,Modern,red,50,0,Dining tables
+979,Provence,yellow,10,0,Solitaire wardrobes
+980,North European,indigo,30,0,Walk in wardrobes
+981,Minimal,purple,30,1,Children's wardrobes
+982,Mediterranean,indigo,60,1,Sectionals
+983,Modern,red,20,0,Beds with storage
+984,Mediterranean,purple,10,0,Upholstered beds
+985,Minimal,brown,20,1,Bookcases
+986,Modern,green,50,0,Chests of drawers
+987,Mediterranean,blue,10,0,Makeup vanities & dressing tables
+988,Provence,green,40,0,Shelf units & cube storage
+989,Minimal,white,20,1,Children's wardrobes
+990,Mediterranean,black,40,0,Accent tables
+991,Provence,gray,60,0,Sectionals
+992,Minimal,green,40,0,Shelf units & cube storage
+993,Minimal,purple,30,0,Drawer units
+994,North European,pink,30,0,Kitchen pantry storage
+995,Minimal,gray,60,0,Guest beds & daybeds
+996,Modern,purple,50,0,Chair pads
+997,Mediterranean,green,50,0,Closet lighting
+998,Minimal,purple,20,1,Filing cabinets & storage cabinets
+999,Vintage,yellow,50,0,Changing tables
+1000,Vintage,orange,60,0,Nightstands
+1001,Modern,brown,20,1,Kitchen pantry storage
+1002,Modern,pink,10,0,Ceiling lights
+1003,Mediterranean,white,60,1,Dining chairs
+1004,Provence,pink,50,1,Dining tables
+1005,Minimal,orange,50,1,Children's wardrobes
+1006,Antique,blue,40,0,Desks & computer desks
+1007,Provence,blue,30,0,Nightstands
+1008,Provence,green,50,1,Bar stools & chairs
+1009,Natural,purple,40,1,Sectionals
+1010,Modern,orange,10,1,Desk lamps
+1011,Mediterranean,orange,20,0,Closet lighting
+1012,Antique,yellow,40,1,Sofa legs
+1013,North European,blue,30,1,Desks & computer desks
+1014,Natural,gray,30,0,Nightstands
+1015,Modern,black,30,0,Bed legs
+1016,Mediterranean,blue,10,1,Toy storage
+1017,Antique,pink,50,0,Accent tables
+1018,Provence,white,30,1,Bar tables
+1019,Natural,pink,40,1,Dining room cabinets & cupboards
+1020,Natural,pink,20,0,Filing cabinets & storage cabinets
+1021,North European,yellow,50,0,Kids stools & benches
+1022,Modern,yellow,50,1,Twin beds
+1023,Provence,indigo,10,1,Café tables
+1024,Vintage,brown,50,1,Sofa & armchairs covers
+1025,Mediterranean,indigo,60,1,Bar tables
+1026,Modern,yellow,10,0,Leather & faux leather sofas
+1027,North European,black,30,1,Sectionals
+1028,Minimal,gray,10,0,Café chairs
+1029,Natural,gray,50,0,Makeup vanities & dressing tables
+1030,Minimal,red,40,1,Sofa accessories
+1031,North European,gray,50,0,Console tables & sofa tables
+1032,Natural,black,20,0,Under bed storage
+1033,Vintage,indigo,30,1,Sofa & armchairs covers
+1034,Minimal,black,20,1,Display cabinets
+1035,Modern,pink,50,0,Wall lamps
+1036,Vintage,yellow,50,0,Bed legs
+1037,Natural,indigo,10,0,Changing tables
+1038,Vintage,indigo,30,0,Changing tables
+1039,Minimal,white,30,1,Sofa & armchairs covers
+1040,Provence,blue,20,1,Nightstands
+1041,Vintage,yellow,40,1,Bookcases
+1042,Natural,blue,30,1,Sofa & armchairs covers
+1043,Provence,black,20,0,Chair pads
+1044,Natural,green,20,0,Chests of drawers
+1045,Mediterranean,green,60,1,Upholstered beds
+1046,Natural,gray,50,1,Chair pads
+1047,Vintage,indigo,20,1,"Full, Queen and King size platform beds"
+1048,Antique,green,20,0,Accent tables
+1049,Minimal,black,10,0,Dining sets
+1050,Minimal,yellow,20,0,Desk lamps
+1051,Antique,gray,50,1,Floor lamps
+1052,Mediterranean,black,20,0,Closet lighting
+1053,Natural,yellow,30,1,Dining sets
+1054,Mediterranean,black,20,1,Bookcases
+1055,Minimal,blue,10,0,Step stools & step ladders
+1056,Provence,pink,40,0,Chair pads
+1057,Provence,green,40,1,Step stools & step ladders
+1058,North European,indigo,10,0,TV stands & benches
+1059,Modern,purple,30,0,High chairs
+1060,Natural,indigo,60,0,Chests of drawers
+1061,Vintage,green,60,1,Children's dressers and chests
+1062,Vintage,black,10,0,Walk in wardrobes
+1063,Mediterranean,gray,20,1,Stools & benches
+1064,Natural,blue,50,0,"Shades, bases & cords"
+1065,Antique,white,20,0,Desk lamps
+1066,Vintage,pink,60,1,Twin beds
+1067,Modern,black,50,1,Kids beds
+1068,Mediterranean,indigo,40,1,Nightstands
+1069,Antique,blue,60,0,Accent tables
+1070,Modern,white,10,0,Sofa & armchairs covers
+1071,Provence,orange,60,0,Storage shelves & units
+1072,Natural,yellow,40,1,Bar tables
+1073,Modern,purple,40,1,Sofa legs
+1074,Minimal,white,40,1,Walk in wardrobes
+1075,Natural,red,40,1,Sofa & armchairs covers
+1076,Vintage,black,30,0,Dining room cabinets & cupboards
+1077,North European,gray,20,0,Closet lighting
+1078,Modern,pink,10,0,Kids lighting
+1079,Modern,purple,60,0,Dining sets
+1080,North European,black,60,1,Twin beds
+1081,Minimal,orange,30,1,Sofa legs
+1082,Modern,blue,50,1,"Full, Queen and King size platform beds"
+1083,Natural,blue,10,0,Fitted wardrobes
+1084,Provence,indigo,40,0,Drawer units
+1085,Vintage,brown,10,0,Children's wardrobes
+1086,Vintage,green,50,0,Leather & faux leather sofas
+1087,Modern,white,50,1,Kids beds
+1088,Mediterranean,blue,50,0,Bar tables
+1089,Provence,brown,30,1,Walk in wardrobes
+1090,Modern,white,60,1,Cube storage
+1091,Modern,green,20,0,Dining chairs
+1092,Minimal,green,20,1,Display cabinets
+1093,Minimal,yellow,10,1,Fitted wardrobes
+1094,Mediterranean,purple,20,1,Sofa & armchairs covers
+1095,Antique,white,40,1,Sofa legs
+1096,Vintage,indigo,40,0,Nightstands
+1097,Modern,blue,40,1,Dining room cabinets & cupboards
+1098,Provence,indigo,50,0,Ceiling lights
+1099,Provence,yellow,30,0,Café chairs
+1100,North European,black,30,1,Console tables & sofa tables
+1101,Modern,pink,20,0,Kids beds
+1102,Vintage,gray,40,0,Drawer units
+1103,Vintage,indigo,30,0,"Shades, bases & cords"
+1104,Mediterranean,gray,50,1,Sofa accessories
+1105,Vintage,indigo,10,1,Sofa accessories
+1106,North European,gray,60,0,Kids tables
+1107,Modern,red,50,1,Console tables & sofa tables
+1108,Modern,gray,20,0,Desk chairs
+1109,Minimal,yellow,20,1,Accent tables
+1110,Modern,white,40,1,Display cabinets
+1111,North European,purple,30,0,Sliding wardrobes
+1112,Vintage,yellow,30,0,Desk chairs
+1113,Modern,purple,30,0,Storage shelves & units
+1114,Antique,red,10,1,BEKANT conference & meeting tables
+1115,Minimal,blue,10,1,"Shades, bases & cords"
+1116,North European,gray,10,1,Console tables & sofa tables
+1117,North European,indigo,60,1,Kids stools & benches
+1118,North European,blue,20,1,Twin beds
+1119,Natural,yellow,50,1,Beds with storage
+1120,Mediterranean,yellow,40,1,Floor lamps
+1121,Natural,purple,10,0,Display cabinets
+1122,Minimal,indigo,50,1,Bookcases
+1123,Mediterranean,orange,50,0,Desks & computer desks
+1124,Mediterranean,white,30,0,Drawer units
+1125,Modern,red,30,1,Café chairs
+1126,Natural,black,60,0,Headboards
+1127,Provence,black,60,0,Cube storage
+1128,Mediterranean,purple,60,1,Headboards
+1129,North European,pink,40,0,Desk chairs
+1130,North European,brown,10,1,Leather & faux leather sofas
+1131,Antique,indigo,30,0,Bed legs
+1132,Antique,brown,40,1,Under bed storage
+1133,Modern,purple,10,1,Drawer units
+1134,Vintage,orange,10,0,"Shades, bases & cords"
+1135,Natural,purple,20,1,Café chairs
+1136,North European,orange,20,0,Sofa accessories
+1137,Minimal,black,10,1,Bed legs
+1138,Modern,yellow,40,1,Desk chairs
+1139,North European,green,30,1,Desk lamps
+1140,North European,indigo,40,0,Shelf units & cube storage
+1141,Natural,orange,60,1,Dining chairs
+1142,Modern,pink,50,0,Floor lamps
+1143,Mediterranean,gray,20,1,TV stands & benches
+1144,Natural,purple,20,0,"Full, Queen and King size platform beds"
+1145,Antique,orange,60,1,Desk lamps
+1146,Modern,orange,10,1,Kids tables
+1147,Natural,yellow,40,1,Headboards
+1148,Antique,black,40,0,Sofa accessories
+1149,Mediterranean,orange,10,0,Wall lamps
+1150,North European,indigo,60,0,Beds with storage
+1151,North European,orange,50,0,Kids lighting
+1152,Natural,brown,50,1,Bookcases
+1153,Provence,pink,60,1,Headboards
+1154,Natural,black,10,1,Kids stools & benches
+1155,Mediterranean,brown,10,0,Table lamps
+1156,Provence,blue,60,1,Under bed storage
+1157,Vintage,yellow,20,0,Ceiling lights
+1158,Modern,white,10,1,Dining tables
+1159,Vintage,gray,50,0,Filing cabinets & storage cabinets
+1160,Minimal,white,50,0,Hinged wardrobes
+1161,Natural,yellow,60,1,Kids lighting
+1162,Provence,pink,30,0,Fitted wardrobes
+1163,Modern,white,20,0,Display cabinets
+1164,Natural,indigo,30,0,Desks & computer desks
+1165,Modern,yellow,40,0,Fitted wardrobes
+1166,Provence,orange,40,1,Storage shelves & units
+1167,North European,white,30,1,Beds with storage
+1168,North European,purple,20,1,Desk chairs
+1169,Natural,white,30,0,Kids chairs
+1170,North European,purple,30,0,Children's dressers and chests
+1171,Minimal,gray,50,0,Fabric sofas
+1172,Antique,brown,60,1,Sofa legs
+1173,Natural,brown,20,0,Walk in wardrobes
+1174,Antique,blue,20,0,Fitted wardrobes
+1175,Provence,indigo,50,0,Sofa & armchairs covers
+1176,Natural,purple,60,1,Sofa & armchairs covers
+1177,North European,blue,10,0,Children's wardrobes
+1178,Antique,red,40,1,Ceiling lights
+1179,Antique,brown,60,1,Dining chairs
+1180,North European,black,10,1,Stools & benches
+1181,Modern,indigo,20,1,Kids stools & benches
+1182,Mediterranean,purple,60,0,Bed legs
+1183,Mediterranean,white,40,0,Display cabinets
+1184,Antique,brown,60,0,TV & media storage
+1185,Mediterranean,black,30,0,Bed legs
+1186,Mediterranean,brown,30,0,Desks & computer desks
+1187,Antique,gray,60,1,Kids beds
+1188,Provence,black,10,0,Nightstands
+1189,Vintage,brown,10,0,Solitaire wardrobes
+1190,North European,pink,30,0,Chair pads
+1191,Modern,blue,30,1,Solitaire wardrobes
+1192,North European,blue,20,1,Children's wardrobes
+1193,North European,purple,40,0,Ottomans
+1194,North European,brown,20,0,Guest beds & daybeds
+1195,Natural,blue,40,0,Sofa legs
+1196,Mediterranean,orange,20,0,Bar stools & chairs
+1197,Minimal,yellow,30,1,BEKANT conference & meeting tables
+1198,North European,gray,10,0,"Full, Queen and King size platform beds"
+1199,Minimal,gray,30,1,Open wardrobes
+1200,Modern,brown,20,0,Ottomans
+1201,Vintage,red,20,1,Floor lamps
+1202,North European,green,50,0,BEKANT conference & meeting tables
+1203,Natural,green,50,0,Shelf units & cube storage
+1204,Mediterranean,purple,10,0,Hinged wardrobes
+1205,North European,gray,30,1,Desk lamps
+1206,Provence,white,40,1,Desks & computer desks
+1207,Mediterranean,black,40,0,Leather & faux leather sofas
+1208,North European,gray,50,0,Kitchen pantry storage
+1209,Provence,pink,50,0,Kids beds
+1210,Antique,yellow,50,1,Café tables
+1211,Minimal,black,10,0,TV stands & benches
+1212,Antique,brown,20,0,Bed legs
+1213,Modern,green,60,0,BEKANT conference & meeting tables
+1214,Provence,indigo,50,1,Café chairs
+1215,North European,pink,60,1,Closet lighting
+1216,Natural,white,10,1,Sleeper sofas
+1217,Antique,yellow,20,1,"Shades, bases & cords"
+1218,Vintage,purple,50,1,Desk chairs
+1219,Antique,green,40,0,Solitaire wardrobes
+1220,Vintage,red,50,1,Cribs
+1221,Vintage,brown,10,1,Upholstered beds
+1222,North European,purple,40,0,Floor lamps
+1223,Mediterranean,brown,30,1,Wall lamps
+1224,Provence,gray,10,0,Guest beds & daybeds
+1225,Vintage,white,60,0,"Buffet tables, sideboard buffets & buffet cabinets"
+1226,Mediterranean,purple,50,1,Floor lamps
+1227,Modern,blue,30,0,Café chairs
+1228,Natural,orange,60,1,Console tables & sofa tables
+1229,Modern,gray,20,0,Shelf units & cube storage
+1230,Mediterranean,green,50,0,Kids lighting
+1231,Modern,green,30,0,Floor lamps
+1232,Modern,green,20,1,Kids tables
+1233,Vintage,indigo,20,1,Sofa legs
+1234,Mediterranean,green,50,1,Nightstands
+1235,Natural,white,50,1,Ceiling lights
+1236,Natural,indigo,60,0,Fitted wardrobes
+1237,North European,white,40,1,Stools & benches
+1238,Antique,indigo,20,1,Desk chairs
+1239,Natural,pink,20,0,Display cabinets
+1240,Natural,black,50,1,Filing cabinets & storage cabinets
+1241,North European,yellow,10,0,Nightstands
+1242,Natural,orange,10,1,Nightstands
+1243,Antique,red,30,1,Bookcases
+1244,Provence,brown,60,0,Bed legs
+1245,Mediterranean,gray,60,0,Kids stools & benches
+1246,Mediterranean,blue,30,0,Floor lamps
+1247,Antique,gray,50,0,TV & media storage
+1248,Minimal,white,20,0,"Shades, bases & cords"
+1249,Antique,white,10,0,Shelf units & cube storage
+1250,Antique,purple,60,1,Makeup vanities & dressing tables
+1251,Modern,blue,10,1,Console tables & sofa tables
+1252,North European,pink,20,0,Children's wardrobes
+1253,Vintage,white,60,0,Console tables & sofa tables
+1254,Antique,brown,50,1,BEKANT conference & meeting tables
+1255,Mediterranean,white,10,0,Kids stools & benches
+1256,North European,purple,50,1,Bar stools & chairs
+1257,Provence,red,30,1,Kids chairs
+1258,Antique,blue,60,1,TV stands & benches
+1259,Antique,green,20,0,Café tables
+1260,Natural,pink,10,0,Guest beds & daybeds
+1261,Minimal,purple,60,1,Children's wardrobes
+1262,Provence,white,20,0,Kitchen pantry storage
+1263,Antique,purple,20,0,Upholstered beds
+1264,Vintage,gray,30,1,Beds with storage
+1265,Modern,black,30,1,Leather & faux leather sofas
+1266,Minimal,green,50,0,Dining chairs
+1267,Provence,pink,60,0,Display cabinets
+1268,Provence,orange,50,0,Kids beds
+1269,Mediterranean,gray,20,0,Ottomans
+1270,Vintage,orange,30,0,Under bed storage
+1271,Provence,black,10,0,Cribs
+1272,Minimal,gray,40,0,Drawer units
+1273,North European,white,10,1,Chair pads
+1274,North European,blue,40,1,Bar tables
+1275,Mediterranean,brown,20,0,Desk lamps
+1276,Natural,yellow,10,0,Console tables & sofa tables
+1277,Natural,brown,20,0,Accent tables
+1278,Vintage,blue,50,1,Display cabinets
+1279,Mediterranean,gray,40,0,Sectionals
+1280,Vintage,blue,30,0,Drawer units
+1281,Natural,white,30,0,Sofa & armchairs covers
+1282,Modern,red,10,1,Sliding wardrobes
+1283,Antique,yellow,30,0,Kitchen pantry storage
+1284,Modern,white,60,1,Chests of drawers
+1285,Mediterranean,blue,50,0,Open wardrobes
+1286,Vintage,indigo,30,1,TV & media storage
+1287,Modern,yellow,60,1,"Full, Queen and King size platform beds"
+1288,North European,black,20,0,Hinged wardrobes
+1289,Modern,brown,20,1,Beds with storage
+1290,Antique,blue,10,0,Headboards
+1291,North European,orange,10,1,Drawer units
+1292,North European,pink,60,0,Kids chairs
+1293,Antique,blue,10,0,Chests of drawers
+1294,Modern,brown,40,0,Stools & benches
+1295,Antique,yellow,20,1,Floor lamps
+1296,Provence,green,50,1,Twin beds
+1297,Vintage,indigo,60,1,Display cabinets
+1298,Provence,green,10,0,"Shades, bases & cords"
+1299,Provence,purple,30,0,Kids lighting
+1300,Vintage,orange,20,0,Storage shelves & units
+1301,Mediterranean,pink,40,1,Kids tables
+1302,Natural,indigo,60,1,Ottomans
+1303,Vintage,pink,40,0,Console tables & sofa tables
+1304,Provence,indigo,50,1,Wall lamps
+1305,Minimal,purple,60,0,Fabric sofas
+1306,Antique,brown,60,1,Storage shelves & units
+1307,Modern,blue,10,0,Nightstands
+1308,Antique,indigo,40,0,High chairs
+1309,Mediterranean,blue,20,0,Sofa & armchairs covers
+1310,Provence,yellow,10,0,Kids tables
+1311,Natural,black,50,1,Storage shelves & units
+1312,Provence,blue,60,1,Bookcases
+1313,Vintage,blue,10,1,Wall lamps
+1314,North European,orange,20,1,Makeup vanities & dressing tables
+1315,Provence,black,50,0,Console tables & sofa tables
+1316,Antique,black,10,0,Desk lamps
+1317,Provence,white,50,0,Kitchen pantry storage
+1318,Vintage,brown,40,0,Step stools & step ladders
+1319,Provence,indigo,40,0,Dining room cabinets & cupboards
+1320,Vintage,red,50,0,Kids stools & benches
+1321,Natural,orange,50,0,BEKANT conference & meeting tables
+1322,Vintage,blue,20,1,Children's wardrobes
+1323,Mediterranean,gray,60,0,Toy storage
+1324,Vintage,orange,20,0,BEKANT conference & meeting tables
+1325,Mediterranean,yellow,30,0,Desks & computer desks
+1326,Minimal,yellow,20,1,"Shades, bases & cords"
+1327,Vintage,yellow,10,0,Accent tables
+1328,Vintage,green,60,1,Under bed storage
+1329,Mediterranean,black,20,1,Beds with storage
+1330,North European,brown,40,1,Filing cabinets & storage cabinets
+1331,Natural,red,20,0,Floor lamps
+1332,Vintage,blue,20,0,Toy storage
+1333,Provence,white,60,0,Twin beds
+1334,Minimal,gray,50,1,Kitchen pantry storage
+1335,Provence,blue,50,0,TV & media storage
+1336,North European,white,40,0,Hinged wardrobes
+1337,Antique,purple,50,0,TV stands & benches
+1338,North European,orange,20,1,Fitted wardrobes
+1339,Minimal,indigo,40,1,Desk lamps
+1340,Minimal,white,30,0,Children's dressers and chests
+1341,North European,red,50,0,Closet lighting
+1342,North European,gray,40,1,Changing tables
+1343,Minimal,red,40,1,Sofa accessories
+1344,North European,white,40,0,Desk chairs
+1345,Minimal,brown,60,1,Table lamps
+1346,Natural,white,30,1,Fabric sofas
+1347,Mediterranean,blue,10,1,Walk in wardrobes
+1348,Natural,blue,30,1,Storage shelves & units
+1349,Mediterranean,white,30,0,Accent tables
+1350,Provence,orange,20,1,Table lamps
+1351,Minimal,gray,60,1,Filing cabinets & storage cabinets
+1352,North European,pink,50,0,Open wardrobes
+1353,North European,indigo,50,1,Under bed storage
+1354,Vintage,indigo,10,1,Drawer units
+1355,Minimal,blue,10,0,Dining sets
+1356,Minimal,brown,50,1,Ottomans
+1357,Modern,indigo,30,1,Leather & faux leather sofas
+1358,Natural,yellow,10,0,Sectionals
+1359,Mediterranean,orange,40,1,Cube storage
+1360,Minimal,black,50,0,Kids beds
+1361,Modern,white,20,0,Dining tables
+1362,Mediterranean,purple,40,1,Upholstered beds
+1363,Modern,red,50,1,"Shades, bases & cords"
+1364,Natural,gray,30,1,Bookcases
+1365,Vintage,red,20,0,Table lamps
+1366,Provence,red,20,1,Kitchen pantry storage
+1367,Modern,red,10,0,Accent tables
+1368,North European,purple,40,0,Fitted wardrobes
+1369,Mediterranean,yellow,50,0,TV stands & benches
+1370,Antique,orange,20,1,Dining chairs
+1371,Mediterranean,green,40,0,Shelf units & cube storage
+1372,Natural,green,50,1,Closet lighting
+1373,Modern,orange,20,1,Bar stools & chairs
+1374,Antique,orange,50,0,Bed legs
+1375,North European,gray,50,1,Accent tables
+1376,Provence,yellow,60,1,Floor lamps
+1377,Natural,black,60,1,Café chairs
+1378,North European,purple,30,0,Open wardrobes
+1379,Mediterranean,blue,10,0,Beds with storage
+1380,Mediterranean,orange,20,1,"Buffet tables, sideboard buffets & buffet cabinets"
+1381,North European,yellow,40,0,Under bed storage
+1382,North European,green,30,0,Sofa legs
+1383,Mediterranean,purple,20,1,Sleeper sofas
+1384,Provence,indigo,30,1,Sofa legs
+1385,Natural,indigo,40,0,Headboards
+1386,Mediterranean,orange,30,0,"Buffet tables, sideboard buffets & buffet cabinets"
+1387,North European,pink,30,1,Ceiling lights
+1388,North European,black,30,1,Dining room cabinets & cupboards
+1389,Provence,pink,40,0,Dining tables
+1390,Natural,white,20,0,Walk in wardrobes
+1391,Vintage,orange,10,0,High chairs
+1392,Provence,red,10,1,Ceiling lights
+1393,Vintage,purple,60,0,Desks & computer desks
+1394,Minimal,purple,60,1,Beds with storage
+1395,Provence,green,60,0,Toy storage
+1396,Provence,black,60,0,Storage shelves & units
+1397,Natural,gray,20,1,"Full, Queen and King size platform beds"
+1398,Antique,orange,30,1,Solitaire wardrobes
+1399,Vintage,brown,30,0,Display cabinets
+1400,Modern,black,20,0,Sectionals
+1401,Antique,red,40,0,Upholstered beds
+1402,Natural,black,40,0,Floor lamps
+1403,Modern,brown,30,1,Shelf units & cube storage
+1404,Antique,purple,20,0,Kids stools & benches
+1405,Antique,red,20,0,Kids tables
+1406,Provence,purple,60,1,Twin beds
+1407,Modern,white,30,0,TV stands & benches
+1408,Natural,yellow,60,1,Under bed storage
+1409,Antique,blue,40,1,Filing cabinets & storage cabinets
+1410,Vintage,black,40,0,Desk chairs
+1411,Mediterranean,orange,10,1,Bar stools & chairs
+1412,Minimal,black,20,1,Kids lighting
+1413,Antique,blue,60,1,"Buffet tables, sideboard buffets & buffet cabinets"
+1414,Antique,yellow,60,0,Console tables & sofa tables
+1415,North European,green,60,1,Children's wardrobes
+1416,Modern,orange,10,1,Filing cabinets & storage cabinets
+1417,Provence,indigo,60,1,Sleeper sofas
+1418,Vintage,white,50,0,Café tables
+1419,Antique,purple,20,1,BEKANT conference & meeting tables
+1420,North European,pink,40,0,Wall lamps
+1421,Natural,indigo,50,1,Display cabinets
+1422,Vintage,pink,30,1,Solitaire wardrobes
+1423,Modern,gray,60,1,TV & media storage
+1424,Minimal,indigo,10,1,Dining chairs
+1425,North European,red,40,0,Walk in wardrobes
+1426,Vintage,indigo,20,0,Dining chairs
+1427,Antique,red,60,1,High chairs
+1428,Mediterranean,purple,50,0,Café tables
+1429,Antique,blue,40,1,Cribs
+1430,Minimal,brown,30,0,Sofa accessories
+1431,Antique,red,50,0,Makeup vanities & dressing tables
+1432,Minimal,yellow,50,0,Drawer units
+1433,North European,purple,20,0,Café tables
+1434,Modern,indigo,10,1,Café tables
+1435,Modern,purple,60,0,Leather & faux leather sofas
+1436,Provence,green,30,0,Bar stools & chairs
+1437,Antique,brown,10,0,Headboards
+1438,North European,indigo,20,1,Kids lighting
+1439,Mediterranean,white,10,1,Desk chairs
+1440,Provence,red,60,0,Dining sets
+1441,Antique,blue,60,0,"Full, Queen and King size platform beds"
+1442,Natural,yellow,40,0,Sofa & armchairs covers
+1443,Provence,black,50,1,Ottomans
+1444,Provence,brown,10,0,Twin beds
+1445,Antique,purple,10,0,"Shades, bases & cords"
+1446,Provence,white,20,0,Fitted wardrobes
+1447,Modern,pink,10,0,Solitaire wardrobes
+1448,Antique,black,20,0,Dining chairs
+1449,Mediterranean,indigo,40,1,Storage shelves & units
+1450,Minimal,brown,40,1,"Full, Queen and King size platform beds"
+1451,Minimal,purple,60,1,"Shades, bases & cords"
+1452,Minimal,indigo,40,1,Dining sets
+1453,North European,black,40,1,Accent tables
+1454,Natural,orange,20,0,Makeup vanities & dressing tables
+1455,Minimal,white,60,1,Children's dressers and chests
+1456,Modern,blue,40,0,Bar tables
+1457,Vintage,black,50,0,High chairs
+1458,Modern,white,60,0,Console tables & sofa tables
+1459,Vintage,yellow,60,0,Ceiling lights
+1460,Mediterranean,indigo,20,0,Sleeper sofas
+1461,Modern,pink,40,0,Cube storage
+1462,Antique,indigo,60,0,Stools & benches
+1463,Natural,green,60,1,Bookcases
+1464,Mediterranean,yellow,30,0,Drawer units
+1465,Mediterranean,orange,30,1,Step stools & step ladders
+1466,North European,red,60,1,Solitaire wardrobes
+1467,Provence,brown,10,0,Sofa accessories
+1468,Mediterranean,blue,50,0,Toy storage
+1469,Mediterranean,purple,50,1,Dining room cabinets & cupboards
+1470,Antique,brown,60,0,Sleeper sofas
+1471,Minimal,indigo,50,0,Kitchen pantry storage
+1472,North European,green,30,0,Makeup vanities & dressing tables
+1473,Natural,red,10,0,Chair pads
+1474,Minimal,green,40,0,Bed legs
+1475,Natural,pink,50,1,Makeup vanities & dressing tables
+1476,Modern,orange,50,0,Storage shelves & units
+1477,Mediterranean,white,20,1,Drawer units
+1478,Minimal,brown,30,0,Upholstered beds
+1479,Minimal,blue,30,1,Toy storage
+1480,North European,green,40,0,Accent tables
+1481,Modern,purple,50,0,Sofa accessories
+1482,Minimal,yellow,20,1,Café chairs
+1483,North European,red,60,1,Changing tables
+1484,Antique,gray,40,1,Open wardrobes
+1485,Mediterranean,pink,60,0,Kids stools & benches
+1486,North European,purple,60,1,BEKANT conference & meeting tables
+1487,Mediterranean,purple,20,1,Wall lamps
+1488,Mediterranean,gray,40,1,Upholstered beds
+1489,Minimal,indigo,20,0,"Full, Queen and King size platform beds"
+1490,Minimal,brown,10,0,BEKANT conference & meeting tables
+1491,Antique,orange,20,0,Accent tables
+1492,North European,purple,50,1,Floor lamps
+1493,North European,black,30,0,TV & media storage
+1494,Antique,black,10,0,Stools & benches
+1495,Natural,white,60,1,Sliding wardrobes
+1496,Vintage,white,30,0,Sofa accessories
+1497,Natural,gray,20,1,Dining sets
+1498,North European,indigo,20,1,Dining sets
+1499,Natural,blue,30,0,Display cabinets
+1500,Modern,orange,30,1,Toy storage
+1501,Vintage,green,50,1,Bar tables
+1502,Mediterranean,indigo,60,0,Display cabinets
+1503,Vintage,white,20,0,Solitaire wardrobes
+1504,Mediterranean,black,50,1,Filing cabinets & storage cabinets
+1505,Vintage,black,40,1,Guest beds & daybeds
+1506,North European,gray,50,0,Closet lighting
+1507,Provence,purple,50,0,Sofa & armchairs covers
+1508,Mediterranean,brown,40,0,Leather & faux leather sofas
+1509,Provence,brown,40,1,Fitted wardrobes
+1510,Modern,blue,10,1,High chairs
+1511,Natural,red,30,0,Nightstands
+1512,North European,orange,20,1,Bookcases
+1513,Vintage,blue,60,1,Desks & computer desks
+1514,Modern,orange,10,1,Dining tables
+1515,Antique,gray,50,0,Kids lighting
+1516,Mediterranean,orange,40,1,"Buffet tables, sideboard buffets & buffet cabinets"
+1517,Provence,green,40,0,Cube storage
+1518,Antique,yellow,10,1,Chair pads
+1519,Minimal,white,30,1,Bed legs
+1520,Provence,green,20,1,Leather & faux leather sofas
+1521,Modern,green,30,0,Bar tables
+1522,Provence,pink,20,1,Fabric sofas
+1523,Provence,brown,30,0,Bed legs
+1524,North European,brown,20,1,Sofa accessories
+1525,Mediterranean,blue,60,0,Makeup vanities & dressing tables
+1526,Mediterranean,pink,30,1,Chests of drawers
+1527,Provence,purple,10,0,Ceiling lights
+1528,Vintage,purple,60,0,Guest beds & daybeds
+1529,Antique,red,50,0,Walk in wardrobes
+1530,Vintage,green,60,1,Kids beds
+1531,North European,green,50,1,Bed legs
+1532,Mediterranean,white,20,1,Kids lighting
+1533,Provence,blue,40,0,Kids lighting
+1534,North European,indigo,30,1,Café chairs
+1535,Provence,gray,30,0,Guest beds & daybeds
+1536,Antique,pink,40,0,TV stands & benches
+1537,North European,red,20,1,Changing tables
+1538,Antique,pink,60,1,TV & media storage
+1539,Mediterranean,yellow,30,1,Table lamps
+1540,Modern,orange,20,1,Storage shelves & units
+1541,Mediterranean,purple,60,0,Kids stools & benches
+1542,North European,orange,20,1,Dining chairs
+1543,Mediterranean,orange,50,1,Headboards
+1544,Provence,orange,40,1,Dining chairs
+1545,Modern,pink,40,0,Upholstered beds
+1546,Mediterranean,yellow,10,0,Cube storage
+1547,Vintage,green,50,0,Bookcases
+1548,Natural,pink,30,0,Toy storage
+1549,Modern,red,10,0,Beds with storage
+1550,Mediterranean,brown,50,1,Kids chairs
+1551,Mediterranean,black,50,1,BEKANT conference & meeting tables
+1552,Mediterranean,brown,60,1,Shelf units & cube storage
+1553,Mediterranean,brown,40,1,Walk in wardrobes
+1554,Natural,blue,60,1,Beds with storage
+1555,North European,white,50,0,Bed legs
+1556,Natural,white,20,1,Fitted wardrobes
+1557,Provence,pink,50,1,Chests of drawers
+1558,Modern,black,60,1,Dining tables
+1559,Modern,yellow,40,0,Ottomans
+1560,Provence,yellow,10,0,Fitted wardrobes
+1561,Antique,indigo,40,0,Walk in wardrobes
+1562,North European,black,50,1,Drawer units
+1563,Provence,red,50,0,Bar stools & chairs
+1564,Modern,black,10,1,BEKANT conference & meeting tables
+1565,Mediterranean,yellow,10,1,Chests of drawers
+1566,Modern,brown,20,0,Dining chairs
+1567,Vintage,indigo,10,0,Makeup vanities & dressing tables
+1568,Mediterranean,purple,60,0,Sectionals
+1569,North European,pink,20,0,Dining tables
+1570,North European,indigo,20,1,Fabric sofas
+1571,Modern,red,40,0,Console tables & sofa tables
+1572,North European,green,60,0,Closet lighting
+1573,Antique,indigo,40,1,Fitted wardrobes
+1574,North European,green,30,1,High chairs
+1575,Vintage,orange,30,0,Dining tables
+1576,Modern,white,20,1,Chests of drawers
+1577,Vintage,black,50,0,Display cabinets
+1578,Provence,pink,30,0,Storage shelves & units
+1579,Minimal,brown,10,1,High chairs
+1580,Natural,red,50,1,Chests of drawers
+1581,Minimal,pink,50,1,Kids chairs
+1582,Minimal,yellow,50,0,Chests of drawers
+1583,Vintage,red,30,0,Wall lamps
+1584,Modern,red,30,1,Nightstands
+1585,Mediterranean,gray,50,1,Desk lamps
+1586,Minimal,brown,30,1,Leather & faux leather sofas
+1587,Mediterranean,pink,40,0,Headboards
+1588,North European,brown,10,1,Changing tables
+1589,North European,green,60,0,Hinged wardrobes
+1590,Mediterranean,white,20,0,Ottomans
+1591,Natural,pink,10,0,Children's wardrobes
+1592,Antique,yellow,60,0,Children's dressers and chests
+1593,Provence,blue,10,1,Sectionals
+1594,Mediterranean,orange,50,1,"Buffet tables, sideboard buffets & buffet cabinets"
+1595,Modern,pink,40,0,Stools & benches
+1596,Mediterranean,red,50,0,Kitchen pantry storage
+1597,Mediterranean,blue,10,1,Children's wardrobes
+1598,Vintage,yellow,20,0,Kids chairs
+1599,Minimal,indigo,40,1,Shelf units & cube storage
+1600,Natural,black,20,0,Ottomans
+1601,Natural,purple,50,0,Storage shelves & units
+1602,Modern,orange,20,1,Children's wardrobes
+1603,Antique,purple,40,1,Console tables & sofa tables
+1604,Natural,orange,40,1,Sofa legs
+1605,North European,orange,10,0,Chests of drawers
+1606,Provence,pink,50,0,Table lamps
+1607,Antique,blue,30,0,Closet lighting
+1608,North European,blue,60,0,Console tables & sofa tables
+1609,Modern,indigo,50,0,Sleeper sofas
+1610,Vintage,green,20,1,Desks & computer desks
+1611,Provence,black,10,1,Toy storage
+1612,Modern,blue,20,1,Sofa & armchairs covers
+1613,Natural,black,30,0,Bar stools & chairs
+1614,Minimal,blue,40,1,Sofa & armchairs covers
+1615,Provence,gray,20,1,"Shades, bases & cords"
+1616,Antique,green,20,1,Stools & benches
+1617,Modern,pink,50,0,Bookcases
+1618,Mediterranean,black,60,0,Wall lamps
+1619,Natural,purple,20,1,Café chairs
+1620,Vintage,green,10,0,Fitted wardrobes
+1621,North European,blue,50,1,Makeup vanities & dressing tables
+1622,Vintage,indigo,40,1,Bed legs
+1623,North European,red,60,0,Table lamps
+1624,Vintage,green,10,0,Cube storage
+1625,Natural,black,20,0,Sofa legs
+1626,Modern,white,60,0,Closet lighting
+1627,Vintage,blue,60,0,Bookcases
+1628,North European,yellow,40,0,Bookcases
+1629,Mediterranean,green,40,0,Dining sets
+1630,Natural,green,30,0,Fabric sofas
+1631,Provence,green,20,1,"Full, Queen and King size platform beds"
+1632,Modern,yellow,30,1,Hinged wardrobes
+1633,Minimal,brown,30,0,Dining room cabinets & cupboards
+1634,Vintage,purple,10,0,Table lamps
+1635,Minimal,green,60,1,Desk lamps
+1636,Vintage,brown,50,1,Dining tables
+1637,Mediterranean,white,50,1,Dining sets
+1638,Minimal,brown,20,1,Desks & computer desks
+1639,Minimal,pink,40,1,TV & media storage
+1640,Mediterranean,blue,10,0,Chests of drawers
+1641,Antique,gray,40,1,Ottomans
+1642,North European,purple,10,1,Headboards
+1643,Modern,yellow,60,0,Dining sets
+1644,Antique,gray,50,0,Sofa & armchairs covers
+1645,Mediterranean,blue,10,0,Dining sets
+1646,North European,indigo,20,1,Bed legs
+1647,Provence,pink,20,0,Solitaire wardrobes
+1648,Antique,indigo,40,1,Closet lighting
+1649,Provence,red,20,0,Kids stools & benches
+1650,Antique,gray,20,1,TV & media storage
+1651,Provence,orange,30,0,Café tables
+1652,Natural,gray,20,1,Twin beds
+1653,Mediterranean,indigo,20,1,Twin beds
+1654,Minimal,white,10,1,Sectionals
+1655,Vintage,black,60,0,Chair pads
+1656,Mediterranean,black,60,1,Desks & computer desks
+1657,Provence,white,40,0,Under bed storage
+1658,Natural,orange,20,0,Twin beds
+1659,Mediterranean,gray,60,1,Kids tables
+1660,Provence,purple,40,0,Kitchen pantry storage
+1661,Natural,black,30,1,Walk in wardrobes
+1662,Provence,gray,30,0,Kitchen pantry storage
+1663,Mediterranean,brown,40,1,Sleeper sofas
+1664,Natural,brown,10,0,Drawer units
+1665,Mediterranean,gray,20,0,Makeup vanities & dressing tables
+1666,North European,gray,60,1,Sofa accessories
+1667,Modern,red,10,1,Display cabinets
+1668,Modern,white,60,0,High chairs
+1669,Vintage,purple,10,1,"Shades, bases & cords"
+1670,North European,purple,10,0,Ceiling lights
+1671,Natural,purple,60,0,Kitchen pantry storage
+1672,Provence,red,50,1,"Buffet tables, sideboard buffets & buffet cabinets"
+1673,Mediterranean,orange,30,0,Sofa legs
+1674,Vintage,indigo,20,0,Sectionals
+1675,Natural,blue,30,1,Solitaire wardrobes
+1676,Minimal,indigo,40,0,Ceiling lights
+1677,Vintage,purple,10,1,Sectionals
+1678,Minimal,indigo,60,0,Sleeper sofas
+1679,Provence,yellow,60,0,High chairs
+1680,Antique,blue,20,0,Fabric sofas
+1681,Minimal,brown,60,0,Ceiling lights
+1682,Mediterranean,orange,20,1,Sliding wardrobes
+1683,Provence,gray,20,0,Twin beds
+1684,North European,red,20,0,Nightstands
+1685,North European,red,20,1,Changing tables
+1686,Modern,orange,20,0,Bar stools & chairs
+1687,Provence,white,40,1,Headboards
+1688,Vintage,orange,50,0,Display cabinets
+1689,Modern,brown,20,0,BEKANT conference & meeting tables
+1690,Vintage,indigo,30,0,Display cabinets
+1691,Natural,red,50,0,Leather & faux leather sofas
+1692,Antique,black,60,1,Bar stools & chairs
+1693,Provence,red,60,1,Dining chairs
+1694,Vintage,orange,60,1,Console tables & sofa tables
+1695,Provence,orange,30,1,Solitaire wardrobes
+1696,Provence,yellow,30,1,Ottomans
+1697,Natural,indigo,30,0,Guest beds & daybeds
+1698,Mediterranean,orange,40,1,Under bed storage
+1699,Provence,gray,30,1,Console tables & sofa tables
+1700,Provence,blue,50,1,Display cabinets
+1701,Vintage,yellow,50,1,Kids tables
+1702,Mediterranean,red,40,0,Cube storage
+1703,Vintage,white,50,0,Guest beds & daybeds
+1704,Vintage,brown,30,0,Makeup vanities & dressing tables
+1705,Provence,blue,10,1,Ceiling lights
+1706,North European,green,10,0,Café tables
+1707,Mediterranean,purple,60,1,Nightstands
+1708,Mediterranean,brown,10,1,Bookcases
+1709,Minimal,brown,20,0,Desk chairs
+1710,Antique,gray,20,1,BEKANT conference & meeting tables
+1711,Vintage,black,40,1,Wall lamps
+1712,Provence,yellow,20,1,Shelf units & cube storage
+1713,Vintage,black,20,0,Fabric sofas
+1714,North European,green,30,1,Hinged wardrobes
+1715,Mediterranean,purple,20,0,Café tables
+1716,Natural,white,30,1,Children's dressers and chests
+1717,Modern,yellow,50,0,Twin beds
+1718,Modern,brown,20,0,Drawer units
+1719,Minimal,yellow,60,1,Kitchen pantry storage
+1720,Minimal,orange,60,0,Open wardrobes
+1721,Mediterranean,black,10,1,High chairs
+1722,Mediterranean,red,30,1,Storage shelves & units
+1723,North European,pink,10,1,TV stands & benches
+1724,Minimal,brown,20,0,Bed legs
+1725,Provence,green,60,0,Kids beds
+1726,North European,white,30,0,Closet lighting
+1727,Provence,purple,30,1,Solitaire wardrobes
+1728,Natural,white,20,0,Step stools & step ladders
+1729,Provence,yellow,40,0,Ceiling lights
+1730,North European,brown,30,1,Bookcases
+1731,Modern,indigo,10,1,Kids tables
+1732,Minimal,gray,20,1,Shelf units & cube storage
+1733,Natural,pink,50,0,Leather & faux leather sofas
+1734,Antique,red,20,0,Leather & faux leather sofas
+1735,Mediterranean,pink,40,0,Closet lighting
+1736,Mediterranean,brown,30,0,Sofa accessories
+1737,Mediterranean,brown,40,1,Kitchen pantry storage
+1738,Vintage,indigo,60,1,Nightstands
+1739,Modern,orange,30,1,Sleeper sofas
+1740,Modern,brown,10,1,Desks & computer desks
+1741,Minimal,gray,40,0,Under bed storage
+1742,Vintage,green,50,1,Twin beds
+1743,Mediterranean,purple,50,1,Chests of drawers
+1744,Minimal,yellow,20,0,TV & media storage
+1745,Antique,red,50,0,Dining room cabinets & cupboards
+1746,North European,pink,30,1,"Shades, bases & cords"
+1747,Provence,green,30,1,Upholstered beds
+1748,Vintage,blue,60,1,Kids stools & benches
+1749,Minimal,white,50,1,Desk chairs
+1750,Minimal,indigo,60,0,Solitaire wardrobes
+1751,Antique,orange,10,0,Cube storage
+1752,Minimal,blue,40,0,Drawer units
+1753,Provence,pink,20,1,Bar tables
+1754,Vintage,gray,10,1,"Full, Queen and King size platform beds"
+1755,Provence,brown,20,1,Desk lamps
+1756,Mediterranean,gray,10,1,Fabric sofas
+1757,Vintage,orange,20,1,"Full, Queen and King size platform beds"
+1758,Provence,pink,20,1,Upholstered beds
+1759,Modern,pink,50,1,Headboards
+1760,Antique,purple,50,1,Kids beds
+1761,Vintage,white,10,1,Floor lamps
+1762,Antique,red,10,0,Guest beds & daybeds
+1763,Mediterranean,black,30,1,Café chairs
+1764,Modern,black,10,0,Desk chairs
+1765,Mediterranean,green,60,1,Wall lamps
+1766,Natural,white,60,1,Floor lamps
+1767,Minimal,black,10,1,Cube storage
+1768,North European,orange,10,0,BEKANT conference & meeting tables
+1769,North European,purple,30,1,Guest beds & daybeds
+1770,Vintage,orange,40,1,Café tables
+1771,Provence,gray,40,1,Open wardrobes
+1772,Natural,gray,10,1,Stools & benches
+1773,Vintage,red,50,1,Sliding wardrobes
+1774,Antique,black,50,0,Bed legs
+1775,Minimal,brown,40,0,Sliding wardrobes
+1776,Natural,brown,50,0,Leather & faux leather sofas
+1777,Antique,gray,50,0,TV & media storage
+1778,Natural,pink,20,0,Sofa legs
+1779,Modern,indigo,20,0,Cube storage
+1780,Provence,white,10,0,Desk lamps
+1781,Modern,white,30,1,Cribs
+1782,Modern,purple,60,0,Guest beds & daybeds
+1783,Minimal,pink,60,1,Wall lamps
+1784,Antique,brown,60,0,Desks & computer desks
+1785,North European,black,40,0,Makeup vanities & dressing tables
+1786,North European,pink,60,0,Solitaire wardrobes
+1787,Modern,pink,50,0,Step stools & step ladders
+1788,Minimal,gray,40,0,Makeup vanities & dressing tables
+1789,Modern,brown,50,1,Kids stools & benches
+1790,Natural,black,60,1,Console tables & sofa tables
+1791,Natural,red,60,1,Drawer units
+1792,Antique,pink,10,0,Filing cabinets & storage cabinets
+1793,Vintage,pink,40,1,Shelf units & cube storage
+1794,Provence,white,30,1,Drawer units
+1795,Antique,yellow,40,1,Nightstands
+1796,Antique,white,10,0,Children's dressers and chests
+1797,Provence,brown,10,0,Sleeper sofas
+1798,Provence,orange,10,0,Console tables & sofa tables
+1799,North European,purple,20,1,Sofa accessories
+1800,Antique,black,20,1,Fitted wardrobes
+1801,Antique,gray,60,0,Table lamps
+1802,Modern,red,10,0,Sliding wardrobes
+1803,Vintage,red,20,1,Hinged wardrobes
+1804,Natural,brown,60,1,"Buffet tables, sideboard buffets & buffet cabinets"
+1805,Mediterranean,blue,50,0,Kids chairs
+1806,Minimal,orange,10,1,Walk in wardrobes
+1807,Vintage,red,40,1,Floor lamps
+1808,Antique,indigo,20,0,Fabric sofas
+1809,Minimal,gray,30,0,"Full, Queen and King size platform beds"
+1810,Minimal,green,50,0,Kids beds
+1811,Mediterranean,brown,30,1,Wall lamps
+1812,Provence,purple,10,0,Sofa legs
+1813,Vintage,orange,10,0,Table lamps
+1814,Minimal,indigo,10,1,Guest beds & daybeds
+1815,Provence,indigo,10,1,Twin beds
+1816,Provence,green,20,1,Display cabinets
+1817,Modern,blue,30,1,Cribs
+1818,Antique,white,20,0,Bar stools & chairs
+1819,Provence,yellow,60,1,Kids tables
+1820,Provence,yellow,40,0,Toy storage
+1821,Minimal,pink,40,1,Storage shelves & units
+1822,Modern,red,50,1,Beds with storage
+1823,Modern,yellow,40,0,Table lamps
+1824,Modern,orange,30,0,Kids beds
+1825,North European,yellow,40,0,"Buffet tables, sideboard buffets & buffet cabinets"
+1826,Minimal,white,60,1,Desk lamps
+1827,Minimal,yellow,50,1,Café tables
+1828,Vintage,yellow,50,0,Sectionals
+1829,Provence,red,30,1,Table lamps
+1830,Mediterranean,pink,10,0,Accent tables
+1831,Antique,green,10,1,Changing tables
+1832,Minimal,indigo,30,0,Kids tables
+1833,Minimal,gray,20,0,Kids chairs
+1834,Minimal,purple,20,0,Desks & computer desks
+1835,Modern,green,60,0,Desks & computer desks
+1836,Antique,gray,50,1,Nightstands
+1837,Antique,white,60,0,High chairs
+1838,Mediterranean,pink,50,0,Children's wardrobes
+1839,Minimal,black,20,1,Nightstands
+1840,Mediterranean,brown,60,0,Closet lighting
+1841,Mediterranean,green,10,0,Desk chairs
+1842,North European,indigo,40,0,Children's wardrobes
+1843,Minimal,pink,60,0,Children's wardrobes
+1844,Antique,purple,60,1,Bar tables
+1845,Mediterranean,red,50,1,Filing cabinets & storage cabinets
+1846,Natural,orange,50,1,Children's dressers and chests
+1847,North European,red,40,1,Changing tables
+1848,Mediterranean,indigo,50,1,Beds with storage
+1849,Mediterranean,purple,10,1,Children's wardrobes
+1850,Vintage,orange,20,0,Headboards
+1851,Antique,purple,10,1,Desk lamps
+1852,Mediterranean,black,40,1,Twin beds
+1853,Vintage,white,20,0,High chairs
+1854,Minimal,brown,30,1,Chests of drawers
+1855,Minimal,brown,60,1,Fitted wardrobes
+1856,Minimal,red,50,1,Dining room cabinets & cupboards
+1857,North European,indigo,20,1,Sliding wardrobes
+1858,Modern,white,20,1,Headboards
+1859,Mediterranean,brown,60,0,Bar stools & chairs
+1860,Mediterranean,black,40,1,Accent tables
+1861,Antique,yellow,50,0,Desk chairs
+1862,Antique,brown,60,0,Fabric sofas
+1863,Vintage,red,10,0,Solitaire wardrobes
+1864,Modern,orange,60,0,Nightstands
+1865,Antique,gray,50,0,BEKANT conference & meeting tables
+1866,Natural,green,50,0,Drawer units
+1867,Antique,purple,60,0,Kids stools & benches
+1868,North European,yellow,40,0,Floor lamps
+1869,North European,brown,60,0,"Buffet tables, sideboard buffets & buffet cabinets"
+1870,North European,orange,60,0,Bar stools & chairs
+1871,Provence,red,50,1,Under bed storage
+1872,Mediterranean,gray,50,1,Fabric sofas
+1873,Antique,white,40,1,Chair pads
+1874,Vintage,pink,60,1,Kids beds
+1875,Mediterranean,red,60,0,Hinged wardrobes
+1876,Mediterranean,orange,50,0,Guest beds & daybeds
+1877,Provence,black,20,1,Drawer units
+1878,North European,pink,30,1,Console tables & sofa tables
+1879,Natural,purple,30,1,Kids chairs
+1880,Mediterranean,yellow,20,1,Kids lighting
+1881,North European,red,20,1,Wall lamps
+1882,North European,indigo,60,1,TV & media storage
+1883,North European,white,10,0,Leather & faux leather sofas
+1884,Minimal,orange,10,0,Walk in wardrobes
+1885,North European,yellow,60,0,Bookcases
+1886,Natural,indigo,20,0,Desks & computer desks
+1887,Natural,green,40,0,Kids chairs
+1888,North European,indigo,20,1,Kids chairs
+1889,North European,pink,10,1,Sectionals
+1890,North European,black,40,1,Walk in wardrobes
+1891,Mediterranean,yellow,40,1,Sofa accessories
+1892,Vintage,black,10,0,Nightstands
+1893,North European,white,10,0,TV stands & benches
+1894,Provence,blue,50,1,Fabric sofas
+1895,Provence,black,60,1,Sofa & armchairs covers
+1896,North European,purple,50,1,Desk chairs
+1897,North European,red,40,0,TV stands & benches
+1898,Mediterranean,brown,30,0,Chests of drawers
+1899,Provence,gray,40,0,Children's dressers and chests
+1900,Modern,indigo,60,1,Twin beds
+1901,Provence,white,30,1,Bed legs
+1902,Mediterranean,purple,40,1,Chair pads
+1903,Natural,black,40,1,TV stands & benches
+1904,Modern,black,30,0,Chair pads
+1905,Antique,black,40,1,Under bed storage
+1906,Minimal,orange,50,0,Sectionals
+1907,Provence,pink,30,1,Twin beds
+1908,Minimal,black,40,1,Desk chairs
+1909,Natural,purple,50,0,Floor lamps
+1910,Mediterranean,yellow,20,0,Walk in wardrobes
+1911,Antique,white,30,0,Café chairs
+1912,Minimal,orange,60,1,Children's wardrobes
+1913,Natural,pink,40,0,Makeup vanities & dressing tables
+1914,Provence,black,30,0,BEKANT conference & meeting tables
+1915,Minimal,orange,40,1,Sofa & armchairs covers
+1916,Antique,brown,50,0,Wall lamps
+1917,Antique,white,20,0,Closet lighting
+1918,Antique,gray,60,0,"Full, Queen and King size platform beds"
+1919,Antique,yellow,10,1,Kids stools & benches
+1920,Modern,purple,20,0,Leather & faux leather sofas
+1921,Provence,yellow,10,1,Accent tables
+1922,Modern,white,50,1,Dining room cabinets & cupboards
+1923,Antique,red,20,1,Café chairs
+1924,Modern,blue,50,0,Beds with storage
+1925,Vintage,indigo,30,1,Kitchen pantry storage
+1926,Natural,indigo,40,1,Upholstered beds
+1927,Minimal,brown,30,0,Table lamps
+1928,Vintage,black,10,0,Sofa accessories
+1929,Vintage,brown,20,1,Stools & benches
+1930,North European,orange,20,1,Console tables & sofa tables
+1931,North European,red,20,0,"Buffet tables, sideboard buffets & buffet cabinets"
+1932,Vintage,black,40,0,Walk in wardrobes
+1933,Vintage,red,10,1,Display cabinets
+1934,North European,orange,60,1,Sofa & armchairs covers
+1935,Mediterranean,white,40,1,Café chairs
+1936,Vintage,gray,40,0,Chests of drawers
+1937,Provence,indigo,40,1,Children's wardrobes
+1938,Vintage,indigo,50,0,Ceiling lights
+1939,Mediterranean,blue,10,0,Upholstered beds
+1940,Vintage,red,30,0,Bar stools & chairs
+1941,Antique,orange,40,0,Kids stools & benches
+1942,North European,green,20,1,Kids tables
+1943,Vintage,pink,20,1,Floor lamps
+1944,Natural,pink,10,1,Under bed storage
+1945,Provence,brown,30,1,Desk lamps
+1946,Antique,gray,50,1,Kids tables
+1947,Provence,black,40,0,Bar stools & chairs
+1948,North European,blue,60,1,Sliding wardrobes
+1949,Mediterranean,purple,20,0,Makeup vanities & dressing tables
+1950,Minimal,green,60,1,Kids lighting
+1951,North European,orange,20,0,Headboards
+1952,Minimal,orange,50,1,Cribs
+1953,Provence,red,60,0,Display cabinets
+1954,Provence,blue,20,1,Desks & computer desks
+1955,Modern,purple,10,0,Kids stools & benches
+1956,Natural,green,60,0,Fitted wardrobes
+1957,Natural,black,40,1,Sofa accessories
+1958,North European,brown,50,0,Desk lamps
+1959,Mediterranean,black,30,1,Dining chairs
+1960,Natural,red,40,0,Console tables & sofa tables
+1961,Modern,yellow,30,0,Children's wardrobes
+1962,Antique,white,40,1,Kids lighting
+1963,North European,black,10,0,Filing cabinets & storage cabinets
+1964,Natural,green,30,1,Sleeper sofas
+1965,Minimal,black,50,0,Cube storage
+1966,Antique,black,50,0,Sectionals
+1967,Modern,white,20,0,Floor lamps
+1968,Vintage,purple,10,0,Children's wardrobes
+1969,Natural,green,40,1,Walk in wardrobes
+1970,Mediterranean,white,30,0,Step stools & step ladders
+1971,North European,purple,60,0,Walk in wardrobes
+1972,Modern,gray,20,1,"Full, Queen and King size platform beds"
+1973,Mediterranean,white,20,1,Kitchen pantry storage
+1974,Provence,green,40,0,Table lamps
+1975,Antique,yellow,40,0,Chests of drawers
+1976,Minimal,white,30,0,Walk in wardrobes
+1977,Provence,indigo,40,0,Dining sets
+1978,Modern,white,60,1,Dining room cabinets & cupboards
+1979,Antique,blue,10,0,Headboards
+1980,Natural,yellow,40,1,Sofa accessories
+1981,Mediterranean,blue,40,1,Cribs
+1982,Antique,white,10,1,Kids lighting
+1983,Provence,yellow,20,1,Makeup vanities & dressing tables
+1984,North European,orange,50,0,Solitaire wardrobes
+1985,Vintage,green,40,0,Makeup vanities & dressing tables
+1986,North European,brown,30,1,Café tables
+1987,Provence,pink,40,0,Fitted wardrobes
+1988,Natural,purple,30,0,Accent tables
+1989,Mediterranean,yellow,10,1,Sleeper sofas
+1990,Minimal,indigo,40,1,Filing cabinets & storage cabinets
+1991,Vintage,indigo,10,1,Storage shelves & units
+1992,Natural,purple,30,1,Stools & benches
+1993,Minimal,white,30,1,Filing cabinets & storage cabinets
+1994,Modern,indigo,20,1,Accent tables
+1995,Mediterranean,gray,20,1,Display cabinets
+1996,Mediterranean,brown,40,1,High chairs
+1997,Provence,blue,10,0,"Full, Queen and King size platform beds"
+1998,Antique,gray,20,1,Dining room cabinets & cupboards
+1999,Mediterranean,black,10,1,Hinged wardrobes
+2001,Modern,blue,20,1,X
+24,Antique,white,20,1,X
+24,Mediterranean,yellow,20,1,X
+25,Antique,yellow,20,1,X
