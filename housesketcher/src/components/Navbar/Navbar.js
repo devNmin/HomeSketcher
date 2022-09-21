@@ -7,7 +7,7 @@ import logo from '../../assets/Logo.png';
 import styles from './Navbar.module.css';
 import AuthContext from '../../context/AuthContext';
 import Navbutton from './Navbutton'
-import { padding } from '@mui/system';
+// import { padding } from '@mui/system';
 
 
 function Navbar(props) {
@@ -15,10 +15,12 @@ function Navbar(props) {
 
   return (
     <div className={styles.navbar}>
-      <img className={styles.navbar_logo} src={logo} alt="" />
+      <Link to='/loginmain'>
+        <img className={styles.navbar_logo} src={logo} alt="" />
+      </Link>
       {user && <div className={styles.navbar_search}>
-        <input className={styles.navbar_searchInput} type="text" />
-        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" /> 
+        {/* <input className={styles.navbar_searchInput} type="text" />
+        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />  */}
              
       </div>}
       

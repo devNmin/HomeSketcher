@@ -11,14 +11,14 @@ function SubCarousel(props) {
   let {BASE_URL, authTokens} = useContext(AuthContext)
 
   const getPopulars = async () => {
-    const response = await axios.get(BASE_URL + 'interests/data/', {
+    const response = await axios.get(BASE_URL + 'furnitures/label/rate/', {
       headers: {
         Authorization: `Bearer ${authTokens.access}`
       }
     })
-    const json = await response.data;
-    console.log(json)
-    setPopulars(json);
+    const data = await response.data;
+    console.log(data.furnitures)
+    setPopulars(data.furnitures);
   }
 
   useEffect(() => {
@@ -37,11 +37,11 @@ function SubCarousel(props) {
       >
           {populars.map((popular) => (
             <div key={popular.id}>
-              <a href={popular.url}>
-                <img src={popular.image_url} alt="" />
+              <a href={popular.furniture_url}>
+                <img src={popular.furniture_image} alt="" />
               </a>
               <h6>
-                {popular.title}
+                {popular.furniture_name}
               </h6>
             </div>
           ))}
