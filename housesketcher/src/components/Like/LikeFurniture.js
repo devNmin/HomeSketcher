@@ -8,7 +8,7 @@ import axios from 'axios'
 export default function LikeFurniture(props) {
     let {BASE_URL, authTokens} = useContext(AuthContext)
     // props.like 받았다고 가정 기본 default 값은 false 대신에 props.like가 들어가겠지?
-    const [isLike, setIsLikeHandler] = useState(false)
+    const [isLike, setIsLikeHandler] = useState(props.furniture.like)
     const [isMouseon, setIsMouseOnHandler] = useState(false)
 
     const likeClickHandler = (id, islike) => {
@@ -52,14 +52,14 @@ export default function LikeFurniture(props) {
                     onMouseEnter={() => {setIsMouseOnHandler(true)}} 	      // 마우스엔터 이벤트이면 hide가 false가 된다.
                     onMouseLeave={() => {setIsMouseOnHandler(false)}}
                 >
-                    <a href= {furniture.url}>
-                        <Card.Img variant="top" src={furniture.medium_cover_image} />
+                    <a href= {furniture.furniture_url}>
+                        <Card.Img variant="top" src={furniture.furniture_image} />
                     </a>
                     <Card.Body>
                         <div>
-                            {isMouseon? <b> {furniture.title}</b> : <b> {nameSpacer(furniture.title)}</b> }                            
-                            {isLike ? <Button onClick={() => {likeClickHandler(3, isLike)}} variant="danger">Remove</Button> : 
-                            <Button onClick={() => {likeClickHandler(3, isLike)}} variant="primary">Save</Button>}             
+                            {isMouseon? <b> {furniture.furniture_name}</b> : <b>{nameSpacer(furniture.furniture_name)}</b> }                            
+                            {isLike ? <Button onClick={() => {likeClickHandler(furniture.id, isLike)}} variant="danger">Remove</Button> : 
+                            <Button onClick={() => {likeClickHandler(furniture.id, isLike)}} variant="primary">Save</Button>}             
                             
                         </div>
                     </Card.Body>

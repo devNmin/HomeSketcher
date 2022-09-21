@@ -40,7 +40,7 @@ function Pagnation() {
 
     pages = pages.filter((element) => element < items.length);
 
-    searchCtx(changePage(pageNum));
+    searchCtx.changePage(pageNum);
   }, [pageNum, items]);
 
   return (
