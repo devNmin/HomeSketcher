@@ -96,7 +96,7 @@ export default function AccountRegisterPage() {
       </div>
     <section className={styles.auth}>
     <form onSubmit={submitHandler}>
-    <img src={logo} alt="" />      
+        
         <div className='Signup'>
           <div>
             {/* 아이디 */}
