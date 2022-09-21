@@ -145,18 +145,21 @@ class FurnitureListAPIView(APIView):
 
     @swagger_auto_schema(tags=['Item Search Page 가구 필터링 검색'], request_body=FurnitureSwaggerSerializer, responses={200: 'Success'})
     def post(self,request):
-        page =request.data.get('page') #페이지 번호
-        main = request.data.get('main') #대분류
-        sub = request.data.get('sub') #소분류
-        minPrice = request.data.get('minPrice') #최소 가격 설정
-        maxPrice = request.data.get('maxPrice') #최대 가격 설정
-        width = request.data.get('width') #가로 길이 -> 최대값으로 이거 이하의 값만 반환
-        length = request.data.get('length') #세로 길이 -> 최대값
-        height = request.data.get('height') #높이 -> 최대값
-        style = request.data.get('style') #스타일 
-        byPrice = request.data.get('byPrice') #가격 높낮이 순. 높은순 high, 낮은순 low, 없으면 null
-        byLike = request.data.get('like') #좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
-
+        try:
+            page =request.data.get('page') #페이지 번호
+            main = request.data.get('main') #대분류
+            sub = request.data.get('sub') #소분류
+            minPrice = request.data.get('minPrice') #최소 가격 설정
+            maxPrice = request.data.get('maxPrice') #최대 가격 설정
+            width = request.data.get('width') #가로 길이 -> 최대값으로 이거 이하의 값만 반환
+            length = request.data.get('length') #세로 길이 -> 최대값
+            height = request.data.get('height') #높이 -> 최대값
+            style = request.data.get('style') #스타일 
+            byPrice = request.data.get('byPrice') #가격 높낮이 순. 높은순 high, 낮은순 low, 없으면 null
+            byLike = request.data.get('byLike') #좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
+        except:
+            return Response(returnErrorJson("Json Error. 타입을 맞춰주세요","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
+        
         #하트 많고 작은 순
 
         print(page,main,sub,minPrice,maxPrice, width, length, height)
@@ -191,7 +194,7 @@ class FurnitureListAPIView(APIView):
             # where furnitures_furniture.id = total_likes.furniture_id
             # group by furnitures_furniture.id;
             if byLike is not None:
-                if like == 'high':
+                if byLike == 'high':
                     furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('-cnt')
                 else:
                     furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('cnt')  
