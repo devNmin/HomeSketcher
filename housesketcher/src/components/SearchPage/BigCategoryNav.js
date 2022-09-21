@@ -21,13 +21,13 @@ function BigCategoryNav() {
 
   useEffect(() => {
     const changeMainAndSub = async () => {
-      setIsLoding(true);
+      
       await filterCtx.changeMain(bigCategory);
       await filterCtx.getSubCategoryList(bigCategory);
       await filterCtx.getFurnitureList();
 
       if (filterCtx.furnitureList.length > 0) {
-        setIsLoding(false);
+        
       }
     };
     changeMainAndSub();
