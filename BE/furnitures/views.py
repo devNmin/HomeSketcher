@@ -21,6 +21,7 @@ from .serializers import(
     FurnitureSwaggerSerializer,
     FurnitureInfoSwaggerSerializer
 )
+import time
 import pandas as pd 
 
 from django.db.models import Subquery,Count
@@ -212,24 +213,17 @@ class FurnitureClickAPIView(APIView):
                 'time' : datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             }
             con.lpush('clickList', str(data))
-            # test11 = str(data)
-            # json_acceptable_string = test11.replace("'", "\"")
-            # print("tttt", json.loads(json_acceptable_string))
-            # print("tttt", type(json.loads(json_acceptable_string)))
-            # print(con.lrange("clickList", 0, con.llen("clickList")))
-            # ----------------------- 데이터 형식 --------------------
-            # strData = "["
-            # test = con.lrange("clickList", 0, -1)
-            # for item in test:
-            #     strData += item.decode() + ", "
-            #     print(item.decode())
-            # result = strData[:-2]
-            # result += "]" 
-            # print("result" , result)
-            # ----------------------- 데이터 형식 --------------------
-            # print("test", test)
-            # test1_df = pd.DataFrame(test)
-            # test1_df.to_csv('test1_df.csv')
+            
+            # 최근 본 가구 5개 저장 - redis sorted sets
+            now = int(time.time() * 60 * 60 * 24 * 30)
+            dict = {}
+            dict[furniture_pk] = now
+            con.zadd(request.user.id, dict)
+            con.zremrangebyrank(request.user.id, -6, -6)
+            # print(con.zscore(request.user.id, furniture_pk)) // 해당 가구의 클릭 시간
+            # print(con.zrange(request.user.id, 0, -1)) // 해당 유저의 최신 5개 (오래된거 부터 나옴)
+            
+           
             return returnSuccessJson("성공","200", status.HTTP_200_OK)
         except:
             return returnErrorJson("서버 오류","500",status.HTTP_500_INTERNAL_SERVER_ERROR)
