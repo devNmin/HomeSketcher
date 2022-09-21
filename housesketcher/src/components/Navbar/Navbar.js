@@ -21,13 +21,17 @@ function Navbar(props) {
       {user && <div className={styles.navbar_search}>
         {/* <input className={styles.navbar_searchInput} type="text" />
         <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />  */}
-             
+        <a href='/searchpage'>
+          <p>Recommend</p>
+        </a>
+        <a href='/searchpage'>
+          <p>3DInterior</p>
+        </a>
       </div>}
       
       <nav className={styles.nav}>
-        <ul>         
-          
-          {user ? (                    
+        <ul>      
+          {user ? (
             <li>
               <Navbutton />
               {/* <button><b>Hello, {user.user_nickname}</b></button> */}

@@ -13,7 +13,7 @@ const Footer = () => {
           <img src={logo} alt="LD" title="LD Entertainment" />
           <div className={styles.textCompany}>
             <span>
-              본 서비스는 IKEA의 제품 정보를 제공하고 있습니다.
+              This service provides IKEA product information.
             </span>
             <span>
               COPYRIGHT (C) IKEA ALL RIGHTS RESERVED.
