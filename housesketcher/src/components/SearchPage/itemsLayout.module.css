@@ -4,6 +4,7 @@ img {
 }
 
 .display_flex {
+  min-height: 30rem;
   display: flex;
   width: 100%;
   flex-wrap: wrap;
@@ -19,4 +20,9 @@ img {
 }
 .blank {
   height: 30rem;
+}
+h2 {
+  color: #fbd95d;
+  margin-top: 5rem;
+  text-shadow: 1px 1px 1px #f5ecc9;
 }

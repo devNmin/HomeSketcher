@@ -19,6 +19,7 @@ const FilterContext = createContext({
 
   addFilter: (filterName) => {},
   removeFilter: (filterName) => {},
+  isSelectedFilter: (filterName) => {},
   changePage: (pageNum) => {},
   changeMain: (categoryName) => {},
   changeSub: (categoryName) => {},
@@ -77,6 +78,7 @@ export function FilterContextProvider(props) {
 
   const setMainHandler = (categoryName) => {
     setMain(categoryName);
+    setSub(null);
   };
   // state 최신값을 사용하기 위해서는 useeffect 실행 조건에 main값을 넣어줘야함
 
@@ -142,7 +144,21 @@ export function FilterContextProvider(props) {
       length: length,
       height: height,
       style: style,
+      byPrice: null,
+      byLike: null,
     };
+    if (!IsSelectedFilterHandler('Size')) {
+      data.width = null;
+      data.length = null;
+      data.height = null;
+    }
+    if (!IsSelectedFilterHandler('Price')) {
+      data.minPrice = null;
+      data.maxPrice = null;
+    }
+    if (!IsSelectedFilterHandler('Style')) {
+      data.style = null;
+    }
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
