@@ -101,7 +101,7 @@ DATABASES = {
         'USER': 'root',
         'PASSWORD': MYSQL_SECRET,
         'HOST': 'mysql',
-        # 'HOST' : 'j7b304.p.ssafy.io',
+        #'HOST' : 'j7b304.p.ssafy.io',
         'PORT': '3306',
     }
 }
