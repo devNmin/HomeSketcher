@@ -39,7 +39,7 @@ class FurnitureSwaggerSerializer(serializers.Serializer):
     height = serializers.FloatField(help_text="가구 높이",required=False)
     style = serializers.CharField(help_text="가구 스타일",required=False)
     byPrice = serializers.CharField(help_text="가격 높낮이순. 높은순 high, 낮은순 low, 없으면 null",required = False)
-    like = serializers.CharField(help_text="좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null", required = False)
+    byLike = serializers.CharField(help_text="좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null", required = False)
     # furniture_style = serializers.CharField(help_text="가구 스타일",required=False)
     # furniture_color = serializers.CharField(help_text="가구 색상",required=False)
     # furniture_condition = serializers.CharField(help_text = "이 항목은 추가 예정",required=False)
