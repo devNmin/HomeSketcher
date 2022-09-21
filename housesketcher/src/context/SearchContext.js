@@ -144,6 +144,8 @@ export function FilterContextProvider(props) {
       length: length,
       height: height,
       style: style,
+      byPrice: null,
+      byLike: null,
     };
     if (!IsSelectedFilterHandler('Size')) {
       data.width = null;
