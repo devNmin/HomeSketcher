@@ -19,8 +19,8 @@ class RecomListAPIView(APIView):
 
         fur_id = return_recom_funr(request.user.id)
         furnitures = Furniture.objects.filter(id__in=fur_id)
-        res = {}
-        #하트 많고 작은 순
-        res['furnitures'] = furnitures.values
+        # res = {}
+        # #하트 많고 작은 순
+        # res['furnitures'] = furnitures.values
 
-        return Response(res, status=status.HTTP_200_OK) 
+        return Response(furnitures.values(), status=status.HTTP_200_OK) 

@@ -2,8 +2,8 @@ import pandas as pd
 import numpy as np
 import random
 def add_recom(user_new):
-    recom_org = pd.read_csv('recom_table.csv')
-    user_df3 = pd.read_csv('user_to_user_table.csv')
+    recom_org = pd.read_csv('util/recom_table.csv')
+    user_df3 = pd.read_csv('util/user_to_user_table.csv')
     # user_df3.set_index("user_pk",inplace=True)
     
     userPk = user_new
@@ -56,7 +56,7 @@ def add_new_member(member_data,userDatapath):
 
 
     # 신규 유저 
-    new_member_df = pd.DataFrame([user_new],columns=['user_pk','user_style', 'user_color', 'user_age', 'user_gender','user_interest'])
+    new_member_df = pd.DataFrame([member_data],columns=['user_pk','user_style', 'user_color', 'user_age', 'user_gender','user_interest'])
     new_member_df['user_age'] = new_member_df.user_age.astype(str)
     new_member_df_dum = pd.get_dummies(new_member_df)
     concat_df = pd.concat([user_dummy_98,new_member_df_dum])
@@ -77,16 +77,11 @@ def add_new_member(member_data,userDatapath):
     new_member_df.set_index("user_pk",inplace=True)
     user_df = user_df.append(new_member_df)
     user_df.to_csv('user_dataframe.csv')
-    add_recom(user_new[0])
+    add_recom(member_data[0])
 
 # views_table
 def return_recom_funr(user_pk):
-    read_views_table = pd.read_csv('recom_table.csv')
+    read_views_table = pd.read_csv('util/recom_table.csv')
     recom_list = (read_views_table.iloc[user_pk].recom_fur_pk[1:-2]).split(',')
     
     return recom_list
-
-
-user_new = [2233,'Modern','red','20','female','Table lamps'] # pk , user_style,user_color,user_age,user_gender_user_interest
-add_new_member(user_new,'user_dataframe.csv')
-return_recom_funr(11)
