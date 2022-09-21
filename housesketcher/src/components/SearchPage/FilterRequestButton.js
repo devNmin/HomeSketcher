@@ -8,10 +8,7 @@ function FilterRequestButton() {
     <div>
       <div className={classes.category_line}>
         <p className={classes.category_name}></p>
-        <button
-          className={classes.request_button}
-          onClick={searchCtx.getFurnitureList}
-        >
+        <button className={classes.request_button} onClick={searchCtx.getFurnitureList}>
           Apply
         </button>
       </div>
