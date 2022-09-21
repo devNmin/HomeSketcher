@@ -14,10 +14,8 @@ const BigCategoryList = [
   'Lamps',
   'Kids',
 ];
-// BigCategoty 선택 ===>>>> api 요청 보냄 ===>>>> 소분류 카테고리 목록 SmallCategoryBox에! 뿌려줌(redux or reactContext)
-// 아무것도 선택하지 않았을 떄 기본 : Sofas
+
 function BigCategoryNav() {
-  const [isLoading, setIsLoding] = useState(true);
   const [bigCategory, setBigCategory] = useState('Shelves');
   const filterCtx = useContext(SearchContext);
 
@@ -35,14 +33,6 @@ function BigCategoryNav() {
     changeMainAndSub();
   }, [bigCategory, filterCtx.main]);
 
-  // if (isLoading) {
-  //   return (
-  //     <section>
-  //       <p>Loading...</p>
-  //     </section>
-  //   );
-  // }
-
   return (
     <header className={classes.header}>
       <ul>
@@ -54,9 +44,7 @@ function BigCategoryNav() {
                 setBigCategory(categoryName);
               }}
               className={
-                categoryName === bigCategory
-                  ? classes.selected
-                  : classes.unselected
+                categoryName === bigCategory ? classes.selected : classes.unselected
               }
             >
               {categoryName}

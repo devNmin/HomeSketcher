@@ -31,11 +31,7 @@ function UncontrolledExample() {
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
-          className="d-block w-100"
-          src={image1}
-          alt="Third slide"
-        />
+        <img className="d-block w-100" src={image1} alt="Third slide" />
 
         <Carousel.Caption className={styles.carousel_inner}>
           <h3>October Furniture Event News</h3>

@@ -13,7 +13,7 @@ hr {
 .category_box {
   width: 50rem;
   border: 1px solid black;
-  margin-bottom: 5rem;
+  margin-bottom: 1.6rem;
 }
 
 .category_line {
@@ -102,4 +102,8 @@ input::placeholder {
   cursor: pointer;
   line-height: 1rem;
   font-size: small;
+}
+
+.bold {
+  font-weight: bold;
 }

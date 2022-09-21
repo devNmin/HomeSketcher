@@ -1,3 +1,51 @@
+hr {
+  margin: 0;
+  width: 4rem;
+}
+.row_width {
+  width: 100%;
+  justify-content: center;
+  margin-bottom: 5rem;
+}
+.flex_around {
+  min-width: 400px;
+  display: flex;
+  justify-content: space-around;
+}
 .display_flex {
   display: flex;
+}
+
+.category_name {
+  width: 30rem;
+  font-size: larger;
+  font-weight: bold;
+}
+
+.sort_name {
+  margin-left: 2rem;
+  cursor: pointer;
+  justify-content: center;
+}
+.sort_name > p {
+  margin-bottom: 0;
+  font-size: small;
+  text-align: center;
+}
+.sort_name > div {
+  display: none;
+}
+.sort_name:hover > div {
+  display: block;
+  position: absolute;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+}
+.sort_name:hover div > p {
+  width: 4rem;
+  font-size: small;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
 }

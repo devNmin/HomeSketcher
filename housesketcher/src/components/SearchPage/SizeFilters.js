@@ -30,7 +30,6 @@ function SizeFilters() {
     } else {
       maxSize.height = null;
     }
-    SearchCtx.changeSize(maxSize);
   };
   useEffect(() => {
     SearchCtx.changeSize(maxSize);
