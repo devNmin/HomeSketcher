@@ -7,7 +7,7 @@ import logo from '../../assets/Logo.png';
 import styles from './Navbar.module.css';
 import AuthContext from '../../context/AuthContext';
 import Navbutton from './Navbutton'
-import { padding } from '@mui/system';
+// import { padding } from '@mui/system';
 
 
 function Navbar(props) {
@@ -15,29 +15,30 @@ function Navbar(props) {
 
   return (
     <div className={styles.navbar}>
-      <img className={styles.navbar_logo} src={logo} alt="" />
+      <Link to='/loginmain'>
+        <img className={styles.navbar_logo} src={logo} alt="" />
+      </Link>
       {user && <div className={styles.navbar_search}>
-        <input className={styles.navbar_searchInput} type="text" />
-        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" /> 
-             
+        {/* <input className={styles.navbar_searchInput} type="text" />
+        <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />  */}
+        <a href='/searchpage'>
+          <p>Recommend</p>
+        </a>
+        <a href='/searchpage'>
+          <p>3DInterior</p>
+        </a>
       </div>}
       
       <nav className={styles.nav}>
-        <ul>         
-          
-          {user ? (                    
+        <ul>      
+          {user ? (
             <li>
               <Navbutton />
               {/* <button><b>Hello, {user.user_nickname}</b></button> */}
               {/* <button onClick={logoutUser}>Logout</button> */}
             </li>
           ): (
-          <li>
-            <Link to = '/login'><button>
-                  Sign In
-            </button>
-              </Link>
-          </li>
+          null
           )}        
         </ul>
       </nav>     

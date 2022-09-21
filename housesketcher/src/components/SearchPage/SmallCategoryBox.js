@@ -22,7 +22,9 @@ function SmallCategoryBox() {
         {searchCtx.isSelectedFilter('Size') && <SizeFilters />}
         {searchCtx.isSelectedFilter('Price') && <PriceFilters />}
         {searchCtx.isSelectedFilter('Style') && <StyleFilters />}
-        {searchCtx.filters.length > 0 && <FilterRequestButton />}
+        {searchCtx.filters.length > 0 && !searchCtx.isSelectedFilter('Liked') && (
+          <FilterRequestButton />
+        )}
       </div>
     </div>
   );

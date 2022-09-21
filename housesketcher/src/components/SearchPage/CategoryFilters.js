@@ -9,9 +9,9 @@ function CategoryFilters() {
         <div className={classes.row}>
           <MainChip name="Size" />
           <MainChip name="Price" />
+          <MainChip name="Style" />
         </div>
         <div className={classes.row}>
-          <MainChip name="Style" />
           <MainChip name="Liked" />
         </div>
       </div>

@@ -3,10 +3,16 @@ import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import AuthContext from '../../context/AuthContext';
 import {useContext} from 'react'
+import { useHistory } from 'react-router-dom';
 
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   let {user , logoutUser} = useContext(AuthContext)
+  const hisory = useHistory()
+
+  const retestClickHandler = () => {
+    hisory.push('/tasteanalysis')
+  }
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -24,6 +30,7 @@ export default function BasicPopover() {
       <button aria-describedby={id} variant="contained" onClick={handleClick}>
         <b>Hello, {user.user_nickname}</b>
       </button>
+      <div>
       <Popover
         id={id}
         open={open}
@@ -34,14 +41,19 @@ export default function BasicPopover() {
           horizontal: 'left',
         }}
       >
+      <div>
         <Typography sx={{ p: 2 }} >
-            <p>Retest</p>
+            <p onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Retest</p>
             <hr />
-            <p>Edit Profile</p>
+            <p style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Edit Profile</p>
             <hr />
-            <p onClick={logoutUser}>Logout</p>            
-            </Typography>
+            <p onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' }}>Logout</p>            
+        </Typography>
+
+      </div>
       </Popover>
+
+      </div>
     </div>
   );
 }
