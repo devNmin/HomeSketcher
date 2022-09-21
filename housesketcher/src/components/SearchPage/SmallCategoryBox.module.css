@@ -103,3 +103,7 @@ input::placeholder {
   line-height: 1rem;
   font-size: small;
 }
+
+.bold {
+  font-weight: bold;
+}

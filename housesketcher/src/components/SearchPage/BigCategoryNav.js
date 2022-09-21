@@ -54,9 +54,7 @@ function BigCategoryNav() {
                 setBigCategory(categoryName);
               }}
               className={
-                categoryName === bigCategory
-                  ? classes.selected
-                  : classes.unselected
+                categoryName === bigCategory ? classes.selected : classes.unselected
               }
             >
               {categoryName}

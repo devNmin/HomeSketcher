@@ -1,32 +1,26 @@
 import { useState, useContext, useEffect } from 'react';
 import classes from './SortComponentRow.module.css';
 import SearchContext from '../../context/SearchContext';
-import { collapseClasses } from '@mui/material';
 
-/* 
-byPrice	string
-title: Byprice
-minLength: 1
-가격 높낮이순. 높은순 high, 낮은순 low, 없으면 null
-
-byLike	string
-title: Bylike
-minLength: 1
-좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
-*/
-const SortName = { none: null, price: 'byPrice', like: 'byLike' };
-const SortDetail = { none: null, ascending: 'high', descending: 'low' };
-
+const SortNames = { none: null, price: 'byPrice', like: 'byLike' };
+const SortDetails = { none: null, ascending: 'high', descending: 'low' };
 function SortComponentRow() {
   const searchCtx = useContext(SearchContext);
-  const [sortName, setsortName] = useState(null);
-  const [sortDetail, setSortDetail] = useState(null);
+  const [sortName, setsortName] = useState('none');
+  const [sortDetail, setSortDetail] = useState('none');
   useEffect(() => {
     if (sortName === 'none') {
       setSortDetail('none');
     }
-    searchCtx.changeSort(SortName[sortName], SortDetail[sortDetail]);
-  }, [sortName, sortDetail]);
+    if (sortName === 'price') {
+      searchCtx.changeSort('byLike', null);
+      searchCtx.changeSort('byPrice', SortDetails[sortDetail]);
+    } else {
+      searchCtx.changeSort('byPrice', null);
+      searchCtx.changeSort('byLike', SortDetails[sortDetail]);
+    }
+    searchCtx.getFurnitureList();
+  }, [sortName, sortDetail, searchCtx.byLike, searchCtx.byPrice]);
   return (
     <div className={classes.row_width}>
       <div className={classes.flex_around}>
@@ -40,7 +34,7 @@ function SortComponentRow() {
               <p>{sortName ? sortName : 'none'}</p>
               <hr />
               <div>
-                {Object.keys(SortName).map((name) => {
+                {Object.keys(SortNames).map((name) => {
                   return (
                     <p
                       key={name}
@@ -59,7 +53,7 @@ function SortComponentRow() {
               <hr />
               {sortName !== 'none' ? (
                 <div>
-                  {Object.keys(SortDetail).map((name) => {
+                  {Object.keys(SortDetails).map((name) => {
                     return (
                       <p
                         key={name}

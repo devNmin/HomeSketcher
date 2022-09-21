@@ -25,7 +25,6 @@ function PriceFilters() {
     } else {
       price.maxp = null;
     }
-    SearchCtx.changePrice(price);
   };
   useEffect(() => {
     SearchCtx.changePrice(price);

@@ -31,7 +31,7 @@ function Pagnation() {
 
     searchCtx.changePage(pageNum);
     searchCtx.getFurnitureList();
-  }, [pageNum, items, searchCtx.page]);
+  }, [pageNum, searchCtx.page]);
 
   return (
     <div className={classes.pagenation_contatiner}>

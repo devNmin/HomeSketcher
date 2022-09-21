@@ -16,6 +16,8 @@ const FilterContext = createContext({
   width: null,
   length: null,
   height: null,
+  byLike: null,
+  byPrice: null,
 
   addFilter: (filterName) => {},
   removeFilter: (filterName) => {},
@@ -30,6 +32,7 @@ const FilterContext = createContext({
 
   getSubCategoryList: (categoryName) => {},
   getFurnitureList: () => {},
+  getLikedFurnutyreList: () => {},
 });
 
 export function FilterContextProvider(props) {
@@ -172,6 +175,8 @@ export function FilterContextProvider(props) {
     if (!IsSelectedFilterHandler('Style')) {
       data.style = null;
     }
+    // 뭔가 가끔씩 요청이 안되는 느낌.
+    // console.log('소 카테고리', data.sub);
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
@@ -181,6 +186,7 @@ export function FilterContextProvider(props) {
       data: data,
     })
       .then((response) => {
+        // console.log('받은 가구 첫번째', response.data.furnitures[0]);
         setFurnitureList(response.data.furnitures);
         let totalP = parseInt(response.data.count / 20);
         if (response.data.count % 20 === 0) {
@@ -191,6 +197,22 @@ export function FilterContextProvider(props) {
           pages.push(i);
         }
         setTotalPage(pages);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const likedFurnitureHandler = async () => {
+    await axios({
+      method: 'get',
+      url: BASE_URL + 'furnitures/like/',
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`,
+      },
+    })
+      .then((response) => {
+        setFurnitureList(response.data);
       })
       .catch((err) => {
         console.log(err);
@@ -211,6 +233,8 @@ export function FilterContextProvider(props) {
     width: width,
     length: length,
     height: height,
+    byLike: byLike,
+    byPrice: byPrice,
 
     addFilter: addFilterHandler,
     removeFilter: removeFilterHandler,
@@ -224,6 +248,7 @@ export function FilterContextProvider(props) {
     changeSort: setSortHandler,
     getSubCategoryList: SubCategoryListHandler,
     getFurnitureList: furnitureListHandler,
+    getLikedFurnutyreList: likedFurnitureHandler,
   };
 
   return (
