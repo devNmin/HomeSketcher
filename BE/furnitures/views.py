@@ -1,3 +1,4 @@
+from tkinter import FALSE
 from furnitures.models import Furniture
 from likes.models import UserLike
 from auths.models import User
@@ -102,11 +103,34 @@ class FurnitureLabelAPIView(APIView):
             #가장 높은 평점을 가진 가구 정보 제공
             if label == "rate":
                 #furniture-rating 별로 내림차순 정렬
-                res['furnitures'] = furnitures.order_by('-furniture_rating')[:20]
+                # 좋아요 여부 가져오기
+                furniture_datas = furnitures.order_by('-furniture_rating')[:20]
+                userId = request.user.id
+                furnitureValuses = furniture_datas.values()
+                for furniture in furnitureValuses:
+                    pk = furniture['id']
+                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
+                    try:
+                        like[0]
+                        furniture['like']=True
+                    except:
+                        furniture['like']=False
+                res['furnitures'] = furnitureValuses
 
             #가장 리뷰수가 많은 가구 정보 제공
             elif label == "review":
-                res['furnitures'] = furnitures.order_by('furniture_review')[:20]
+                furniture_datas =  furnitures.order_by('furniture_review')[:20]
+                userId = request.user.id
+                furnitureValuses = furniture_datas.values()
+                for furniture in furnitureValuses:
+                    pk = furniture['id']
+                    like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
+                    try:
+                        like[0]
+                        furniture['like']=True
+                    except:
+                        furniture['like']=False
+                res['furnitures'] = furnitureValuses
 
         except:
             return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -172,14 +196,24 @@ class FurnitureListAPIView(APIView):
                 else:
                     furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('cnt')  
 
-            
             count = furnitures.count()
             furnitures = furnitures[page*20:page*20+20]
 
-
+            furniture_datas = furnitures
+            userId = request.user.id
+            furnitureValuses = furniture_datas.values()
+            for furniture in furnitureValuses:
+                pk = furniture['id']
+                like = UserLike.objects.filter(user_id=userId, furniture_id=pk)
+                try:
+                    like[0]
+                    furniture['like']=True
+                except:
+                    furniture['like']=FALSE
+            
             res = {}
             res['count'] = count,
-            res['furnitures'] = furnitures
+            res['furnitures'] = furnitureValuses
 
             return Response(res, status=status.HTTP_200_OK)
         except:
