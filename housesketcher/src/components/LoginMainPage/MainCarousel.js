@@ -1,5 +1,6 @@
 import Carousel from 'react-bootstrap/Carousel';
-import image1 from '../../assets/nonloginMain.jpg';
+import image1 from '../../assets/mainCarousel1.jpg';
+import image2 from '../../assets/mainCarousel2.jpg';
 import styles from './MainCarousel.module.css';
 
 function UncontrolledExample() {
@@ -12,14 +13,14 @@ function UncontrolledExample() {
           alt="First slide"
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3>Welcome Clean and Clear White Wood</h3>
+          <p>Goodbye Dark Material</p>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={image1}
+          src={image2}
           alt="Second slide"
         />
 

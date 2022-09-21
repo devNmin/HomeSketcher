@@ -1,23 +1,32 @@
 import CardPanel from './CardPanel'
+import axios from 'axios'
+import AuthContext from '../../context/AuthContext'
 // import { Link } from 'react-router-dom'
 // import logo from '../../assets/Logo.png'
-import { useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useState } from 'react'
 
 function SubCarousel(props) {
   const [populars, setPopulars] = useState([])
+  let {BASE_URL, authTokens} = useContext(AuthContext)
+
   const getPopulars = async () => {
-    const response = await fetch(
-      "https://yts.mx/api/v2/list_movies.json?minimum_rating=8.5&sort_by=year"
-    )
-    const json = await response.json();
-    setPopulars(json.data.movies);
+    const response = await axios.get(BASE_URL + 'furnitures/label/rate/', {
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`
+      }
+    })
+    const data = await response.data;
+    console.log(data.furnitures)
+    setPopulars(data.furnitures);
   }
 
   useEffect(() => {
     getPopulars();
   }, [])
+
   console.log(populars)
+
   return (
     <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
       <h1>popular</h1>
@@ -28,11 +37,11 @@ function SubCarousel(props) {
       >
           {populars.map((popular) => (
             <div key={popular.id}>
-              <a href={popular.url}>
-                <img src={popular.medium_cover_image} alt="" />
+              <a href={popular.furniture_url}>
+                <img src={popular.furniture_image} alt="" />
               </a>
               <h6>
-                {popular.title}
+                {popular.furniture_name}
               </h6>
             </div>
           ))}

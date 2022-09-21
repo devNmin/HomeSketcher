@@ -4,6 +4,7 @@ import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import logo from '../assets/Logo.png'
 
 
 export default function AccountRegisterPage() {
@@ -89,7 +90,8 @@ export default function AccountRegisterPage() {
 
   return (
     <section className={styles.auth}>
-    <form onSubmit={submitHandler}>      
+    <form onSubmit={submitHandler}>
+    <img src={logo} alt="" />      
         <div className='Signup'>
           <div>
             {/* 아이디 */}

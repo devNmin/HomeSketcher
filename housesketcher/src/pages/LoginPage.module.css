@@ -39,7 +39,7 @@ input[type=email] {
   outline: 0;
   margin-bottom: 20px;
   padding-left: 0px;
-  color: #ECF0F5;
+  color: black;
 }
 
 input[type=password] {
@@ -53,7 +53,7 @@ input[type=password] {
   outline: 0;
   padding-left: 0px;
   margin-bottom: 20px;
-  color: #ECF0F5;
+  color: black;
 }
 
 .control {
@@ -76,7 +76,7 @@ input[type=password] {
   border-bottom: 2px solid #F3CD58;
   outline: 0;
   background-color: lightgrey;
-  color: #ECF0F5;
+  color: black;
 }
 
 .actions {
