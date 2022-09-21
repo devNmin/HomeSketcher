@@ -25,8 +25,8 @@ function TasteAnalysisPage() {
             }
              
         }).then(res => {
-            alert('HomeSketcher에 오신걸 환영합니다!')
-            history.push('/loginmain')
+            alert('Your Interior Taste Complete!')
+            history.push('/loginmain').then((() =>window.scrollTo(0,0) ))
         })
 
         console.log(tastelist);
@@ -49,17 +49,23 @@ function TasteAnalysisPage() {
  return (
     <div>
         <Navbar/>
-        <br />
+        <br />        
+        <b>
+
         <div style={{display :'flex', justifyContent: 'center'}}>
             <h3>Select {user.user_nickname}'s</h3>          
         </div>
         <div style={{display :'flex', justifyContent: 'center'}}>
             <h3>Interior Taste</h3>
         </div>
+        </b>
         <br />
         <TasteCompOne AddTaste = {AddTasteHandler} tasteIdList = {tastelist}/>
-        <button onClick = {InitializeHandler}>Initialize</button>
-        <button onClick={SubmitTasteList}>Submit</button>
+        <div style={{display : 'flex', justifyContent: 'center'}}>
+            <button style={{ marginRight : '30px'}} onClick = {InitializeHandler}>Initialize</button>
+            <button style={{ marginLeft : '30px'}} onClick={SubmitTasteList}>Submit</button>
+        </div>
+        <br />
     </div>
  )   
 }

@@ -5,6 +5,8 @@ import AuthContext from '../../context/AuthContext'
 // import logo from '../../assets/Logo.png'
 import { useEffect, useContext } from 'react'
 import { useState } from 'react'
+import LikeFurniture from '../Like/LikeFurniture'
+
 
 function SubCarousel(props) {
   const [populars, setPopulars] = useState([])
@@ -24,9 +26,7 @@ function SubCarousel(props) {
   useEffect(() => {
     getPopulars();
   }, [])
-
-  console.log(populars)
-
+  // console.log(populars)
   return (
     <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
       <h1>popular</h1>
@@ -36,14 +36,8 @@ function SubCarousel(props) {
         populars={populars}
       >
           {populars.map((popular) => (
-            <div key={popular.id}>
-              <a href={popular.furniture_url}>
-                <img src={popular.furniture_image} alt="" />
-              </a>
-              <h6>
-                {popular.furniture_name}
-              </h6>
-            </div>
+            <LikeFurniture furniture = {popular}>              
+            </LikeFurniture>
           ))}
         {/* <div>
           <div style={{ padding: 20 }}>
