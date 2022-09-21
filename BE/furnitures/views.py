@@ -155,7 +155,7 @@ class FurnitureListAPIView(APIView):
         height = request.data.get('height') #높이 -> 최대값
         style = request.data.get('style') #스타일 
         byPrice = request.data.get('byPrice') #가격 높낮이 순. 높은순 high, 낮은순 low, 없으면 null
-        like = request.data.get('like') #좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
+        byLike = request.data.get('like') #좋아요 많고 작은 순. 높은순 high, 낮은순 low, 없으면 null
 
         #하트 많고 작은 순
 
@@ -190,7 +190,7 @@ class FurnitureListAPIView(APIView):
             # inner join likes_userlike as total_likes
             # where furnitures_furniture.id = total_likes.furniture_id
             # group by furnitures_furniture.id;
-            if like is not None:
+            if byLike is not None:
                 if like == 'high':
                     furnitures = furnitures.annotate(cnt=Count('like__furniture_id')).order_by('-cnt')
                 else:
