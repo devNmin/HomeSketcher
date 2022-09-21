@@ -162,7 +162,6 @@ export function FilterContextProvider(props) {
           pages.push(i);
         }
         setTotalPage(pages);
-        console.log('set후에', totalPage);
       })
       .catch((err) => {
         console.log(err);

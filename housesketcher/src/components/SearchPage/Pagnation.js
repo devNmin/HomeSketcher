@@ -18,7 +18,7 @@ function Pagnation() {
       pages = pages.filter((element) => element !== val);
     }
   }
-  console.log('페이지스', pages);
+
   // if (pageNum + 1 > items.length - 2) {
   //   const idx = pages.indexOf(pageNum + 1);
   //   if (idx > 0) {
@@ -40,7 +40,7 @@ function Pagnation() {
 
     pages = pages.filter((element) => element < items.length);
 
-    console.log('페이지스', pages);
+    searchCtx(changePage(pageNum));
   }, [pageNum, items]);
 
   return (
