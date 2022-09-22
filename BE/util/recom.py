@@ -4,7 +4,6 @@ import random
 def add_recom(user_new):
     recom_org = pd.read_csv('util/recom_table.csv')
     user_df3 = pd.read_csv('util/user_to_user_table.csv')
-    # user_df3.set_index("user_pk",inplace=True)
     
     userPk = user_new
 
@@ -43,14 +42,14 @@ def add_recom(user_new):
     recom_table.append(idx_dict)
     recom_add_table = pd.DataFrame(recom_table)
     recom_mod = recom_org.append(recom_add_table)
-    recom_mod.to_csv('recom_mod.csv',index=False)
+    recom_mod.to_csv('util/recom_table.csv',index=False)
 
-def add_new_member(member_data,userDatapath):
-    user_df = pd.read_csv(userDatapath) # 기존 유저 정보 테이블 불러오기 
+def add_new_member(member_data):
+    user_df = pd.read_csv('util/user_dataframe.csv') # 기존 유저 정보 테이블 불러오기 
     user_df.set_index("user_pk",inplace=True)
     user_df['user_age'] = user_df.user_age.astype(str)
     user_dummy_98 = pd.get_dummies(user_df) # 0 1 1 0 0 0  1 1 등으로 colum 변경 
-    user_dummy_98.to_csv('user_dummy_98.csv') # 저장 
+    user_dummy_98.to_csv('util/user_dummy_98.csv') # 저장 
     user_df_2 = user_dummy_98.transpose()	#행 열 전환
     user_df3 = user_dummy_98.dot(user_df_2) # 행렬곱을 통한 유사도 
 
@@ -64,19 +63,22 @@ def add_new_member(member_data,userDatapath):
     concat_df.set_index("user_pk",inplace=True)
 
     new_df = concat_df.iloc[-1]
+    print(new_df)
+    print("------------------")
+    print(user_df_2)
+
     append_df = new_df.dot(user_df_2)
 
-    # print(append_df)
     user_df3 = user_df3.append(append_df)
-    # print(user_df3)
     append_list = list(append_df)
     append_list.append(5)
     pd_col = pd.DataFrame({f'{int(append_df.name)}' : append_list})
     user_df3 = user_df3.join(pd_col)
-    user_df3.to_csv('user_to_user_table.csv')
+    user_df3.to_csv('util/user_to_user_table.csv')
     new_member_df.set_index("user_pk",inplace=True)
     user_df = user_df.append(new_member_df)
-    user_df.to_csv('user_dataframe.csv')
+    user_df.to_csv('util/user_dataframe.csv')
+
     add_recom(member_data[0])
 
 # views_table
