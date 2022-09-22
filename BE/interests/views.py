@@ -99,13 +99,22 @@ class UserInterestResult(APIView):
             else:
                 return returnErrorJson("컬러 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
         
+        user_style = UserStyle.objects.filter(user_id=request.user)
+        max_style_cnt = user_style.aggregate(style_cnt=Max('style_cnt'))['style_cnt']
+        selected_style = user_style.filter(style_cnt=max_style_cnt).order_by("?")[:1]
+        
+        user_color = UserColor.objects.filter(user_id=request.user)
+        max_color_cnt = user_color.aggregate(color_cnt=Max('color_cnt'))['color_cnt']
+        selected_color = user_color.filter(color_cnt=max_color_cnt).order_by("?")[:1]
+        userStyle=selected_style[0]
+        userColor=selected_color[0]
         response = {
-            'style': style[userStyleData.index(max(userStyleData))],
-            'color': color[userColorData.index(max(userColorData))],
+            'style': userStyle,
+            'color': userColor,
         }
         userdata = {
-            'user_style': style[userStyleData.index(max(userStyleData))],
-            'user_color': color[userColorData.index(max(userColorData))],
+            'user_style': userStyle,
+            'user_color': userColor,
         }
         UserSerializer = UserInterestInputSerializer(request.user, data=userdata)
         if UserSerializer.is_valid():
@@ -118,8 +127,8 @@ class UserInterestResult(APIView):
         age = (age//10)*10
 
         user_new = [currentUser.id,userdata['user_style'],userdata['user_color'],str(age),1,'X']
-        print(user_new)
-        add_new_member(user_new)
+        # print(user_new)
+        # add_new_member(user_new)
         return Response(serializer.data, status=status.HTTP_200_OK)
         
     
@@ -150,7 +159,7 @@ class UserInterestResult(APIView):
             }         
             styleSerializer = InterestStyleInputSerializer(data=styleData)          
             if styleSerializer.is_valid():
-                styleSerializer.save(user=currentUser)
+                styleSerializer.save(user_id=currentUser)
             else:
                 return returnErrorJson("스타일 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
@@ -161,17 +170,26 @@ class UserInterestResult(APIView):
             }              
             colorSerializer = InterestColorInputSerializer(data=colorData)            
             if colorSerializer.is_valid():                
-                colorSerializer.save(user=currentUser) 
+                colorSerializer.save(user_id=currentUser) 
             else:
                 return returnErrorJson("컬러 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
 
+        user_style = UserStyle.objects.filter(user_id=request.user)
+        max_style_cnt = user_style.aggregate(style_cnt=Max('style_cnt'))['style_cnt']
+        selected_style = user_style.filter(style_cnt=max_style_cnt).order_by("?")[:1]
+        
+        user_color = UserColor.objects.filter(user_id=request.user)
+        max_color_cnt = user_color.aggregate(color_cnt=Max('color_cnt'))['color_cnt']
+        selected_color = user_color.filter(color_cnt=max_color_cnt).order_by("?")[:1]
+        userStyle=selected_style[0]
+        userColor=selected_color[0]
         response = {
-            'style': style[userStyleData.index(max(userStyleData))],
-            'color': color[userColorData.index(max(userColorData))],
+            'style': userStyle,
+            'color': userColor,
         }
         userdata = {
-            'user_style': style[userStyleData.index(max(userStyleData))],
-            'user_color': color[userColorData.index(max(userColorData))],
+            'user_style': userStyle,
+            'user_color': userColor,
         }
         UserSerializer = UserInterestInputSerializer(request.user, data=userdata)
         if UserSerializer.is_valid():

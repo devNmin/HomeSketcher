@@ -24,3 +24,17 @@ user_pk,user_style,user_color,user_age,user_gender,user_interest
 23,Natural,pink,50,0,TV stands & benches
 24,Antique,brown,40,0,Chests of drawers
 25,Modern,blue,20,1,X
+13,Antique,yellow,0,1,X
+13,Antique,pink,0,1,X
+13,Modern,white,0,1,X
+13,Minimal,gray,0,1,X
+13,Antique,pink,0,1,X
+13,Natural,blue,0,1,X
+13,Antique,pink,0,1,X
+13,Vintage,green,0,1,X
+13,Mediterranean,red,0,1,X
+13,Natural,white,0,1,X
+13,Vintage,gray,0,1,X
+13,Provence,indigo,0,1,X
+13,Modern,purple,0,1,X
+13,Mediterranean,pink,0,1,X
