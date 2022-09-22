@@ -14,7 +14,7 @@ function SmallCategoryList() {
 
   return (
     <div>
-      <hr />
+      <hr className={classes.categoryHr} />
       <div className={classes.category_line}>
         <p className={classes.category_name}>Category</p>
         <div className={classes.item}>

@@ -1,4 +1,12 @@
+@font-face {
+  font-family: 'HallymGothic-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .Category {
+  font-family: 'HallymGothic-Regular';
   background-color: white;
   color: black;
   margin-left: -8px;
@@ -33,7 +41,7 @@
 
 .main_card p {
   font-size: 1.25rem;
-  letter-spacing: 0.5rem;
+  /* letter-spacing: 0.5rem; */
   margin: 0;
 }
 
