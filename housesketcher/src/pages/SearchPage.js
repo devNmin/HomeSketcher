@@ -6,6 +6,7 @@ import ItemsLayout from '../components/SearchPage/ItemsLayout';
 import SortComponentRow from '../components/SearchPage/SortComponentRow';
 import { FilterContextProvider } from '../context/SearchContext';
 import SearchContext from '../context/SearchContext';
+import Footer from '../components/Footer/Footer';
 
 import classes from './SearchPage.module.css';
 
@@ -27,6 +28,7 @@ function SearchPage() {
         <SortComponentRow></SortComponentRow>
         <ItemsLayout></ItemsLayout>
       </div>
+      <Footer />
     </FilterContextProvider>
   );
 }
