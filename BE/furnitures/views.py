@@ -195,7 +195,8 @@ class FurnitureLikeAPIView(APIView):
         id = request.user.id #사용자 pk 정보
         try:
             furnitures = Furniture.objects.filter(id__in= UserLike.objects.filter(user = id).values_list('furniture_id')).values()
-            return Response(furnitures,status=status.HTTP_200_OK)
+            
+            return Response(addLike(furnitures.values(), request.user.id), status=status.HTTP_200_OK)
         
         except:
             return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
