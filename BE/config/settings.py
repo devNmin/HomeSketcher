@@ -4,6 +4,7 @@ from datetime import timedelta
 from dotenv import dotenv_values
 env = dotenv_values(".env")
 MYSQL_SECRET=env["MYSQL_SECRET"]
+REDIS_SECRET=env["REDIS_SECRET"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -212,8 +213,9 @@ CORS_ALLOW_HEADERS = (
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://127.0.0.1:6379",
+        "LOCATION": "redis://redis:6379/1",
         "OPTIONS": {
+            "PASSWORD": REDIS_SECRET,
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
         }
     }

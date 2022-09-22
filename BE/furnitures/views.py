@@ -202,7 +202,7 @@ class FurnitureLikeAPIView(APIView):
         
 class FurnitureClickAPIView(APIView):      
     @swagger_auto_schema(tags=['가구 클릭'],  responses={200: 'Success'})  
-    def get(self, request, furniture_pk):   
+    def get(self, request, furniture_pk):  
         try:
             con = get_redis_connection("default")
             pk = con.llen("clickList")+1
