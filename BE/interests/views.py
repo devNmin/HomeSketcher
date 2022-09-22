@@ -8,7 +8,7 @@ from .models import Interest, UserStyle, UserColor
 from django.http import JsonResponse
 from auths.models import User
 from rest_framework.response import Response
-import random
+import random, datetime
 from django.db.models import Subquery
 from django.db.models import Max
 from util.returnDto import (
