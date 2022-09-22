@@ -1,4 +1,19 @@
-.logo {
+.container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo1 {
+  height: 80px;
+  width: 120px;
+  position: absolute;
+  top: 75%;
+  left: 73%;
+  transform: translate(-75%, -73%);
+}
+
+.logo2 {
   width: 800px;
   height: auto;
   border-radius: 8px;

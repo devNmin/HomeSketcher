@@ -15,6 +15,8 @@ function MainCarousel(props) {
             <br/>Using the HomeSketcher App
             <br/> you can create your room design on your computer
             </p>
+            <br />
+            <br />
           </div>
         </div>
         <hr />
@@ -22,10 +24,13 @@ function MainCarousel(props) {
           <div className={styles.second_text}>
             <h2>Pick your Taste</h2>
             <br />
-            <p className={styles.content}>HomeSketcher identifies your taste
-            <br/>and recommends the best furniture
+            <p className={styles.content}>HomeSketcher identifies your taste and
+            <br/>recommends the best furniture
             <br/>Decorate your home with recommended furniture
             </p>
+            <br />
+            <br />
+            <br />
           </div>
           <img className={styles.second_img} src="https://cdn.electimes.com/news/photo/202201/227731_144732.jpg" alt="" />
         </div>
@@ -39,6 +44,9 @@ function MainCarousel(props) {
             <br/>we build the 3D rooms for you
             <br/>even with complex building structures
             </p>
+            <br />
+            <br />
+            <br />
           </div>
         </div>
         <hr />
