@@ -1,4 +1,3 @@
-from tkinter import FALSE
 from furnitures.models import Furniture
 from likes.models import UserLike
 from auths.models import User
