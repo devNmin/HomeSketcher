@@ -1,6 +1,22 @@
 import pandas as pd
 import numpy as np
-import random
+import random, json, pickle
+
+def hot_furnitures(user_like_furniture_data):
+
+    user_like_furniture_json = json.dumps(user_like_furniture_data,indent=4)
+    user_like_furniture = pd.read_json(user_like_furniture_json)
+    res = list(user_like_furniture.furniture_id.value_counts().keys())
+
+    return res
+
+def read_hot_furnitures():
+
+    with open("util/data/hot_furnitures.txt", 'rb') as lf:
+        readList = pickle.load(lf)
+        
+    return readList
+
 def add_recom(user_new):
     recom_org = pd.read_csv('util/recom_table.csv')
     user_df3 = pd.read_csv('util/user_to_user_table.csv')
