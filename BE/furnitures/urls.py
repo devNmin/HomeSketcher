@@ -9,6 +9,11 @@ from .views import(
     FurnitureClickAPIView,
 )
 
+from .recommend import(
+    FurnitureRecommendAPIView,
+    FurnitureHotItemAPIView
+)
+
 app_name = 'furnitures'
 
 urlpatterns=[
@@ -19,4 +24,7 @@ urlpatterns=[
     path('search/',FurnitureListAPIView.as_view(),name="furniture-list"),
     path('like/',FurnitureLikeAPIView.as_view(),name="furniture-like-list"),
     path('click/<str:furniture_pk>/', FurnitureClickAPIView.as_view(), name="furniture-click"),
+    path('recommend/furniture/', FurnitureRecommendAPIView.as_view(), name="furniture-recommend-list"),
+    path('hot/furniture/', FurnitureHotItemAPIView.as_view(), name="furniture-hot-items"),
+    
 ]
