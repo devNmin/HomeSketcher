@@ -194,14 +194,15 @@ class FurnitureLikeAPIView(APIView):
         id = request.user.id #사용자 pk 정보
         try:
             furnitures = Furniture.objects.filter(id__in= UserLike.objects.filter(user = id).values_list('furniture_id')).values()
-            return Response(furnitures,status=status.HTTP_200_OK)
+            
+            return Response(addLike(furnitures.values(), request.user.id), status=status.HTTP_200_OK)
         
         except:
             return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
         
 class FurnitureClickAPIView(APIView):      
     @swagger_auto_schema(tags=['가구 클릭'],  responses={200: 'Success'})  
-    def get(self, request, furniture_pk):   
+    def get(self, request, furniture_pk):  
         try:
             con = get_redis_connection("default")
             pk = con.llen("clickList")+1

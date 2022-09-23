@@ -61,8 +61,6 @@ class FurnitureLikeUsersAPIView(APIView):
         result = []
         for userPK in likeUserPks:
             user = User.objects.get(id=userPK.user_id)
-            userData = {"user_id":user.id, "user_name":user.user_name} 
-            print(userData)          
+            userData = {"user_id":user.id, "user_name":user.user_name}           
             result.append(userData)
-            print(result)
         return Response(data=result, status=status.HTTP_200_OK)
