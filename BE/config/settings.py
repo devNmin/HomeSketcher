@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     'furnitures',
     'likes',
     'recommendations',
+    'schedulers.apps.SchedulersConfig',
+    
     #swagger library
     'drf_yasg',
       
@@ -107,6 +109,17 @@ DATABASES = {
     }
 }
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://redis:6379/1",
+        # "LOCATION": "redis://localhost:6379",
+        "OPTIONS": {
+            "PASSWORD": REDIS_SECRET,
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -210,13 +223,6 @@ CORS_ALLOW_HEADERS = (
     'x-requested-with',
 )
 
-CACHES = {
-    "default": {
-        "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/1",
-        "OPTIONS": {
-            "PASSWORD": REDIS_SECRET,
-            "CLIENT_CLASS": "django_redis.client.DefaultClient",
-        }
-    }
-}
+# 스케줄러
+APSCHEDULER_DATETIME_FORMAT = "N j, Y, f:s a"  # Default
+SCHEDULER_DEFAULT = True
