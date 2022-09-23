@@ -19,6 +19,7 @@ from .serializers import(
 )
 
 from random import shuffle
+from util.recom import read_hot_furnitures
 
 # 스타일 우선순위 가구 리스트 n개만큼 가져온다
 def FurnitureWithStyle(style,color,birth,gender):
@@ -223,6 +224,11 @@ def FurnitureRecommend(user_id):
     # print(pk_list) 
     # print(len(pk_list))
 
+    furnitures = FurnitureListWithPk(pk_list)
+    
+    return furnitures
+
+def FurnitureListWithPk(pk_list):
     furnitures =[]
     for i in pk_list:
         furniture = Furniture.objects.get(id=i)
@@ -243,7 +249,7 @@ def FurnitureRecommend(user_id):
         res['furniture_sub'] = furniture.furniture_sub
         res['furniture_condition'] = furniture.furniture_condition
         furnitures.append(res)
-    
+
     return furnitures
 
 # 가구 추천 API
@@ -256,3 +262,14 @@ class FurnitureRecommendAPIView(APIView):
         furnitures = FurnitureRecommend(user_id)
         
         return Response(furnitures)
+
+class FurnitureHotItemAPIView(APIView):
+    permission_classes=[IsAuthenticated]
+    
+    @swagger_auto_schema(tags=['시간대별 인기 가구 리스트'],  responses={200: 'Success'})
+    def get(self):
+        furniture_pks = read_hot_furnitures() #시간대별 인기 가구 pk 리스트
+
+        furnitures = FurnitureListWithPk(furniture_pks)        
+
+        return Response("test")
