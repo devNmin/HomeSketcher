@@ -1,38 +1,65 @@
-import React, {useContext, useState} from 'react'
+import React, {useContext, useState } from 'react'
 import AuthContext from '../context/AuthContext';
 import Navbar from '../components/Navbar/Navbar';
 import TasteCompOne from '../components/tastepage/TasteCompOne';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios'
+import swal from "sweetalert2";
 
 
 function TasteAnalysisPage() {
+
+
     let { user , BASE_URL, authTokens } = useContext(AuthContext)
-    const [tastelist, setTasteList] = useState([])
+    const [tastelist, setTasteList] = useState([]);
     const history = useHistory()  
 
     const InitializeHandler = () => {
         setTasteList([])
     }
+
+   
+
     
     const SubmitTasteList = async () => {
-        await axios.post(BASE_URL + 'interests/user/', {
-            img_list : tastelist
-        },{
-            headers :{
-                Authorization : `Bearer ${authTokens.access}`,
-                'Content-Type' : 'application/json'
-            }
-             
-        }).then(res => {
-            alert('Your Interior Taste Complete!')
-            history.push('/loginmain').then((() =>window.scrollTo(0,0) ))
-        })
-
-        console.log(tastelist);
-
+        if (!tastelist.length) {
+            new swal(
+                'Error!',
+                `Please choose at least one interior image`,
+                'error'
+              )                        
+        } else {
+            await axios.post(BASE_URL + 'interests/user/', {
+                img_list : tastelist
+            },{
+                headers :{
+                    Authorization : `Bearer ${authTokens.access}`,
+                    'Content-Type' : 'application/json'
+                }
+                 
+            }).then(res => {
+                new swal(
+                    'Taste analysis complete',
+                    `Your style : ${res.data.style}, Your color : ${res.data.color} `,
+                    'success',{
+                        showCancelButton: true,
+                        cancelButtonText: 'cancel',
+                        reverseButtons: true,
+                    }
+                    
+                  )
+                  history.push('/loginmain').then((() =>window.scrollTo(0,0) ))
+                
+            })
+        }      
 
     }
+
+
+    // const goToLoginMain = () => {
+        
+    // }
+    
     
     const AddTasteHandler = (newtaste) => {
         if (tastelist.includes(newtaste)) {

@@ -17,6 +17,7 @@ function SubCarousel(props) {
 
   let {BASE_URL, authTokens} = useContext(AuthContext)
 
+
   const getPopulars = async () => {
     const response = await axios.get(BASE_URL + 'furnitures/label/rate/', {
       headers: {
@@ -28,14 +29,23 @@ function SubCarousel(props) {
   }
 
   const getRecommends = async () => {
-    const response = await axios.get(BASE_URL + 'recommendations/recomUser/', {
+    const response = await axios.get(BASE_URL + 'furnitures/recommend/furniture/', {
       headers: {
         Authorization: `Bearer ${authTokens.access}`
       }
     })
     const recommendData = await response.data;    
-    console.log(recommendData);
     setRecommends(recommendData);
+  }
+
+  const getLatests = async () => {
+    const response = await axios.get(BASE_URL + 'recommendations/recomUserRecentSee/', {
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`
+      }
+    })
+    const latestData = await response.data;    
+    setLatests(latestData);
   }
 
   const getMostReviews = async () => {
@@ -49,10 +59,15 @@ function SubCarousel(props) {
   }
 
 
+  const addLatests = (newItem) => {
+    setLatests([...latests, newItem])
+  }
+
   useEffect(() => {
     getPopulars();
     getRecommends();
     getMostReviews();
+    getLatests();
   }, [])
   // console.log(populars)
   return (
@@ -65,7 +80,7 @@ function SubCarousel(props) {
         populars={populars}
       >
           {populars.map((popular) => (
-            <LikeFurniture key= {popular.id} furniture = {popular}>              
+            <LikeFurniture key= {popular.id} furniture = {popular} addLatest = {addLatests}>              
             </LikeFurniture>
           ))}
         {/* <div>
@@ -116,7 +131,7 @@ function SubCarousel(props) {
         show={4}
         populars={recommends}>
           {recommends.map((recommend) => (
-            <LikeFurniture key= {recommend.id} furniture = {recommend}>              
+            <LikeFurniture key= {recommend.id} furniture = {recommend} addLatest = {addLatests}>              
             </LikeFurniture>
           ))}        
       </CardPanel>
@@ -129,20 +144,21 @@ function SubCarousel(props) {
         show={4}
         populars={mostReviews}>
           {mostReviews.map((mostReview) => (
-            <LikeFurniture key= {mostReview.id} furniture = {mostReview}>              
+            <LikeFurniture key= {mostReview.id} furniture = {mostReview} addLatest = {addLatests}>              
             </LikeFurniture>
           ))}        
       </CardPanel>
       </div>
 
       <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-      <h1>Latest</h1>
+
+      <h1>Latests</h1>
       <br />
       <CardPanel
         show={4}
-        populars={populars}>
-          {populars.map((popular) => (
-            <LikeFurniture key= {popular.id} furniture = {popular}>              
+        populars={latests}>
+          {latests.map((popular) => (
+            <LikeFurniture key= {popular.id} furniture = {popular} addLatest = {addLatests}>              
             </LikeFurniture>
           ))}        
       </CardPanel>
