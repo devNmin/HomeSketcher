@@ -249,6 +249,8 @@ def FurnitureRecommend(user_id):
 # 가구 추천 API
 class FurnitureRecommendAPIView(APIView):
     permission_classes=[IsAuthenticated]
+
+    @swagger_auto_schema(tags=['사용자별 추천 가구 리스트 전송(4의 배수로 전송)'],  responses={200: 'Success'})
     def get(self,request):
         user_id = request.user.id
         furnitures = FurnitureRecommend(user_id)
