@@ -19,8 +19,13 @@ function ItemsLayout() {
       <div className={classes.display_flex}>
         {items.map((item) => {
           return (
-            <LikeFurniture key={item.id} furniture = {item} onClick={() => {}}>              
-            </LikeFurniture>
+            <div className={classes.item_container}>
+              <LikeFurniture
+                key={item.id}
+                furniture={item}
+                onClick={() => {}}
+              ></LikeFurniture>
+            </div>
           );
         })}
       </div>

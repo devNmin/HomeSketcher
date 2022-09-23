@@ -1,8 +1,3 @@
-img {
-  width: 20rem;
-  height: 20rem;
-}
-
 .display_flex {
   min-height: 30rem;
   display: flex;
@@ -10,19 +5,9 @@ img {
   flex-wrap: wrap;
   justify-content: center;
 }
-.display_flex p {
-  width: 16rem;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-weight: bold;
-  text-align: center;
+.item_container {
+  margin: 1rem;
 }
 .blank {
-  height: 30rem;
-}
-h2 {
-  color: #fbd95d;
-  margin-top: 5rem;
-  text-shadow: 1px 1px 1px #f5ecc9;
+  height: 10rem;
 }
