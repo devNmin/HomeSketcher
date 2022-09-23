@@ -9,10 +9,14 @@ from util.recom import hot_furnitures,read_hot_furnitures
 def redisViewsDataExport():
     #날짜 셋팅
     now = datetime.datetime.now()
-    print(read_hot_furnitures())
-    # viewsData = redisExport()
-    # print(viewsData)
-    # print(hot_furnitures(viewsData))
+
+    viewsData = redisExport() # load views counts from redis 
+    
+    hot_furnitures(viewsData) # save hot item
+    
+    
+    
+    # print(res)
     # subject = str(now.year) + '년 ' + str(now.month) + '월 ' + str(now.day) + '일 ' + str(now.hour) + '조회수 데이터를 보냅니다.'
     # data = viewsData
     

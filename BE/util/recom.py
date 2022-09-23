@@ -2,15 +2,19 @@ import pandas as pd
 import numpy as np
 import random, json, pickle
 
-def hot_furnitures(user_like_furniture_data):
+def hot_furnitures(user_like_furniture_data): # cal views count
+    
+    user_like_furniture_json = json.dumps(user_like_furniture_data)
 
-    user_like_furniture_json = json.dumps(user_like_furniture_data,indent=4)
     user_like_furniture = pd.read_json(user_like_furniture_json)
+
     res = list(user_like_furniture.furniture_id.value_counts().keys())
 
-    return res
+    with open("util/data/hot_furnitures.txt", 'wb') as lf:
+        pickle.dump(res, lf)
 
-def read_hot_furnitures():
+
+def read_hot_furnitures(): 
 
     with open("util/data/hot_furnitures.txt", 'rb') as lf:
         readList = pickle.load(lf)

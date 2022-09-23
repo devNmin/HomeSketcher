@@ -103,8 +103,8 @@ DATABASES = {
         'NAME': 'ssafy',
         'USER': 'root',
         'PASSWORD': MYSQL_SECRET,
-        # 'HOST': 'mysql',
-        'HOST' : 'j7b304.p.ssafy.io',
+        'HOST': 'mysql',
+        # 'HOST' : 'j7b304.p.ssafy.io',
         'PORT': '3306',
     }
 }
@@ -112,8 +112,8 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        "LOCATION": "redis://redis:6379/1",
-        # "LOCATION": "redis://localhost:6379",
+        # "LOCATION": "redis://redis:6379/1",
+        "LOCATION": "redis://j7b304.p.ssafy.io:6379/1",
         "OPTIONS": {
             "PASSWORD": REDIS_SECRET,
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
