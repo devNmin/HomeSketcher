@@ -1,40 +1,52 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import classes from './SmallCategoryBox.module.css';
 import SearchContext from '../../context/SearchContext';
 
 function SizeFilters() {
-  const widthInput = useRef();
-  const lengthInput = useRef();
-  const heightInput = useRef();
   const SearchCtx = useContext(SearchContext);
+  const wsi = useRef();
+  const lsi = useRef();
+  const hsi = useRef();
+  const widthSizeInput = wsi.current;
+  const lengthSizeInput = lsi.current;
+  const heightSizeInput = hsi.current;
+  const [widthInput, setWidthInput] = useState(null);
+  const [lengthInput, setLengthInput] = useState(null);
+  const [heightInput, setHeightInput] = useState(null);
 
-  const maxSize = {
-    width: SearchCtx.width,
-    length: SearchCtx.length,
-    height: SearchCtx.height,
-  };
-
-  const changeSizeInput = (event) => {
-    if (widthInput.current !== undefined && widthInput.current.value !== 0) {
-      maxSize.width = widthInput.current.value;
+  const changeWidthInput = (evnet) => {
+    if (widthSizeInput !== undefined && widthSizeInput.value !== 0) {
+      setWidthInput(widthSizeInput.value);
     } else {
-      maxSize.width = null;
-    }
-    if (lengthInput.current !== undefined && lengthInput.current.value !== 0) {
-      maxSize.length = lengthInput.current.value;
-    } else {
-      maxSize.length = null;
-    }
-    if (heightInput.current !== undefined && heightInput.current.value !== 0) {
-      maxSize.height = heightInput.current.value;
-    } else {
-      maxSize.height = null;
+      setWidthInput(null);
     }
   };
+  const changeLengthInput = (event) => {
+    if (lengthSizeInput !== undefined && lengthSizeInput.value !== 0) {
+      setLengthInput(lengthSizeInput.value);
+    } else {
+      setLengthInput(null);
+    }
+  };
+
+  const changeHeightInput = (event) => {
+    if (heightSizeInput !== undefined && heightSizeInput.value !== 0) {
+      setHeightInput(heightSizeInput.value);
+    } else {
+      setHeightInput(null);
+    }
+  };
+
   useEffect(() => {
-    console.log(maxSize);
-    SearchCtx.changeSize(maxSize);
-  }, [maxSize, SearchCtx.width, SearchCtx.length, SearchCtx.height]);
+    SearchCtx.changeSize({ width: widthInput, length: lengthInput, height: heightInput });
+  }, [
+    widthInput,
+    lengthInput,
+    heightInput,
+    SearchCtx.width,
+    SearchCtx.length,
+    SearchCtx.height,
+  ]);
 
   return (
     <div>
@@ -48,8 +60,8 @@ function SizeFilters() {
               type="number"
               id="width"
               placeholder="inch"
-              ref={widthInput}
-              onChange={changeSizeInput}
+              ref={lsi}
+              onChange={changeWidthInput}
             />
           </div>
           <div className={classes.row}>
@@ -58,8 +70,8 @@ function SizeFilters() {
               type="number"
               id="depth"
               placeholder="inch"
-              ref={lengthInput}
-              onChange={changeSizeInput}
+              ref={wsi}
+              onChange={changeLengthInput}
             />
           </div>
           <div className={classes.row}>
@@ -68,8 +80,8 @@ function SizeFilters() {
               type="number"
               id="height"
               placeholder="inch"
-              ref={heightInput}
-              onChange={changeSizeInput}
+              ref={hsi}
+              onChange={changeHeightInput}
             />
           </div>
         </form>

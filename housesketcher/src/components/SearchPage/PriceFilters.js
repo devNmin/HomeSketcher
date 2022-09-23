@@ -3,20 +3,16 @@ import classes from './SmallCategoryBox.module.css';
 import SearchContext from '../../context/SearchContext';
 
 function PriceFilters() {
+  const SearchCtx = useContext(SearchContext);
   const mni = useRef();
   const mxi = useRef();
-  const SearchCtx = useContext(SearchContext);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const minPriceInput = mni.current;
   const maxPriceInput = mxi.current;
-  const [minpInput, setMinpInput] = useState(0);
-  const [maxpInput, setMaxpInput] = useState(0);
+  const [minpInput, setMinpInput] = useState(null);
+  const [maxpInput, setMaxpInput] = useState(null);
 
   const chageMinPriceInput = (event) => {
-    console.log('event', event.target);
-    console.log('here', minPriceInput);
     if (minPriceInput !== undefined && minPriceInput.value !== 0) {
-      console.log('abc');
       setMinpInput(minPriceInput.value);
     } else {
       setMinpInput(null);
@@ -30,10 +26,9 @@ function PriceFilters() {
     }
   };
   useEffect(() => {
-    console.log('minpInput', minpInput);
-    console.log('maxpInput', maxpInput);
     SearchCtx.changePrice({ minp: minpInput, maxp: maxpInput });
-  }, [minpInput, maxpInput]);
+  }, [minpInput, maxpInput, SearchCtx.minPrice, SearchCtx.maxPrice]);
+
   return (
     <div>
       <hr />
