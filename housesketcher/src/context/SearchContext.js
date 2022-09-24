@@ -95,10 +95,10 @@ export function FilterContextProvider(props) {
   };
 
   const setPriceHandler = (price) => {
-    let minp = price.minp;
-    let maxp = price.maxp;
-    setMinPrice(minp);
-    setMaxPrice(maxp);
+    console.log('setPriceHandler', price.minp, price.maxp);
+
+    setMinPrice(price.minp);
+    setMaxPrice(price.maxp);
   };
 
   const setSizeHandler = (size) => {
@@ -163,6 +163,7 @@ export function FilterContextProvider(props) {
       byPrice: byPrice,
       byLike: byLike,
     };
+    console.log('data', data);
     if (!IsSelectedFilterHandler('Size')) {
       data.width = null;
       data.length = null;
