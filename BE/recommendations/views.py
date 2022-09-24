@@ -34,7 +34,7 @@ class RecomUserRecentSeeAPIView(APIView):
         furnitureIds = con.zrange(request.user.id, 0, -1) # 해당 유저의 최신 5개 (오래된거 부터 나옴)
         strData = []
         for item in furnitureIds:
-            strData.append(item.decode())
-        furnitures = Furniture.objects.filter(id__in=strData)
-        data = addLike(furnitures, request.user.id)
-        return Response(data, status=status.HTTP_200_OK) 
+            furniture = Furniture.objects.filter(id=item.decode())
+            data = addLike(furniture, request.user.id)
+            strData.append(data)
+        return Response(strData[::-1], status=status.HTTP_200_OK) 
