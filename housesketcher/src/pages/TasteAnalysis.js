@@ -18,7 +18,6 @@ function TasteAnalysisPage() {
         setTasteList([])
     }
 
-   
 
     
     const SubmitTasteList = async () => {

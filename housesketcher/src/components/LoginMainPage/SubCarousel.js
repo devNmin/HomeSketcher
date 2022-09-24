@@ -44,7 +44,7 @@ function SubCarousel(props) {
         Authorization: `Bearer ${authTokens.access}`
       }
     })
-    const latestData = await response.data;    
+    const latestData = await response.data;   
     setLatests(latestData);
   }
 
@@ -60,7 +60,8 @@ function SubCarousel(props) {
 
 
   const addLatests = (newItem) => {
-    setLatests([...latests, newItem])
+    setLatests([newItem, ...latests])
+    getLatests();
   }
 
   useEffect(() => {
@@ -158,7 +159,7 @@ function SubCarousel(props) {
         show={4}
         populars={latests}>
           {latests.map((popular) => (
-            <LikeFurniture key= {popular.id} furniture = {popular} addLatest = {addLatests}>              
+            <LikeFurniture key= {popular.id} furniture = {popular[0]} addLatest = {addLatests}>              
             </LikeFurniture>
           ))}        
       </CardPanel>

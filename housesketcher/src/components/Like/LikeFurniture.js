@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
 import { useState, useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
 import axios from 'axios'
@@ -79,7 +78,7 @@ export default function LikeFurniture(props) {
     }
    
   return (   
-       <div onClick={() => {onClickFurnitureHandler(furniture.id)}}>
+       <div>
             
                 <Card style={{ width: '18rem' }} key={furniture.id}                   
                 >
@@ -94,7 +93,7 @@ export default function LikeFurniture(props) {
                    
 
                     <a  href= {furniture.furniture_url}>
-                        <Card.Img variant="top" src={furniture.furniture_image} />
+                        <Card.Img onClick={() => {onClickFurnitureHandler(furniture.id)}} variant="top" src={furniture.furniture_image} />
                         
                     </a>
                     <Card.Body
