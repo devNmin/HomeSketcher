@@ -7,8 +7,8 @@ from util.choicesList import (
 # Create your models here.
 class Furniture(models.Model):
     furniture_name = models.CharField(max_length=100, null=False) #가구 제품명
-    furniture_url = models.CharField(max_length=255, null=False) # 가구 판매 페이지
-    furniture_image = models.CharField(max_length=255,null=False)#가구 이미지 URL
+    furniture_url = models.TextField(max_length=255, null=False) # 가구 판매 페이지
+    furniture_image = models.TextField(max_length=255,null=False)#가구 이미지 URL
     furniture_price = models.IntegerField(null = False) #가구 가격
     furniture_rating = models.FloatField(null = False) #가구 평균 평점
     furniture_review = models.IntegerField(null = False) #가구 리뷰 수
