@@ -2,7 +2,7 @@ import React from 'react'
 import Card from 'react-bootstrap/Card';
 import { useState, useContext } from 'react';
 import AuthContext from '../../context/AuthContext';
-import axios from 'axios'
+import axios from '../../utils/axios';
 import hollowStar from '../../assets/hollowstar.png'
 import fullStar from '../../assets/fullstar.png'
 
@@ -37,7 +37,7 @@ export default function LikeFurniture(props) {
     }
 
     const onClickFurnitureHandler = async (id) => {
-        axios.get(BASE_URL + `furnitures/click/${id}`, {
+        await axios.get(BASE_URL + `furnitures/click/${id}`, {
             headers : {
                 Authorization : `Bearer ${authTokens.access}`
             }
@@ -86,7 +86,9 @@ export default function LikeFurniture(props) {
                         <div >                                                       
                             {isLike ? <img style={{ width :'10%', height: '10%' , cursor:'pointer'}} onClick={() => {likeClickHandler(furniture.id, isLike)}} src= {fullStar}alt="" />: 
                             <img style={{ width :'10%', height: '10%' , cursor:'pointer'}} onClick={() => {likeClickHandler(furniture.id, isLike)}} src= {hollowStar}alt="" />}
-                                
+                            <div>
+                                {furniture.id}
+                            </div>
                          
                         </div>
                     </Card.Body>

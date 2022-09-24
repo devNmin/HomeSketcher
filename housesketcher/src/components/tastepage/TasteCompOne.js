@@ -1,21 +1,16 @@
-import React, {useState, useContext, useEffect} from 'react'
-import axios from 'axios'
-import AuthContext from '../../context/AuthContext'
+import React, {useState, useEffect} from 'react'
+// import AuthContext from '../../context/AuthContext'
 import TasteListFirst from './TasteListFirst'
-import TasteListSecond from './TasteListSecond'
+import axios from '../../utils/axios'
 
 
 export default  function TasteCompOne(props) {    
     let [tastelist, setTasteList] = useState([])  
-    let {BASE_URL, authTokens} = useContext(AuthContext)
+    // let {BASE_URL, authTokens} = useContext(AuthContext)
     let tasteIdList = props.tasteIdList
 
     useEffect(() => {
-        axios.get(BASE_URL + 'interests/data/', {
-            headers :{
-                Authorization : `Bearer ${authTokens.access}`
-            } 
-        }).then(response => {
+        axios.get('interests/data/').then(response => {
                 setTasteList(response.data);
             });
             console.log(tastelist);

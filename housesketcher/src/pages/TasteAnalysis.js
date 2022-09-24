@@ -3,7 +3,7 @@ import AuthContext from '../context/AuthContext';
 import Navbar from '../components/Navbar/Navbar';
 import TasteCompOne from '../components/tastepage/TasteCompOne';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios'
+import axios from '../utils/axios';
 import swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 

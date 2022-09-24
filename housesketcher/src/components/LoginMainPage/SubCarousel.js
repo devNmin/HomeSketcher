@@ -1,5 +1,5 @@
 import CardPanel from './CardPanel'
-import axios from 'axios'
+import axios from '../../utils/axios'
 import AuthContext from '../../context/AuthContext'
 // import { Link } from 'react-router-dom'
 // import logo from '../../assets/Logo.png'
@@ -60,7 +60,6 @@ function SubCarousel(props) {
 
 
   const addLatests = async (newItem) => {   
-    setLatests([newItem, ...latests])
     getLatests();
     
   }
