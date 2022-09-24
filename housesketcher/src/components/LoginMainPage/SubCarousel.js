@@ -59,9 +59,10 @@ function SubCarousel(props) {
   }
 
 
-  const addLatests = (newItem) => {
+  const addLatests = async (newItem) => {   
     setLatests([newItem, ...latests])
-    getLatests();
+    await getLatests();
+    
   }
 
   useEffect(() => {
