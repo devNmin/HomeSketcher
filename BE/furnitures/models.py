@@ -21,7 +21,7 @@ class Furniture(models.Model):
     furniture_main = models.CharField(max_length=255,null=False) #가구 대분류
     furniture_sub = models.CharField(max_length =255, null = False) #가구 소분류
     furniture_condition = models.CharField(max_length=20, null = True) #가구 신제품 여부
-
+    is_dummy = models.IntegerField(null=True)
 
 
     REQUIRED_FIELDS = [

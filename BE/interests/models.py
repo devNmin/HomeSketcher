@@ -17,6 +17,7 @@ class Interest(models.Model):
     sub_color2 = models.CharField(max_length=30, default=0, choices=select_color) # sub_color
     point_color = models.CharField(max_length=30, default=0, choices=select_color_sub) # point color (light, normal, dark)
     point_color2 = models.CharField(max_length=30, default=0, choices=select_color) # point color
+    is_dummy = models.IntegerField(null=True)
     
     REQUIRED_FIELDS = [
         'image_name',
