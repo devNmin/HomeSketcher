@@ -9,7 +9,7 @@ function ItemsLayout() {
   const items = filterCtx.furnitureList;
   useEffect(() => {
     filterCtx.getFurnitureList();
-  }, [items]);
+  }, [filterCtx.sub]);
   if (!items.length) {
     return (
       <div className={classes.display_flex}>

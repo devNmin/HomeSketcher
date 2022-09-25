@@ -9,8 +9,7 @@ function SmallCategoryList() {
 
   useEffect(() => {
     searchCtx.changeSub(subCategory);
-    searchCtx.getFurnitureList();
-  }, [subCategory, searchCtx.sub, searchCtx.main]);
+  }, [subCategory, searchCtx.sub]);
 
   return (
     <div>
