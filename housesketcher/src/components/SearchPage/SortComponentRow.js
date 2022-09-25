@@ -3,7 +3,7 @@ import classes from './SortComponentRow.module.css';
 import SearchContext from '../../context/SearchContext';
 
 const SortNames = { none: null, price: 'byPrice', like: 'byLike' };
-const SortDetails = { none: null, ascending: 'high', descending: 'low' };
+const SortDetails = { none: null, descending: 'high', ascending: 'low' };
 function SortComponentRow() {
   const searchCtx = useContext(SearchContext);
   const [sortName, setsortName] = useState('none');
