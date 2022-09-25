@@ -113,7 +113,7 @@ CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
         "LOCATION": "redis://redis:6379/1",
-        # "LOCATION": "redis://j7b304.p.ssafy.io:6379",
+        # "LOCATION": "redis://j7b304.p.ssafy.io:6379/1",
         "OPTIONS": {
             "PASSWORD": REDIS_SECRET,
             "CLIENT_CLASS": "django_redis.client.DefaultClient",

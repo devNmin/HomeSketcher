@@ -107,3 +107,22 @@ def return_recom_funr(user_pk):
     recom_list = (read_views_table.iloc[user_pk].recom_fur_pk[1:-2]).split(',')
     
     return recom_list
+
+# 일정 시간 마다 함수 실행시켜주기 
+def cal_views(user_like_furniture_data):
+    arr_csv = pd.read_csv('util/data/views.csv', index_col=0)
+    user_like_furniture_json = json.dumps(user_like_furniture_data,indent=4)
+    user_like_furniture = pd.read_json(user_like_furniture_json)
+    # print(user_like_furniture)
+    for i in range(len(user_like_furniture)):
+        fur_id = user_like_furniture.iloc[i].furniture_id
+        user_id = user_like_furniture.iloc[i].user_id
+        
+        # print(user_id,fur_id )
+        arr_csv.iloc[user_id-1][fur_id-1] += 1
+    arr_csv.to_csv('util/data/views.csv')
+# 유저와 가구 조회수 출력
+def read_views(user_pk,fur_pk):
+    arr_csv = pd.read_csv('util/data/views.csv', index_col=0)
+    return arr_csv.iloc[user_pk-1][fur_pk-1]
+
