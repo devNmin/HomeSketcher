@@ -1,34 +1,34 @@
-import { useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect, useRef } from 'react';
 import classes from './SmallCategoryBox.module.css';
 import SearchContext from '../../context/SearchContext';
 
 function PriceFilters() {
-  const minPriceInput = useRef();
-  const maxPriceInput = useRef();
   const SearchCtx = useContext(SearchContext);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const minpInput = minPriceInput;
-  const maxpInput = maxPriceInput;
+  const mni = useRef();
+  const mxi = useRef();
+  const minPriceInput = mni.current;
+  const maxPriceInput = mxi.current;
+  const [minpInput, setMinpInput] = useState(null);
+  const [maxpInput, setMaxpInput] = useState(null);
 
-  const price = {
-    minp: SearchCtx.minPrice,
-    maxp: SearchCtx.maxPrice,
-  };
-  const chagePriceInput = (event) => {
-    if (minpInput.current !== undefined && minpInput.current.value !== 0) {
-      price.minp = minpInput.current.value;
+  const chageMinPriceInput = (event) => {
+    if (minPriceInput !== undefined && minPriceInput.value !== 0) {
+      setMinpInput(minPriceInput.value);
     } else {
-      price.minp = null;
+      setMinpInput(null);
     }
-    if (maxpInput.current !== undefined && maxpInput.current.value !== 0) {
-      price.maxp = maxpInput.current.value;
+  };
+  const chageMaxPriceInput = (event) => {
+    if (maxPriceInput !== undefined && maxPriceInput.value !== 0) {
+      setMaxpInput(maxPriceInput.value);
     } else {
-      price.maxp = null;
+      setMaxpInput(null);
     }
   };
   useEffect(() => {
-    SearchCtx.changePrice(price);
-  }, [price, SearchCtx.minPrice, SearchCtx.maxPrice]);
+    SearchCtx.changePrice({ minp: minpInput, maxp: maxpInput });
+  }, [minpInput, maxpInput, SearchCtx.minPrice, SearchCtx.maxPrice]);
+
   return (
     <div>
       <hr />
@@ -37,12 +37,7 @@ function PriceFilters() {
         <form className={classes.row}>
           <div className={classes.row}>
             <label htmlFor="min">Min</label>
-            <input
-              type="number"
-              id="min"
-              ref={minPriceInput}
-              onChange={chagePriceInput}
-            />
+            <input type="number" id="min" ref={mni} onChange={chageMinPriceInput} />
           </div>
           <label>~</label>
           <div className={classes.row}>
@@ -51,8 +46,8 @@ function PriceFilters() {
               type="number"
               id="max"
               placeholder="$"
-              ref={maxPriceInput}
-              onChange={chagePriceInput}
+              ref={mxi}
+              onChange={chageMaxPriceInput}
             />
           </div>
         </form>
