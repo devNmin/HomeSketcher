@@ -14,5 +14,5 @@ def redisExport():
 
 def deleteRedisData():
     con = get_redis_connection("default")
-    con.ltrim('clickList', 0, 0)
+    con.delete('clickList')
     return 
