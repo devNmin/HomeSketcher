@@ -7,13 +7,20 @@
 
 .page_num {
   text-align: center;
+  padding: 8px 16px;
   font-weight: bold;
-  border: 1px solid rgb(192, 192, 192);
-  width: 1.4rem;
+  border-radius: 5px;
+  /* width: 1.4rem; */
 }
 .page_num:hover {
   cursor: pointer;
+  background-color: #ddd;
 }
+
+/* .page_num:active {
+  background-color: #4CAF50;
+  color: white;
+} */
 
 .page_num > p {
   margin: 0;
