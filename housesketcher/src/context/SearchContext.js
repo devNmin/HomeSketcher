@@ -90,13 +90,11 @@ export function FilterContextProvider(props) {
   };
   // state 최신값을 사용하기 위해서는 useeffect 실행 조건에 main값을 넣어줘야함
 
-  const setSubHandler = (categoryName) => {
+  const setSubHandler = async (categoryName) => {
     setSub(categoryName);
   };
 
   const setPriceHandler = (price) => {
-    console.log('setPriceHandler', price.minp, price.maxp);
-
     setMinPrice(price.minp);
     setMaxPrice(price.maxp);
   };
@@ -149,7 +147,6 @@ export function FilterContextProvider(props) {
   };
 
   const furnitureListHandler = async () => {
-    // 선택된 필터에 있는 것들 아니면 초기화 해야함
     const data = {
       page: page,
       main: main,
@@ -163,7 +160,7 @@ export function FilterContextProvider(props) {
       byPrice: byPrice,
       byLike: byLike,
     };
-    console.log('data', data);
+
     if (!IsSelectedFilterHandler('Size')) {
       data.width = null;
       data.length = null;
@@ -176,8 +173,7 @@ export function FilterContextProvider(props) {
     if (!IsSelectedFilterHandler('Style')) {
       data.style = null;
     }
-    // 뭔가 가끔씩 요청이 안되는 느낌.
-    // console.log('소 카테고리', data.sub);
+
     await axios({
       method: 'post',
       url: BASE_URL + 'furnitures/search/',
@@ -187,7 +183,6 @@ export function FilterContextProvider(props) {
       data: data,
     })
       .then((response) => {
-        // console.log('받은 가구 첫번째', response.data.furnitures[0]);
         setFurnitureList(response.data.furnitures);
         let totalP = parseInt(response.data.count / 20);
         if (response.data.count % 20 === 0) {
