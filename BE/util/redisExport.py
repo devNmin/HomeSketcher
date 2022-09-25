@@ -9,7 +9,7 @@ def redisExport():
     for item in test:
         te = item.decode().replace("'", "\"")
         strData.append(json.loads(te)) 
-
+    deleteRedisData()
     return strData
 
 def deleteRedisData():

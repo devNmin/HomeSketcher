@@ -14,7 +14,7 @@ from util.returnDto import (
     returnSuccessJson,
     returnErrorJson,
 )
-from util.choicesList import category
+from util.choicesList import category, style
 
 from .serializers import(
     FurnitureSerializer,
@@ -224,3 +224,16 @@ class FurnitureClickAPIView(APIView):
             return returnSuccessJson("성공","200", status.HTTP_200_OK)
         except:
             return returnErrorJson("서버 오류","500",status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class GetStyleAndFurnitureView(APIView):
+    @swagger_auto_schema(tags=['스타일별 가구 목록'],  responses={200: 'Success'})
+    def get(self, request):
+        response = {}
+        for i in style:
+            res = Furniture.objects.filter(furniture_style=i).values('id').all()
+            response[i] = list(res)
+        file = open("test_text1.txt", "w") 
+        file.write((str(response)))
+        file.close()
+        
+        return Response("저장", status=status.HTTP_200_OK)
