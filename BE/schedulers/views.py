@@ -11,8 +11,8 @@ def redisViewsDataExport():
     now = datetime.datetime.now()
 
     viewsData = redisExport() # load views counts from redis 
-    
-    hot_furnitures(viewsData) # save hot item
+    if len(viewsData) != 0:
+        hot_furnitures(viewsData) # save hot item
     
     
     
