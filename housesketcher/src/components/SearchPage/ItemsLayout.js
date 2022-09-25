@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import SearchContext from '../../context/SearchContext';
 import Pagnation from './Pagnation';
 import classes from './itemsLayout.module.css';
@@ -7,6 +7,9 @@ import LikeFurniture from '../Like/LikeFurniture';
 function ItemsLayout() {
   const filterCtx = useContext(SearchContext);
   const items = filterCtx.furnitureList;
+  useEffect(() => {
+    filterCtx.getFurnitureList();
+  }, [items]);
   if (!items.length) {
     return (
       <div className={classes.display_flex}>
