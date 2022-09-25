@@ -1,6 +1,6 @@
 import { createContext, useState, useContext } from 'react';
 import AuthContext from './AuthContext';
-import axios from 'axios';
+import axios from '../utils/axios';
 
 const FilterContext = createContext({
   isLoading: false,

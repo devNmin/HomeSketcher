@@ -2,9 +2,10 @@ import React, {useContext, useRef, useState} from 'react'
 import styles from './AccountRegisterPage.module.css'
 import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
+import axios from '../utils/axios';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.png'
+import swal from "sweetalert2";
 
 
 export default function AccountRegisterPage() {
@@ -78,11 +79,20 @@ export default function AccountRegisterPage() {
 
     }).then(res => {
       if(res.ok){
-        alert('회원가입이 완료되었습니다.')
+        new swal(
+          'Register Success',
+          'Welcome to HomeSketcher!'
+          ,'success'
+
+        )
         history.push('/login')
 
       } else {
-        alert('회원가입이 실패하였습니다')
+        new swal(
+          'Oops!',
+          'Something went wrong please check again',
+          'error'
+        )
       }
     })
 

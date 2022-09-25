@@ -29,7 +29,8 @@ export default function TasteListFirst(props) {
               {props.tastelist.map(taste => {
                   return (
                    
-                      <img  key= {taste.id} onClick={() => clickTasteHandler(taste.id)} className='tasteselectimage' style={props.tasteId.includes(taste.id)? { border :'3px solid ',borderColor : '#90EF94',borderRadius : '10%' , width : '380px', height : '380px'}:{ borderRadius : '10%', padding: '10px' , width : '380px', height : '380px'}} src={taste.image_url} alt="" />                                
+                      <img   key= {taste.id} onClick={() => clickTasteHandler(taste.id)} className='tasteselectimage' style={props.tasteId.includes(taste.id)? 
+                        { border :'3px solid ',cursor:'pointer' ,borderColor : '#90EF94',borderRadius : '10%' , width : '380px', height : '380px'}:{ borderRadius : '10%',cursor:'pointer', padding: '10px' , width : '380px', height : '380px'}} src={taste.image_url} alt="" />                                
                                        
                         
                                                                       
