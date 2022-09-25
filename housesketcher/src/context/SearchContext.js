@@ -16,6 +16,7 @@ const FilterContext = createContext({
   width: null,
   length: null,
   height: null,
+  style: null,
   byLike: null,
   byPrice: null,
 
@@ -229,6 +230,7 @@ export function FilterContextProvider(props) {
     width: width,
     length: length,
     height: height,
+    style: style,
     byLike: byLike,
     byPrice: byPrice,
 

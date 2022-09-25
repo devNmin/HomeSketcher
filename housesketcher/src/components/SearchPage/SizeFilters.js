@@ -61,7 +61,7 @@ function SizeFilters() {
               id="width"
               placeholder="inch"
               ref={lsi}
-              onChange={changeWidthInput}
+              onChange={changeLengthInput}
             />
           </div>
           <div className={classes.row}>
@@ -71,7 +71,7 @@ function SizeFilters() {
               id="depth"
               placeholder="inch"
               ref={wsi}
-              onChange={changeLengthInput}
+              onChange={changeWidthInput}
             />
           </div>
           <div className={classes.row}>
