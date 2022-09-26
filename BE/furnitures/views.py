@@ -28,6 +28,8 @@ import pandas as pd
 from django.db.models import Subquery,Count
 from likes.models import UserLike
 
+from random import shuffle
+
 # 가구 검색 API(검색창 검색)
 class FurnitureSearchAPIView(APIView):
     permission_classes=[IsAuthenticated]
@@ -89,22 +91,29 @@ class FurnitureLabelAPIView(APIView):
         # count = furnitures.count() #전체 개수
         res ={} #응답 데이터
         # res['count'] = count
-        try:
+        # try:
             #가장 높은 평점을 가진 가구 정보 제공
-            if label == "rate":
-                #furniture-rating 별로 내림차순 정렬
-                # 좋아요 여부 가져오기
-                furniture_datas = furnitures.order_by('-furniture_rating')[:20]
-                furnitureValuses = furniture_datas.values()
-                res['furnitures'] = addLike(furnitureValuses, request.user.id)
+        if label == "rate":
+            #furniture-rating 별로 내림차순 정렬
+            # 좋아요 여부 가져오기
 
-            #가장 리뷰수가 많은 가구 정보 제공
-            elif label == "review":
-                furniture_datas =  furnitures.order_by('furniture_review')[:20]
-                furnitureValuses = furniture_datas.values()
-                res['furnitures'] = addLike(furnitureValuses, request.user.id)
-        except:
-            return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            furniture_datas = furnitures.order_by('-furniture_rating')[:100]
+            furnitureValuses = furniture_datas.values()
+            furnitureValuses = addLike(furnitureValuses, request.user.id)
+            furnitureValuses = list(furnitureValuses)[:20]
+            shuffle(furnitureValuses)
+            res['furnitures'] = furnitureValuses
+
+        #가장 리뷰수가 많은 가구 정보 제공
+        elif label == "review":
+            furniture_datas =  furnitures.order_by('-furniture_review')[:100]
+            furnitureValuses = furniture_datas.values()
+            furnitureValuses = addLike(furnitureValuses, request.user.id)
+            furnitureValuses = list(furnitureValuses)[:20]
+            shuffle(furnitureValuses)
+            res['furnitures'] = furnitureValuses
+    # except:
+    #     return returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
         return Response(res,status=status.HTTP_200_OK)

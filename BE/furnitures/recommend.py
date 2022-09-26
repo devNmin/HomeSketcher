@@ -211,15 +211,16 @@ def FurnitureRecommend(user_id):
     # print(pk_list) 
     # print(len(pk_list))
 
-    furnitures = FurnitureListWithPk(pk_list)
+    furnitures = FurnitureListWithPk(pk_list,user_id)
     
     return furnitures
 
 # pk 리스트로 가구 리스트 뽑아오는 함수
-def FurnitureListWithPk(pk_list):
+def FurnitureListWithPk(pk_list,user_id):
     furnitures =[]
     for i in pk_list:
         furniture = Furniture.objects.get(id=i)
+        like = UserLike.objects.filter(user_id=user_id, furniture_id=i)
         res={}
         res['id'] = furniture.id
         res['furniture_name'] = furniture.furniture_name
@@ -236,6 +237,11 @@ def FurnitureListWithPk(pk_list):
         res['furniture_main'] = furniture.furniture_main
         res['furniture_sub'] = furniture.furniture_sub
         res['furniture_real'] = furniture.furniture_real
+        try:
+            like[0]
+            res['like']=True
+        except:
+            res['like']=False
         furnitures.append(res)
 
     return furnitures
@@ -262,8 +268,9 @@ class FurnitureHotItemAPIView(APIView):
     @swagger_auto_schema(tags=['시간대별 인기 가구 리스트(Popular)'],  responses={200: 'Success'})
     def get(self,request):
         furniture_pks = read_hot_furnitures() #시간대별 인기 가구 pk 리스트
-
-        data_length = len(furniture_pks)
+        shuffle(furniture_pks) # 항상 다른 리스트가 보이게 무작위로 섞어줌
+        furniture_pks = furniture_pks[:20] # 그 중 20개를 추출
+        data_length = len(furniture_pks) # 혹시 20개가 안될 수도 있기 때문에 전체 길이를 구하고
         data_length = data_length - data_length%4 #프론트에서 보기 좋게 4의 배수로 맞춰줌
 
         furniture_pks = furniture_pks[:data_length]
@@ -271,7 +278,7 @@ class FurnitureHotItemAPIView(APIView):
         # print(data_length)
         
         try:
-            furnitures = FurnitureListWithPk(furniture_pks) # 가구 리스트 추출  
+            furnitures = FurnitureListWithPk(furniture_pks,request.user.id) # 가구 리스트 추출  
         except:
             return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
 
