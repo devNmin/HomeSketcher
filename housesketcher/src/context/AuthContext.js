@@ -24,6 +24,7 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
   // 콜백을 쓰는 이유는 안 쓸 경우 페이지가 로드 될때마다 계속 작동하기 때문에
   console.log('AuthProvider 들어옴');
+  
 
   let [user, setUser] = useState(() =>
     localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
