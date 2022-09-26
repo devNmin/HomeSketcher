@@ -6,7 +6,7 @@ const NonPrivateRoute = ({children, ...rest}) => {
     let {user} = useContext(AuthContext)
     return (
         <Route {...rest}>
-            {user ? <Redirect to= "/loginmain" /> : children}
+            {localStorage.getItem('authTokens') ? <Redirect to= "/loginmain" /> : children}
         </Route>
     )
 }
