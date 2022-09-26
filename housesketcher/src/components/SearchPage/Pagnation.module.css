@@ -17,6 +17,14 @@
   background-color: #ddd;
 }
 
+.now_page {
+  text-align: center;
+  padding: 8px 16px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #fbe194;
+}
+
 /* .page_num:active {
   background-color: #4CAF50;
   color: white;
