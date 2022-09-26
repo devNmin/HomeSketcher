@@ -25,15 +25,14 @@ function App() {
           */}
           <ScrollToTop>
             <Switch className="App">
-              <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
               <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
+              <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
               <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
               <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
               <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>
               <PrivateRoute component= {TasteAnalysisPage} exact path = '/tasteanalysis'/>                        
             </Switch>
           </ScrollToTop>
-
         </AuthProvider>
       </Router>
     </div>

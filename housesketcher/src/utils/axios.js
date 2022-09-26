@@ -1,8 +1,6 @@
 import Axios from 'axios' 
 import jwt_decode from 'jwt-decode'
 import dayjs from 'dayjs'
-import { useContext } from 'react';
-import AuthContext from '../context/AuthContext';
 
 const baseURL = 'https://j7b304.p.ssafy.io/api/v1/';
 
