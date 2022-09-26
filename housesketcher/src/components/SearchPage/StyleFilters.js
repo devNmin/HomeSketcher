@@ -19,7 +19,6 @@ function StyleFilters() {
 
   useEffect(() => {
     searchCtx.changeStyle(styleName);
-    searchCtx.getFurnitureList();
   }, [styleName]);
 
   return (
