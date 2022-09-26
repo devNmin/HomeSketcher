@@ -13,9 +13,20 @@ function SubCarousel(props) {
   const [recommends, setRecommends] = useState([])
   const [mostReviews, setMostReviews] = useState([])
   const [latests, setLatests] = useState([])
-
+  // const [hots, setHots] = useState([])
 
   let {BASE_URL, authTokens} = useContext(AuthContext)
+
+  // const getHots = async () => {
+  //   const response = await axios.get(BASE_URL + 'furnitures/hot/furniture/', {
+  //     headers: {
+  //       Authorization: `Bearer ${authTokens.access}`
+  //     }
+  //   })
+  //   const hotData = await response.data;    
+  //   setPopulars(hotrData.furnitures);
+  // }
+
 
 
   const getPopulars = async () => {
@@ -69,65 +80,50 @@ function SubCarousel(props) {
     getRecommends();
     getMostReviews();
     getLatests();
+    // getHots()
   }, [])
   // console.log(populars)
   return (
     <div>
+      
       <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-      <h1>Popular</h1>
-      <br />
-      <CardPanel
-        show={4}
-        populars={populars}
-      >
-          {populars.map((popular) => (
-            <LikeFurniture key= {popular.id} furniture = {popular} addLatest = {addLatests}>              
-            </LikeFurniture>
-          ))}
-        {/* <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-            <h1>블라블라</h1>
-          </div>
-        </div>
-        <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-            <h1>블라블라</h1>
-          </div>
-        </div>
-        <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-            <h1>블라블라</h1>
-          </div>
-        </div>
-        <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-          </div>
-        </div>
-        <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-          </div>
-        </div>
-        <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-          </div>
-        </div>
-        <div>
-          <div style={{ padding: 20 }}>
-            <img src={logo} alt="placeholder" style={{ width: '100%' }} />
-          </div>
-        </div> */}
-      </CardPanel>
+        <h1>Latests</h1>
+          <br />
+          {latests.length? 
+          <CardPanel
+            show={4}
+            populars={latests}>
+              {latests.map((popular) => (
+                <LikeFurniture key= {popular.id} furniture = {popular[0]} addLatest = {addLatests}>              
+                </LikeFurniture>
+              ))}        
+          </CardPanel>
+          : 
+          <div> There aren't any Latests Furniture</div>
+          }
       </div>
+
+      {/* <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+        <h1>Real time HOTs</h1>
+          <br />
+          {hots.length? 
+          <CardPanel
+            show={4}
+            populars={hots}>
+              {hots.map((hot) => (
+                <LikeFurniture key= {hot.id} furniture = {hot[0]} addLatest = {addLatests}>              
+                </LikeFurniture>
+              ))}        
+          </CardPanel>
+          : 
+          <div> There aren't any Real time hot Furniture</div>
+          }
+      </div> */}
 
       <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
       <h1>Recommended</h1>
       <br />
+      {recommends.length ? 
       <CardPanel
         show={4}
         populars={recommends}>
@@ -136,6 +132,9 @@ function SubCarousel(props) {
             </LikeFurniture>
           ))}        
       </CardPanel>
+      :
+      <div>There aren't any Recommended Furniture</div>
+      }
       </div>
 
       <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
@@ -151,20 +150,20 @@ function SubCarousel(props) {
       </CardPanel>
       </div>
 
+
       <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-
-      <h1>Latests</h1>
-      <br />
-      <CardPanel
-        show={4}
-        populars={latests}>
-          {latests.map((popular) => (
-            <LikeFurniture key= {popular.id} furniture = {popular[0]} addLatest = {addLatests}>              
-            </LikeFurniture>
-          ))}        
-      </CardPanel>
+        <h1>Popular</h1>
+        <br />
+          <CardPanel
+            show={4}
+            populars={populars}
+          >
+              {populars.map((popular) => (
+                <LikeFurniture key= {popular.id} furniture = {popular} addLatest = {addLatests}>              
+                </LikeFurniture>
+              ))}        
+          </CardPanel>
       </div>
-
       
     </div>
   )

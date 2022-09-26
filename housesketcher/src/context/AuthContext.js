@@ -25,11 +25,12 @@ export const AuthProvider = ({ children }) => {
   // 콜백을 쓰는 이유는 안 쓸 경우 페이지가 로드 될때마다 계속 작동하기 때문에
   let [user, setUser] = useState(() =>
     localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+    
   );
+
   let [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem('authTokens')
-      ? JSON.parse(localStorage.getItem('authTokens'))
-      : null
+    localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')): null
+    
   );
   let BASE_URL = 'https://j7b304.p.ssafy.io/api/v1/';
   let [loading, setLoading] = useState(true);
