@@ -14,7 +14,7 @@
     "react-three-fiber": "5.3.11",
     "three": "0.124.0"
   },
-  "homepage": "/test",
+  "homepage": "./",
   "devDependencies": {
   },
   "scripts": {
