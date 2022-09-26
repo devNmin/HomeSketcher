@@ -142,8 +142,9 @@ export default function AccountRegisterPage() {
             </div>
 
             <div className={styles.actions}>
-              <h5> Gender & Birth </h5>
-              <div style={{display:'flex', justifyContent : "center"}}>
+              <h5 style={{ paddingBottom : '10px'}}> Gender & Birth </h5>
+              
+              <div style={{display:'flex', textAlign : 'left', marginLeft : '45px', marginBottom : '40px'}}>
                 <div style={{ marginRight : '20px'}}>
                 <label>남자</label>
                 <input className='mx-3' type="radio" id="male" name="gender" value="0" onChange={handleChange}/>

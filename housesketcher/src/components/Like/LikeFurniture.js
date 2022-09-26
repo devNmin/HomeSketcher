@@ -67,7 +67,7 @@ export default function LikeFurniture(props) {
     
     
     const nameSpacer = (name) => {
-        if (name.length > 29) {
+        if (name.length > 27) {
             const newname =  name.slice(0,22) + '...' 
             return (
                 newname
@@ -78,18 +78,14 @@ export default function LikeFurniture(props) {
     }
    
   return (   
-       <div>
-            
-                <Card style={{ width: '18rem' }} key={furniture.id}                   
+       <div>            
+            <Card style={{ width: '18rem' }} key={furniture.id}                
                 >
-                    <Card.Body>
-                        <div >                                                       
+                    <Card.Body style = {{ paddingBottom :'0px' }}>
+                        <div style = {{ textAlign : 'left'}}>                                                       
                             {isLike ? <img style={{ width :'10%', height: '10%' , cursor:'pointer'}} onClick={() => {likeClickHandler(furniture.id, isLike)}} src= {fullStar}alt="" />: 
                             <img style={{ width :'10%', height: '10%' , cursor:'pointer'}} onClick={() => {likeClickHandler(furniture.id, isLike)}} src= {hollowStar}alt="" />}
-                            <div>
-                                {furniture.id}
-                            </div>
-                         
+                                                    
                         </div>
                     </Card.Body>
                    
@@ -101,18 +97,18 @@ export default function LikeFurniture(props) {
                     <Card.Body
                    >
                         <div style= {{dislplay : 'flex' , marginBottom : '0px'}} >
-                            <a href= {`https://www.google.com/search?q=${furniture.furniture_style}+${furniture.furniture_color}+interior`}
-                             style = {{textDecoration : 'none', cursor:'pointer'}}>
-
-                            <p> #{furniture.furniture_style} #{furniture.furniture_color} </p>
-
-                            </a>
                         </div> 
                         <div
                          onMouseEnter={() => {setIsMouseOnHandler(true)}} 	      // 마우스엔터 이벤트이면 hide가 false가 된다.
                          onMouseLeave={() => {setIsMouseOnHandler(false)}}>
                             {isMouseon? <b> {furniture.furniture_name}</b> : <b>{nameSpacer(furniture.furniture_name)}</b> } 
                         </div>
+                        <a href= {`https://www.google.com/search?q=${furniture.furniture_style}+${furniture.furniture_color}+interior`}
+                            style = {{textDecoration : 'none', cursor:'pointer'}}>
+
+                        <p> #{furniture.furniture_style} #{furniture.furniture_color} </p>
+
+                        </a>
                     </Card.Body>
                   
                     

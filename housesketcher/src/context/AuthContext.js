@@ -27,12 +27,12 @@ export const AuthProvider = ({ children }) => {
 
   let [user, setUser] = useState(() =>
     localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
+    
   );
 
   let [authTokens, setAuthTokens] = useState(() =>
-    localStorage.getItem('authTokens')
-      ? JSON.parse(localStorage.getItem('authTokens'))
-      : null
+    localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')): null
+    
   );
 
   let BASE_URL = 'https://j7b304.p.ssafy.io/api/v1/';
