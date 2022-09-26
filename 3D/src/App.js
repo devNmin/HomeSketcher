@@ -11,6 +11,13 @@ import FloorClip from "./FloorClip";
 import "./styles.css";
 import { DISTANCE_BETWEEN_FLOORS } from "./constants";
 
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
+
 const DevTools = () => {
   const { scene, renderer } = useThree();
 
@@ -20,7 +27,32 @@ const DevTools = () => {
   return null;
 };
 
+
 export default function App() {
+  
+  
+  return (
+    <Router>
+      <div>
+        <ul>
+          <li>
+            <Link to="/test">test</Link>
+          </li>
+        </ul>
+
+        <hr />
+
+        <Routes>
+          <Route path="/test" element={<Test />} />
+
+        </Routes>
+      </div>
+    </Router>
+    
+  );
+}
+
+function Test() {
   
   let [currentFloor, setCurrentFloor] = useState(0);
   let [showCorners, setShowCorners] = useState(false);
@@ -34,6 +66,31 @@ export default function App() {
   const YYY = useRef();
   const HHH = useRef();
 
+  
+  const changeXHandler = () => {
+    if (XXX.current.value !== undefined){
+    setX(XXX.current.value)
+    }
+    else{
+      setX(5)
+    }
+  }
+  const changeYHandler = () => {
+    if (YYY.current.value !== undefined){
+      setY(YYY.current.value)
+      }
+      else{
+        setY(5)
+      }
+  }
+  const changeHHandler = () => {
+    if (HHH.current.value !== undefined){
+      setH(HHH.current.value)
+      }
+      else{
+        setH(1)
+    }
+  }
   let newItem = {
     "floors": [
       {
@@ -46,7 +103,7 @@ export default function App() {
         ],
         "rooms": [
           {
-            "id": "ROOM1",
+            "id": "ROOM2",
             "height": H,
             "coords": [
               { "x": 0, "y": 0 },
@@ -59,18 +116,13 @@ export default function App() {
       }
     ]
   }
-  const changeXHandler = () => {
-    setX(XXX.current.value)
-    setY(YYY.current.value)
-    setH(HHH.current.value)
-
-  }
   let animatedFloorPosition = useFloorTransitionAnimation({
     floors: newItem.floors,
     currentFloor
   });
 
   return (
+    
     <div className="App">
       <Canvas
         key={`isometric-${orthoCamera}`}
@@ -125,9 +177,9 @@ export default function App() {
           <label htmlFor="xx" >X</label>
           <input id="xx" ref={XXX} onChange ={changeXHandler}/>
           <label htmlFor="yy">Y</label>
-          <input id="yy" ref={YYY} onChange ={changeXHandler}/>
+          <input id="yy" ref={YYY} onChange ={changeYHandler}/>
           <label htmlFor="hh">H</label>
-          <input id="hh" ref={HHH} onChange ={changeXHandler}/>
+          <input id="hh" ref={HHH} onChange ={changeHHandler}/>
           <button >제출</button>
         </form>
 
@@ -161,7 +213,8 @@ export default function App() {
         {newItem.floors[currentFloor].doors
           .filter(({ direction }) => direction !== 0)
           .map(({ id }) => (
-            <div key={id}>
+            <div 
+            key={id}>
               <label htmlFor={`door-${id}`}>{id} door</label>
               <input
                 name={`door-${id}`}
@@ -173,9 +226,9 @@ export default function App() {
           ))}
       </div>
     </div>
+    
   );
 }
-
 const useDoorStates = () => {
   let [doorStates, dispatch] = useReducer((state, action) => {
     let { id } = action;

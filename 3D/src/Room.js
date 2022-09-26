@@ -33,12 +33,15 @@ const Room = ({
   return (
     <group>
       {walls.map((wall) => (
-        <Wall
+
+        wall.a.x | wall.a.y | wall.b.x | wall.b.y ? <Wall
           key={`${id}-wall-[${wall.a.x},${wall.a.y}],[${wall.b.x},${wall.b.y}]`}
           {...wall}
           isInteractive={isInteractive}
-        />
+        />:null
+       
       ))}
+
       <Flooring coords={coords} isInteractive={isInteractive} />
       {showCorners &&
         coords.map(({ x, y: z }) => {
