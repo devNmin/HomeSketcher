@@ -100,11 +100,11 @@ export default function AccountRegisterPage() {
 
   return (
     <div>
+    <section className={styles.auth}>
       <div style={{display:'flex', justifyContent : "center"}}>
-        <img src= {logo} alt=""  style={{width : '15%', height: '15%'}}/>
+        <img src= {logo} alt=""/>
 
       </div>
-    <section className={styles.auth}>
     <form onSubmit={submitHandler}>
         
         <div className='Signup'>
@@ -119,7 +119,7 @@ export default function AccountRegisterPage() {
             </div>
             {/* 비밀번호 */}
             <div className={styles.control}>
-              <h5> Password </h5>
+              <h5 className={styles.password}> Password </h5>
               <input type='password' maxLength='15' name='signup_password' ref={passwordInput}/>
             </div>
             {/* 비밀번호2 */}
