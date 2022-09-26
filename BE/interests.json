@@ -1,1 +1,0 @@
-[{"model": "interests.interest", "pk": 1, "fields": {"image_name": "00000001.jpg", "image_url": "https://firebasestorage.googleapis.com/v0/b/homesketcher-", "style": "A", "color": "black"}}, {"model": "interests.interest", "pk": 2, "fields": {"image_name": "00000002.jpg", "image_url": "https://firebasestorage.googleapis.com/v0/b/homesketcher-", "style": "A", "color": "black"}}]
