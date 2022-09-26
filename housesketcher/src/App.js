@@ -25,7 +25,7 @@ function App() {
           */}
           <ScrollToTop>
             <Switch className="App">
-              <NonPrivateRoute component={NonLoginMainPage} exact path="/main"/>              
+              <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
               <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
               <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
               <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
