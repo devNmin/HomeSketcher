@@ -235,7 +235,7 @@ def FurnitureListWithPk(pk_list):
         res['furniture_color'] = furniture.furniture_color
         res['furniture_main'] = furniture.furniture_main
         res['furniture_sub'] = furniture.furniture_sub
-        res['furniture_condition'] = furniture.furniture_condition
+        res['furniture_real'] = furniture.furniture_real
         furnitures.append(res)
 
     return furnitures

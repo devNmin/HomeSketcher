@@ -45,6 +45,7 @@ class User(AbstractBaseUser):
     user_birth = models.DateField(null=True) # 생년월일
     user_style = models.CharField(max_length=30, default=0, choices=select_style) # 선호 스타일
     user_color = models.CharField(max_length=30, default=0, choices=select_color) # 선호 색상
+    is_dummy = models.IntegerField(null=True)
     
     USERNAME_FIELD = 'id' # 기본키
 
