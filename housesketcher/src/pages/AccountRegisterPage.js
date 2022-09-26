@@ -2,7 +2,7 @@ import React, {useContext, useRef, useState} from 'react'
 import styles from './AccountRegisterPage.module.css'
 import AuthContext from '../context/AuthContext'
 import { useHistory } from 'react-router-dom';
-import axios from '../utils/axios';
+import axios from 'axios';
 import { Link } from 'react-router-dom';
 import logo from '../assets/Logo.png'
 import swal from "sweetalert2";
