@@ -1,12 +1,10 @@
 import { Route, Redirect } from "react-router-dom";
-import { useContext } from "react";
-import AuthContext from "../context/AuthContext";
 
-const PrivateRoute = ({children, ...rest}) => {
-    let {user} = useContext(AuthContext)
+
+const PrivateRoute = ({children, ...rest}) => {    
     return (
         <Route {...rest}>
-            {!localStorage.getItem('authTokens')  ? <Redirect to= "/" /> : children}
+            {!localStorage.getItem('userInfo')  ? <Redirect to= "/" /> : children}
         </Route>
     )
 }
