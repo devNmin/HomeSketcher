@@ -22,7 +22,7 @@ function ItemsLayout() {
       <div className={classes.display_flex}>
         {items.map((item) => {
           return (
-            <div className={classes.item_container}>
+            <div  key={item.id} className={classes.item_container}>
               <LikeFurniture
                 key={item.id}
                 furniture={item}
