@@ -5,6 +5,8 @@ from dotenv import dotenv_values
 env = dotenv_values(".env")
 MYSQL_SECRET=env["MYSQL_SECRET"]
 REDIS_SECRET=env["REDIS_SECRET"]
+MYSQL_HOST=env["MYSQL_HOST"]
+REDIS_HOST=env["REDIS_HOST"]
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -103,8 +105,7 @@ DATABASES = {
         'NAME': 'ssafy',
         'USER': 'root',
         'PASSWORD': MYSQL_SECRET,
-        # 'HOST': 'mysql',
-        'HOST' : 'j7b304.p.ssafy.io',
+        'HOST' : MYSQL_HOST,
         'PORT': '3306',
     }
 }
@@ -112,8 +113,7 @@ DATABASES = {
 CACHES = {
     "default": {
         "BACKEND": "django_redis.cache.RedisCache",
-        # "LOCATION": "redis://redis:6379/1",
-        "LOCATION": "redis://j7b304.p.ssafy.io:6379/1",
+        "LOCATION": REDIS_HOST,
         "OPTIONS": {
             "PASSWORD": REDIS_SECRET,
             "CLIENT_CLASS": "django_redis.client.DefaultClient",
