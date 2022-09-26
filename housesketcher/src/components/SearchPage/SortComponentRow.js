@@ -20,7 +20,7 @@ function SortComponentRow() {
       searchCtx.changeSort('byLike', SortDetails[sortDetail]);
     }
     searchCtx.getFurnitureList();
-  }, [sortName, sortDetail, searchCtx.byLike, searchCtx.byPrice]);
+  }, [sortName, sortDetail]);
   return (
     <div className={classes.row_width}>
       <div className={classes.flex_around}>
