@@ -9,10 +9,10 @@ def redisExport():
     for item in test:
         te = item.decode().replace("'", "\"")
         strData.append(json.loads(te)) 
-
+    # deleteRedisData()
     return strData
 
 def deleteRedisData():
     con = get_redis_connection("default")
-    con.ltrim('clickList', 0, 0)
+    con.delete('clickList')
     return 

@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 import datetime
 from util.redisExport import redisExport
-from util.recom import hot_furnitures,read_hot_furnitures
+from util.recom import hot_furnitures,read_hot_furnitures, cal_views
 # Create your views here.
 
 # redis 결과 보내기
@@ -11,9 +11,10 @@ def redisViewsDataExport():
     now = datetime.datetime.now()
 
     viewsData = redisExport() # load views counts from redis 
-    
-    hot_furnitures(viewsData) # save hot item
-    
+   
+    if len(viewsData) != 0:
+        hot_furnitures(viewsData) # save hot item
+    cal_views(viewsData)
     
     
     # print(res)

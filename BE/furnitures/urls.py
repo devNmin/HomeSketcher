@@ -7,6 +7,7 @@ from .views import(
     FurnitureListAPIView,
     FurnitureLikeAPIView,
     FurnitureClickAPIView,
+    GetStyleAndFurnitureView,
 )
 
 from .recommend import(
@@ -26,5 +27,6 @@ urlpatterns=[
     path('click/<str:furniture_pk>/', FurnitureClickAPIView.as_view(), name="furniture-click"),
     path('recommend/furniture/', FurnitureRecommendAPIView.as_view(), name="furniture-recommend-list"),
     path('hot/furniture/', FurnitureHotItemAPIView.as_view(), name="furniture-hot-items"),
+    path('getStyleAndFurniture/', GetStyleAndFurnitureView.as_view(), name="style-get-furniture"),
     
 ]
