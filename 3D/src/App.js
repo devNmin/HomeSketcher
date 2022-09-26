@@ -28,31 +28,31 @@ const DevTools = () => {
 };
 
 
-export default function App() {
+// export default function App() {
   
   
-  return (
-    <Router>
-      <div>
-        <ul>
-          <li>
-            <Link to="/test">test</Link>
-          </li>
-        </ul>
+//   return (
+//     <Router>
+//       <div>
+//         <ul>
+//           <li>
+//             <Link to="/abc">abc</Link>
+//           </li>
+//         </ul>
 
-        <hr />
+//         <hr />
 
-        <Routes>
-          <Route path="/test" element={<Test />} />
+//         <Routes>
+//           <Route path="/abc" element={<Abc />} />
 
-        </Routes>
-      </div>
-    </Router>
+//         </Routes>
+//       </div>
+//     </Router>
     
-  );
-}
+//   );
+// }
 
-function Test() {
+export default function App() {
   
   let [currentFloor, setCurrentFloor] = useState(0);
   let [showCorners, setShowCorners] = useState(false);

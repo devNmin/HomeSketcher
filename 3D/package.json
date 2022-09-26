@@ -3,8 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "homepage": ".",
-  "keywords": [],
-  "main": "src/index.js",
   "dependencies": {
     "@react-spring/three": "9.0.0-rc.3",
     "gsap": "3.6.0",
@@ -18,7 +16,6 @@
   },
   "homepage": "/test",
   "devDependencies": {
-    "typescript": "3.8.3"
   },
   "scripts": {
     "start": "react-scripts start",
