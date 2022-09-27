@@ -27,6 +27,7 @@ import pandas as pd
 
 from django.db.models import Subquery,Count
 from likes.models import UserLike
+from threedimensions.models import GlbObject
 
 from random import shuffle
 
@@ -198,14 +199,28 @@ class FurnitureLikeAPIView(APIView):
     permission_classes=[IsAuthenticated]
     serializer_class = FurnitureSerializer
 
-    @swagger_auto_schema(tags=['좋아요 표시한 가구 리스트 전송'],  responses={200: 'Success'})
+    @swagger_auto_schema(tags=['좋아요 표시한 가구 리스트 전송(glb 포함)'],  responses={200: 'Success'})
     def get(self,request):
         id = request.user.id #사용자 pk 정보
         try:
             furnitures = Furniture.objects.filter(id__in= UserLike.objects.filter(user = id).values_list('furniture_id')).values()
+
+            glbs = GlbObject.objects.all().values_list("furniture_sub","glb_url")
             
-            return Response(addLike(furnitures.values(), request.user.id), status=status.HTTP_200_OK)
-        
+            url_data = {}
+            # 뽑아쓰기 쉽게 키(소분류), 밸류(url)로 생성
+            for g in glbs:
+                url_data[g[0]] = g[1]
+                
+            res = [] #응답 데이터
+            
+            for furniture in furnitures:
+                furniture['like']=True
+                furniture['glb_url']=url_data.get(furniture['furniture_sub'])
+                res.append(furniture)
+
+            return Response(res, status=status.HTTP_200_OK)
+            
         except:
             return Response(returnErrorJson("DB Error","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR))
         
