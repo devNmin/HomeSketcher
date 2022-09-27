@@ -137,18 +137,6 @@ export default function ThreeJsPage() {
   
   console.log('targettargettarget', target)
 
-  const MyMesh = () => {
-    const refMesh = useRef();
-  
-    useFrame(() => {
-      if(refMesh.current) {
-        // rotates the object
-        refMesh.current.rotate.x += 0.01;
-      }
-    });
-    return (<mesh ref={refMesh} />);
-  }
-
 
   return (
     <div className={classes.three_body}>
@@ -161,13 +149,13 @@ export default function ThreeJsPage() {
           </div>
         </div>
         <div className={classes.RightItems}>
-        <Canvas  onPointerMissed={() => setTarget(null)} >
-          {/* key={`isometric-${orthoCamera}`}
+        <Canvas  onPointerMissed={() => setTarget(null)} 
+          key={`isometric-${orthoCamera}`}
           orthographic={orthoCamera}
-          invalidateframeloop="false" */}
+          invalidateframeloop="false">
           
           <ModelT/>
-          <CameraSetup />
+          {/* <CameraSetup /> */}
           
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
@@ -183,7 +171,7 @@ export default function ThreeJsPage() {
 
           <FloorClip currentFloor={currentFloor} data={newItem} />
           {target && <TransformControls object={target} mode={mode} />}
-          
+          <OrbitControls makeDefault />
           <DevTools />
         </Canvas>
       <div>
