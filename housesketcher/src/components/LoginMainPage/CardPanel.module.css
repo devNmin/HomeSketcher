@@ -1,12 +1,16 @@
 .carousel_container {
   width: 100%;
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column;
+  justify-content: center;
+  align-items: flex-end; */
   background-color: transparent;
 }
 
 .carousel_wrapper {
   display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   position: relative;
 }
@@ -45,6 +49,8 @@
 
 .carousel_content.show_4 > * {
   width: calc(100% / 4);
+  display: flex;
+  justify-content: center;
   text-align: center;
 }
 
@@ -56,16 +62,16 @@
   width: 48px;
   height: 48px;
   border-radius: 24px;
-  background-color: white;
+  background-color: #F3CD58;
   border: 1px solid #ddd;
 }
 
 .left_arrow {
-  left: 24px;
+  left: 20px;
 }
 
 .right_arrow {
-  right: 24px;
+  right: 20px;
 }
 
 @media (hover: none) and (pointer: coarse) {

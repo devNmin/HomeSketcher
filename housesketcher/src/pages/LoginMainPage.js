@@ -12,7 +12,11 @@ function LoginMainPage(props) {
 		<>
 			<Navbar />
 			<MainCarousel />
-			<SubCarousel />					
+			<SubCarousel />
+			<br />
+			<br />
+			<br />
+			<br />					
 			<Footer />
 		</>
 	);
