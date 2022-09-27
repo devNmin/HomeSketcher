@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import { Link } from 'react-router-dom';
 // npm install @mui/icons-material @mui/material @emotion/styled @emotion/react
@@ -6,42 +6,41 @@ import { Link } from 'react-router-dom';
 import logo from '../../assets/Logo.png';
 import styles from './Navbar.module.css';
 import AuthContext from '../../context/AuthContext';
-import Navbutton from './Navbutton'
+import Navbutton from './Navbutton';
 // import { padding } from '@mui/system';
 
-
 function Navbar(props) {
-  let { user  } = useContext(AuthContext)
+  let { user } = useContext(AuthContext);
 
   return (
     <div className={styles.navbar}>
-      <Link to='/loginmain'>
+      <Link to="/loginmain">
         <img className={styles.navbar_logo} src={logo} alt="" />
       </Link>
-      {user && <div className={styles.navbar_search}>
-        {/* <input className={styles.navbar_searchInput} type="text" />
+      {user && (
+        <div className={styles.navbar_search}>
+          {/* <input className={styles.navbar_searchInput} type="text" />
         <SearchIcon className={styles.navbar_searchIcon} fontSize="large" />  */}
-        <a href='/searchpage'>
-          <p>Recommend</p>
-        </a>
-        <a href='/searchpage'>
-          <p>3DInterior</p>
-        </a>
-      </div>}
-      
+          <a href="/searchpage">
+            <p>Recommend</p>
+          </a>
+          <a href="/modeling">
+            <p>3DInterior</p>
+          </a>
+        </div>
+      )}
+
       <nav className={styles.nav}>
-        <ul>      
+        <ul>
           {user ? (
             <li>
               <Navbutton />
               {/* <button><b>Hello, {user.user_nickname}</b></button> */}
               {/* <button onClick={logoutUser}>Logout</button> */}
             </li>
-          ): (
-          null
-          )}        
+          ) : null}
         </ul>
-      </nav>     
+      </nav>
     </div>
   );
 }

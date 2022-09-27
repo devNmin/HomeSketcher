@@ -4,12 +4,13 @@ import './App.css';
 import NonLoginMainPage from './pages/NonLoginMainPage';
 import SearchPage from './pages/SearchPage';
 import LoginPage from './pages/LoginPage';
-import AccountRegisterPage from './pages/AccountRegisterPage'
-import { AuthProvider } from './context/AuthContext'
-import LoginMainPage from './pages/LoginMainPage'
-import PrivateRoute from './utils/PrivateRoute'
-import NonPrivateRoute from './utils/NonPrivateRoute'
-import TasteAnalysisPage from './pages/TasteAnalysis'
+import AccountRegisterPage from './pages/AccountRegisterPage';
+import { AuthProvider } from './context/AuthContext';
+import LoginMainPage from './pages/LoginMainPage';
+import PrivateRoute from './utils/PrivateRoute';
+import NonPrivateRoute from './utils/NonPrivateRoute';
+import TasteAnalysisPage from './pages/TasteAnalysis';
+import ThreeJsPage from './pages/ThreeJsPage';
 import ScrollToTop from './hooks/ScrollToTop';
 
 function App() {
@@ -25,12 +26,13 @@ function App() {
           */}
           <ScrollToTop>
             <Switch className="App">
-              <NonPrivateRoute component={NonLoginMainPage} exact path="/"/>              
-              <PrivateRoute component={LoginMainPage} exact path= "/loginmain"/>             
-              <PrivateRoute component={SearchPage} exact path="/searchpage"/>         
-              <NonPrivateRoute component={LoginPage} exact path = "/login"/>     
-              <NonPrivateRoute component={AccountRegisterPage} exact path="/register"/>
-              <PrivateRoute component= {TasteAnalysisPage} exact path = '/tasteanalysis'/>                        
+              <NonPrivateRoute component={NonLoginMainPage} exact path="/" />
+              <PrivateRoute component={LoginMainPage} exact path="/loginmain" />
+              <PrivateRoute component={SearchPage} exact path="/searchpage" />
+              <NonPrivateRoute component={LoginPage} exact path="/login" />
+              <NonPrivateRoute component={AccountRegisterPage} exact path="/register" />
+              <PrivateRoute component={TasteAnalysisPage} exact path="/tasteanalysis" />
+              <PrivateRoute component={ThreeJsPage} exact path="/modeling" />
             </Switch>
           </ScrollToTop>
         </AuthProvider>

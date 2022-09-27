@@ -1,0 +1,12 @@
+.three_body {
+  font-family: sans-serif;
+  font-size: 12px;
+  text-align: center;
+  width: 100%;
+  height: auto;
+}
+
+.canvas_css {
+  margin: 5rem;
+  height: auto;
+}
