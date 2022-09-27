@@ -6,6 +6,7 @@ import CameraSetup from '../components/ThreeJsPage/CameraSetup';
 import FloorPlan from '../components/ThreeJsPage/FloorPlan';
 import FloorClip from '../components/ThreeJsPage/FloorClip';
 
+import { Model } from '../components/ThreeJsPage/Model';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
 import classes from './ThreeJsPage.module.css';
 
@@ -100,6 +101,7 @@ export default function App() {
           </a.group>
 
           <FloorClip currentFloor={currentFloor} data={newItem} />
+          <Model position={[0, 0, 0]} />
 
           <DevTools />
         </Canvas>
