@@ -1,5 +1,5 @@
-import React, { useState, useReducer, useMemo, useRef } from 'react';
-import { Canvas, useThree } from "react-three-fiber";
+import React, {useState, useReducer, useMemo, useRef } from 'react';
+import { Canvas, useThree, useFrame  } from "react-three-fiber";
 import { a, useSpring } from '@react-spring/three';
 // import data from '../components/ThreeJsPage/floplan-data.json';
 import CameraSetup from '../components/ThreeJsPage/CameraSetup';
@@ -10,6 +10,14 @@ import { Model } from '../components/ThreeJsPage/Model';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
 import classes from './ThreeJsPage.module.css';
 
+///////////////////////
+import create from 'zustand'
+import { OrbitControls, TransformControls,  } from '@react-three/drei'
+import { useControls } from 'leva'
+import { useGLTF, useCursor} from '@react-three/drei';
+
+//////////////////////
+
 const DevTools = () => {
   const { scene, renderer } = useThree();
 
@@ -19,8 +27,41 @@ const DevTools = () => {
   return null;
 };
 
-export default function App() {
-  let [currentFloor, setCurrentFloor] = useState(0);
+
+const useStore = create((set) => ({ target: null, setTarget: (target) => set({ target }) }))
+
+function ModelT(props) {
+
+  const { nodes, materials } = useGLTF('/pot.glb');
+  const setTarget = useStore((state) => state.setTarget)
+  const [hovered, setHovered] = useState(false)
+
+  function clcikHandler(data){
+    console.log('------------')
+    console.log('data',data)
+    setTarget(data)
+    console.log('------------')
+    console.log('setTargetsetTargetsetTarget',data)
+    console.log('------------')
+    // console.log('target',target)
+  }
+  useCursor(hovered)
+  return (
+      // <mesh {...props} onClick={(e) => {setTarget(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
+      <mesh {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
+      // <mesh {...props} onClick={(e) => clcikHandler(e.object)} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
+      // <mesh {...props} onClick={(e) => cc(e)} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
+        geometry={nodes.normalized_model.geometry}
+        material={materials.solid_001_wire}
+        rotation={[Math.PI / 2, 0, 0]}
+      >
+      </mesh>
+  );
+}
+
+export default function ThreeJsPage() {
+  // let [currentFloor, setCurrentFloor] = useState(0);
+  let currentFloor= 0;
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
 
@@ -69,6 +110,16 @@ export default function App() {
               { x: 0, y: Y },
             ],
           },
+          {
+            "id": "ROOM3",
+            "height": H,
+            "coords": [
+              { "x": 0, "y": 0 },
+              { "x": X/3, "y": 0 },
+              { "x": X/3, "y": Y/5 },
+              { "x": 0, "y": Y/5 }
+            ]
+          }
         ],
       },
     ],
@@ -77,17 +128,47 @@ export default function App() {
     floors: newItem.floors,
     currentFloor,
   });
+  ////
+
+
+  const { target, setTarget } = useStore()
+  const { mode } = useControls({ mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] } })
+  /////
+  
+  console.log('targettargettarget', target)
+
+  const MyMesh = () => {
+    const refMesh = useRef();
+  
+    useFrame(() => {
+      if(refMesh.current) {
+        // rotates the object
+        refMesh.current.rotate.x += 0.01;
+      }
+    });
+    return (<mesh ref={refMesh} />);
+  }
+
 
   return (
     <div className={classes.three_body}>
-      <div className={classes.canvas_css}>
-        <Canvas
-          key={`isometric-${orthoCamera}`}
-          orthographic={orthoCamera}
-          invalidateframeloop="false"
-        >
-          <CameraSetup />
 
+        <div className={classes.LeftItems}>
+          <div>
+            HI
+            {/* <h1>{target}</h1> */}
+            <h1>{mode}</h1>
+          </div>
+        </div>
+        <div className={classes.RightItems}>
+        <Canvas  onPointerMissed={() => setTarget(null)} >
+          {/* key={`isometric-${orthoCamera}`}
+          orthographic={orthoCamera}
+          invalidateframeloop="false" */}
+          
+          <ModelT/>
+          <CameraSetup />
+          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -97,17 +178,17 @@ export default function App() {
               interactiveFloors={[currentFloor]}
               data={newItem}
               showCorners={showCorners}
-            />
+              />
           </a.group>
 
           <FloorClip currentFloor={currentFloor} data={newItem} />
-          <Model position={[0, 0, 0]} />
-
+          {target && <TransformControls object={target} mode={mode} />}
+          
           <DevTools />
         </Canvas>
-      </div>
       <div>
-        <div className="controls perspectiveControls">
+        
+        <div className={`${classes.controls} ${classes.perspectiveControls}`}>
           <div>
             <label htmlFor="isometricView">Isometric View</label>
             <input
@@ -128,7 +209,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="help">
+        <div className={classes.help} >
           <form>
             <label htmlFor="xx">X</label>
             <input id="xx" ref={XXX} onChange={changeXHandler} />
@@ -139,23 +220,7 @@ export default function App() {
           </form>
         </div>
 
-        <div className="controls floorControls">
-          {Array.from({ length: newItem.floors.length }).map((_, i) => {
-            let floorNumber = newItem.floors.length - (i + 1);
-            return (
-              <div key={`room-${floorNumber}`}>
-                <label htmlFor={`room-${floorNumber}`}>{`room ${floorNumber}`}</label>
-                <input
-                  type="radio"
-                  checked={floorNumber === currentFloor}
-                  onChange={() => setCurrentFloor(floorNumber)}
-                />
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="controls doorControls">
+        <div className={`${classes.controls} ${classes.doorControls}`}>
           {newItem.floors[currentFloor].doors
             .filter(({ direction }) => direction !== 0)
             .map(({ id }) => (
@@ -165,6 +230,7 @@ export default function App() {
               </div>
             ))}
         </div>
+      </div>
       </div>
     </div>
   );
