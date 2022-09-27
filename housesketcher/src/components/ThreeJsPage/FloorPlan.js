@@ -1,22 +1,21 @@
-import React, { useEffect, useRef } from "react";
-import gsap from "gsap";
-import Room from "./Room";
-import Door from "./Door";
-import Window from "./Window";
-import Ground from "./Ground";
-import { setOpacity } from "./three-utils";
-import { DISTANCE_BETWEEN_FLOORS } from "./constants";
+import React, { useEffect, useRef } from 'react';
+import gsap from 'gsap';
+import Room from './Room';
+import Door from './Door';
+import Window from './Window';
+import Ground from './Ground';
+import { setOpacity } from './three-utils';
+import { DISTANCE_BETWEEN_FLOORS } from './constants';
 
 const FloorPlan = ({
   data,
   showCorners,
   doorStates = {},
   interactiveFloors = [],
-  onToggleDoorState
+  onToggleDoorState,
 }) => (
   <group position={[-6, 0, -4.5]}>
     {data.floors.map((floor, index) => {
-      
       let isInteractive = interactiveFloors.includes(index);
       return (
         <Floor
@@ -39,7 +38,7 @@ const Floor = ({
   showCorners,
   isInteractive,
   doorStates,
-  onToggleDoorState
+  onToggleDoorState,
 }) => {
   let ref = useRef();
   // useEffect(() => {
