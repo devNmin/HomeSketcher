@@ -1,5 +1,5 @@
 import React, { useState, useReducer, useMemo, useRef } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import { Canvas, useThree } from "react-three-fiber";
 import { a, useSpring } from '@react-spring/three';
 // import data from '../components/ThreeJsPage/floplan-data.json';
 import CameraSetup from '../components/ThreeJsPage/CameraSetup';

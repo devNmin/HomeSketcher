@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
-import * as THREE from 'three';
-import { useThree } from '@react-three/fiber';
-import { DISTANCE_BETWEEN_FLOORS } from './constants';
+import { useMemo } from "react";
+import * as THREE from "three";
+import { useThree } from "react-three-fiber";
+import { DISTANCE_BETWEEN_FLOORS } from "./constants";
 
 /**
  * attempting to use clip-planes to isolate which floor to show, and
