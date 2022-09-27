@@ -46,31 +46,31 @@ const DevTools = () => {
 const useStore = create((set) => ({ target: null, setTarget: (target) => set({ target }) }))
 
 // 가구 3D 모델 생성?
-function ModelT(props) {
+// function ModelT(props) {
 
-  const gltf = useLoader(
-    GLTFLoader,
-    props.objUrl
-    );;
-  const setTarget = useStore((state) => state.setTarget)
-  const [hovered, setHovered] = useState(false)
+//   const gltf = useLoader(
+//     GLTFLoader,
+//     props.objUrl
+//     );;
+//   const setTarget = useStore((state) => state.setTarget)
+//   const [hovered, setHovered] = useState(false)
 
-  function clcikHandler(data){
-    console.log('------------')
-    console.log('data',data)
-    setTarget(data)
-    console.log('------------')
-    console.log('setTargetsetTargetsetTarget',data)
-    console.log('------------')
-    // console.log('target',target)
-  }
-  useCursor(hovered)
-  return (
-  // <mesh {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
-  //     </mesh>
-  <primitive  object={gltf.scene}  {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
-  );
-}
+//   function clcikHandler(data){
+//     console.log('------------')
+//     console.log('data',data)
+//     setTarget(data)
+//     console.log('------------')
+//     console.log('setTargetsetTargetsetTarget',data)
+//     console.log('------------')
+//     // console.log('target',target)
+//   }
+//   useCursor(hovered)
+//   return (
+//   // <mesh {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
+//   //     </mesh>
+//   <primitive  object={gltf.scene}  {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
+//   );
+// }
 
 export default function ThreeJsPage() {
   // let [currentFloor, setCurrentFloor] = useState(0);
@@ -82,9 +82,9 @@ export default function ThreeJsPage() {
 
   // 가구 obj 더해주기 
   const addobjListHandler = (objUrl) => {
-    setObjList((prevObjList) => {
-      return [...prevObjList, objUrl]
-    })
+    setObjList(
+       [...objList, objUrl]
+    )
   }
 
   
@@ -180,7 +180,7 @@ export default function ThreeJsPage() {
 
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
-            <ModelT objUrl = {obj}/>
+            <Model objUrl = {obj} testStore = {useStore}/>
           ))
           }
 
