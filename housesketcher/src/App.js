@@ -1,4 +1,4 @@
-import { Switch, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, BrowserRouter as Router , Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NonLoginMainPage from './pages/NonLoginMainPage';
@@ -11,6 +11,8 @@ import PrivateRoute from './utils/PrivateRoute';
 import NonPrivateRoute from './utils/NonPrivateRoute';
 import TasteAnalysisPage from './pages/TasteAnalysis';
 import ThreeJsPage from './pages/ThreeJsPage';
+import TTTest from './pages/TTTest';
+import NewMind from './pages/NewMind';
 import ScrollToTop from './hooks/ScrollToTop';
 
 function App() {
@@ -32,7 +34,9 @@ function App() {
               <NonPrivateRoute component={LoginPage} exact path="/login" />
               <NonPrivateRoute component={AccountRegisterPage} exact path="/register" />
               <PrivateRoute component={TasteAnalysisPage} exact path="/tasteanalysis" />
-              <PrivateRoute component={ThreeJsPage} exact path="/modeling" />
+              <Route component={ThreeJsPage} exact path="/modeling" />
+              <Route component={TTTest} exact path="/asd" />
+              <Route component={NewMind} exact path="/new" />
             </Switch>
           </ScrollToTop>
         </AuthProvider>
