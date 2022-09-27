@@ -220,4 +220,53 @@ class SendUserInterestResult(APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except:
                 return returnErrorJson("취향 결과 데이터 전송 실패","500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class SendRandomUserInterestResult(APIView):
+    permission_classes = [ IsAuthenticated ]
+    @swagger_auto_schema(tags=['랜덤 취향 생성'], responses={200: 'Success'})
+    def get(self, request, user_pk):
+        currentUser = User.objects.get(id=user_pk)
+        randomColor = random.choice(color)
+        randomStyle = random.choice(style)
+        UserStyle.objects.filter(user_id=user_pk).delete()
+        UserColor.objects.filter(user_id=user_pk).delete()
+        styleData = {                    
+            'style_name' : randomStyle,
+            'style_cnt' : 0
+        }
         
+        styleSerializer = InterestStyleInputSerializer(data=styleData) 
+                
+        if styleSerializer.is_valid():
+            styleSerializer.save(user_id=currentUser)
+        else:
+            return returnErrorJson("스타일 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR) 
+        
+        colorData = {              
+            'color_name' : randomColor,
+            'color_cnt' : 0
+        }              
+        colorSerializer = InterestColorInputSerializer(data=colorData)            
+        if colorSerializer.is_valid():                
+            colorSerializer.save(user_id=currentUser) 
+        else:
+            return returnErrorJson("컬러 저장 실패", "500", status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        userdata = {
+            'user_style': randomStyle,
+            'user_color': randomColor,
+        }
+        UserSerializer = UserInterestInputSerializer(currentUser, data=userdata)
+        if UserSerializer.is_valid():
+            UserSerializer.save()
+        response = {
+            'style': randomStyle,
+            'color': randomColor,
+        }
+        serializer = UserInterestDataSerializer(response)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+    
+    
+         
+            

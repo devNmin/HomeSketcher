@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'furnitures',
     'likes',
     'recommendations',
+    'threedimensions',
     'schedulers.apps.SchedulersConfig',
     
     #swagger library
