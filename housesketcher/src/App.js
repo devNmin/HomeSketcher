@@ -32,7 +32,7 @@ function App() {
               <NonPrivateRoute component={LoginPage} exact path="/login" />
               <NonPrivateRoute component={AccountRegisterPage} exact path="/register" />
               <PrivateRoute component={TasteAnalysisPage} exact path="/tasteanalysis" />
-              <NonPrivateRoute component={ThreeJsPage} exact path="/3d" />
+              <PrivateRoute component={ThreeJsPage} exact path="/modeling" />
             </Switch>
           </ScrollToTop>
         </AuthProvider>
