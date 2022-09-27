@@ -50,6 +50,7 @@ api_urlpatterns = ([
     path('interests/', include('interests.urls', namespace="interests")),
     path('likes/', include('likes.urls', namespace="likes")),
     path('recommendations/', include('recommendations.urls', namespace="recommendations")),
+    path('threedimensions/', include('threedimensions.urls', namespace="threedimensions")),
 ],'api/v1')
 
 urlpatterns=[

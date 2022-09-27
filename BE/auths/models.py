@@ -43,8 +43,8 @@ class User(AbstractBaseUser):
     user_nickname = models.CharField(max_length=30, null=True) # 닉네임
     user_gender = models.IntegerField(null=True) # 0 = 남 / 1 = 여
     user_birth = models.DateField(null=True) # 생년월일
-    user_style = models.CharField(max_length=30, default='Modern', choices=select_style) # 선호 스타일
-    user_color = models.CharField(max_length=30, default='black', choices=select_color) # 선호 색상
+    user_style = models.CharField(max_length=30, default='0', choices=select_style) # 선호 스타일
+    user_color = models.CharField(max_length=30, default='0', choices=select_color) # 선호 색상
     is_dummy = models.IntegerField(null=True)
     
     USERNAME_FIELD = 'id' # 기본키
