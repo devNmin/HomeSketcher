@@ -5,6 +5,7 @@ from .views import (
     LoginAPIView,
     LogoutAPIView,
     DeleteUserView,
+    UserTrendAPIView
 )
 
 app_name = 'auths'
@@ -18,4 +19,6 @@ urlpatterns = [
     path('token_refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     #토큰 유효성 검사
     path('token_verify/', TokenVerifyView.as_view(), name='token_verify'),
+    #컬러,스타일 통계 데이터
+    path('trend/', UserTrendAPIView.as_view(), name='style_color_trend'),
 ]

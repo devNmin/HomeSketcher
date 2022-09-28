@@ -21,6 +21,9 @@ from .serializers import (
     RefreshTokenSerializer
     )
 
+from django.db.models import Count
+import datetime
+
 # Create your views here.
 class RegistrationAPIView(APIView):
     permission_classes = [ AllowAny ] # 인증 여부 상관 없이 뷰 호출 허용
@@ -119,3 +122,64 @@ class DeleteUserView(APIView):
             user_object = User.objects.get(id=pk)
             user_object.delete()
             return returnSuccessJson("delete ok","200", status=status.HTTP_200_OK)
+
+class UserTrendAPIView(APIView):
+    permission_classes = [AllowAny]
+
+    @swagger_auto_schema(tags=['스타일, 컬러 전체 정보/ 내 나이 기준, 성별 기준 정보'],response={200:'successs'})
+    def get(self,request):
+        # forAll = User.objects.values("user_style","user_color").annotate(Count("user_style"),Count("user_color"))
+        res = {}
+
+        # 전체 스타일, 컬러 통계 정보 start
+        allStyle = User.objects.values("user_style").annotate(Count("user_style"))
+        allColor = User.objects.values("user_color").annotate(Count("user_color"))
+        res['allStyle'] = allStyle
+        res['allColor'] = allColor
+        # 전체 스타일, 컬러 통계 정보 end
+
+        # 성별 기준 스타일, 컬러 통계 정보
+        maleStyle = User.objects.filter(user_gender = 0).values("user_style").annotate(Count("user_style"))
+        femaleStyle = User.objects.filter(user_gender = 1).values("user_color").annotate(Count("user_color"))
+        res['maleStyle'] = maleStyle
+        res['femaleStyle'] = femaleStyle
+
+        #나이 기준 스타일, 컬러 통계 정보
+        now = datetime.datetime.now()
+        year = now.year
+        month = now.month
+        day = now.day
+
+        
+        age_group = [28,38,48,58,68,78]
+        ageStyle = {}
+        ageColor = {}
+
+        left = datetime.datetime(year-18,1,1).strftime('%Y-%m-%d')
+        right = datetime.datetime(year,12,31).strftime('%Y-%m-%d')
+        ageStyle["0"] = User.objects.filter(user_birth__range=(left,right)).values("user_style").annotate(Count("user_style"))
+        ageColor["0"] = User.objects.filter(user_birth__range=(left,right)).values("user_color").annotate(Count("user_color"))
+        # print(left)
+        # print(right)
+        # print("===")
+
+        for i in age_group:
+            left = datetime.datetime(year-i,1,1).strftime('%Y-%m-%d')
+            right = datetime.datetime(year-i+9,12,31).strftime('%Y-%m-%d')
+            ageStyle[str(i-8)] = User.objects.filter(user_birth__range=(left,right)).values("user_style").annotate(Count("user_style"))
+            ageColor[str(i-8)] = User.objects.filter(user_birth__range=(left,right)).values("user_color").annotate(Count("user_color"))
+            # print(left)
+            # print(right)
+            # print("===")
+        
+        left = datetime.datetime(year-79,12,31).strftime('%Y-%m-%d')
+        right = datetime.datetime(year,12,31).strftime('%Y-%m-%d')
+        ageStyle["old"] = User.objects.filter(user_birth__lte=left).values("user_style").annotate(Count("user_style"))
+        ageColor["old"] = User.objects.filter(user_birth__lte=left).values("user_color").annotate(Count("user_color"))
+        # print(left)
+
+        res['ageStyle'] = ageStyle
+        res['ageColor'] = ageColor
+
+
+        return Response(res,status=status.HTTP_200_OK)
