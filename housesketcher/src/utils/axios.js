@@ -9,7 +9,7 @@ let authTokens = localStorage.getItem('authTokens')? JSON.parse(localStorage.get
 const axios = Axios.create({
     baseURL, 
     headers : {
-        Authorization : `Bearer ${localStorage.getItem('authTokens')?.access}`
+        Authorization : `Bearer ${authTokens?.access}`
     }
 }) 
 
@@ -21,8 +21,6 @@ axios.interceptors.request.use(async req => {
     }
 
     // jwt decode를 통해서 토큰의 exp 시간이 현재 시간과의 차이가 1초미만일때 expired 됨 (access 토큰이 요청보내기전 만료됐는지 확인)
-    authTokens = localStorage.getItem('authTokens')? JSON.parse(localStorage.getItem('authTokens')): null
-    console.log('authTokens',authTokens);
     let user = jwt_decode(authTokens.access)
     let isExpired = dayjs.unix(user.exp).diff(dayjs()) < 1
     console.log('isExpired ',isExpired);
@@ -36,8 +34,8 @@ axios.interceptors.request.use(async req => {
         })
         // 요청 성공시 결과로부터 새로운 access 토큰을 받고 이를 set을 통해 갱신해준다. 
         let data = await response.data
+        console.log('response data', response.data);
         localStorage.setItem('authTokens',JSON.stringify({ access: data.access, refresh: authTokens.refresh }))
-        console.log('local storage', localStorage.getItem('authTokens'));
         // authTokens = localStorage.getItem('authTokens')? JSON.parse(localStorage.getItem('authTokens')): null
         req.headers.Authorization = `Bearer ${response.data.access}`
         return req        
@@ -45,9 +43,9 @@ axios.interceptors.request.use(async req => {
     // 실패시 refresh 토큰이 만료되었다는 의미기 때문에 자동으로 logout을 해주어야한다. AuthContext에 잇는 logout 그대로 구현해준다. 
     catch (error) {
         console.log(error);
-        // localStorage.removeItem('userInfo');
-        // localStorage.removeItem('authTokens');
-        // window.location.replace("/")
+        localStorage.removeItem('userInfo');
+        localStorage.removeItem('authTokens');
+        window.location.replace("/")
     }    
 })
 
