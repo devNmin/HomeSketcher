@@ -1,14 +1,25 @@
-import React, { useState, useReducer, useMemo, useRef } from 'react';
-import { Canvas, useThree } from '@react-three/fiber';
+import React, {useState, useReducer, useMemo, useRef, Suspense } from 'react';
+import { Canvas, useThree, useFrame  } from "react-three-fiber";
 import { a, useSpring } from '@react-spring/three';
 // import data from '../components/ThreeJsPage/floplan-data.json';
 import CameraSetup from '../components/ThreeJsPage/CameraSetup';
 import FloorPlan from '../components/ThreeJsPage/FloorPlan';
 import FloorClip from '../components/ThreeJsPage/FloorClip';
 
-import { Model } from '../components/ThreeJsPage/Model';
+import  Model  from '../components/ThreeJsPage/Model';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
 import classes from './ThreeJsPage.module.css';
+
+///////////////////////
+import { useLoader } from "@react-three/fiber";
+import create from 'zustand'
+import { Environment, OrbitControls, TransformControls, Html, useProgress } from '@react-three/drei'
+import { useControls } from 'leva'
+import { useGLTF, useCursor} from '@react-three/drei';
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import Liked from '../components/ThreeJsPage/Liked';
+
+//////////////////////
 
 const DevTools = () => {
   const { scene, renderer } = useThree();
@@ -19,11 +30,64 @@ const DevTools = () => {
   return null;
 };
 
-export default function App() {
-  let [currentFloor, setCurrentFloor] = useState(0);
+// 1. Glb 파일 로딩 
+// function Loader() {
+//   const { active, progress, errors, item, loaded, total } = useProgress();
+//   return <Html center>{progress} % loaded</Html>;
+// }
+
+// const Model = () => {
+//   const gltf = useLoader(
+//     GLTFLoader,
+//     'https://firebasestorage.googleapis.com/v0/b/homesketcher-37070.appspot.com/o/glb%2Fdesks.glb?alt=media&token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjIxZTZjMGM2YjRlMzA5NTI0N2MwNjgwMDAwZTFiNDMxODIzODZkNTAiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoia21TZWNvbmQiLCJwaWN0dXJlIjoiaHR0cDovL3d3dy5leGFtcGxlLmNvbS8xMjM0NTY3OC9waG90by5wbmciLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaG9tZXNrZXRjaGVyLTM3MDcwIiwiYXVkIjoiaG9tZXNrZXRjaGVyLTM3MDcwIiwiYXV0aF90aW1lIjoxNjY0MjQ2Njk5LCJ1c2VyX2lkIjoiZzVnNzJuU1ZmWWd0ZVJBQ3UzWHNTTVBDTzVGMyIsInN1YiI6Imc1ZzcyblNWZllndGVSQUN1M1hzU01QQ081RjMiLCJpYXQiOjE2NjQyNDY2OTksImV4cCI6MTY2NDI1MDI5OSwiZW1haWwiOiJqbzk1MTEyOEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlciI6Iis4MjEwNjQ4NTU3OTQiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis4MjEwNjQ4NTU3OTQiXSwiZW1haWwiOlsiam85NTExMjhAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.jbsBNl9xzkPZTEuO3NID7cbC4QINFcka5o73QyUP4_rt-9V4iRUO19eVp1JVSjs-16xToS-9xZgVQ8--j9-Cv_8ihku2veGrqNoXSX2U_Z-GrPg0DcjrR0MY8oof6-ZofCjt-Dqhe1twVbD1ijmTXl28ISs8eVG8LoyVbppkvFJq5TmV1Mh5wiMz6Y4LgPSW_CcJY5RwDTapA5oxkP_psALDr1Iopz_ADZNymW_dOPbGkbOqJHqk0PgEFz6gzcvJcpDJwIZupvia71q6cdmb_tVuy2Tu7_0Uk88r_2YHnNrC3bBGxhotWCoVFF11SF_UBGztJRBI_JBYRZqL-PFuvA'
+//   );
+//   return <primitive object={gltf.scene} scale={0.4} />;
+// };
+const useStore = create((set) => ({ target: null, setTarget: (target) => set({ target }) }))
+
+// 가구 3D 모델 생성?
+// function ModelT(props) {
+
+//   const gltf = useLoader(
+//     GLTFLoader,
+//     props.objUrl
+//     );;
+//   const setTarget = useStore((state) => state.setTarget)
+//   const [hovered, setHovered] = useState(false)
+
+//   function clcikHandler(data){
+//     console.log('------------')
+//     console.log('data',data)
+//     setTarget(data)
+//     console.log('------------')
+//     console.log('setTargetsetTargetsetTarget',data)
+//     console.log('------------')
+//     // console.log('target',target)
+//   }
+//   useCursor(hovered)
+//   return (
+//   // <mesh {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
+//   //     </mesh>
+//   <primitive  object={gltf.scene}  {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
+//   );
+// }
+
+export default function ThreeJsPage() {
+  // let [currentFloor, setCurrentFloor] = useState(0);
+  let currentFloor= 0;
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
+  let [objList, setObjList] = useState([])
 
+
+  // 가구 obj 더해주기 
+  const addobjListHandler = (objUrl) => {
+    setObjList(
+       [...objList, objUrl]
+    )
+  }
+
+  
   let [X, setX] = useState(0);
   let [Y, setY] = useState(0);
   let [H, setH] = useState(0);
@@ -69,6 +133,16 @@ export default function App() {
               { x: 0, y: Y },
             ],
           },
+          {
+            "id": "ROOM3",
+            "height": H,
+            "coords": [
+              { "x": 0, "y": 0 },
+              { "x": X/3, "y": 0 },
+              { "x": X/3, "y": Y/5 },
+              { "x": 0, "y": Y/5 }
+            ]
+          }
         ],
       },
     ],
@@ -77,17 +151,41 @@ export default function App() {
     floors: newItem.floors,
     currentFloor,
   });
+  ////
+
+
+  const { target, setTarget } = useStore()
+  const { mode } = useControls({ mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] } })
+  /////
+  
+  console.log('targettargettarget', target)
+
 
   return (
     <div className={classes.three_body}>
-      <div className={classes.canvas_css}>
-        <Canvas
+
+        {/* 가구 UX 창 */}
+        <div className={classes.LeftItems}>
+          <div>
+            <Liked addObj = {addobjListHandler}/>          
+            <h1>{mode}</h1>
+          </div>
+        </div>
+
+        <div className={classes.RightItems}>
+        <Canvas  onPointerMissed={() => setTarget(null)} 
           key={`isometric-${orthoCamera}`}
           orthographic={orthoCamera}
-          invalidateframeloop="false"
-        >
-          <CameraSetup />
+          invalidateframeloop="false">
 
+          {/* 가구 3D 모델 */}
+          {objList.map((obj) => (
+            <Model objUrl = {obj} testStore = {useStore}/>
+          ))
+          }
+
+
+          {/* <CameraSetup /> */}          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -97,17 +195,18 @@ export default function App() {
               interactiveFloors={[currentFloor]}
               data={newItem}
               showCorners={showCorners}
-            />
+              />
           </a.group>
 
           <FloorClip currentFloor={currentFloor} data={newItem} />
-          <Model position={[0, 0, 0]} />
-
+          {target && <TransformControls object={target} mode={mode} />}
+          <OrbitControls makeDefault />
           <DevTools />
         </Canvas>
-      </div>
       <div>
-        <div className="controls perspectiveControls">
+        
+        {/* 뷰 + 코너 확인 */}
+        <div className={`${classes.controls} ${classes.perspectiveControls}`}>
           <div>
             <label htmlFor="isometricView">Isometric View</label>
             <input
@@ -128,7 +227,9 @@ export default function App() {
           </div>
         </div>
 
-        <div className="help">
+
+        {/* 방 수치 입력 */}
+        <div className={classes.help} >
           <form>
             <label htmlFor="xx">X</label>
             <input id="xx" ref={XXX} onChange={changeXHandler} />
@@ -139,23 +240,9 @@ export default function App() {
           </form>
         </div>
 
-        <div className="controls floorControls">
-          {Array.from({ length: newItem.floors.length }).map((_, i) => {
-            let floorNumber = newItem.floors.length - (i + 1);
-            return (
-              <div key={`room-${floorNumber}`}>
-                <label htmlFor={`room-${floorNumber}`}>{`room ${floorNumber}`}</label>
-                <input
-                  type="radio"
-                  checked={floorNumber === currentFloor}
-                  onChange={() => setCurrentFloor(floorNumber)}
-                />
-              </div>
-            );
-          })}
-        </div>
 
-        <div className="controls doorControls">
+
+        <div className={`${classes.controls} ${classes.doorControls}`}>
           {newItem.floors[currentFloor].doors
             .filter(({ direction }) => direction !== 0)
             .map(({ id }) => (
@@ -165,6 +252,7 @@ export default function App() {
               </div>
             ))}
         </div>
+      </div>
       </div>
     </div>
   );
