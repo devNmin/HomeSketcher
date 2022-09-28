@@ -38,6 +38,7 @@ axios.interceptors.request.use(async req => {
         localStorage.setItem('authTokens',JSON.stringify({ access: data.access, refresh: authTokens.refresh }))
         // authTokens = localStorage.getItem('authTokens')? JSON.parse(localStorage.getItem('authTokens')): null
         req.headers.Authorization = `Bearer ${response.data.access}`
+        window.location.reload()
         return req        
     }
     // 실패시 refresh 토큰이 만료되었다는 의미기 때문에 자동으로 logout을 해주어야한다. AuthContext에 잇는 logout 그대로 구현해준다. 
