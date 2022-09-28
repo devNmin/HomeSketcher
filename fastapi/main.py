@@ -8,9 +8,12 @@ def read_root():
     return {"Hello": "World"}
     
 @app.post("/fastapi/uploadfiles/")
-async def create_upload_files(files: list[UploadFile]):
-    
-    return {"filenames": [file.filename for file in files]}
+async def predict( image: UploadFile = File(...)):
+    class_names = ['class_antique', 'class_mediterranean', 'class_natural']
+    res = []
+    path = f'img/{image.filename}'
+
+    return {"hello": "world"}
 
 # @app.get("/fastapi/predict")
 # def read_root():
