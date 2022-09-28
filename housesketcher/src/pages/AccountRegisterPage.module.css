@@ -1,0 +1,180 @@
+.auth {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  width: 95%;
+  max-width: 50rem;
+  border-radius: 6px;
+  background-color: #F5F5F5;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  margin-top: 5rem;
+  text-align: center;
+  color: black;
+}
+
+.auth h1 {
+  text-align: center;
+  color: white;
+}
+
+.auth h3 {
+  text-align: center;
+  color: black;
+}
+
+.auth img{
+  max-width: 300px;
+  margin-top: 5rem;
+  margin-bottom: 3rem;
+}
+
+.control {
+  margin-bottom: 0.5rem;
+}
+
+input[type=text] {
+  width: 90%;
+  background-color: #F5F5F5;
+  border: none;
+  border-bottom: 2px solid #F3CD58;
+  border-top: 0px;
+  border-radius: 0px;
+  font-weight: bold;
+  outline: 0;
+  margin-bottom: 20px;
+  padding-left: 0px;
+  color: #ECF0F5;
+}
+
+input[type=password] {
+  width: 90%;
+  background-color: #F5F5F5;
+  border: none;
+  border-bottom: 2px solid #F3CD58;
+  border-top: 0px;
+  border-radius: 0px;
+  font-weight: bold;
+  outline: 0;
+  padding-left: 0px;
+  margin-bottom: 20px;
+  color: #ECF0F5;
+}
+
+.password {
+  text-align: left;
+  margin-left: 2.5rem;
+  margin-top: 1rem;
+}
+
+.control h5 {
+  text-align: left;
+  margin-left: 2.5rem;
+}
+
+.control label {
+  margin-left: 2rem;
+  display: block;
+  color: white;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.control input:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 2px solid #F3CD58;
+  outline: 0;
+  background-color: lightgrey;
+  color: black;
+}
+
+.actions {
+  margin-top: 1.5rem;
+  /* display: flex;
+  flex-direction: column;
+  align-items: center; */
+  text-decoration: none;
+}
+
+.actions input[type=text], button {
+  cursor: pointer;
+  font: inherit;
+  color: white;
+  background-color: #F3CD58;
+  border: 1px solid #F3CD58;
+  border-radius: 4px;
+  padding: 0.5rem 2.5rem;
+  width: 15rem;
+  text-align: center;
+}
+
+.actions input:hover, button:hover {
+  background-color: #F3CD58;
+  border-color: #F3CD58;
+  text-decoration: none;
+}
+
+.actions h5 {
+  text-align: left;
+  margin-left: 2.5rem;
+}
+
+.actions .toggle {
+  margin-top: 1rem;
+  background-color: transparent;
+  color: #9f5ccc;
+  border: none;
+  padding: 0.15rem 1.5rem;
+}
+
+.actions .toggle:hover {
+  background-color: transparent;
+  color: #ae82cc;
+}
+
+.Email {
+  display: flex;
+}
+
+
+.Email input[type=text] {
+  width: 60%;
+  background-color: #F5F5F5;
+  border: none;
+  border-bottom: 2px solid #F3CD58;
+  border-top: 0px;
+  border-radius: 0px;
+  font-weight: bold;
+  outline: 0;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 2.5rem;
+  margin-right: 1rem;
+  color: #ECF0F5;
+}
+
+.Email input:focus {
+  border-color: inherit;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border-bottom: 2px solid #F3CD58;
+  outline: 0;
+  background-color: lightgrey;
+  color: black;
+}
+
+.EmailCheck {
+  color: black;
+  background-color: transparent;
+  border: none;
+  width: 20%;
+  margin-left: 3.5rem;
+}
+
+.linkP {
+  text-decoration: none;
+  color: gray;
+}
