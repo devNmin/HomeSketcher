@@ -18,10 +18,5 @@ RUN pip3 install -r requirements.txt
 
 COPY . /app
 
-# RUN pip3 install uvicorn[standard]
-
-# RUN pip3 install gunicorn && gunicorn
-
 EXPOSE 8003
  
-#CMD ["uvicorn", "fastapi.main:app", "--host", "0.0.0.0", "--port", "8080"]

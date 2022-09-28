@@ -1,33 +1,32 @@
 from fastapi import FastAPI , File, UploadFile
-# from predict import predict_img
+from predict import predict_img
 import numpy as np
+from PIL import Image
+import shutil
+
 app = FastAPI()
 
 @app.get("/fastapi/")
 def read_root():
     return {"Hello": "World"}
-    
-@app.post("/fastapi/uploadfiles/")
+
+@app.post("/fastapi/predict")
 async def predict( image: UploadFile = File(...)):
     class_names = ['class_antique', 'class_mediterranean', 'class_natural']
-    res = []
+    res = {}
     path = f'img/{image.filename}'
 
-    return {"hello": "world"}
+    with open(path, "wb") as buffer:
+        shutil.copyfileobj(image.file, buffer)
+    # AI model 
+    return_value = predict_img(path)
 
-# @app.get("/fastapi/predict")
-# def read_root():
-#     res = []
-#     img_path = 'img/ttt.jpg'
-#     return_value = predict_img(img_path)
-#     print(type(return_value))
-#     arr = np.array(return_value)
-#     print('-------------')
-#     print(arr)
-#     print(type(arr.tolist()))
-#     print('-------------')
-#     print(arr)
+    arr = np.array(return_value)
 
-#     res.append(float(arr[0][0]))
-#     return res
-    
+    res = { }
+    class_names = ['Antique', 'Mediterranean', 'Natural']
+    for i in range(len(class_names)):
+        res[class_names[i]] = round(arr[0][i]*100,2)
+    result = dict(sorted(res.items(), key = lambda res: res[1],reverse=True))
+
+    return {"predict":result}
