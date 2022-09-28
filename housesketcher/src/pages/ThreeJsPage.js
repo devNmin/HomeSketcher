@@ -173,28 +173,28 @@ export default function ThreeJsPage() {
         </div>
 
         <div className={classes.RightItems}>
-        <Canvas  onPointerMissed={() => setTarget(null)} 
+        <Canvas   
+        // onPointerMissed = 밖에 클릭시 target null로 만들기 
           key={`isometric-${orthoCamera}`}
           orthographic={orthoCamera}
           invalidateframeloop="false">
 
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
-            <Model objUrl = {obj} testStore = {useStore}/>
+            <Model onPointerMissed={() => setTarget(null)} objUrl = {obj} setTarget = {setTarget} />
           ))
           }
-
 
           {/* <CameraSetup /> */}          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
 
-          <a.group position={animatedFloorPosition}>
+          <a.group position={animatedFloorPosition} style ={{zIndex : 1}}>
             <FloorPlan
               interactiveFloors={[currentFloor]}
               data={newItem}
-              showCorners={showCorners}
+              showCorners={showCorners}               
               />
           </a.group>
 
@@ -205,6 +205,9 @@ export default function ThreeJsPage() {
         </Canvas>
       <div>
         
+
+
+
         {/* 뷰 + 코너 확인 */}
         <div className={`${classes.controls} ${classes.perspectiveControls}`}>
           <div>

@@ -14,12 +14,7 @@ const Flooring = ({ coords, isInteractive }) => {
   return (
     <mesh
       position={[0, -1e-3, 0]}
-      rotation={[degreesToRadians(90), 0, 0]}
-      onClick={(ev) => {
-        if (isInteractive) {
-          ev.stopPropagation();
-        }
-      }}
+      rotation={[degreesToRadians(90), 0, 0]}      
     >
       <shapeBufferGeometry args={[shape]} />
       <FlooringMaterial />
@@ -38,7 +33,8 @@ const FlooringMaterial = () => {
     <meshLambertMaterial
       ref={ref}
       roughness={0.5}
-      color="#c9b19f" //"#c9a891"
+      color= 
+      "#E5D8B0"
       side={THREE.DoubleSide}
     />
   );
