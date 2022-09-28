@@ -1,0 +1,92 @@
+.navbar {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #FFFAEE;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  justify-content: space-between;
+}
+
+
+.navbar_logo{
+  width: 100px;
+  object-fit: contain;
+  margin: 0 20px;
+  margin-top: 5px;
+}
+
+.navbar_search {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  /* border-radius: 20px; */
+  text-decoration: none;
+}
+
+.navbar_search a{
+  text-decoration: none;
+  color: black;
+  margin-top: 1rem;
+  margin-left: 1rem;
+}
+
+/* .navbar_searchInput {
+  height: 20px;
+  padding: 10px;
+  border: none;
+  width: 50%;
+}
+
+.navbar_searchIcon {
+  background-color: transparent;
+  padding: 10px;
+  height: 40px;
+} */
+
+.nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+
+.nav li {
+  margin: 0;
+  margin-left: 2rem;
+  padding-right: 2rem;
+}
+
+.nav a {
+  text-decoration: none;
+  color: black;
+}
+
+.nav a:hover,
+.nav a:active {
+  color: grey;
+}
+
+.nav button {
+  font: inherit;
+  background: none;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  color: black;
+  cursor: pointer;
+  /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.26); */
+  border-radius: 20px;
+}
+
+.nav button:focus {
+  outline: none;
+}
+
+.nav button:hover,
+.nav button:active {
+  /* color: #f3cafb; */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.26);
+}
+
