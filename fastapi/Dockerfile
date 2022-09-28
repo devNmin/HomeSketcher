@@ -6,7 +6,7 @@ RUN apt-get -y install vim
 
 RUN mkdir /app
 
-ADD . /app
+# ADD . /app
 
 WORKDIR /app
 
@@ -15,6 +15,8 @@ COPY requirements.txt ./
 RUN pip3 install --upgrade pip 
 
 RUN pip3 install -r requirements.txt 
+
+COPY . /app
 
 # RUN pip3 install uvicorn[standard]
 
