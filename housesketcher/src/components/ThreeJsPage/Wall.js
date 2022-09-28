@@ -16,7 +16,7 @@ const Wall = ({
   height,
   doors = [],
   windows = [],
-  isInteractive = true
+  
 }) => {
   const {
     position,
@@ -85,12 +85,7 @@ const Wall = ({
   return (
     <mesh
       position={position}
-      rotation={rotation}
-      onClick={(ev) => {
-        if (isInteractive) {
-          ev.stopPropagation();
-        }
-      }}
+      rotation={rotation}      
     >
       <mesh position={[-HALF_WALL_THICKNESS, 0, -HALF_WALL_THICKNESS]}>
         <extrudeBufferGeometry
