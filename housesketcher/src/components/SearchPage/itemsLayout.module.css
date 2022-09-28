@@ -1,0 +1,13 @@
+.display_flex {
+  min-height: 30rem;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.item_container {
+  margin: 1rem;
+}
+.blank {
+  height: 10rem;
+}

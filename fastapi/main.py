@@ -1,6 +1,5 @@
 from fastapi import FastAPI , File, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-
 from predict import predict_img
 import numpy as np
 from PIL import Image
@@ -17,6 +16,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+=======
+>>>>>>> fastapi/main.py
 @app.get("/fastapi/")
 def read_root():
     return {"Hello": "World"}
