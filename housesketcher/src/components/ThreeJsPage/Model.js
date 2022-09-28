@@ -7,19 +7,20 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 
 export default function Model (props)  {
-  const useStore = props.testStore
+  const setTarget = props.setTarget
+ 
   const gltf = useLoader(
     GLTFLoader,
     props.objUrl
   );
 
-  const setTarget = useStore((state) => state.setTarget)
+  
   const [hovered, setHovered] = useState(false)
 
   function clcikHandler(data){
     console.log('------------')
     console.log('data',data)
-    setTarget(data)
+    props.setTarget(data)  
     console.log('------------')
     console.log('setTargetsetTargetsetTarget',data)
     console.log('------------')
@@ -30,6 +31,6 @@ export default function Model (props)  {
   
   // return <primitive onClick={(e) => {setTarget(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)} object={gltf.scene} scale={1} />;
   return  (
-  <primitive  object={gltf.scene} {...props}  onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
+  <primitive  object={gltf.scene} {...props}  onClick={(e) => { e.stopPropagation(); setTarget(e.object); clcikHandler(e.object);}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
   );
 }
