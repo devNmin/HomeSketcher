@@ -205,18 +205,25 @@ class FurnitureLikeAPIView(APIView):
         try:
             furnitures = Furniture.objects.filter(id__in= UserLike.objects.filter(user = id).values_list('furniture_id')).values()
 
-            glbs = GlbObject.objects.all().values_list("furniture_sub","glb_url")
+            glbs = GlbObject.objects.all().values_list("furniture_sub","glb_url", "glb_width", "glb_length", "glb_height")
             
             url_data = {}
             # 뽑아쓰기 쉽게 키(소분류), 밸류(url)로 생성
             for g in glbs:
-                url_data[g[0]] = g[1]
+                url_data[g[0]] = [g[1], g[2], g[3], g[4]]
                 
             res = [] #응답 데이터
             
             for furniture in furnitures:
                 furniture['like']=True
-                furniture['glb_url']=url_data.get(furniture['furniture_sub'])
+                glb_data=url_data.get(furniture['furniture_sub'])
+                # print("==============")
+                # print(glb_data)
+                # print("==============")
+                furniture['glb_url']=url_data.get(furniture['furniture_sub'])[0]
+                furniture['glb_width']=url_data.get(furniture['furniture_sub'])[1]
+                furniture['glb_length']=url_data.get(furniture['furniture_sub'])[2]
+                furniture['glb_height']=url_data.get(furniture['furniture_sub'])[3]
                 res.append(furniture)
 
             return Response(res, status=status.HTTP_200_OK)
