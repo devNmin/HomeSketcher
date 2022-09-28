@@ -16,8 +16,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-=======
->>>>>>> fastapi/main.py
+
 @app.get("/fastapi/")
 def read_root():
     return {"Hello": "World"}
