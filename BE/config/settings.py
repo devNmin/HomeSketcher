@@ -178,7 +178,7 @@ SIMPLE_JWT = {
     'AUTH_HEADER_TYPES': ('Bearer','JWT',),
     'ALGORITHM': 'HS256',
     'SIGNING_KEY': SECRET_KEY,
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=2),
+    'ACCESS_TOKEN_LIFETIME': timedelta(hours=2),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=14),
 }
 
