@@ -1,5 +1,5 @@
 from fastapi import FastAPI , File, UploadFile
-from predict import predict_img
+from util.predict import predict_img
 import numpy as np
 from PIL import Image
 import shutil
