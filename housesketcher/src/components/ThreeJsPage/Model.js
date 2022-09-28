@@ -1,25 +1,36 @@
 // npx gltfjsx pot.glb
 import React , { useState } from 'react';
-import { useGLTF, useCursor} from '@react-three/drei';
+import { useCursor} from '@react-three/drei';
+import { useLoader } from "@react-three/fiber";
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
-import create from 'zustand'
 
-const useStore = create((set) => ({ target: null, setTarget: (target) => set({ target }) }))
-export function Model(props) {
-  const { nodes, materials } = useGLTF('/pot.glb');
-  const setTarget = useStore((state) => state.setTarget)
 
+export default function Model (props)  {
+  const setTarget = props.setTarget
+ 
+  const gltf = useLoader(
+    GLTFLoader,
+    props.objUrl
+  );
+
+  
   const [hovered, setHovered] = useState(false)
-  useCursor(hovered)
-  return (
-      <mesh {...props} onClick={(e) => setTarget(e.object)} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
-      // <mesh {...props} onClick={(e) => cc(e)} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}
-        geometry={nodes.normalized_model.geometry}
-        material={materials.solid_001_wire}
-        rotation={[Math.PI / 2, 0, 0]}
-      >
-      </mesh>
+
+  function clcikHandler(data){
+    console.log('------------')
+    console.log('data',data)
+    props.setTarget(data)  
+    console.log('------------')
+    console.log('setTargetsetTargetsetTarget',data)
+    console.log('------------')
+    // console.log('target',target)
+  }
+
+  useCursor(hovered)  
+  
+  // return <primitive onClick={(e) => {setTarget(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)} object={gltf.scene} scale={1} />;
+  return  (
+  <primitive  object={gltf.scene} {...props}  onClick={(e) => { e.stopPropagation(); setTarget(e.object); clcikHandler(e.object);}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
   );
 }
-
-useGLTF.preload('/pot.glb');

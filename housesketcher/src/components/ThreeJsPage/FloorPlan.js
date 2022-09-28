@@ -12,11 +12,14 @@ const FloorPlan = ({
   showCorners,
   doorStates = {},
   interactiveFloors = [],
-  onToggleDoorState,
+  onToggleDoorState,  
 }) => (
   <group position={[-6, 0, -4.5]}>
     {data.floors.map((floor, index) => {
       let isInteractive = interactiveFloors.includes(index);
+      const onClickHandler = () => {
+        console.log('room was clicked!');
+      }
       return (
         <Floor
           key={index}
@@ -26,6 +29,7 @@ const FloorPlan = ({
           showCorners={showCorners}
           doorStates={doorStates}
           onToggleDoorState={onToggleDoorState}
+          clickHandler = {onClickHandler}
         />
       );
     })}
@@ -39,6 +43,7 @@ const Floor = ({
   isInteractive,
   doorStates,
   onToggleDoorState,
+  clickHandler
 }) => {
   let ref = useRef();
   // useEffect(() => {
