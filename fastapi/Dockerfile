@@ -1,11 +1,22 @@
 FROM python:3.10
 
-WORKDIR /code
+RUN apt-get -y update
 
-COPY ./requirements.txt /code/requirements.txt
+RUN apt-get -y install vim 
+
+RUN mkdir /app
+
+# ADD . /app
+
+WORKDIR /app
+
+COPY requirements.txt ./
  
-RUN pip install --no-cache-dir --upgrade -r /code/requirements.txt
+RUN pip3 install --upgrade pip 
+
+RUN pip3 install -r requirements.txt 
+
+COPY . /app
+
+EXPOSE 8003
  
-#COPY ./app /code/app
- 
-#CMD ["uvicorn", "fastapi.main:app", "--host", "0.0.0.0", "--port", "8080"]
