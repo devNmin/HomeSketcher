@@ -2,12 +2,18 @@ import * as React from 'react';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import AuthContext from '../../context/AuthContext';
-import {useContext} from 'react'
+import {useContext, useState} from 'react'
 import { useHistory } from 'react-router-dom';
 import swal from "sweetalert2";
+import { color } from '@mui/system';
 
 export default function BasicPopover() {
   const [anchorEl, setAnchorEl] = React.useState(null);
+
+  let [retestHover, setRetestHover] = useState(false)
+  let [editHover, setEditHover] = useState(false)
+  let [logoutHover, setLogoutHover] = useState(false)
+
   let {user , logoutUser} = useContext(AuthContext)
   const hisory = useHistory()
 
@@ -78,11 +84,14 @@ export default function BasicPopover() {
       >
       <div>
         <Typography sx={{ p: 2 }} >
-            <p  onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer'}}>Retest</p>
+            <p  onMouseEnter={() => { setRetestHover(true) }} 	     
+            onMouseLeave={() => { setRetestHover(false) }}  onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer', color : retestHover? '#F3CD58' : null}}>Retest</p>
             <hr />
-            <p onClick= {editClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer'}}>Edit Profile</p>
+            <p  onMouseEnter={() => { setEditHover(true) }} 	     
+            onMouseLeave={() => { setEditHover(false) }} onClick= {editClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer', color : editHover? '#F3CD58' : null}}>Edit Profile</p>
             <hr />
-            <p onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer'}}>Logout</p>            
+            <p onMouseEnter={() => { setLogoutHover(true) }} 	     
+            onMouseLeave={() => { setLogoutHover(false) }}  onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer',  color : logoutHover? '#F3CD58' : null}}>Logout</p>            
         </Typography>
 
       </div>
