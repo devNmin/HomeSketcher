@@ -8,8 +8,11 @@ import swal from "sweetalert2";
 import ClipLoader from "react-spinners/ClipLoader";
 
 
+
+
 function TasteAnalysisPage() {
     const [loading, setLoading] = useState(false)
+    const [isMouseon, setIsMouseOnHandler] = useState(false)
     useEffect(() => {
         setLoading(true)
         setTimeout(() => {
@@ -55,7 +58,7 @@ function TasteAnalysisPage() {
                     }
                     
                   )
-                  history.push('/loginmain').then((() =>window.scrollTo(0,0) ))
+                  history.push('/loginmain').then(() =>window.scrollTo(0,0) )
                 
             })
         }      
@@ -66,7 +69,11 @@ function TasteAnalysisPage() {
     // const goToLoginMain = () => {
         
     // }
-    
+    const skipClickHandler = async (userid) => {
+        await axios.get(BASE_URL + `interests/userRandom/${userid}`)
+        history.push('/loginmain').then(() =>window.scrollTo(0,0) )
+
+    }
     
     const AddTasteHandler = (newtaste) => {
         if (tastelist.includes(newtaste)) {
@@ -99,8 +106,8 @@ function TasteAnalysisPage() {
 
          </b>
         :
-
-        <b>
+        <div>
+          <b>
 
             <div style={{display :'flex', justifyContent: 'center'}}>
                 <h3>Select {user.user_nickname}'s</h3>          
@@ -108,7 +115,22 @@ function TasteAnalysisPage() {
             <div style={{display :'flex', justifyContent: 'center'}}>
                 <h3>Interior Taste</h3>
             </div>
-        </b>
+          </b>
+          <button
+            onMouseEnter={() => { setIsMouseOnHandler(true) }} 	     
+            onMouseLeave={() => { setIsMouseOnHandler(false) }}   
+            onClick = {() => {skipClickHandler(user.id)}}       
+          style={{ display : 'flex' , justifyContent : 'center',marginLeft : '60px', cursor: 'pointer', marginBottom : '0px', backgroundColor : isMouseon? '#DFBC52' : null}  }>
+            Skip
+          </button>
+          {isMouseon? 
+          <div style={{display : 'flex' , paddingLeft : '60px' }}>* if you skip this, your style and color taste will be automatically selected</div>:
+          null
+
+          }
+
+        </div>
+        
         }       
         <br />
         
