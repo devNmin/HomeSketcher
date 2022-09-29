@@ -24,7 +24,8 @@ function MainCarousel(props) {
           <div className={styles.second_text}>
             <h2>Pick your Taste</h2>
             <br />
-            <p className={styles.content}>HomeSketcher identifies your taste and
+            <p className={styles.content}>
+            <br/>HomeSketcher identifies your taste and
             <br/>recommends the best furniture
             <br/>Decorate your home with recommended furniture
             </p>
@@ -40,7 +41,8 @@ function MainCarousel(props) {
           <div className={styles.right}>
             <h2>Bring Your Ideas Into 3D</h2>
             <br />
-            <p className={styles.content}>Pick your furnitures and put
+            <p className={styles.content}>
+            <br/>Pick your furnitures and put
             <br/>we build the 3D rooms for you
             <br/>even with complex building structures
             </p>

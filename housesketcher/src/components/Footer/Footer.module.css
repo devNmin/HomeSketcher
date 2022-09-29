@@ -12,7 +12,8 @@
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  margin-left: 5rem;
+  justify-content: space-between;
+  /* margin-left: 5rem; */
   padding-left: 15rem;
 }
 
@@ -48,6 +49,18 @@
   font-size: 14px;
 }
 .textCompany span {
+  display: block;
+  line-height: 2;
+  color: #949494;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.info {
+  padding-right: 15rem;
+}
+
+.info span {
   display: block;
   line-height: 2;
   color: #949494;
