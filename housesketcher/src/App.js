@@ -1,4 +1,4 @@
-import { Switch, BrowserRouter as Router , Route } from 'react-router-dom';
+import { Switch, BrowserRouter as Router, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NonLoginMainPage from './pages/NonLoginMainPage';
@@ -14,6 +14,7 @@ import ThreeJsPage from './pages/ThreeJsPage';
 import TTTest from './pages/TTTest';
 import NewMind from './pages/NewMind';
 import ScrollToTop from './hooks/ScrollToTop';
+import HomeSketcherAIPage from './pages/HomeSketcherAIPage';
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
               <Route component={ThreeJsPage} exact path="/modeling" />
               <Route component={TTTest} exact path="/asd" />
               <Route component={NewMind} exact path="/new" />
+              <Route component={HomeSketcherAIPage} exaxt path="/ai" />
             </Switch>
           </ScrollToTop>
         </AuthProvider>

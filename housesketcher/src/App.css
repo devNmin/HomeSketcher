@@ -1,0 +1,8 @@
+@font-face {
+  font-family: 'ROKAF';
+  src: url('./assets/Fonts/ROKAF\ Sans\ Medium.ttf');
+}
+
+body {
+  font-family: 'ROKAF';
+}

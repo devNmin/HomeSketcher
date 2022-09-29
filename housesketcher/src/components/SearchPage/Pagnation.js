@@ -44,14 +44,11 @@ function Pagnation() {
           <div
             className={page === pageNum ? classes.now_page : classes.page_num}
             key={page}
+            onClick={() => {
+              setPageNum(page);
+            }}
           >
-            <p
-              onClick={() => {
-                setPageNum(page);
-              }}
-            >
-              {page + 1}
-            </p>
+            <p>{page + 1}</p>
           </div>
         );
       })}

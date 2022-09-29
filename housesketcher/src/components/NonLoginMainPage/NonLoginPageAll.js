@@ -20,6 +20,7 @@ function NonLoginPageAll(props) {
               <h1 className={styles.title_h1_2}>
                 Your Dream
               </h1>
+              <br/><br/>
               <h2 className={styles.title_h2}>Changing your space changes your life</h2>
                 <Link to= '/login'>
                   <button type="button">                 

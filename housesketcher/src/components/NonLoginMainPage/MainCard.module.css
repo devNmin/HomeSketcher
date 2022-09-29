@@ -5,6 +5,11 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'ROKAF';
+  src: url('../../assets/Fonts/ROKAF\ Sans\ Medium.ttf');
+}
+
 .Category {
   font-family: 'HallymGothic-Regular';
   background-color: white;
@@ -33,9 +38,10 @@
   margin: 5rem auto;
 }
 
-.main_card h3 {
+.main_card h2 {
+  font-family: 'ROKAF';
   font-size: 2rem;
-  letter-spacing: 1rem;
+  /* letter-spacing: 1rem; */
   margin: 0;
 }
 
