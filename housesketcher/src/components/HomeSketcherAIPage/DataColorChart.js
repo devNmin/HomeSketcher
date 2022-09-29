@@ -3,7 +3,7 @@ import { ResponsiveBar } from '@nivo/bar';
 // 사용 라이브러리 : https://nivo.rocks/
 // 참고 블로그 : https://jforj.tistory.com/269
 
-const DataChart = () => {
+const DataColorChart = () => {
   // 3. 실시간 인기 스타일 차트 보여주기
   const data = [
     {
@@ -222,4 +222,4 @@ const DataChart = () => {
   );
 };
 
-export default DataChart;
+export default DataColorChart;
