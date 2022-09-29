@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'HallymGothic-Regular';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2204@1.0/HallymGothic-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+}
+
 .header_section {
     background-color: rgba(0, 0, 0, 0.26);
     background-image: url(../../assets/nonloginMain.jpg);
@@ -23,7 +30,8 @@
   }
   
   .title_h2 {
-    font-size: 2rem;
+    font-size: 1.7rem;
+    font-family: 'HallymGothic-Regular';
   }
   
   .title {
