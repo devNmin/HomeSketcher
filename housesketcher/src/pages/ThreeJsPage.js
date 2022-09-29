@@ -78,6 +78,10 @@ export default function ThreeJsPage() {
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
   let [objList, setObjList] = useState([])
+  let totalcost = 0
+  objList.forEach((obj) => {
+    totalcost += obj.furniture_price
+  })
 
 
   // 가구 obj 더해주기 
@@ -167,12 +171,15 @@ export default function ThreeJsPage() {
         {/* 가구 UX 창 */}
         <div className={classes.LeftItems}>
           <div>
-            <Liked addObj = {addobjListHandler}/>          
-            <h1>{mode}</h1>
+            Total Cost : {totalcost} $
+          </div>
+        <div>
+          
+            <Liked addObj = {addobjListHandler}/>    
           </div>
         </div>
 
-        <div className={classes.RightItems}>
+        <div className={classes.RightItems} style = {{ backgroundColor : '#E3E8EC'}}>
         <Canvas   
         // onPointerMissed = 밖에 클릭시 target null로 만들기 
           key={`isometric-${orthoCamera}`}
@@ -181,7 +188,7 @@ export default function ThreeJsPage() {
 
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
-            <Model onPointerMissed={() => setTarget(null)} objUrl = {obj} setTarget = {setTarget} />
+            <Model onPointerMissed={() => setTarget(null)} objUrl = {obj.glb_url} setTarget = {setTarget} />
           ))
           }
 
