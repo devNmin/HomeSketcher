@@ -32,7 +32,7 @@ export default function LikeThreeFurniture(props) {
 	}
 
 	return (		
-			<Card style={{ maxWidth : '100px',cursor: 'pointer'}} key={furniture.id}
+			<Card style={{ maxWidth : '120px',cursor: 'pointer'}} key={furniture.id}
 				onClick = {() => {props.getFurnObj(furniture)}}>
 				<p style={{ display : 'flex', justifyContent : 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>{furniture.furniture_price}$</p>					
 				<Card.Img onClick={() => { onClickFurnitureHandler(furniture.id) }} variant="top" src={furniture.furniture_image} />				

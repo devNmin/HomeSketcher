@@ -1,6 +1,7 @@
-import React, {useState, useReducer, useMemo, useRef, Suspense } from 'react';
+import React, {useEffect ,useContext, useState, useReducer, useMemo, useRef, Suspense } from 'react';
 import { Canvas, useThree, useFrame  } from "react-three-fiber";
 import { a, useSpring } from '@react-spring/three';
+import { useHistory } from 'react-router-dom';
 // import data from '../components/ThreeJsPage/floplan-data.json';
 import CameraSetup from '../components/ThreeJsPage/CameraSetup';
 import FloorPlan from '../components/ThreeJsPage/FloorPlan';
@@ -19,10 +20,20 @@ import { useGLTF, useCursor} from '@react-three/drei';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Liked from '../components/ThreeJsPage/Liked';
 import Staged from '../components/ThreeJsPage/Staged';
-
+import axios from '../utils/axios';
+import AuthContext from '../context/AuthContext';
+import RecomFurn from '../components/ThreeJsPage/RecomFurn';
+import ItemUX from '../components/ThreeJsPage/ItemUX';
+import ClipLoader from "react-spinners/ClipLoader";
+import CustomScroll from 'react-custom-scroll'
+import { button } from 'react-bootstrap'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 //////////////////////
 
 const DevTools = () => {
+  
   const { scene, renderer } = useThree();
 
   new CustomEvent('observe', { detail: renderer });
@@ -74,27 +85,70 @@ const useStore = create((set) => ({ target: null, setTarget: (target) => set({ t
 // }
 
 export default function ThreeJsPage() {
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
   // let [currentFloor, setCurrentFloor] = useState(0);
+  let { BASE_URL } = useContext(AuthContext);
+  let [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem('authTokens')
+      ? JSON.parse(localStorage.getItem('authTokens'))
+      : null
+  );
   let currentFloor= 0;
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
   let [objList, setObjList] = useState([])
+  let [recomList, setRecomList] = useState([])
+
+  const getRecomFurnitures = async () => {
+    await axios({
+      method: 'get',
+      url: BASE_URL + 'furnitures/3d/furniture/',
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`,
+      },
+    }).then (
+      (response) => {
+        setRecomList(Object.entries(response.data))
+        console.log('recomList', recomList);
+      }
+    ).catch((err) => {
+      console.log(err);
+    });
+  }
+
   let totalcost = 0
   objList.forEach((obj) => {
     totalcost += obj.furniture_price
   })
 
+  useEffect(() => {
+    getRecomFurnitures();
+    setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+  }, [])
 
   // 가구 obj 더해주기 
   const addobjListHandler = (objUrl) => {
-    setObjList(
-       [...objList, objUrl]
-    )
+    console.log(objUrl);
+    if ( objList.includes(objUrl)){
+      console.log(' 중복');
+    }else {
+      setObjList(
+         [...objList, objUrl]
+      )
+      console.log('위의 것을 넣습니다.');
+    }
   }
 
   // 가구 obj 제거하기 
   const removeobjListHandler = (objUrl) => {
     console.log('remove', objUrl);
+    setObjList(
+      objList.filter(obj => obj.id !== objUrl.id)
+    )
 
   }
 
@@ -163,6 +217,9 @@ export default function ThreeJsPage() {
     currentFloor,
   });
   ////
+  const exitHandler = () => {
+    history.push('/')
+  }
 
 
   const { target, setTarget } = useStore()
@@ -170,24 +227,90 @@ export default function ThreeJsPage() {
   /////
   
   console.log('targettargettarget', target)
-
+  const [isOpen, setMenu] = useState(true)
+  const toggleMenu = () => {
+    setMenu(isOpen => !isOpen); // on,off 개념 boolean
+}
 
   return (
-    <div className={classes.three_body}>
-
+    <div className={classes.three_body} >
         {/* 가구 UX 창 */}
-        <div className={classes.LeftItems}>
-          <div>
-            Total Cost : {totalcost} $
-          </div>
-         <div style={{ padding : '10px' }}>          
-            <button style={{ width: '100%'}}>Liked Furnitures</button>
-            <Liked addObj = {addobjListHandler}/>    
+      
+          <div className={classes.LeftItems} style = {{ overflowY : 'scroll' }}>
+          <div style={{ padding : '30px' }}>
+            <div style={{display : 'flex'}}>
+            
+            <DropdownButton
+            as={ButtonGroup}
+            key= 'Warning'
+            id={`dropdown-variants-Warning`}
+            variant={'Warning'.toLowerCase()}
+            title='Room List'
+            style={{ width : '45%'}}
+          >
+            <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
+            <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
+          </DropdownButton>
 
+           <button style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+            </div>                      
+            <br />
+            <br />
             <button style={{ width: '100%'}}>Staged Furnitures</button>
             <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
+            <br />
+            <div style={{display : 'flex', justifyContent: 'center'}}>
+              Total Cost : {totalcost} $
+            </div>
+            <br />
+
+
+            {loading? 
+            <b>
+            <div style={{display :'flex', justifyContent: 'center'}}>
+                <h3>Setting for</h3>          
+            </div>
+            <div style={{display :'flex', justifyContent: 'center'}}>
+                <h3>Your furnitures</h3>
+            </div>
+            <div style={{display :'flex', justifyContent: 'center'}}>
+                <ClipLoader color={'#F3CD58'} loading={loading}  size={50} />
+                
+            </div>
+
+            </b>
+            :
+            null            
+            }
+            
+            <button onClick={()=>toggleMenu()} style={{ width: '100%', marginBottom: '1px' , display : loading? 'none' : null}}>Liked Furnitures</button>
+            {loading? null : <div>
+              {
+                isOpen? <Liked addObj = {addobjListHandler}/> : null    
+
+              }
+
+            </div>
+              } 
+            {recomList.map(([key, value]) => (
+              <div  key = {key} style ={{ marginBottom: '1px', display : loading? 'none' : null}}>
+                <ItemUX furnkey = {key} furnvalue = {value} addobjHandler = {addobjListHandler}/>
+                {/* <button style={{ width: '100%'}}>{key}</button>
+                <RecomFurn addObj = {addobjListHandler} furnitures = {value}/> */}
+              </div>             
+            
+            )
+
+            )}
+            <br />            
+            <button onClick={exitHandler}>Exit</button>  
+                         
+
           </div>
-        </div>
+          </div>
+
+      
 
         <div className={classes.RightItems} style = {{ backgroundColor : '#E3E8EC'}}>
         <Canvas   

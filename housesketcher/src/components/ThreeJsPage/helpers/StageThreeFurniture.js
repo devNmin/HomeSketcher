@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import { useState, useContext } from 'react';
 import AuthContext from '../../../context/AuthContext';
 import axios from 'axios';
-
+import { button } from 'react-bootstrap'
 
 export default function StageThreeFurniture(props) {
 	let { BASE_URL, authTokens } = useContext(AuthContext)
@@ -32,9 +32,9 @@ export default function StageThreeFurniture(props) {
 	}
 
 	return (		
-			<Card style={{ maxWidth : '100px'}} 
-				>
-				<p onClick={() => {props.getFurnObj(furniture)}} style={{ position : 'absolute' , display : 'flex', marginLeft: '80px', cursor : 'pointer'}}>X</p>
+			<Card style={{ maxWidth : '120px'}} 
+				>				
+				<button onClick={() => {props.getFurnObj(furniture)}} style={{ width: '5px', height : '5px',position : 'absolute' , display : 'flex', marginLeft: '103px', cursor : 'pointer'}} type="button" class="btn-close" aria-label="Close"></button>
 				<p style={{ display : 'flex', justifyContent : 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>{furniture.furniture_price}$</p>									
 				<Card.Img variant="top" src={furniture.furniture_image} />				
 				<Card.Body				
