@@ -12,7 +12,8 @@ from .views import(
 
 from .recommend import(
     FurnitureRecommendAPIView,
-    FurnitureHotItemAPIView
+    FurnitureHotItemAPIView,
+    FurnitureForThreeAPIView
 )
 
 app_name = 'furnitures'
@@ -28,5 +29,5 @@ urlpatterns=[
     path('recommend/furniture/', FurnitureRecommendAPIView.as_view(), name="furniture-recommend-list"),
     path('hot/furniture/', FurnitureHotItemAPIView.as_view(), name="furniture-hot-items"),
     path('getStyleAndFurniture/', GetStyleAndFurnitureView.as_view(), name="style-get-furniture"),
-    
+    path('3d/furniture/',FurnitureForThreeAPIView.as_view(),name = "3dpage-furnitures"),
 ]

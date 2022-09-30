@@ -20,6 +20,7 @@ from .serializers import(
 
 from random import shuffle
 from util.recom import read_hot_furnitures
+from util.choicesList import category
 
 # 스타일 우선순위 가구 리스트 n개만큼 가져온다
 def FurnitureWithStyle(style,color,birth,gender):
@@ -283,3 +284,24 @@ class FurnitureHotItemAPIView(APIView):
             return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
 
         return Response(furnitures)
+
+#3d 모델링 페이지 카테고리별 가구 추천 데이터. 스타일 + 컬러로만 최대한 적용
+class FurnitureForThreeAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    @swagger_auto_schema(tags=['3d 페이지 카테고리별 추천 데이터'],  responses={200: 'Success'})
+    def get(self,request):
+        try:
+            user = User.objects.get(id = request.user.id)
+            
+            furniture_styles = Furniture.objects.filter(furniture_style = user.user_style)
+            furniture_colors = Furniture.objects.filter(furniture_color = user.user_color)
+
+            category_main = category.keys()
+            res = {}
+            for c in category_main:
+                res[c] = (furniture_styles.filter(furniture_main = c).order_by('?')[:7].union(furniture_colors.filter(furniture_main=c).order_by('?')[:3])).order_by('?').values()
+
+            return Response(res,status=status.HTTP_200_OK)
+        except:
+            return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
