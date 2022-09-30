@@ -100,6 +100,10 @@ export default function ThreeJsPage() {
   let [objList, setObjList] = useState([])
   let [recomList, setRecomList] = useState([])
 
+  const makeRoomClick = async () => {
+    console.log('Clicked makeRoom button!');
+  }
+
   const getRecomFurnitures = async () => {
     await axios({
       method: 'get',
@@ -152,6 +156,11 @@ export default function ThreeJsPage() {
 
   }
 
+  // 카메라 리셋 버튼
+  const onClickResetCamera = async () => {
+    // Orbitcontrols.reset() 
+    console.log('HI');
+  }
   
   let [X, setX] = useState(0);
   let [Y, setY] = useState(0);
@@ -254,9 +263,15 @@ export default function ThreeJsPage() {
           </DropdownButton>
 
            <button style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+           
             </div>                      
             <br />
             <br />
+
+            <button style={{ display : 'absolute'}}
+             onClick={() => onClickResetCamera()}
+            >Reset View</button>
+
             <button style={{ width: '100%'}}>Staged Furnitures</button>
             <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
             <br />
@@ -350,14 +365,22 @@ export default function ThreeJsPage() {
 
         {/* 뷰 + 코너 확인 */}
         <div className={`${classes.controls} ${classes.perspectiveControls}`}>
+            
           <div>
-            <label htmlFor="isometricView">Isometric View</label>
+            <label htmlFor="isometricView">Reset View</label>
+
+
+
             <input
               name="isometricView"
               type="checkbox"
               checked={orthoCamera}
               onChange={() => setOrthoCamera(!orthoCamera)}
             />
+
+            
+
+
           </div>
           <div>
             <label htmlFor="showCorners">show corners</label>
