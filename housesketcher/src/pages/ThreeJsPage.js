@@ -18,6 +18,7 @@ import { useControls } from 'leva'
 import { useGLTF, useCursor} from '@react-three/drei';
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Liked from '../components/ThreeJsPage/Liked';
+import Staged from '../components/ThreeJsPage/Staged';
 
 //////////////////////
 
@@ -89,6 +90,12 @@ export default function ThreeJsPage() {
     setObjList(
        [...objList, objUrl]
     )
+  }
+
+  // 가구 obj 제거하기 
+  const removeobjListHandler = (objUrl) => {
+    console.log('remove', objUrl);
+
   }
 
   
@@ -173,9 +180,12 @@ export default function ThreeJsPage() {
           <div>
             Total Cost : {totalcost} $
           </div>
-        <div>
-          
+         <div style={{ padding : '10px' }}>          
+            <button style={{ width: '100%'}}>Liked Furnitures</button>
             <Liked addObj = {addobjListHandler}/>    
+
+            <button style={{ width: '100%'}}>Staged Furnitures</button>
+            <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
           </div>
         </div>
 

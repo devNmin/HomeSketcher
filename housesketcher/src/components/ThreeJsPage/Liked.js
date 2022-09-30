@@ -39,7 +39,7 @@ function Liked(props) {
   }, [])
 
   return (
-    <div style={{display : 'flex', flexWrap: 'wrap', overflowY : 'scroll', maxHeight: '250px'}}>
+    <div style={{display : 'flex', flexWrap: 'wrap', overflowY : 'scroll', maxHeight: '250px',  borderStyle : 'solid', borderColor : '#F3CD58'}}>
       {furnitureList.map((detail) => (        
           <LikeThreeFurniture 
             key={detail.id}
