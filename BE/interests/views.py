@@ -1,4 +1,5 @@
 from urllib import response
+from xmlrpc.client import ResponseError
 from rest_framework.views import APIView
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -28,6 +29,8 @@ from .serializers import(
     InterestColorInputSerializer,   
     UserInterestDataSerializer, 
     UserInterestInputSerializer,
+    styleChangeSerialiizer,
+    UserStyleDataSerializer,
 )
 
 # Create your views here.
@@ -266,7 +269,17 @@ class SendRandomUserInterestResult(APIView):
         serializer = UserInterestDataSerializer(response)
         return Response(serializer.data, status=status.HTTP_200_OK)
     
-    
-    
-         
-            
+class SetUserStyleAPIView(APIView):
+    @swagger_auto_schema(tags=['스타일 변경'], request_body=styleChangeSerialiizer,responses={200: 'Success'})
+    def put(self, request):
+        currentUser = User.objects.get(id=request.user.id)
+        newStyle = {
+            'user_style' : request.data['style']
+        }
+        UserStyle.objects.filter(user_id=request.user.id).delete()
+        userStyleDataSerializer = UserStyleDataSerializer(currentUser, data=newStyle)
+        if userStyleDataSerializer.is_valid():
+            userStyleDataSerializer.save()
+        else:
+            return returnErrorJson("유효하지 않은 잘못된 스타일입니다.", "400", status.HTTP_400_BAD_REQUEST)
+        return returnSuccessJson("스타일이 변경되었습니다. style: " + newStyle['user_style'], "200", status.HTTP_200_OK)

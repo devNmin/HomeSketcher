@@ -44,9 +44,21 @@ class UserInterestInputSerializer(serializers.ModelSerializer):
 class UserInterestDataSerializer(serializers.Serializer):
     style = serializers.CharField(max_length=30, default=0)
     color = serializers.CharField(max_length=30, default=0)
+
+class UserStyleDataSerializer(serializers.Serializer):
+    user_style = serializers.CharField(max_length=30, default=0)
+   
+    def update(self, instance, validated_data):
+        instance.user_style = validated_data.get('user_style', instance.user_style)
+        instance.save()
+        return instance
           
 # 취향 폼 작성 결과 swagger
 class InterestFormResultSerialiizer(serializers.Serializer):
     img_list = serializers.ListField(
         child=serializers.IntegerField()
     )
+
+# 스타일 변경 swagger
+class styleChangeSerialiizer(serializers.Serializer):
+    style = serializers.CharField(max_length=30, default=0)
