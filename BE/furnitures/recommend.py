@@ -2,6 +2,7 @@ import datetime
 from furnitures.models import Furniture
 from auths.models import User
 from likes.models import UserLike
+from threedimensions.models import GlbObject
 from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -296,12 +297,24 @@ class FurnitureForThreeAPIView(APIView):
             
             furniture_styles = Furniture.objects.filter(furniture_style = user.user_style)
             furniture_colors = Furniture.objects.filter(furniture_color = user.user_color)
+            glbs = GlbObject.objects.all().values_list("furniture_sub","glb_url", "glb_width", "glb_length", "glb_height")
+            
+            url_data = {}
+            # 뽑아쓰기 쉽게 키(소분류), 밸류(url)로 생성
+            for g in glbs:
+                url_data[g[0]] = [g[1], g[2], g[3], g[4]]
 
             category_main = category.keys()
             res = {}
             for c in category_main:
                 res[c] = (furniture_styles.filter(furniture_main = c).order_by('?')[:7].union(furniture_colors.filter(furniture_main=c).order_by('?')[:3])).order_by('?').values()
-
+                for furniture in res[c]:
+                    furniture['glb_url']=url_data.get(furniture['furniture_sub'])[0]
+                    furniture['glb_width']=url_data.get(furniture['furniture_sub'])[1]
+                    furniture['glb_length']=url_data.get(furniture['furniture_sub'])[2]
+                    furniture['glb_height']=url_data.get(furniture['furniture_sub'])[3]
+                    
+                    
             return Response(res,status=status.HTTP_200_OK)
         except:
             return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
