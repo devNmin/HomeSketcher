@@ -1,30 +1,69 @@
-import axios from 'axios';
-import { useEffect } from 'react';
+import Axios from 'axios';
+import { useEffect, useState, useContext } from 'react';
 import BASE_URL from './AIBaseUrl';
+import classes from './AIStyle.module.css';
+import LodingText from '../Common/LodingText';
+import axios from '../../utils/axios';
+import swal from "sweetalert2";
+import AuthContext from '../../context/AuthContext';
+import { useHistory } from 'react-router-dom';
 
 const textContext = {
-  natural: [
-    'Natural interior design seeks to bring the outdoors in',
-    'by incorporating natural and nature-inspired materials into the home.',
-    'creating a look that is fresh, pure, authentic, and comfortable.',
-    'Woven fabrics, wicker or rattan furniture and decor, and shades of green alongside',
-    'nature-inspired neutrals are hallmarks of this wholesome and on-trend design style.',
+  Natural: [
+    'Natural interior design seeks to',
+    'bring the outdoors in by incorporating natural',
+    'and nature-inspired materials into the home.',
+    'creating a look that is fresh, pure,',
+    'authentic, and comfortable.',
+    'Woven fabrics, wicker or rattan furniture',
+    'and decor, and shades of green alongside',
+    'nature-inspired neutrals are hallmarks',
+    'of this wholesome and on-trend design style.',
   ],
-  mediterranean: [
-    'Mediterranean-style interior design is a riff on the décor',
-    'found in countries that border the Mediterranean Sea.',
-    'Whether you’re channeling a warm, carefree summer in Santorini, Capri, or Ibiza',
-    'he best Mediterranean-style interior design focuses on indoor-outdoor living.',
-    'Use materials such as wood, rattan, ceramics, terracotta, wrought iron, linen, and cotton',
+  Mediterranean: [
+    'Mediterranean-style interior design',
+    'is a riff on the décor found in countries',
+    'that border the Mediterranean Sea.',
+    'Whether you’re channeling a warm, carefree summer',
+    'in Santorini, Capri, or Ibiza.',
+    'he best Mediterranean-style interior design',
+    'focuses on indoor-outdoor living.',
+    'Use materials such as wood, rattan,',
+    'ceramics, terracotta, wrought iron, linen, and cotton',
   ],
-  antique: [],
+  Antique: [
+    'Antiques offer style, history, and',
+    'practicality to any room.',
+    'Antiques evoke amazement and great interest',
+    'in people, with questions like who made the furnishings,',
+    'what great craftsmanship went into its creation,',
+    'and what historical events have these pieces been through.',
+    'Just their sheer beauty is enough to decorate',
+    'with different styles in allowing',
+    'the past to come to present day life.',
+  ],
 };
 
+const NotAvailableList = ['image/png', 'image/gif'];
+
 function AIStyle() {
-  const file = null;
+  const [fileUrl, setFileUrl] = useState(null);
+  const [style, setStyle] = useState(null);
+  const [predictValue, setPredictValue] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const {user} = useContext(AuthContext)
+  const history = useHistory()
+
   const imageUpload = async (e) => {
-    let file = e.target.files[0];
-    axios({
+    const file = e.target.files[0];
+    if (NotAvailableList.includes(file.type)) {
+      const extension = file.type.split('/')[1];
+      alert(`Sorry, "${extension}" is not available filename extension`);
+      return;
+    }
+    setIsLoading(true);
+    setFileUrl(URL.createObjectURL(file));
+    Axios({
       headers: {
         'Content-Type': 'multipart/form-data',
         'Access-Control-Allow-Origin': '*',
@@ -34,31 +73,105 @@ function AIStyle() {
       data: { image: file },
     })
       .then((response) => {
-        console.log(response);
+        const entries = Object.entries(response.data.predict);
+        setStyle(entries[0][0]);
+        setPredictValue(entries[0][1]);
+        setIsLoading(false);
       })
       .catch((err) => console.log(err));
   };
   useEffect(() => {}, []);
 
-  // 1. 이미지 백으로 보내기
-  // ==> 응답 기다리기
-  // ==> 스타일별 설명 text 랜더링
+  if (isLoading) {
+    return (
+      <div className={classes.loading_position}>
+        <LodingText />
+      </div>
+    );
+  }
 
-  // 2. 스타일 저장하기 요청 보내기
-  // ==> 성공메세지 알람
-
+  const fixStyleHandler = (result) => {
+    axios.put('interests/userStyleChange/', {
+      style : result
+    })
+    .then (
+      (response) => {
+        console.log(response.data.message);
+        new swal(
+          'Style change complete',
+          `before : ${user.user_style} &nbsp;&nbsp;  after : ${style}`,
+          'success',{
+              showCancelButton: true,
+              cancelButtonText: 'cancel',
+              reverseButtons: true,
+          }
+          
+        )
+        history.push('/loginmain')
+      }
+    ).catch((err) => 
+    new swal(
+      'Error!',
+      `Please try again or reload the page`,
+      'error'
+    )  );
+    
+  }
   return (
-    <div>
-      <div>서비스 설명</div>
-      <div>결과와 스타일 설명</div>
-      <img src={file} alt="" />
+    <div className={classes.display_flex}>
+      <div className={classes.left_width}>
+        {style ? (
+          <div>
+            <h2>{style}</h2>
+            <div className={classes.text_group_margin}>
+              {textContext[style].map((text) => {
+                return <p className={classes.small_text}>{text}</p>;
+              })}
+            </div>
+            <button onClick={() => fixStyleHandler(style)}>Save this style</button> 
+          </div>
+        ) : (
+          <div>
+            <h2>Pick a Picture</h2>
+            <p className={classes.explain_text}>
+              Home Sketcher will analyze style of picture
+            </p>
+          </div>
+        )}
+      </div>
 
-      <input
-        type="file"
-        accept="image/*"
-        name="img_file"
-        onChange={(e) => imageUpload(e)}
-      />
+      <div>
+        {fileUrl ? (
+          <div className={classes.wrapper}>
+            <div className={classes.wrapper}>
+              <img src={fileUrl} alt="uploaded img" className={classes.user_img} />
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              name="img_file"
+              onChange={(e) => imageUpload(e)}
+            />
+          </div>
+        ) : (
+          <div className={classes.wrapper}>
+            <div className={classes.wrapper}>
+              <img
+                src="https://i0.wp.com/bespok.com/wp-content/uploads/2020/10/placeholder.png?w=1200&ssl=1"
+                alt="img upload"
+                className={classes.user_img}
+              />
+            </div>
+            <input
+              type="file"
+              accept="image/*"
+              name="img_file"
+              onChange={(e) => imageUpload(e)}
+            />
+          </div>
+        )}
+      </div>
+      <form></form>
     </div>
   );
 }

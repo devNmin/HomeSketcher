@@ -11,6 +11,7 @@
   padding: 1rem;
   text-align: center;
   color: black;
+  user-select: none;
 }
 
 .auth h1 {

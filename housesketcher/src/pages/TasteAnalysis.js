@@ -88,7 +88,7 @@ function TasteAnalysisPage() {
     }
     
  return (
-    <div>
+    <div style={{ userSelect : 'none' }}>
         <Navbar/>
         <br /> 
         {loading? 

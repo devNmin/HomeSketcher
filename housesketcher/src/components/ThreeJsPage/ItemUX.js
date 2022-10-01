@@ -9,7 +9,7 @@ export default function ItemUX(props) {
         setMenu(isOpen => !isOpen); // on,off 개념 boolean
     }
   return (
-    <div >
+    <div style={{ marginBottom: '2px'}} >
         <button onClick={()=>toggleMenu()} style={{ width: '100%'}}>{key}</button>
         {isOpen?
         <RecomFurn  addObj = {props.addobjHandler} furnitures = {value}/>  : null }

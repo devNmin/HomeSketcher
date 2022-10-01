@@ -8,4 +8,5 @@
     rgba(255, 250, 238, 0) 90.19%,
     #fffaee 100%
   );
+  user-select: none;
 }

@@ -15,6 +15,8 @@ import TTTest from './pages/TTTest';
 import NewMind from './pages/NewMind';
 import ScrollToTop from './hooks/ScrollToTop';
 import HomeSketcherAIPage from './pages/HomeSketcherAIPage';
+import { ThemeProvider } from './context/themeProvider';
+import { GlobalStyle } from './theme/GlobalStyle';
 
 function App() {
   return (
@@ -25,21 +27,24 @@ function App() {
             import React, {useContext} from 'react'
             import AuthContext from '../context/AuthContext'(위치)
             함수 안 let {authTokens} = useContext(AuthContext) => token 가져오기 authTokens.access 
-                    let {userInfo} = useContext(AuthContext) => 현재 유저정보 가져오기 
+            let {userInfo} = useContext(AuthContext) => 현재 유저정보 가져오기 
           */}
           <ScrollToTop>
-            <Switch className="App">
-              <NonPrivateRoute component={NonLoginMainPage} exact path="/" />
-              <PrivateRoute component={LoginMainPage} exact path="/loginmain" />
-              <PrivateRoute component={SearchPage} exact path="/searchpage" />
-              <NonPrivateRoute component={LoginPage} exact path="/login" />
-              <NonPrivateRoute component={AccountRegisterPage} exact path="/register" />
-              <PrivateRoute component={TasteAnalysisPage} exact path="/tasteanalysis" />
-              <Route component={ThreeJsPage} exact path="/modeling" />
-              <Route component={TTTest} exact path="/asd" />
-              <Route component={NewMind} exact path="/new" />
-              <Route component={HomeSketcherAIPage} exaxt path="/ai" />
-            </Switch>
+            <ThemeProvider >
+              <GlobalStyle />
+              <Switch className="App">
+                <NonPrivateRoute component={NonLoginMainPage} exact path="/" />
+                <PrivateRoute component={LoginMainPage} exact path="/loginmain" />
+                <PrivateRoute component={SearchPage} exact path="/searchpage" />
+                <NonPrivateRoute component={LoginPage} exact path="/login" />
+                <NonPrivateRoute component={AccountRegisterPage} exact path="/register" />
+                <PrivateRoute component={TasteAnalysisPage} exact path="/tasteanalysis" />
+                <Route component={ThreeJsPage} exact path="/modeling" />
+                <Route component={TTTest} exact path="/asd" />
+                <Route component={NewMind} exact path="/new" />
+                <Route component={HomeSketcherAIPage} exaxt path="/ai" />
+              </Switch>
+            </ThemeProvider>
           </ScrollToTop>
         </AuthProvider>
       </Router>
