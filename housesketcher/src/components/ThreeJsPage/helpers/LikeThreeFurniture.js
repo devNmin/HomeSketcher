@@ -32,17 +32,20 @@ export default function LikeThreeFurniture(props) {
 	}
 
 	return (		
-			<Card style={{ width: '33%', height: '33%', maxHeight: '33%' , cursor: 'pointer' }} key={furniture.id}
-				onClick = {() => {props.getFurnObj(furniture.glb_url)}}>				
+			<Card style={{ maxWidth : '120px',cursor: 'pointer'}} key={furniture.id}
+				onClick = {() => {props.getFurnObj(furniture)}}>
+				<p style={{ display : 'flex', justifyContent : 'center', marginBottom: '0.5rem', marginTop: '0.5rem'}}>{furniture.furniture_price}$</p>					
 				<Card.Img onClick={() => { onClickFurnitureHandler(furniture.id) }} variant="top" src={furniture.furniture_image} />				
-				<Card.Body
-				style={{ height: '120px', maxHeight: '120px', paddingBottom: '0px', marginTop: '20px' }}
-				>
-					<div
-						onMouseEnter={() => { setIsMouseOnHandler(true) }} 	      // 마우스엔터 이벤트이면 hide가 false가 된다.
-						onMouseLeave={() => { setIsMouseOnHandler(false) }}>
-						{isMouseon ? <b> {furniture.furniture_name}</b> : <b>{nameSpacer(furniture.furniture_name)}</b>}
-					</div>								
+				<Card.Body				
+				onMouseEnter={() => { setIsMouseOnHandler(true) }} 	      // 마우스엔터 이벤트이면 hide가 false가 된다.
+				onMouseLeave={() => { setIsMouseOnHandler(false) }}>
+					<b style={{fontSize : '0.1vw'}}>
+						{isMouseon ? <p>
+						 {furniture.furniture_name} </p>: 
+						 <p>{nameSpacer(furniture.furniture_name)}</p>}			
+
+					</b>
+																
 				</Card.Body>
 				{/* <Card.Body style={{ paddingBottom: '0px' }}>
 				</Card.Body> */}

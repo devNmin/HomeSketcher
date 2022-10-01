@@ -53,6 +53,7 @@
 
 .main_card img {
   width: 500px;
+  height: 360px;
 }
 
 
@@ -78,6 +79,7 @@
 .second_img {
   margin-right: 5rem;
   margin-left: 4rem;
+  height: 320px;
 }
 
 .content {

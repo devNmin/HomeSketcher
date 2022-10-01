@@ -210,6 +210,7 @@ export function FilterContextProvider(props) {
     })
       .then((response) => {
         setFurnitureList(response.data);
+        setTotalPage([]);
       })
       .catch((err) => {
         console.log(err);

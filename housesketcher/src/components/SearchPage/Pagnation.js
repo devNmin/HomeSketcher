@@ -27,7 +27,9 @@ function Pagnation() {
 
     searchCtx.changePage(pageNum);
   }, [pageNum, searchCtx.page]);
-
+  if (!items.length) {
+    return null;
+  }
   return (
     <div className={classes.pagenation_contatiner}>
       <div className={classes.page_num}>

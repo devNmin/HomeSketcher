@@ -46,16 +46,6 @@ const Floor = ({
   clickHandler
 }) => {
   let ref = useRef();
-  // useEffect(() => {
-  //   var obj = { opacity: isInteractive ? 0 : 1 };
-  //   gsap.to(obj, {
-  //     duration: 1,
-  //     opacity: isInteractive ? 1 : 0,
-  //     onUpdate: function () {
-  //       setOpacity(ref.current, obj.opacity);
-  //     }
-  //   });
-  // }, [isInteractive]);
 
   return (
     <group ref={ref} position={[0, level, 0]}>

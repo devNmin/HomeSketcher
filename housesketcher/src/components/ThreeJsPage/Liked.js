@@ -30,23 +30,22 @@ function Liked(props) {
   };
   
   // 3D페이지에서 가구 모델 카드를 클릭했을시, 해당 가구 id로 보내고 obj을 받은 다음 리스트에 추가
-  const onClickThreeFurn = async (glb_url) => {
-    props.addObj(glb_url)
+  const onClickThreeFurn = async (furn_info) => {
+    props.addObj(furn_info)
   }
-
-
 
   useEffect(() => {
     likedFurnitureHandler();
   }, [])
 
   return (
-    <div style= {{ display : 'flex'}}>
+    <div style={{display : 'flex', flexWrap: 'wrap', overflowY : 'scroll', maxHeight: '250px',  borderStyle : 'solid', borderColor : '#F3CD58'}}>
       {furnitureList.map((detail) => (        
           <LikeThreeFurniture 
             key={detail.id}
             furniture={detail}
-          getFurnObj ={onClickThreeFurn}></LikeThreeFurniture>        
+          getFurnObj ={onClickThreeFurn}
+          ></LikeThreeFurniture>        
       
       ))}
     </div>

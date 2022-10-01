@@ -1,0 +1,35 @@
+.tooltip {
+  display: block;
+  font-weight: bold;
+}
+
+.tooltip_text {
+  display: none;
+  position: absolute;
+  max-width: 80%;
+
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.8em;
+  color: white;
+  background: rgba(69, 68, 68, 0.709);
+}
+
+.tooltip:hover .tooltip_text {
+  display: block;
+}
+
+.tag {
+  display: block;
+  margin-top: 0.4rem;
+  margin-left: 0.8rem;
+  text-align: left;
+}
+.name_div {
+  text-align: left;
+  margin-left: 0.8rem;
+}
+.like_div {
+  display: block;
+  position: absolute;
+}

@@ -1,27 +1,38 @@
-import React, {useState, useReducer, useMemo, useRef, Suspense } from 'react';
+import React, {useEffect ,useContext, useState, useReducer, useMemo, useRef, Suspense } from 'react';
 import { Canvas, useThree, useFrame  } from "react-three-fiber";
 import { a, useSpring } from '@react-spring/three';
+import { useHistory } from 'react-router-dom';
 // import data from '../components/ThreeJsPage/floplan-data.json';
-import CameraSetup from '../components/ThreeJsPage/CameraSetup';
 import FloorPlan from '../components/ThreeJsPage/FloorPlan';
-import FloorClip from '../components/ThreeJsPage/FloorClip';
+import Ground from '../components/ThreeJsPage/Ground';
 
-import  Model  from '../components/ThreeJsPage/Model';
+import  ModelT  from '../components/ThreeJsPage/Modelt';
+import Model from '../components/ThreeJsPage/Model';
+import  CameraSetup  from '../components/ThreeJsPage/CameraSetup';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
 import classes from './ThreeJsPage.module.css';
 
 ///////////////////////
-import { useLoader } from "@react-three/fiber";
 import create from 'zustand'
-import { Environment, OrbitControls, TransformControls, Html, useProgress } from '@react-three/drei'
+import {  OrbitControls, TransformControls } from '@react-three/drei'
 import { useControls } from 'leva'
-import { useGLTF, useCursor} from '@react-three/drei';
-import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import Liked from '../components/ThreeJsPage/Liked';
-
+import Staged from '../components/ThreeJsPage/Staged';
+import axios from '../utils/axios';
+import AuthContext from '../context/AuthContext';
+import RecomFurn from '../components/ThreeJsPage/RecomFurn';
+import ItemUX from '../components/ThreeJsPage/ItemUX';
+import ClipLoader from "react-spinners/ClipLoader";
+import CustomScroll from 'react-custom-scroll'
+import { button } from 'react-bootstrap'
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import * as THREE from 'three'
 //////////////////////
 
 const DevTools = () => {
+  
   const { scene, renderer } = useThree();
 
   new CustomEvent('observe', { detail: renderer });
@@ -30,63 +41,90 @@ const DevTools = () => {
   return null;
 };
 
-// 1. Glb 파일 로딩 
-// function Loader() {
-//   const { active, progress, errors, item, loaded, total } = useProgress();
-//   return <Html center>{progress} % loaded</Html>;
-// }
 
-// const Model = () => {
-//   const gltf = useLoader(
-//     GLTFLoader,
-//     'https://firebasestorage.googleapis.com/v0/b/homesketcher-37070.appspot.com/o/glb%2Fdesks.glb?alt=media&token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjIxZTZjMGM2YjRlMzA5NTI0N2MwNjgwMDAwZTFiNDMxODIzODZkNTAiLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoia21TZWNvbmQiLCJwaWN0dXJlIjoiaHR0cDovL3d3dy5leGFtcGxlLmNvbS8xMjM0NTY3OC9waG90by5wbmciLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaG9tZXNrZXRjaGVyLTM3MDcwIiwiYXVkIjoiaG9tZXNrZXRjaGVyLTM3MDcwIiwiYXV0aF90aW1lIjoxNjY0MjQ2Njk5LCJ1c2VyX2lkIjoiZzVnNzJuU1ZmWWd0ZVJBQ3UzWHNTTVBDTzVGMyIsInN1YiI6Imc1ZzcyblNWZllndGVSQUN1M1hzU01QQ081RjMiLCJpYXQiOjE2NjQyNDY2OTksImV4cCI6MTY2NDI1MDI5OSwiZW1haWwiOiJqbzk1MTEyOEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlciI6Iis4MjEwNjQ4NTU3OTQiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis4MjEwNjQ4NTU3OTQiXSwiZW1haWwiOlsiam85NTExMjhAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.jbsBNl9xzkPZTEuO3NID7cbC4QINFcka5o73QyUP4_rt-9V4iRUO19eVp1JVSjs-16xToS-9xZgVQ8--j9-Cv_8ihku2veGrqNoXSX2U_Z-GrPg0DcjrR0MY8oof6-ZofCjt-Dqhe1twVbD1ijmTXl28ISs8eVG8LoyVbppkvFJq5TmV1Mh5wiMz6Y4LgPSW_CcJY5RwDTapA5oxkP_psALDr1Iopz_ADZNymW_dOPbGkbOqJHqk0PgEFz6gzcvJcpDJwIZupvia71q6cdmb_tVuy2Tu7_0Uk88r_2YHnNrC3bBGxhotWCoVFF11SF_UBGztJRBI_JBYRZqL-PFuvA'
-//   );
-//   return <primitive object={gltf.scene} scale={0.4} />;
-// };
 const useStore = create((set) => ({ target: null, setTarget: (target) => set({ target }) }))
 
-// 가구 3D 모델 생성?
-// function ModelT(props) {
-
-//   const gltf = useLoader(
-//     GLTFLoader,
-//     props.objUrl
-//     );;
-//   const setTarget = useStore((state) => state.setTarget)
-//   const [hovered, setHovered] = useState(false)
-
-//   function clcikHandler(data){
-//     console.log('------------')
-//     console.log('data',data)
-//     setTarget(data)
-//     console.log('------------')
-//     console.log('setTargetsetTargetsetTarget',data)
-//     console.log('------------')
-//     // console.log('target',target)
-//   }
-//   useCursor(hovered)
-//   return (
-//   // <mesh {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}>
-//   //     </mesh>
-//   <primitive  object={gltf.scene}  {...props} onClick={(e) => {setTarget(e.object); clcikHandler(e.object)}} onPointerOver={() => setHovered(true)} onPointerOut={() => setHovered(false)}/>
-//   );
-// }
-
+// ThreeJsPage 
 export default function ThreeJsPage() {
+  const [loading, setLoading] = useState(false)
+  const history = useHistory()
   // let [currentFloor, setCurrentFloor] = useState(0);
+  let { BASE_URL } = useContext(AuthContext);
+  let [authTokens, setAuthTokens] = useState(() =>
+    localStorage.getItem('authTokens')
+      ? JSON.parse(localStorage.getItem('authTokens'))
+      : null
+  );
   let currentFloor= 0;
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
   let [objList, setObjList] = useState([])
+  let [recomList, setRecomList] = useState([])
+  let [isOpen, setIsOpen] = useState(true)
 
-
-  // 가구 obj 더해주기 
-  const addobjListHandler = (objUrl) => {
-    setObjList(
-       [...objList, objUrl]
-    )
+  const makeRoomClick = async () => {
+    console.log('Clicked makeRoom button!');
   }
 
+  const getRecomFurnitures = async () => {
+    await axios({
+      method: 'get',
+      url: BASE_URL + 'furnitures/3d/furniture/',
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`,
+      },
+    }).then (
+      (response) => {
+        setRecomList(Object.entries(response.data))
+        console.log('recomList', recomList);
+      }
+    ).catch((err) => {
+      console.log(err);
+    });
+  }
+
+  let totalcost = 0
+  objList.forEach((obj) => {
+    totalcost += obj.furniture_price
+  })
+
+  useEffect(() => {
+    getRecomFurnitures();
+    setLoading(true)
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000)
+  }, [])
+
+  
+  // 가구 obj 더해주기 
+  const addobjListHandler = (objUrl) => {
+    console.log(objUrl);
+    if (objList.includes(objUrl)){
+      console.log(' 중복');
+    }else {
+      setObjList(
+         [...objList, objUrl]
+      )
+      console.log('위의 것을 넣습니다.');
+      console.log(objList);
+    }
+  }
+
+  // 가구 obj 제거하기 
+  const removeobjListHandler = (objUrl) => {
+    console.log('remove', objUrl);
+    setObjList(
+      objList.filter(obj => obj.id !== objUrl.id)
+    )
+
+  }
+
+  // 카메라 리셋 버튼
+  const onClickResetCamera = async () => {
+    // Orbitcontrols.reset() 
+    console.log('HI');
+  }
   
   let [X, setX] = useState(0);
   let [Y, setY] = useState(0);
@@ -94,28 +132,38 @@ export default function ThreeJsPage() {
   const XXX = useRef();
   const YYY = useRef();
   const HHH = useRef();
+  
+  const toggleMenu = () => {
+    setIsOpen(!isOpen)
+  }
 
   const changeXHandler = () => {
+    console.log(objList)
     if (XXX.current.value !== undefined) {
-      setX(XXX.current.value);
-    } else {
-      setX(5);
+      setX(parseInt(XXX.current.value));
     }
   };
   const changeYHandler = () => {
     if (YYY.current.value !== undefined) {
-      setY(YYY.current.value);
-    } else {
-      setY(5);
+      setY(parseInt(YYY.current.value));
     }
   };
   const changeHHandler = () => {
     if (HHH.current.value !== undefined) {
-      setH(HHH.current.value);
-    } else {
-      setH(1);
+      setH(parseFloat(HHH.current.value));
     }
   };
+  let roomMain = {
+    id: 'roomMain',
+    height: H,
+    coords: [
+      { x: 0, y: 0 },
+      { x: X, y: 0 },
+      { x: X, y: Y },
+      { x: 0, y: Y },
+    ],
+  }
+
   let newItem = {
     floors: [
       {
@@ -123,26 +171,7 @@ export default function ThreeJsPage() {
         doors: [],
         windows: [],
         rooms: [
-          {
-            id: 'ROOM2',
-            height: H,
-            coords: [
-              { x: 0, y: 0 },
-              { x: X, y: 0 },
-              { x: X, y: Y },
-              { x: 0, y: Y },
-            ],
-          },
-          {
-            "id": "ROOM3",
-            "height": H,
-            "coords": [
-              { "x": 0, "y": 0 },
-              { "x": X/3, "y": 0 },
-              { "x": X/3, "y": Y/5 },
-              { "x": 0, "y": Y/5 }
-            ]
-          }
+          roomMain,
         ],
       },
     ],
@@ -152,40 +181,194 @@ export default function ThreeJsPage() {
     currentFloor,
   });
   ////
+  const exitHandler = () => {
+    history.push('/')
+  }
 
 
   const { target, setTarget } = useStore()
   const { mode } = useControls({ mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] } })
   /////
+
+  //checkIntersect -> 충돌 확인, true일때 충돌난 경우
+
+  // objBox에 setBox를 이용해서 box들을 json 형태로 저장한다.
+  let [objBox, setBox] =useState({ });
   
-  console.log('targettargettarget', target)
+  //isCollison : 충돌 발생 여부  | setIsCollison : isCollison 토글 시키는 함수
+
+  
+  let [preX, setpreX] = useState(0.0);
+  let [preY, setpreY] = useState(0.0);
+  let [preZ, setpreZ] = useState(0.0);
+  let [preXYZ, setpreXYZ] = useState([]);
 
 
+  
+  function ObjectChangeHandler(props){
+    const box = new THREE.Box3().setFromObject(props); // 현재 박스
+
+    // setBox -> objBox 리스트. 가구 box들을 저장하는 리스트. 현재 위치를 업데이트 해 줌.
+    setBox(prevState => ({
+          ...prevState,
+          [props.uuid]: box,
+        }));
+    let targetBox = objBox[props.uuid]
+    // 벽 충돌
+    // x 축 : -6 ~ 
+    if (-5.92+(targetBox.max.x-targetBox.min.x)/2> props.position.x){
+      target.position.x = preX
+    }
+    if (-5.92+X-(targetBox.max.x-targetBox.min.x)/2 < props.position.x){
+      target.position.x = preX
+    }
+    
+    if (-4.615 + (targetBox.max.z-targetBox.min.z)/2> props.position.z){
+      target.position.z = preZ
+    }
+    if (-4.615+Y -(targetBox.max.z-targetBox.min.z)/2 < props.position.z){
+      target.position.z = preZ
+    }
+    if (target.position.y < 0){
+      target.position.y = preY
+    }
+    if (target.position.y + (targetBox.max.y - targetBox.min.y)/2 > H ){
+      target.position.y = preY
+    }
+    
+
+    // Check collision box -> 충돌 확인 // 오브젝트간 충돌
+    for (const key in objBox) {
+      console.log("key ============ ",key)
+      if(props.uuid !==key){ // 자기 자신 아닌 경우
+        if (box.intersectsBox(objBox[key])){ // 충돌이 발생한 경우
+          console.log("충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌")
+          console.log(preXYZ.x)
+          console.log(preXYZ.y)
+          console.log(preXYZ.z)
+          // target.position.x = preXYZ.x
+          // target.position.y = preXYZ.y
+          // target.position.z = preXYZ.z
+          target.position.x = preX
+          target.position.y = preY
+          target.position.z = preZ
+          // break // 충돌 했으니 for문 탈출
+        }
+        
+        // } &&(-4 < targetMinV.z)  && (-5.8+X > targetMaxV.x) &&(-4+Y > targetMaxV.z)){
+        //   check6 =true;
+        // }
+  
+      }
+    }
+
+    setpreX(target.position.x)
+    setpreY(target.position.y)
+    setpreZ(target.position.z)
+    setpreXYZ([...preXYZ, target.position] )
+    
+  }
+  
   return (
-    <div className={classes.three_body}>
-
+    <div className={classes.three_body} >
         {/* 가구 UX 창 */}
-        <div className={classes.LeftItems}>
-          <div>
-            <Liked addObj = {addobjListHandler}/>          
-            <h1>{mode}</h1>
-          </div>
-        </div>
+      
+          <div className={classes.LeftItems} style = {{ overflowY : 'scroll' }}>
+          <div style={{ padding : '30px' }}>
+            <div style={{display : 'flex'}}>
+            
+            <DropdownButton
+            as={ButtonGroup}
+            key= 'Warning'
+            id={`dropdown-variants-Warning`}
+            variant={'Warning'.toLowerCase()}
+            title='Room List'
+            style={{ width : '45%'}}
+          >
+            <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
+            <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
+          </DropdownButton>
 
-        <div className={classes.RightItems}>
+           <button style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+           
+            </div>                      
+            <br />
+            <br />
+
+            {/* <button style={{ display : 'absolute'}}
+             onClick={() => onClickResetCamera()}
+            >Reset View</button> */}
+
+            <button style={{ width: '100%'}}>Staged Furnitures</button>
+            <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
+            <br />
+            <div style={{display : 'flex', justifyContent: 'center'}}>
+              Total Cost : {totalcost} $
+            </div>
+            <br />
+
+
+            {loading? 
+            <b>
+            <div style={{display :'flex', justifyContent: 'center'}}>
+                <h3>Setting for</h3>          
+            </div>
+            <div style={{display :'flex', justifyContent: 'center'}}>
+                <h3>Your furnitures</h3>
+            </div>
+            <div style={{display :'flex', justifyContent: 'center'}}>
+                <ClipLoader color={'#F3CD58'} loading={loading}  size={50} />
+                
+            </div>
+
+            </b>
+            :
+            null            
+            }
+            
+            <button onClick={()=>toggleMenu()} style={{ width: '100%', marginBottom: '1px' , display : loading? 'none' : null}}>Liked Furnitures</button>
+            {loading? null : <div>
+              {
+                isOpen? <Liked addObj = {addobjListHandler}/> : null    
+
+              }
+
+            </div>
+              } 
+            {recomList.map(([key, value]) => (
+              <div  key = {key} style ={{ display : loading? 'none' : null}}>
+                <ItemUX furnkey = {key} furnvalue = {value} addobjHandler = {addobjListHandler}/>
+                {/* <button style={{ width: '100%'}}>{key}</button>
+                <RecomFurn addObj = {addobjListHandler} furnitures = {value}/> */}
+              </div>             
+            
+            )
+
+            )}
+            <br />            
+            <button onClick={exitHandler}>Exit</button>  
+                         
+
+          </div>
+          </div>
+
+      
+
+        <div className={classes.RightItems} style = {{ backgroundColor : '#E3E8EC'}}>
         <Canvas   
         // onPointerMissed = 밖에 클릭시 target null로 만들기 
           key={`isometric-${orthoCamera}`}
           orthographic={orthoCamera}
           invalidateframeloop="false">
-
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
-            <Model onPointerMissed={() => setTarget(null)} objUrl = {obj} setTarget = {setTarget} />
+            <ModelT onPointerMissed={() => setTarget(null)} objUrl = {obj.glb_url}  setTarget = {setTarget} />
           ))
           }
-
-          {/* <CameraSetup /> */}          
+          
+          {/* <Ground/> */}
+          <CameraSetup />          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -198,8 +381,7 @@ export default function ThreeJsPage() {
               />
           </a.group>
 
-          <FloorClip currentFloor={currentFloor} data={newItem} />
-          {target && <TransformControls object={target} mode={mode} />}
+          {target && <TransformControls onChange={(e) => { ObjectChangeHandler(target); }} object={target} mode={mode} />}
           <OrbitControls makeDefault />
           <DevTools />
         </Canvas>
@@ -210,14 +392,22 @@ export default function ThreeJsPage() {
 
         {/* 뷰 + 코너 확인 */}
         <div className={`${classes.controls} ${classes.perspectiveControls}`}>
+            
           <div>
-            <label htmlFor="isometricView">Isometric View</label>
+            <label htmlFor="isometricView">Reset View</label>
+
+
+
             <input
               name="isometricView"
               type="checkbox"
               checked={orthoCamera}
               onChange={() => setOrthoCamera(!orthoCamera)}
             />
+
+            
+
+
           </div>
           <div>
             <label htmlFor="showCorners">show corners</label>
@@ -274,4 +464,4 @@ const useFloorTransitionAnimation = ({ floors, currentFloor }) => {
   });
 
   return position;
-};
+}

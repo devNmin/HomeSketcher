@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './CardPanel.module.css'
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 
 const Carousel = (props) => {
   const {children, show, populars} = props
@@ -60,7 +62,7 @@ const Carousel = (props) => {
               {
                   currentIndex > 0 &&
                   <button onClick={prev} className={styles.left_arrow}>
-                      &lt;
+                      <ArrowBackIosIcon />
                   </button>
               }
               <div
@@ -79,7 +81,7 @@ const Carousel = (props) => {
               {
                   currentIndex < (length - show) &&
                   <button onClick={next} className={styles.right_arrow}>
-                      &gt;
+                      <ArrowForwardIosIcon />
                   </button>
               }
           </div>
