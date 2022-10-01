@@ -20,15 +20,40 @@ export default function AccountRegisterPage() {
   let [formData, setformData] = useState({
     gender: ""
   })
+  let [gender, setGender] = useState(null)
 
-  const handleChange = event => {
-    const value = event.target.value
-    console.log(value);
+  // const handleChange = async (event) => {
+  //   event.preventDefault()
+  //   const value = event
+  //   console.log(value);
+  //   if (event === 0) {
+  //     setGender('male')      
+  //   }else {
+  //     setGender('female')
+  //   }
+  //   setformData({      
+  //     gender: value
+  //   })
+  // }
+
+  const maleChange = async (event) => {
+    event.preventDefault()
+    setGender('male') 
     setformData({
-      ...formData,
-      gender: value
+      gender : 0
+    })  
+
+  }
+
+  const femaleChange = async (event) => {
+    event.preventDefault()
+    setGender('female')    
+    setformData({
+      gender : 1
     })
   }
+
+
 
 
   const emailcheckHandler = async (event) => {
@@ -109,7 +134,7 @@ export default function AccountRegisterPage() {
           <img src={logo} alt="" />
 
         </div>
-        <form onSubmit={submitHandler}>
+        <form>
 
           <div className='Signup'>
             <div>
@@ -148,26 +173,29 @@ export default function AccountRegisterPage() {
               <div className={styles.actions}>
                 <h5 style={{ paddingBottom: '10px' }}> Gender & Birth </h5>
 
-                <div style={{ display: 'flex', textAlign: 'left', marginLeft: '45px', marginBottom: '40px' }}>
-                  <div style={{ marginRight: '20px' }}>
+                <div style={{ display: 'flex', justifyContent : 'space-between', marginLeft: '45px',marginRight: '45px', marginBottom: '30px' }}>                 
+                     <button onClick = {maleChange} style ={{ backgroundColor : gender === 'male'? '#D3B24B' : null}}>Male</button>
+                     <button onClick = {femaleChange} style ={{ backgroundColor : gender === 'female'? '#D3B24B' : null}}>Female</button>                   
+{/* 
                     <label>남자</label>
                     <input className='mx-2' type="radio" id="male" name="gender" value="0" onChange={handleChange} />
                     <label>여자</label>
-                    <input className='mx-2' id="female" type="radio" name="gender" value="1" onChange={handleChange} />
-                  </div>
-
-
-                  <input style={{ marginLeft: '5rem' }} type="date" maxLength='6' name='signup_birthday' ref={birthInput} />
+                    <input className='mx-2' id="female" type="radio" name="gender" value="1" onChange={handleChange} /> */}           
+                </div>
+                <div style={{ display: 'flex', justifyContent: "start", marginLeft: '45px'}}>
+                  <input type="date" maxLength='6' name='signup_birthday' ref={birthInput} />
                 </div>
               </div>
+              <br />
               <div>
               </div>
               {/* 생년월일 */}
               {/* 생년월일 */}
             </div>
           </div>
-          <button type='submit'>Sign Up</button>
+          <button onClick={submitHandler} >Sign Up</button>
         </form>
+
         <Link className={styles.linkP} to='/login'>
           <p>Already Have An Account</p>
         </Link>

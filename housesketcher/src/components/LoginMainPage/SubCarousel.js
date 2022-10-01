@@ -13,19 +13,20 @@ function SubCarousel(props) {
   const [recommends, setRecommends] = useState([]);
   const [mostReviews, setMostReviews] = useState([]);
   const [latests, setLatests] = useState([]);
-  // const [hots, setHots] = useState([])
+  const [hots, setHots] = useState([])
 
   let { BASE_URL, authTokens } = useContext(AuthContext);
 
-  // const getHots = async () => {
-  //   const response = await axios.get(BASE_URL + 'furnitures/hot/furniture/', {
-  //     headers: {
-  //       Authorization: `Bearer ${authTokens.access}`
-  //     }
-  //   })
-  //   const hotData = await response.data;
-  //   setPopulars(hotrData.furnitures);
-  // }
+  const getHots = async () => {
+    const response = await axios.get(BASE_URL + 'furnitures/hot/furniture/', {
+      headers: {
+        Authorization: `Bearer ${authTokens.access}`
+      }
+    })
+    const hotData = await response.data;
+    console.log(hotData);
+    setHots(hotData);
+  }
 
   const getPopulars = async () => {
     const response = await axios.get(BASE_URL + 'furnitures/label/rate/', {
@@ -76,7 +77,7 @@ function SubCarousel(props) {
     getRecommends();
     getMostReviews();
     getLatests();
-    // getHots()
+    getHots()
   }, []);
   // console.log(populars)
   return (
@@ -102,22 +103,23 @@ function SubCarousel(props) {
         )}
       </div>
 
-      {/* <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
+      <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
         <h1>Real time HOTs</h1>
+        <p className={classes.explain_text}>Furnitures with hot clicks in real time</p>
           <br />
-          {hots.length? 
+          {hots? 
           <CardPanel
             show={4}
             populars={hots}>
               {hots.map((hot) => (
-                <LikeFurniture key= {hot.id} furniture = {hot[0]} addLatest = {addLatests}>              
+                <LikeFurniture key= {hot.id} furniture = {hot} addLatest = {addLatests}>              
                 </LikeFurniture>
               ))}        
           </CardPanel>
           : 
           <div> There aren't any Real time hot Furniture</div>
           }
-      </div> */}
+      </div>
 
       <div
         style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}
