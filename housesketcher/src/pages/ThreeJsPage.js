@@ -58,6 +58,8 @@ export default function ThreeJsPage() {
   let currentFloor= 0;
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
+  let [initCamera, setinitCamera] = useState(0);
+  let [downloadFlag, setDownloadFlag] = useState(false);
   let [objList, setObjList] = useState([])
   let [recomList, setRecomList] = useState([])
   let [isOpen, setIsOpen] = useState(true)
@@ -120,12 +122,6 @@ export default function ThreeJsPage() {
 
   }
 
-  // 카메라 리셋 버튼
-  const onClickResetCamera = async () => {
-    // Orbitcontrols.reset() 
-    console.log('HI');
-  }
-  
   let [X, setX] = useState(0);
   let [Y, setY] = useState(0);
   let [H, setH] = useState(0);
@@ -268,7 +264,6 @@ export default function ThreeJsPage() {
     setpreXYZ([...preXYZ, target.position] )
     
   }
-  
   return (
     <div className={classes.three_body} >
         {/* 가구 UX 창 */}
@@ -289,17 +284,19 @@ export default function ThreeJsPage() {
             <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
             <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
           </DropdownButton>
-
-           <button style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+          <button style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
            
             </div>                      
             <br />
             <br />
 
-            {/* <button style={{ display : 'absolute'}}
-             onClick={() => onClickResetCamera()}
-            >Reset View</button> */}
-
+            <button style={{ display : 'absolute'}}
+             onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}}
+            >Reset View</button>
+            <button style={{ display : 'absolute'}}
+             onClick={() => setDownloadFlag(!downloadFlag)}
+            >Capture and download</button>
+            
             <button style={{ width: '100%'}}>Staged Furnitures</button>
             <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
             <br />
@@ -368,7 +365,7 @@ export default function ThreeJsPage() {
           }
           
           {/* <Ground/> */}
-          <CameraSetup />          
+          <CameraSetup initCamera = {initCamera} downloadFlag={downloadFlag}/>          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -395,8 +392,6 @@ export default function ThreeJsPage() {
             
           <div>
             <label htmlFor="isometricView">Reset View</label>
-
-
 
             <input
               name="isometricView"
