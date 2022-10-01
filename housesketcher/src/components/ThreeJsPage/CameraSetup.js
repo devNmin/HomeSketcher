@@ -34,27 +34,13 @@ const CameraSetup = (props) => {
       z= 8
       
     }
+    
+    
     console.log("point", x + " " + y + " " + z )
     camera.position.set(x,y,z);
-    if (props.downloadFlag ){
-      
-      gl.render(scene, camera)
-      camera.position.set(-10,15,8);
+   
 
-      let screenshot = gl.domElement.toDataURL()
-      console.log(screenshot)
-      var link = document.createElement('a');
-
-      link.setAttribute('href', screenshot);
-      link.setAttribute('target', '_blank');
-      link.setAttribute('download', 'test');
-
-      link.click();
-      // props.downloadFlag =false
-    }
-    
-
-  }, [camera, gl, props.initCamera, props.downloadFlag, scene]);
+  }, [camera, gl, props.initCamera, scene]);
 
 
 };

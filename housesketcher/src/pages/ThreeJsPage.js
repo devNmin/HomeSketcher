@@ -9,6 +9,7 @@ import Ground from '../components/ThreeJsPage/Ground';
 import  ModelT  from '../components/ThreeJsPage/Modelt';
 import Model from '../components/ThreeJsPage/Model';
 import  CameraSetup  from '../components/ThreeJsPage/CameraSetup';
+import  ScreenShot  from '../components/ThreeJsPage/ScreenShot';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
 import classes from './ThreeJsPage.module.css';
 
@@ -239,9 +240,6 @@ export default function ThreeJsPage() {
       if(props.uuid !==key){ // 자기 자신 아닌 경우
         if (box.intersectsBox(objBox[key])){ // 충돌이 발생한 경우
           console.log("충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌")
-          console.log(preXYZ.x)
-          console.log(preXYZ.y)
-          console.log(preXYZ.z)
           // target.position.x = preXYZ.x
           // target.position.y = preXYZ.y
           // target.position.z = preXYZ.z
@@ -251,10 +249,6 @@ export default function ThreeJsPage() {
           // break // 충돌 했으니 for문 탈출
         }
         
-        // } &&(-4 < targetMinV.z)  && (-5.8+X > targetMaxV.x) &&(-4+Y > targetMaxV.z)){
-        //   check6 =true;
-        // }
-  
       }
     }
 
@@ -294,7 +288,7 @@ export default function ThreeJsPage() {
              onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}}
             >Reset View</button>
             <button style={{ display : 'absolute'}}
-             onClick={() => setDownloadFlag(!downloadFlag)}
+             onClick={() => {setDownloadFlag(!downloadFlag)}}
             >Capture and download</button>
             
             <button style={{ width: '100%'}}>Staged Furnitures</button>
@@ -365,7 +359,8 @@ export default function ThreeJsPage() {
           }
           
           {/* <Ground/> */}
-          <CameraSetup initCamera = {initCamera} downloadFlag={downloadFlag}/>          
+          <CameraSetup initCamera = {initCamera}/>          
+          <ScreenShot  downloadFlag={downloadFlag}/>          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -389,21 +384,6 @@ export default function ThreeJsPage() {
 
         {/* 뷰 + 코너 확인 */}
         <div className={`${classes.controls} ${classes.perspectiveControls}`}>
-            
-          <div>
-            <label htmlFor="isometricView">Reset View</label>
-
-            <input
-              name="isometricView"
-              type="checkbox"
-              checked={orthoCamera}
-              onChange={() => setOrthoCamera(!orthoCamera)}
-            />
-
-            
-
-
-          </div>
           <div>
             <label htmlFor="showCorners">show corners</label>
             <input
