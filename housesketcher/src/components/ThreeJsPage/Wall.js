@@ -1,30 +1,18 @@
-import React, { useMemo, useState, useRef, useEffect } from "react";
+import React, { useMemo, useState, useRef, useEffect, useContext } from 'react';
 import {
   distance,
   degreesToRadians,
   arrangeClockwise,
-  cartesianToPolar
-} from "./geometry";
-import * as THREE from "three";
+  cartesianToPolar,
+} from './geometry';
+import * as THREE from 'three';
+import ThreeJSContext from '../../context/ThreeJSContext';
 
 const WALL_THICKNESS = 0.1;
 const HALF_WALL_THICKNESS = WALL_THICKNESS / 2;
 
-const Wall = ({
-  a,
-  b,
-  height,
-  doors = [],
-  windows = [],
-  
-}) => {
-  const {
-    position,
-    rotation,
-    corners,
-    doorsRelative,
-    windowsRelative
-  } = useMemo(() => {
+const Wall = ({ a, b, height, doors = [], windows = [] }) => {
+  const { position, rotation, corners, doorsRelative, windowsRelative } = useMemo(() => {
     const length = distance(a, b) + WALL_THICKNESS;
     const angleFromAtoB = cartesianToPolar(b, a).angle;
 
@@ -35,7 +23,7 @@ const Wall = ({
         [0, 0],
         [0, height],
         [length, height],
-        [length, 0]
+        [length, 0],
       ],
       doorsRelative: doors.map(({ hinge, latch, height }) => {
         let hingePos = distance(a, hinge) + HALF_WALL_THICKNESS;
@@ -46,9 +34,9 @@ const Wall = ({
               { x: hingePos, y: 0.0 },
               { x: hingePos, y: height },
               { x: latchPos, y: height },
-              { x: latchPos, y: 0.0 }
+              { x: latchPos, y: 0.0 },
             ])
-          )
+          ),
         };
       }),
       windowsRelative: windows.map(({ left, right, sill, lintel }) => {
@@ -60,11 +48,11 @@ const Wall = ({
               { x: leftPos, y: sill },
               { x: leftPos, y: lintel },
               { x: rightPos, y: lintel },
-              { x: rightPos, y: sill }
+              { x: rightPos, y: sill },
             ])
-          )
+          ),
         };
-      })
+      }),
     };
   }, [a, b, height, doors, windows]);
 
@@ -83,10 +71,7 @@ const Wall = ({
   }, [corners, doorsRelative, windowsRelative]);
 
   return (
-    <mesh
-      position={position}
-      rotation={rotation}      
-    >
+    <mesh position={position} rotation={rotation}>
       <mesh position={[-HALF_WALL_THICKNESS, 0, -HALF_WALL_THICKNESS]}>
         <extrudeBufferGeometry
           args={[
@@ -94,8 +79,8 @@ const Wall = ({
             {
               bevelEnabled: false,
               depth: WALL_THICKNESS,
-              steps: 1
-            }
+              steps: 1,
+            },
           ]}
         />
         <WallMaterial />
@@ -106,6 +91,7 @@ const Wall = ({
 
 const WallMaterial = () => {
   const ref = useRef();
+  const ThreeJSCtx = useContext(ThreeJSContext);
 
   useEffect(() => {
     ref.current.color.convertSRGBToLinear();
@@ -115,7 +101,7 @@ const WallMaterial = () => {
     <meshLambertMaterial
       ref={ref}
       roughness={0.5}
-      args={[{ color: "#a39b9b" }]}
+      args={[{ color: ThreeJSCtx.wallColor }]}
       castShadow={true}
       receiveShadow={true}
     />

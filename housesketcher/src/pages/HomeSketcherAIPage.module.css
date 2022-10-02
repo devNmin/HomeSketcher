@@ -4,6 +4,7 @@ a {
 
 .body {
   user-select: none;
+  height: 95vh;
 }
 
 .justify_center {
@@ -16,35 +17,49 @@ a {
   margin-top: 8rem;
 }
 
+.display_none {
+  display: none;
+}
 /* main page layout */
 /* https://codepen.io/comehope/pen/GYXvez */
 .main {
   width: 100%;
   height: inherit;
-  background: linear-gradient(#eed99a, #f3cd58);
+  background: linear-gradient(#f5e3ac, #f3cd58);
   display: flex;
   align-items: center;
   justify-content: center;
   height: 95vh;
   overflow: hidden;
 }
-
+.main_dark {
+  width: 100%;
+  height: inherit;
+  background: linear-gradient(#d7aa23, #574200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 95vh;
+  overflow: hidden;
+}
+/* open_popup : 작은 버튼 */
 .open_popup {
   box-sizing: border-box;
   color: white;
   font-size: 16px;
   width: 10em;
-  height: 4em;
   border: 1px solid;
   text-align: center;
   line-height: 4em;
   text-decoration: none;
-  text-transform: capitalize;
   margin: 1em;
 }
 
 .open_popup:hover {
   border-width: 2px;
+  color: white;
+  text-shadow: 1px 1px 1px white;
+  box-shadow: 1px 1px 5px white;
 }
 
 /* popup page layout */
@@ -61,12 +76,6 @@ a {
 
 .popup:target {
   display: flex;
-}
-
-.popup > p {
-  font-size: 100px;
-  text-align: center;
-  margin: 0.3em 0.05em;
 }
 
 /* animation effects */
@@ -96,7 +105,7 @@ a {
 
 @keyframes open-animate {
   to {
-    height: 100vh;
+    height: 95vh;
     top: 0;
   }
 }
@@ -119,7 +128,59 @@ a {
   }
 }
 
-/* 버튼 */
+/* 팝업페이지 다크 */
+
+.popup_dark {
+  position: relative;
+  top: -95vh;
+  width: 100%;
+  height: inherit;
+  flex-direction: column;
+  justify-content: flex-start;
+  display: none;
+}
+
+.popup_dark:target {
+  display: flex;
+}
+
+/* animation effects */
+
+.popup_dark > * {
+  filter: opacity(0);
+  animation: fade-in 0.5s ease-in forwards;
+  animation-delay: 1s;
+}
+
+@keyframes fade-in {
+  to {
+    filter: opacity(1);
+  }
+}
+
+.popup_dark::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 0;
+  top: 50%;
+  background-color: #202020;
+  animation: open-animate 0.5s cubic-bezier(0.8, 0.2, 0, 1.2) forwards;
+  animation-delay: 0.5s;
+}
+
+.popup_dark::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #202020;
+  top: calc((100% - 2px) / 2);
+  left: 0;
+  animation: line-animate 0.5s cubic-bezier(0.8, 0.2, 0, 1.2);
+}
+
+/* 큰 버튼 */
 .btn {
   border: none;
   display: block;
@@ -162,6 +223,46 @@ a {
   transform: translateX(-9%) translateY(-25%) rotate(45deg);
 }
 
-.display_none {
-  display: none;
+/* 큰 버튼_dark */
+.btn_dark {
+  border: none;
+  display: block;
+  text-align: center;
+  cursor: pointer;
+  text-transform: uppercase;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  color: #fff;
+  font-weight: 700;
+  font-size: 15px;
+  background-color: #f3cd58;
+  padding: 17px 60px;
+  margin: 0 auto;
+  box-shadow: 0 5px 15px rgba(227, 227, 227, 0.2);
+}
+
+.btn_dark span {
+  color: black;
+  position: relative;
+  z-index: 1;
+}
+
+.btn_dark:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 490%;
+  width: 140%;
+  background: rgb(255, 255, 255);
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+  -webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+  transform: translateX(-98%) translateY(-25%) rotate(45deg);
+}
+
+.btn_dark:hover:after {
+  -webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+  transform: translateX(-9%) translateY(-25%) rotate(45deg);
 }
