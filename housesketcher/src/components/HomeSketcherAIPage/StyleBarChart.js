@@ -5,7 +5,7 @@ import classes from './ModeChange.module.css';
 // 사용 라이브러리 : https://nivo.rocks/
 // 참고 블로그 : https://jforj.tistory.com/269
 
-const StyleBarChart = ({ responseData }) => {
+const StyleBarChart = ({ responseData, isLight }) => {
   // 3. 실시간 인기 스타일 차트 보여주기
   const [isGroup, setIsGroup] = useState(false);
   function GroupModeHandelr() {
@@ -109,7 +109,7 @@ const StyleBarChart = ({ responseData }) => {
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div style={{ width: '80%', height: '20rem', margin: '0 auto' }}>
+    <div style={{ width: '80%', height: '25rem', margin: '0 auto' }}>
       <p
         className={classes.btn_12}
         onClick={() => {
@@ -129,26 +129,6 @@ const StyleBarChart = ({ responseData }) => {
         valueScale={{ type: 'linear' }}
         indexScale={{ type: 'band', round: true }}
         colors={{ scheme: 'yellow_orange_brown' }}
-        defs={[
-          {
-            id: 'dots',
-            type: 'patternDots',
-            background: 'inherit',
-            color: '#38bcb2',
-            size: 4,
-            padding: 1,
-            stagger: true,
-          },
-          {
-            id: 'lines',
-            type: 'patternLines',
-            background: 'inherit',
-            color: '#eed312',
-            rotation: -45,
-            lineWidth: 6,
-            spacing: 10,
-          },
-        ]}
         borderColor={{
           from: 'color',
           modifiers: [['darker', 1.6]],
@@ -159,16 +139,9 @@ const StyleBarChart = ({ responseData }) => {
           tickSize: 5,
           tickPadding: 5,
           tickRotation: 0,
-          legend: 'Style',
-          legendPosition: 'middle',
-          legendOffset: 32,
         }}
         enableLabel={!isGroup}
         labelSkipHeight={12}
-        labelTextColor={{
-          from: 'color',
-          modifiers: [['darker', 1.6]],
-        }}
         legends={[
           {
             dataFrom: 'keys',
@@ -182,7 +155,7 @@ const StyleBarChart = ({ responseData }) => {
             itemHeight: 20,
             itemDirection: 'left-to-right',
             itemOpacity: 0.85,
-            symbolSize: 10,
+            symbolSize: 12,
             effects: [
               {
                 on: 'hover',
@@ -197,6 +170,46 @@ const StyleBarChart = ({ responseData }) => {
         ariaLabel="Nivo bar chart demo"
         barAriaLabel={function (e) {
           return e.id + ': ' + e.formattedValue + ' in country: ' + e.indexValue;
+        }}
+        theme={{
+          background: isLight ? '#202020' : '#ffffff',
+          textColor: isLight ? '#ffffff' : '#333333',
+          fontSize: 11,
+          axis: {
+            domain: {
+              line: {
+                stroke: isLight ? '#707070' : '#dddddd',
+                strokeWidth: 1,
+              },
+            },
+            ticks: {
+              line: {
+                stroke: '#777777',
+                strokeWidth: 1,
+              },
+              text: {
+                fontSize: 17,
+              },
+            },
+          },
+          grid: {
+            line: {
+              stroke: isLight ? '#707070' : '#dddddd',
+              strokeWidth: 1,
+            },
+          },
+          legends: {
+            text: {
+              fontSize: 15,
+            },
+          },
+          tooltip: {
+            container: {
+              background: '#ffffff',
+              color: '#333333',
+              fontSize: 16,
+            },
+          },
         }}
       />
     </div>
