@@ -71,7 +71,7 @@ function TasteAnalysisPage() {
     // }
     const skipClickHandler = async (userid) => {
         await axios.get(BASE_URL + `interests/userRandom/${userid}`)
-        history.push('/loginmain').then(() =>window.scrollTo(0,0) )
+        history.push('/loginmain')
 
     }
     

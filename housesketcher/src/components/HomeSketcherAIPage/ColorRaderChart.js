@@ -2,10 +2,8 @@ import * as React from 'react';
 import { ResponsiveRadar } from '@nivo/radar';
 
 // 사용 라이브러리 : https://nivo.rocks/
-// 참고 블로그 : https://jforj.tistory.com/269
 
-const ColorRaderChart = ({ maleData, femaleData }) => {
-  // 3. 실시간 인기 스타일 차트 보여주기
+const ColorRaderChart = ({ maleData, femaleData, isLight }) => {
   let data = [
     {
       taste: 'Red',
@@ -73,20 +71,21 @@ const ColorRaderChart = ({ maleData, femaleData }) => {
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div style={{ width: '60%', height: '20rem', margin: '0 auto' }}>
+    <div style={{ width: '60%', height: '35rem', margin: '0 auto' }}>
       <ResponsiveRadar
         data={data}
         keys={['male', 'female']}
         indexBy="taste"
         valueFormat=">-.2f"
-        margin={{ top: 70, right: 80, bottom: 40, left: 80 }}
+        margin={{ top: 70, right: 80, bottom: 70, left: 80 }}
         borderColor={{ from: 'color' }}
         gridLabelOffset={36}
         dotSize={10}
         dotColor={{ theme: 'background' }}
         dotBorderWidth={2}
         colors={{ scheme: 'pastel1' }}
-        blendMode="multiply"
+        fillOpacity={isLight ? 0.2 : 0.25}
+        blendMode={isLight ? 'screen' : 'multiply'}
         motionConfig="wobbly"
         legends={[
           {
@@ -95,9 +94,9 @@ const ColorRaderChart = ({ maleData, femaleData }) => {
             translateX: -10,
             translateY: -40,
             itemWidth: 20,
-            itemHeight: 20,
-            itemTextColor: '#999',
-            symbolSize: 14,
+            itemHeight: 30,
+            itemTextColor: isLight ? '#c7c7c7' : '#999',
+            symbolSize: 20,
             symbolShape: 'circle',
             effects: [
               {
@@ -109,6 +108,58 @@ const ColorRaderChart = ({ maleData, femaleData }) => {
             ],
           },
         ]}
+        theme={{
+          background: isLight ? '#202020' : '#ffffff',
+          textColor: isLight ? '#ffffff' : '#333333',
+          fontSize: 11,
+          axis: {
+            domain: {
+              line: {
+                stroke: '#777777',
+                strokeWidth: 1,
+              },
+            },
+            legend: {
+              text: {
+                fontSize: 12,
+                fill: '#333333',
+              },
+            },
+            ticks: {
+              line: {
+                stroke: '#777777',
+                strokeWidth: 1,
+              },
+              text: {
+                fontSize: 15,
+              },
+            },
+          },
+          grid: {
+            line: {
+              stroke: isLight ? '#707070' : '#dddddd',
+              strokeWidth: 1,
+            },
+          },
+          legends: {
+            text: {
+              fontSize: 20,
+            },
+            ticks: {
+              line: {},
+              text: {
+                fontSize: 10,
+              },
+            },
+          },
+          tooltip: {
+            container: {
+              background: '#ffffff',
+              color: '#333333',
+              fontSize: 16,
+            },
+          },
+        }}
       />
     </div>
   );
