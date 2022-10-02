@@ -12,13 +12,10 @@ import LoadingText from '../components/Common/LodingText';
 function HomeSketcherAIPage() {
   const [responseData, setResponseData] = useState(null);
   const [isMain, setIsMain] = useState(true);
+  const isLight = window.localStorage.theme === 'light';
+  const BtnClass = isLight ? classes.btn_dark : classes.btn;
+  const PopupClass = isLight ? classes.popup_dark : classes.popup;
 
-  const chartList = {
-    StyleBarChart: 0,
-    StyleRaderChart: 0,
-    ColorBarChart: 0,
-    ColorRaderChart: 0,
-  };
   const responseDataHandler = async () => {
     await axios
       .get('auths/trend')
@@ -39,15 +36,14 @@ function HomeSketcherAIPage() {
   return (
     <div className={classes.body}>
       <Navbar />
-      <div className={classes.main}>
-        {/* TODO2 : css 고치기 : 버튼 호버 색! 갈라지는 효과 가운데서 시작하게 하기*/}
+      <div className={isLight ? classes.main_dark : classes.main}>
         <a
           href="#ai_style"
           onClick={() => {
             setIsMain(false);
           }}
         >
-          <button className={isMain ? classes.btn : classes.display_none}>
+          <button className={isMain ? BtnClass : classes.display_none}>
             <span>AI Style Analytics</span>
           </button>
         </a>
@@ -90,7 +86,7 @@ function HomeSketcherAIPage() {
         </a>
       </div>
 
-      <section id="ai_style" className={classes.popup}>
+      <section id="ai_style" className={PopupClass}>
         <div className={classes.my_margin}>
           <a
             href="#"
@@ -98,16 +94,16 @@ function HomeSketcherAIPage() {
               setIsMain(true);
             }}
           >
-            <button className={classes.btn}>
+            <button className={BtnClass}>
               <span>Back</span>
             </button>
           </a>
           <div className={classes.my_margin}></div>
-          <AIStyle />
+          <AIStyle isLight={isLight} />
         </div>
       </section>
 
-      <section id="style_age" className={classes.popup}>
+      <section id="style_age" className={PopupClass}>
         <div className={classes.my_margin}>
           <a
             href="#"
@@ -115,16 +111,16 @@ function HomeSketcherAIPage() {
               setIsMain(true);
             }}
           >
-            <button className={classes.btn}>
+            <button className={BtnClass}>
               <span>Back</span>
             </button>
           </a>
           <div className={classes.my_margin}></div>
-          <StyleBarChart responseData={responseData.ageStyle} />
+          <StyleBarChart responseData={responseData.ageStyle} isLight={isLight} />
         </div>
       </section>
 
-      <section id="style_gender" className={classes.popup}>
+      <section id="style_gender" className={PopupClass}>
         <div className={classes.my_margin}>
           <a
             href="#"
@@ -132,7 +128,7 @@ function HomeSketcherAIPage() {
               setIsMain(true);
             }}
           >
-            <button className={classes.btn}>
+            <button className={BtnClass}>
               <span>Back</span>
             </button>
           </a>
@@ -140,11 +136,12 @@ function HomeSketcherAIPage() {
           <StyleRaderChart
             maleData={responseData.maleStyle}
             femaleData={responseData.femaleStyle}
+            isLight={isLight}
           />
         </div>
       </section>
 
-      <section id="color_age" className={classes.popup}>
+      <section id="color_age" className={PopupClass}>
         <div className={classes.my_margin}>
           <a
             href="#"
@@ -152,16 +149,16 @@ function HomeSketcherAIPage() {
               setIsMain(true);
             }}
           >
-            <button className={classes.btn}>
+            <button className={BtnClass}>
               <span>Back</span>
             </button>
           </a>
           <div className={classes.my_margin}></div>
-          <ColorBarChart responseData={responseData.ageColor} />
+          <ColorBarChart responseData={responseData.ageColor} isLight={isLight} />
         </div>
       </section>
 
-      <section id="color_gender" className={classes.popup}>
+      <section id="color_gender" className={PopupClass}>
         <div className={classes.my_margin}>
           <a
             href="#"
@@ -169,7 +166,7 @@ function HomeSketcherAIPage() {
               setIsMain(true);
             }}
           >
-            <button className={classes.btn}>
+            <button className={BtnClass}>
               <span>Back</span>
             </button>
           </a>
@@ -177,26 +174,12 @@ function HomeSketcherAIPage() {
           <ColorRaderChart
             maleData={responseData.maleColor}
             femaleData={responseData.femaleColor}
+            isLight={isLight}
           />
         </div>
       </section>
     </div>
   );
-  // return (
-  //   <div>
-  //     <Navbar />
-  //     <div className={classes.justify_center}>
-  //       <AIStyle />
-
-  //       <StyleBarChart responseData={responseData.ageStyle} />
-  //       <StyleRaderChart
-  //         maleData={responseData.maleStyle}
-  //         femaleData={responseData.femaleStyle}
-  //       />
-  //     </div>
-  //     <AnimationToggle />
-  //   </div>
-  // );
 }
 
 export default HomeSketcherAIPage;

@@ -1,11 +1,16 @@
 /* 출처 : https://codepen.io/yuhomyan/pen/OJMejWJ */
+.chart_container {
+  width: 80%;
+  height: 25rem;
+  margin: 0 auto;
+}
+
 .btn_12 {
   width: 130px;
   height: 40px;
   color: #fff;
   border-radius: 5px;
   padding: 10px 25px;
-  font-family: 'Lato', sans-serif;
   font-weight: 500;
   background: transparent;
   cursor: pointer;
