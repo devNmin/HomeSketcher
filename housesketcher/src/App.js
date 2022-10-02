@@ -17,6 +17,7 @@ import ScrollToTop from './hooks/ScrollToTop';
 import HomeSketcherAIPage from './pages/HomeSketcherAIPage';
 import { ThemeProvider } from './context/themeProvider';
 import { GlobalStyle } from './theme/GlobalStyle';
+import { ThreeJSContextProvider } from './context/ThreeJSContext';
 
 function App() {
   return (
@@ -30,20 +31,30 @@ function App() {
             let {userInfo} = useContext(AuthContext) => 현재 유저정보 가져오기 
           */}
           <ScrollToTop>
-            <ThemeProvider >
-              <GlobalStyle />
-              <Switch className="App">
-                <NonPrivateRoute component={NonLoginMainPage} exact path="/" />
-                <PrivateRoute component={LoginMainPage} exact path="/loginmain" />
-                <PrivateRoute component={SearchPage} exact path="/searchpage" />
-                <NonPrivateRoute component={LoginPage} exact path="/login" />
-                <NonPrivateRoute component={AccountRegisterPage} exact path="/register" />
-                <PrivateRoute component={TasteAnalysisPage} exact path="/tasteanalysis" />
-                <Route component={ThreeJsPage} exact path="/modeling" />
-                <Route component={TTTest} exact path="/asd" />
-                <Route component={NewMind} exact path="/new" />
-                <Route component={HomeSketcherAIPage} exaxt path="/ai" />
-              </Switch>
+            <ThemeProvider>
+              <ThreeJSContextProvider>
+                <GlobalStyle />
+                <Switch className="App">
+                  <NonPrivateRoute component={NonLoginMainPage} exact path="/" />
+                  <PrivateRoute component={LoginMainPage} exact path="/loginmain" />
+                  <PrivateRoute component={SearchPage} exact path="/searchpage" />
+                  <NonPrivateRoute component={LoginPage} exact path="/login" />
+                  <NonPrivateRoute
+                    component={AccountRegisterPage}
+                    exact
+                    path="/register"
+                  />
+                  <PrivateRoute
+                    component={TasteAnalysisPage}
+                    exact
+                    path="/tasteanalysis"
+                  />
+                  <Route component={ThreeJsPage} exact path="/modeling" />
+                  <Route component={TTTest} exact path="/asd" />
+                  <Route component={NewMind} exact path="/new" />
+                  <Route component={HomeSketcherAIPage} exaxt path="/ai" />
+                </Switch>
+              </ThreeJSContextProvider>
             </ThemeProvider>
           </ScrollToTop>
         </AuthProvider>
