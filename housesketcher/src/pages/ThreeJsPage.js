@@ -41,6 +41,10 @@ import * as THREE from 'three';
 ////////
 import ThreeJSContext from '../context/ThreeJSContext.js';
 ////
+///////2D////////////
+import Canvas2D from '../components/ThreeJsPage/2d/drawroom'
+////////////////////
+
 const DevTools = () => {
   const { scene, renderer } = useThree();
 
@@ -156,65 +160,6 @@ export default function ThreeJsPage() {
   };
 
   
-  // 2d에서 룸정보 올때 변환해줌 
-  function roomLoad() {
-    let roomList  = {
-      0:{ 'fx':5,'fy':5,'nx':5,'ny':5},
-      1:{ 'fx':5,'fy':5,'nx':5,'ny':5},
-      2:{ 'fx':5,'fy':5,'nx':5,'ny':5},
-    }
-    let rooms = []
-    console.log("asdas",Object.keys(roomList).length)
-    for (let i = 0; i < Object.keys(roomList).length; i++) {
-      let roomInfo = {}
-      const el = roomList[i];
-      console.log(el)
-      roomInfo['id'] = i
-      roomInfo['height'] = 2
-      roomInfo['coords'] = [
-        { x: el['fx'], y: el['fy'] },
-        { x: el['nx'], y: el['fy'] },
-        { x: el['nx'], y: el['ny'] },
-        { x: el['fx'], y: el['ny'] },
-      ]
-      
-      rooms.push(roomInfo)
-    }
-    console.log(rooms)
-    return rooms
-  }
-  // let coords = [
-  //   {x: fx, y: fy},
-  //   {x: nx, y: fy},
-  //   {x: nx, y: ny},
-  //   {x: 0, y: ny},
-  // ]
-  let roomMain = {
-    id: 'roomMain',
-    height: H,
-    coords: [
-      { x: 0, y: 0 },
-      { x: X, y: 0 },
-      { x: X, y: Y },
-      { x: 0, y: Y },
-    ],
-  }
-  
-  let newItem = {
-    floors: [
-      {
-        y: 0,
-        doors: [],
-        windows: [],
-        rooms: [roomMain],
-      },
-    ],
-  };
-  let animatedFloorPosition = useFloorTransitionAnimation({
-    floors: newItem.floors,
-    currentFloor,
-  });
-  ////
   const exitHandler = () => {
     history.push('/');
   };
@@ -298,6 +243,32 @@ export default function ThreeJsPage() {
     console.log('이벤트', e.target.value);
     ThreeJSCtx.changeWallColor(e.target.value);
   }
+
+  //================2D==================
+  const [showResults, setShowResults] =useState(false)
+  let [mouseList] = useState([])
+  let [roomList,setRoomList] = useState([])
+  let [threeInfo, setThreeInfo] = useState([])
+
+  let [isRect,setIsRect] = useState(false);
+
+  let newItem = {
+    floors: [
+      {
+        y: 0,
+        doors: [],
+        windows: [],
+        rooms: threeInfo
+      },
+    ],
+  };
+  let animatedFloorPosition = useFloorTransitionAnimation({
+    floors: newItem.floors,
+    currentFloor,
+  });
+
+  //================2D=================
+
   return (
     <div className={classes.three_body}>
       {/* 가구 UX 창 */}
@@ -312,14 +283,14 @@ export default function ThreeJsPage() {
             variant={'Warning'.toLowerCase()}
             title='Room List'
             style={{ width : '45%'}}
-          >
-            <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
-            <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
-            <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
-          </DropdownButton>
-          <button onClick={() => roomLoad()} style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+            >
+              <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
+              <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
+              <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
+            </DropdownButton>
+          <button  style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
            
-            </div>                      
+          </div>                      
             <br />
             <br />
 
@@ -379,7 +350,8 @@ export default function ThreeJsPage() {
       </div>
 
       <div className={classes.RightItems} style={{ backgroundColor: '#E3E8EC' }}>
-        <Canvas
+        {!showResults && <Canvas2D threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
+        {showResults &&<Canvas 
           // onPointerMissed = 밖에 클릭시 target null로 만들기
           key={`isometric-${orthoCamera}`}
           orthographic={orthoCamera}
@@ -420,58 +392,64 @@ export default function ThreeJsPage() {
           )}
           <OrbitControls makeDefault />
           <DevTools />
-        </Canvas>
-      <div>
-        
+        </Canvas>}
+        <div>
+          
 
 
 
-        {/* 뷰 + 코너 확인 */}
-        <div className={`${classes.controls} ${classes.perspectiveControls}`}>
-          <div>
-            <label htmlFor="showCorners">show corners</label>
+          {/* 뷰 + 코너 확인 */}
+          <div className={`${classes.controls} ${classes.perspectiveControls}`}>
+            <div>
+              <label htmlFor="showCorners">show corners</label>
+              <input
+                name="showCorners"
+                type="checkbox"
+                checked={showCorners}
+                onChange={() => setShowCorners(!showCorners)}
+              />
+            </div>
+            <div>
+              <button onClick={() => {setShowResults(!showResults)}}>change</button>
+              <button onClick={() => {setIsRect(!isRect)}}>MakeRect</button>
+            </div>
+            </div>
+
+            {/* 방 수치 입력 */}
+            <div className={classes.help}>
+              <form>
+                <label htmlFor="xx">X</label>
+                <input id="xx" ref={XXX} onChange={changeXHandler} />
+                <label htmlFor="yy">Y</label>
+                <input id="yy" ref={YYY} onChange={changeYHandler} />
+                <label htmlFor="hh">H</label>
+                <input id="hh" ref={HHH} onChange={changeHHandler} />
+              </form>
+            </div>
+
+            <div className={`${classes.controls} ${classes.doorControls}`}>
+              {newItem.floors[currentFloor].doors
+                .filter(({ direction }) => direction !== 0)
+                .map(({ id }) => (
+                  <div key={id}>
+                    <label htmlFor={`door-${id}`}>{id} door</label>
+                    <input name={`door-${id}`} type="checkbox" />
+                  </div>
+                ))}
+            </div>
+            {/* 벽 색 인풋 받기 */}
             <input
-              name="showCorners"
-              type="checkbox"
-              checked={showCorners}
-              onChange={() => setShowCorners(!showCorners)}
+              type="color"
+              id="myBestColor"
+              value={ThreeJSCtx.wallColor}
+              onChange={(e) => {
+                wallColorHandler(e);
+              }}
             />
           </div>
-
-          {/* 방 수치 입력 */}
-          <div className={classes.help}>
-            <form>
-              <label htmlFor="xx">X</label>
-              <input id="xx" ref={XXX} onChange={changeXHandler} />
-              <label htmlFor="yy">Y</label>
-              <input id="yy" ref={YYY} onChange={changeYHandler} />
-              <label htmlFor="hh">H</label>
-              <input id="hh" ref={HHH} onChange={changeHHandler} />
-            </form>
           </div>
-
-          <div className={`${classes.controls} ${classes.doorControls}`}>
-            {newItem.floors[currentFloor].doors
-              .filter(({ direction }) => direction !== 0)
-              .map(({ id }) => (
-                <div key={id}>
-                  <label htmlFor={`door-${id}`}>{id} door</label>
-                  <input name={`door-${id}`} type="checkbox" />
-                </div>
-              ))}
-          </div>
-          {/* 벽 색 인풋 받기 */}
-          <input
-            type="color"
-            id="myBestColor"
-            value={ThreeJSCtx.wallColor}
-            onChange={(e) => {
-              wallColorHandler(e);
-            }}
-          />
-        </div>
       </div>
-    </div>
+    
   );
 }
 
