@@ -16,7 +16,8 @@ import Ground from '../components/ThreeJsPage/Ground';
 
 import ModelT from '../components/ThreeJsPage/Modelt';
 import Model from '../components/ThreeJsPage/Model';
-import CameraSetup from '../components/ThreeJsPage/CameraSetup';
+import  CameraSetup  from '../components/ThreeJsPage/CameraSetup';
+import  ScreenShot  from '../components/ThreeJsPage/ScreenShot';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
 import classes from './ThreeJsPage.module.css';
 
@@ -68,9 +69,11 @@ export default function ThreeJsPage() {
   let currentFloor = 0;
   let [showCorners, setShowCorners] = useState(false);
   let [orthoCamera, setOrthoCamera] = useState(false);
-  let [objList, setObjList] = useState([]);
-  let [recomList, setRecomList] = useState([]);
-  let [isOpen, setIsOpen] = useState(true);
+  let [initCamera, setinitCamera] = useState(0);
+  let [downloadFlag, setDownloadFlag] = useState(false);
+  let [objList, setObjList] = useState([])
+  let [recomList, setRecomList] = useState([])
+  let [isOpen, setIsOpen] = useState(true)
 
   const makeRoomClick = async () => {
     console.log('Clicked makeRoom button!');
@@ -124,12 +127,6 @@ export default function ThreeJsPage() {
     setObjList(objList.filter((obj) => obj.id !== objUrl.id));
   };
 
-  // 카메라 리셋 버튼
-  const onClickResetCamera = async () => {
-    // Orbitcontrols.reset()
-    console.log('HI');
-  };
-
   let [X, setX] = useState(0);
   let [Y, setY] = useState(0);
   let [H, setH] = useState(0);
@@ -157,6 +154,41 @@ export default function ThreeJsPage() {
       setH(parseFloat(HHH.current.value));
     }
   };
+
+  
+  // 2d에서 룸정보 올때 변환해줌 
+  function roomLoad() {
+    let roomList  = {
+      0:{ 'fx':5,'fy':5,'nx':5,'ny':5},
+      1:{ 'fx':5,'fy':5,'nx':5,'ny':5},
+      2:{ 'fx':5,'fy':5,'nx':5,'ny':5},
+    }
+    let rooms = []
+    console.log("asdas",Object.keys(roomList).length)
+    for (let i = 0; i < Object.keys(roomList).length; i++) {
+      let roomInfo = {}
+      const el = roomList[i];
+      console.log(el)
+      roomInfo['id'] = i
+      roomInfo['height'] = 2
+      roomInfo['coords'] = [
+        { x: el['fx'], y: el['fy'] },
+        { x: el['nx'], y: el['fy'] },
+        { x: el['nx'], y: el['ny'] },
+        { x: el['fx'], y: el['ny'] },
+      ]
+      
+      rooms.push(roomInfo)
+    }
+    console.log(rooms)
+    return rooms
+  }
+  // let coords = [
+  //   {x: fx, y: fy},
+  //   {x: nx, y: fy},
+  //   {x: nx, y: ny},
+  //   {x: 0, y: ny},
+  // ]
   let roomMain = {
     id: 'roomMain',
     height: H,
@@ -166,8 +198,8 @@ export default function ThreeJsPage() {
       { x: X, y: Y },
       { x: 0, y: Y },
     ],
-  };
-
+  }
+  
   let newItem = {
     floors: [
       {
@@ -238,17 +270,10 @@ export default function ThreeJsPage() {
 
     // Check collision box -> 충돌 확인 // 오브젝트간 충돌
     for (const key in objBox) {
-      console.log('key ============ ', key);
-      if (props.uuid !== key) {
-        // 자기 자신 아닌 경우
-        if (box.intersectsBox(objBox[key])) {
-          // 충돌이 발생한 경우
-          console.log(
-            '충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌'
-          );
-          console.log(preXYZ.x);
-          console.log(preXYZ.y);
-          console.log(preXYZ.z);
+      console.log("key ============ ",key)
+      if(props.uuid !==key){ // 자기 자신 아닌 경우
+        if (box.intersectsBox(objBox[key])){ // 충돌이 발생한 경우
+          console.log("충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌")
           // target.position.x = preXYZ.x
           // target.position.y = preXYZ.y
           // target.position.z = preXYZ.z
@@ -257,10 +282,7 @@ export default function ThreeJsPage() {
           target.position.z = preZ;
           // break // 충돌 했으니 for문 탈출
         }
-
-        // } &&(-4 < targetMinV.z)  && (-5.8+X > targetMaxV.x) &&(-4+Y > targetMaxV.z)){
-        //   check6 =true;
-        // }
+        
       }
     }
 
@@ -276,8 +298,6 @@ export default function ThreeJsPage() {
     console.log('이벤트', e.target.value);
     ThreeJSCtx.changeWallColor(e.target.value);
   }
-  ///
-
   return (
     <div className={classes.three_body}>
       {/* 가구 UX 창 */}
@@ -286,34 +306,38 @@ export default function ThreeJsPage() {
         <div style={{ padding: '30px' }}>
           <div style={{ display: 'flex' }}>
             <DropdownButton
-              as={ButtonGroup}
-              key="Warning"
-              id={`dropdown-variants-Warning`}
-              variant={'Warning'.toLowerCase()}
-              title="Room List"
-              style={{ width: '45%' }}
-            >
-              <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
-              <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
-              <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>
-            </DropdownButton>
+            as={ButtonGroup}
+            key= 'Warning'
+            id={`dropdown-variants-Warning`}
+            variant={'Warning'.toLowerCase()}
+            title='Room List'
+            style={{ width : '45%'}}
+          >
+            <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
+            <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
+            <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
+          </DropdownButton>
+          <button onClick={() => roomLoad()} style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+           
+            </div>                      
+            <br />
+            <br />
 
-            <button style={{ width: '45%', marginLeft: '40px' }}>Make room </button>
-          </div>
-          <br />
-          <br />
+            <button style={{ display : 'absolute'}}
+             onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}}
+            >Reset View</button>
+            <button style={{ display : 'absolute'}}
+             onClick={() => {setDownloadFlag(!downloadFlag)}}
+            >Capture and download</button>
+            
+            <button style={{ width: '100%'}}>Staged Furnitures</button>
+            <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
+            <br />
+            <div style={{display : 'flex', justifyContent: 'center'}}>
+              Total Cost : {totalcost} $
+            </div>
+            <br />
 
-          {/* <button style={{ display : 'absolute'}}
-             onClick={() => onClickResetCamera()}
-            >Reset View</button> */}
-
-          <button style={{ width: '100%' }}>Staged Furnitures</button>
-          <Staged furnitures={objList} removeObj={removeobjListHandler} />
-          <br />
-          <div style={{ display: 'flex', justifyContent: 'center' }}>
-            Total Cost : {totalcost} $
-          </div>
-          <br />
 
           {loading ? (
             <b>
@@ -371,7 +395,8 @@ export default function ThreeJsPage() {
           ))}
 
           {/* <Ground/> */}
-          <CameraSetup />
+          <CameraSetup initCamera = {initCamera}/>          
+          <ScreenShot  downloadFlag={downloadFlag}/>          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -396,28 +421,21 @@ export default function ThreeJsPage() {
           <OrbitControls makeDefault />
           <DevTools />
         </Canvas>
-        <div>
-          {/* 뷰 + 코너 확인 */}
-          <div className={`${classes.controls} ${classes.perspectiveControls}`}>
-            <div>
-              <label htmlFor="isometricView">Reset View</label>
+      <div>
+        
 
-              <input
-                name="isometricView"
-                type="checkbox"
-                checked={orthoCamera}
-                onChange={() => setOrthoCamera(!orthoCamera)}
-              />
-            </div>
-            <div>
-              <label htmlFor="showCorners">show corners</label>
-              <input
-                name="showCorners"
-                type="checkbox"
-                checked={showCorners}
-                onChange={() => setShowCorners(!showCorners)}
-              />
-            </div>
+
+
+        {/* 뷰 + 코너 확인 */}
+        <div className={`${classes.controls} ${classes.perspectiveControls}`}>
+          <div>
+            <label htmlFor="showCorners">show corners</label>
+            <input
+              name="showCorners"
+              type="checkbox"
+              checked={showCorners}
+              onChange={() => setShowCorners(!showCorners)}
+            />
           </div>
 
           {/* 방 수치 입력 */}
