@@ -11,7 +11,6 @@ import LoadingText from '../components/Common/LodingText';
 
 function HomeSketcherAIPage() {
   const [responseData, setResponseData] = useState(null);
-  const [isLoading, setIsLoading] = useState(false);
   const [isMain, setIsMain] = useState(true);
 
   const chartList = {
@@ -21,12 +20,10 @@ function HomeSketcherAIPage() {
     ColorRaderChart: 0,
   };
   const responseDataHandler = async () => {
-    setIsLoading(true);
     await axios
       .get('auths/trend')
       .then((response) => {
         setResponseData(response.data);
-        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);

@@ -4,6 +4,7 @@ a {
 
 .body {
   user-select: none;
+  height: 95vh;
 }
 
 .justify_center {
@@ -34,17 +35,18 @@ a {
   color: white;
   font-size: 16px;
   width: 10em;
-  height: 4em;
   border: 1px solid;
   text-align: center;
   line-height: 4em;
   text-decoration: none;
-  text-transform: capitalize;
   margin: 1em;
 }
 
 .open_popup:hover {
   border-width: 2px;
+  color: white;
+  text-shadow: 1px 1px 1px white;
+  box-shadow: 1px 1px 5px white;
 }
 
 /* popup page layout */
@@ -61,12 +63,6 @@ a {
 
 .popup:target {
   display: flex;
-}
-
-.popup > p {
-  font-size: 100px;
-  text-align: center;
-  margin: 0.3em 0.05em;
 }
 
 /* animation effects */
@@ -96,7 +92,7 @@ a {
 
 @keyframes open-animate {
   to {
-    height: 100vh;
+    height: 95vh;
     top: 0;
   }
 }
