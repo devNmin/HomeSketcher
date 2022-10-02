@@ -150,6 +150,41 @@ export default function ThreeJsPage() {
       setH(parseFloat(HHH.current.value));
     }
   };
+
+  
+  // 2d에서 룸정보 올때 변환해줌 
+  function roomLoad() {
+    let roomList  = {
+      0:{ 'fx':5,'fy':5,'nx':5,'ny':5},
+      1:{ 'fx':5,'fy':5,'nx':5,'ny':5},
+      2:{ 'fx':5,'fy':5,'nx':5,'ny':5},
+    }
+    let rooms = []
+    console.log("asdas",Object.keys(roomList).length)
+    for (let i = 0; i < Object.keys(roomList).length; i++) {
+      let roomInfo = {}
+      const el = roomList[i];
+      console.log(el)
+      roomInfo['id'] = i
+      roomInfo['height'] = 2
+      roomInfo['coords'] = [
+        { x: el['fx'], y: el['fy'] },
+        { x: el['nx'], y: el['fy'] },
+        { x: el['nx'], y: el['ny'] },
+        { x: el['fx'], y: el['ny'] },
+      ]
+      
+      rooms.push(roomInfo)
+    }
+    console.log(rooms)
+    return rooms
+  }
+  // let coords = [
+  //   {x: fx, y: fy},
+  //   {x: nx, y: fy},
+  //   {x: nx, y: ny},
+  //   {x: 0, y: ny},
+  // ]
   let roomMain = {
     id: 'roomMain',
     height: H,
@@ -160,7 +195,7 @@ export default function ThreeJsPage() {
       { x: 0, y: Y },
     ],
   }
-
+  
   let newItem = {
     floors: [
       {
@@ -278,7 +313,7 @@ export default function ThreeJsPage() {
             <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
             <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
           </DropdownButton>
-          <button style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+          <button onClick={() => roomLoad()} style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
            
             </div>                      
             <br />
