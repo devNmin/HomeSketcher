@@ -12,12 +12,12 @@ export function AiContextProvider(props) {
   const [responseData, setResponseData] = useState([]);
 
   const responseDataHandler = async () => {
-    console.log('실행2');
+    // console.log('실행2');
     await axios
       .get('auths/trend')
       .then((response) => {
         setResponseData(response.data);
-        console.log(response.data);
+        // console.log(response.data);
         setIsLoding(false);
       })
       .catch((err) => {
