@@ -39,3 +39,17 @@
   top: 0px;
   margin-top: 10px;
 }
+
+.display_none {
+  display: none;
+}
+
+.room_title {
+  font-weight: bold;
+  font-size: large;
+  color: black;
+}
+
+.room_size_input {
+  color: black
+}
