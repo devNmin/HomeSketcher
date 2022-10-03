@@ -1,21 +1,10 @@
-import React, {
-  useEffect,
-  useContext,
-  useState,
-  useReducer,
-  useMemo,
-  useRef,
-  Suspense,
-} from 'react';
-import { Canvas, useThree, useFrame } from 'react-three-fiber';
+import React, { useEffect, useContext, useState, useMemo, useRef, } from 'react';
+import { Canvas, useThree} from 'react-three-fiber';
 import { a, useSpring } from '@react-spring/three';
 import { useHistory } from 'react-router-dom';
-// import data from '../components/ThreeJsPage/floplan-data.json';
 import FloorPlan from '../components/ThreeJsPage/FloorPlan';
-import Ground from '../components/ThreeJsPage/Ground';
 
 import ModelT from '../components/ThreeJsPage/Modelt';
-import Model from '../components/ThreeJsPage/Model';
 import  CameraSetup  from '../components/ThreeJsPage/CameraSetup';
 import  ScreenShot  from '../components/ThreeJsPage/ScreenShot';
 import { DISTANCE_BETWEEN_FLOORS } from '../components/ThreeJsPage/constants';
@@ -29,22 +18,22 @@ import Liked from '../components/ThreeJsPage/Liked';
 import Staged from '../components/ThreeJsPage/Staged';
 import axios from '../utils/axios';
 import AuthContext from '../context/AuthContext';
-import RecomFurn from '../components/ThreeJsPage/RecomFurn';
 import ItemUX from '../components/ThreeJsPage/ItemUX';
 import ClipLoader from 'react-spinners/ClipLoader';
-import CustomScroll from 'react-custom-scroll';
-import { button } from 'react-bootstrap';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import * as THREE from 'three';
-////////
+//////////////////////////
 import ThreeJSContext from '../context/ThreeJSContext.js';
-////
+import InputGroup from '../components/ThreeJsPage/helpers/InputGroup';
+
 ///////2D////////////
 import Canvas2D from '../components/ThreeJsPage/2d/drawroom'
 ////////////////////
 
+///////data load (나중에 방 데이터 저장 불러오기 쓸때 참고용)/////////
+// import data from '../components/ThreeJsPage/floplan-data.json';
 const DevTools = () => {
   const { scene, renderer } = useThree();
 
@@ -61,28 +50,29 @@ const useStore = create((set) => ({
 
 // ThreeJsPage
 export default function ThreeJsPage() {
-  const [loading, setLoading] = useState(false);
-  const history = useHistory();
-  // let [currentFloor, setCurrentFloor] = useState(0);
-  let { BASE_URL } = useContext(AuthContext);
+  
+  const [loading, setLoading] = useState(false); // 가구 loading 
+  const history = useHistory(); // exit 누를시 홈으로 
+  let { BASE_URL } = useContext(AuthContext); 
   let [authTokens, setAuthTokens] = useState(() =>
     localStorage.getItem('authTokens')
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
-  );
-  let currentFloor = 0;
-  let [showCorners, setShowCorners] = useState(false);
-  let [orthoCamera, setOrthoCamera] = useState(false);
-  let [initCamera, setinitCamera] = useState(0);
-  let [downloadFlag, setDownloadFlag] = useState(false);
-  let [objList, setObjList] = useState([])
-  let [recomList, setRecomList] = useState([])
-  let [isOpen, setIsOpen] = useState(true)
+  ); // Token 
 
-  const makeRoomClick = async () => {
-    console.log('Clicked makeRoom button!');
-  };
+  let currentFloor = 0; // 지금은 1층뿐 복층 건물 이용할때 응용가능 
+  let offsetCanvasX = -5.92; // 2D 에서 3D 그려줄 때 생기는 canvas 오차 Offset
+  let offsetCanvasY = -4.615; // 2D 에서 3D 그려줄 때 생기는 canvas 오차 Offset
+  let [clickRoom, setClickRoom] = useState(0); // 방 넘버 object 클릭시 이용
+  let [valueChange, setvalueChange] = useState(false); // 방수치 적용 handler 
+  let [initCamera, setinitCamera] = useState(0); // 카메라 뷰 전환 
+  let [downloadFlag, setDownloadFlag] = useState(false); // DownLoad
 
+  let [objList, setObjList] = useState([]) // object 리스트 
+  let [recomList, setRecomList] = useState([]) // 추천 리스트
+  let [isOpen, setIsOpen] = useState(true) //메뉴 토글 
+  
+  // 추천 아이템 Axios
   const getRecomFurnitures = async () => {
     await axios({
       method: 'get',
@@ -93,70 +83,93 @@ export default function ThreeJsPage() {
     })
       .then((response) => {
         setRecomList(Object.entries(response.data));
-        console.log('recomList', recomList);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  // 총 가격 계산
   let totalcost = 0;
   objList.forEach((obj) => {
     totalcost += obj.furniture_price;
   });
 
+  //useEffetct
   useEffect(() => {
     getRecomFurnitures();
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
     }, 1000);
+
+
   }, []);
 
   // 가구 obj 더해주기
   const addobjListHandler = (objUrl) => {
-    console.log(objUrl);
+    // roomList  0 여기에 room number 넣어주면 됨 
+    // modelT에 position을 넣기위해 centerX,Y를 추가해줌
+    objUrl['centerX'] = (threeInfo[roomNumber].coords[0]['x']+threeInfo[roomNumber].coords[2]['x'])/2+offsetCanvasX
+    objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2+offsetCanvasY
+
     if (objList.includes(objUrl)) {
       console.log(' 중복');
     } else {
       setObjList([...objList, objUrl]);
       console.log('위의 것을 넣습니다.');
-      console.log(objList);
+
     }
   };
 
   // 가구 obj 제거하기
   const removeobjListHandler = (objUrl) => {
-    console.log('remove', objUrl);
     setObjList(objList.filter((obj) => obj.id !== objUrl.id));
   };
 
-  let [X, setX] = useState(0);
-  let [Y, setY] = useState(0);
-  let [H, setH] = useState(0);
-  const XXX = useRef();
-  const YYY = useRef();
-  const HHH = useRef();
-
+  // toggle function
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+  // 방수치 X값 변경(가로)
+  const changeXHandler = (e) => {
+    
+    // e.target.value*45 = math.abs(nx-fx)
+    if (roomList[e.target.id]['fx'] < roomList[e.target.id]['nx']){
+ 
+      roomList[e.target.id]['nx'] = parseFloat(e.target.value)*45+roomList[e.target.id]['fx']
+      roomList[e.target.id]['centerX'] = (roomList[e.target.id]['fx']+roomList[e.target.id]['nx'])/2
 
-  const changeXHandler = () => {
-    console.log(objList);
-    if (XXX.current.value !== undefined) {
-      setX(parseInt(XXX.current.value));
+      threeInfo[e.target.id]['coords'][1]['x'] = threeInfo[e.target.id]['coords'][0]['x']+parseFloat(e.target.value)
+      threeInfo[e.target.id]['coords'][2]['x'] = threeInfo[e.target.id]['coords'][0]['x']+parseFloat(e.target.value)
     }
+    else{
+      roomList[e.target.id]['fx'] = roomList[e.target.id]['nx']- parseFloat(e.target.value)*45
+      roomList[e.target.id]['centerX'] = (roomList[e.target.id]['fx']+roomList[e.target.id]['nx'])/2
+
+      threeInfo[e.target.id]['coords'][0]['x'] = threeInfo[e.target.id]['coords'][1]['x']-parseFloat(e.target.value)
+      threeInfo[e.target.id]['coords'][3]['x'] = threeInfo[e.target.id]['coords'][1]['x']-parseFloat(e.target.value)
+    }
+    wallCreate() //벽 업데이트
   };
-  const changeYHandler = () => {
-    if (YYY.current.value !== undefined) {
-      setY(parseInt(YYY.current.value));
+  // 방수치 Y값 변경(세로)
+  const changeYHandler = (e) => {
+    if (roomList[e.target.id]['fy'] < roomList[e.target.id]['ny']){
+
+      roomList[e.target.id]['ny'] = parseFloat(e.target.value)*45+roomList[e.target.id]['fy']
+      roomList[e.target.id]['centerY'] = (roomList[e.target.id]['fy']+roomList[e.target.id]['ny'])/2 // 룸 센터좌표 업데이트 
+
+      threeInfo[e.target.id]['coords'][2]['y'] = threeInfo[e.target.id]['coords'][0]['y']+parseFloat(e.target.value)
+      threeInfo[e.target.id]['coords'][3]['y'] = threeInfo[e.target.id]['coords'][0]['y']+parseFloat(e.target.value)
     }
-  };
-  const changeHHandler = () => {
-    if (HHH.current.value !== undefined) {
-      setH(parseFloat(HHH.current.value));
+    else{
+      roomList[e.target.id]['fy'] = roomList[e.target.id]['ny']- parseFloat(e.target.value)*45
+      roomList[e.target.id]['centerY'] = (roomList[e.target.id]['fy']+roomList[e.target.id]['ny'])/2 // 룸 센터좌표 업데이트 
+
+      threeInfo[e.target.id]['coords'][0]['y'] = threeInfo[e.target.id]['coords'][1]['y']-parseFloat(e.target.value)
+      threeInfo[e.target.id]['coords'][1]['y'] = threeInfo[e.target.id]['coords'][1]['y']-parseFloat(e.target.value)
     }
+    wallCreate() //벽 업데이트
   };
 
   
@@ -165,10 +178,10 @@ export default function ThreeJsPage() {
   };
 
   const { target, setTarget } = useStore();
-  const { mode } = useControls({
-    mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] },
-  });
-  /////
+  
+  
+  
+
 
   //checkIntersect -> 충돌 확인, true일때 충돌난 경우
 
@@ -180,77 +193,17 @@ export default function ThreeJsPage() {
   let [preX, setpreX] = useState(0.0);
   let [preY, setpreY] = useState(0.0);
   let [preZ, setpreZ] = useState(0.0);
-  let [preXYZ, setpreXYZ] = useState([]);
-
-  function ObjectChangeHandler(props) {
-    const box = new THREE.Box3().setFromObject(props); // 현재 박스
-
-    // setBox -> objBox 리스트. 가구 box들을 저장하는 리스트. 현재 위치를 업데이트 해 줌.
-    setBox((prevState) => ({
-      ...prevState,
-      [props.uuid]: box,
-    }));
-    let targetBox = objBox[props.uuid];
-    // 벽 충돌
-    // x 축 : -6 ~
-    if (-5.92 + (targetBox.max.x - targetBox.min.x) / 2 > props.position.x) {
-      target.position.x = preX;
-    }
-    if (-5.92 + X - (targetBox.max.x - targetBox.min.x) / 2 < props.position.x) {
-      target.position.x = preX;
-    }
-
-    if (-4.615 + (targetBox.max.z - targetBox.min.z) / 2 > props.position.z) {
-      target.position.z = preZ;
-    }
-    if (-4.615 + Y - (targetBox.max.z - targetBox.min.z) / 2 < props.position.z) {
-      target.position.z = preZ;
-    }
-    if (target.position.y < 0) {
-      target.position.y = preY;
-    }
-    if (target.position.y + (targetBox.max.y - targetBox.min.y) / 2 > H) {
-      target.position.y = preY;
-    }
-
-    // Check collision box -> 충돌 확인 // 오브젝트간 충돌
-    for (const key in objBox) {
-      console.log("key ============ ",key)
-      if(props.uuid !==key){ // 자기 자신 아닌 경우
-        if (box.intersectsBox(objBox[key])){ // 충돌이 발생한 경우
-          console.log("충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌충돌")
-          // target.position.x = preXYZ.x
-          // target.position.y = preXYZ.y
-          // target.position.z = preXYZ.z
-          target.position.x = preX;
-          target.position.y = preY;
-          target.position.z = preZ;
-          // break // 충돌 했으니 for문 탈출
-        }
-        
-      }
-    }
-
-    setpreX(target.position.x);
-    setpreY(target.position.y);
-    setpreZ(target.position.z);
-    setpreXYZ([...preXYZ, target.position]);
-  }
-
-  ///
-  const ThreeJSCtx = useContext(ThreeJSContext);
-  function wallColorHandler(e) {
-    console.log('이벤트', e.target.value);
-    ThreeJSCtx.changeWallColor(e.target.value);
-  }
-
+  
+  
   //================2D==================
+  let [roomNumber, setRoomNumber] = useState(0);
   const [showResults, setShowResults] =useState(false)
   let [mouseList] = useState([])
   let [roomList,setRoomList] = useState([])
+
   let [threeInfo, setThreeInfo] = useState([])
 
-  let [isRect,setIsRect] = useState(false);
+  let [isRect,setIsRect] = useState(true);
 
   let newItem = {
     floors: [
@@ -269,6 +222,88 @@ export default function ThreeJsPage() {
 
   //================2D=================
 
+  function ObjectChangeHandler(props) {
+    const box = new THREE.Box3().setFromObject(props); // 현재 박스
+
+    // setBox -> objBox 리스트. 가구 box들을 저장하는 리스트. 현재 위치를 업데이트 해 줌.
+    setBox((prevState) => ({
+      ...prevState,
+      [props.uuid]: box,
+    }));
+    let targetBox = objBox[props.uuid];
+
+    
+    // 높이 제한
+
+    if (target.position.y < 0) {
+      target.position.y = preY;
+    }
+    if (target.position.y + (targetBox.max.y - targetBox.min.y) / 2 > 0) {
+      target.position.y = preY;
+    }
+  // })
+
+    
+    // 벽 충돌 포함
+    // Check collision box -> 충돌 확인 // 오브젝트간 충돌
+    for (const key in objBox) {
+      if(props.uuid !==key){ // 자기 자신 아닌 경우
+        // if (box.intersectsBox(objBox[key])){ // 충돌이 발생한 경우
+        if (box.intersectsBox(objBox[key])){ // 충돌이 발생한 경우
+          // 이전 좌표로 고정 
+          target.position.x = preX;
+          target.position.y = preY;
+          target.position.z = preZ;
+        }        
+      }
+    }
+    // 이전 좌표 업데이트 
+    setpreX(target.position.x);
+    setpreY(target.position.y);
+    setpreZ(target.position.z);
+  }
+
+  // useContext
+  const ThreeJSCtx = useContext(ThreeJSContext);
+
+  function wallColorHandler(e) {
+    console.log('이벤트', e.target.value);
+    ThreeJSCtx.changeWallColor(e.target.value);
+  }
+
+  let [wallNum, setWallNum] = useState(0);
+
+  function wallCreate(){
+    
+    for (let index = 0; index < threeInfo.length; index++) {
+      const element = threeInfo[index]['coords'];
+      
+      // Wall Top , Right 
+      for (let i = 0; i < 2;i++){
+
+        let min = new THREE.Vector3(element[i]['x']+offsetCanvasX, -2, element[i]['y']+offsetCanvasY);
+        let max = new THREE.Vector3(element[i+1]['x']+offsetCanvasX, 2, element[i+1]['y']+offsetCanvasY);
+        let wall = new THREE.Box3(min, max);
+        let key = 'wallNumber_'+index+'_'+i
+        objBox[key]=wall
+
+        setWallNum(wallNum+1)
+        
+      }
+      // Wall Bottom, Left
+      for (let i = 2; i <4;i++){
+        let max = new THREE.Vector3(element[i]['x']+offsetCanvasX, 2, element[i]['y']+offsetCanvasY);
+        let min = new THREE.Vector3(element[(i+1)%4]['x']+offsetCanvasX, -2, element[(i+1)%4]['y']+offsetCanvasY);
+        let wall = new THREE.Box3(min, max);
+        let key = 'wallNumber_'+index+'_'+i
+
+        objBox[key]=wall
+        setWallNum(wallNum+1)
+        
+      }
+    }
+  }
+
   return (
     <div className={classes.three_body}>
       {/* 가구 UX 창 */}
@@ -281,26 +316,24 @@ export default function ThreeJsPage() {
             key= 'Warning'
             id={`dropdown-variants-Warning`}
             variant={'Warning'.toLowerCase()}
-            title='Room List'
+            title={clickRoom ? `Room #${clickRoom+1}`: 'Room List' }
+            // title={'Room List'}
             style={{ width : '45%'}}
             >
-              <Dropdown.Item eventKey="1">Room #1</Dropdown.Item>
-              <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
-              <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
+            {roomList.map((value) =>(
+              <div>
+                <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num) }} >Room #{value.num+1}</Dropdown.Item>
+              </div>
+            ))}
+              
+
             </DropdownButton>
-          <button  style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+          <button onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}} style={{ width: '45%', marginLeft: '40px'}}>view change </button>
            
           </div>                      
             <br />
             <br />
-
-            <button style={{ display : 'absolute'}}
-             onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}}
-            >Reset View</button>
-            <button style={{ display : 'absolute'}}
-             onClick={() => {setDownloadFlag(!downloadFlag)}}
-            >Capture and download</button>
-            
+                        
             <button style={{ width: '100%'}}>Staged Furnitures</button>
             <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
             <br />
@@ -340,26 +373,29 @@ export default function ThreeJsPage() {
           {recomList.map(([key, value]) => (
             <div key={key} style={{ display: loading ? 'none' : null }}>
               <ItemUX furnkey={key} furnvalue={value} addobjHandler={addobjListHandler} />
-              {/* <button style={{ width: '100%'}}>{key}</button>
-                <RecomFurn addObj = {addobjListHandler} furnitures = {value}/> */}
             </div>
           ))}
           <br />
-          <button onClick={exitHandler}>Exit</button>
+          <button  onClick={() => {setDownloadFlag(!downloadFlag)}}>
+            Capture
+          </button>
+          <button style={{ display : 'absolute', marginLeft:'70px'}} onClick={exitHandler}>Exit</button>
         </div>
       </div>
 
       <div className={classes.RightItems} style={{ backgroundColor: '#E3E8EC' }}>
-        {!showResults && <Canvas2D threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
+        {!showResults && <Canvas2D  valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
         {showResults &&<Canvas 
           // onPointerMissed = 밖에 클릭시 target null로 만들기
-          key={`isometric-${orthoCamera}`}
-          orthographic={orthoCamera}
+          key={`isometric-${false}`}
+          orthographic={false}
           invalidateframeloop="false"
         >
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
             <ModelT
+              // position = {[obj.centerX,0,obj.centerY]}
+              position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
               objUrl={obj.glb_url}
               setTarget={setTarget}
@@ -367,6 +403,7 @@ export default function ThreeJsPage() {
           ))}
 
           {/* <Ground/> */}
+       
           <CameraSetup initCamera = {initCamera}/>          
           <ScreenShot  downloadFlag={downloadFlag}/>          
           <ambientLight intensity={0.5} color="#eef" />
@@ -377,17 +414,17 @@ export default function ThreeJsPage() {
             <FloorPlan
               interactiveFloors={[currentFloor]}
               data={newItem}
-              showCorners={showCorners}
+              showCorners={false}
             />
           </a.group>
 
           {target && (
-            <TransformControls
+            <TransformControls 
               onChange={(e) => {
                 ObjectChangeHandler(target);
               }}
               object={target}
-              mode={mode}
+              mode= {ThreeJSCtx.mode}
             />
           )}
           <OrbitControls makeDefault />
@@ -395,36 +432,27 @@ export default function ThreeJsPage() {
         </Canvas>}
         <div>
           
-
-
-
           {/* 뷰 + 코너 확인 */}
           <div className={`${classes.controls} ${classes.perspectiveControls}`}>
             <div>
-              <label htmlFor="showCorners">show corners</label>
-              <input
-                name="showCorners"
-                type="checkbox"
-                checked={showCorners}
-                onChange={() => setShowCorners(!showCorners)}
-              />
-            </div>
-            <div>
-              <button onClick={() => {setShowResults(!showResults)}}>change</button>
-              <button onClick={() => {setIsRect(!isRect)}}>MakeRect</button>
+              <button onClick={() => {setShowResults(!showResults) ; wallCreate()}}>change</button>
             </div>
             </div>
 
-            {/* 방 수치 입력 */}
+            {/* 방 수치 변경 */}
             <div className={classes.help}>
-              <form>
-                <label htmlFor="xx">X</label>
-                <input id="xx" ref={XXX} onChange={changeXHandler} />
-                <label htmlFor="yy">Y</label>
-                <input id="yy" ref={YYY} onChange={changeYHandler} />
-                <label htmlFor="hh">H</label>
-                <input id="hh" ref={HHH} onChange={changeHHandler} />
-              </form>
+              {roomList.map(value => (
+                <div className={clickRoom !== value.num ? classes.display_none : null}>
+                  <form>
+                    <p className={classes.room_title}>Room {value.num+1}</p>
+                    <label className={classes.room_size_input} htmlFor="x">Width</label>
+                    <input id={`${value.num}`} placeholder={(Math.abs(value.nx-value.fx)/45).toFixed(2)} onChange={(e)=>{changeXHandler(e)}} />
+                    <label className={classes.room_size_input} htmlFor="y">Height</label>
+                    <input id={`${value.num}`} placeholder={(Math.abs(value.ny-value.fy)/45).toFixed(2)} onChange={(e)=>{changeYHandler(e)}} />
+                    <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} >적용</button>
+                  </form>
+                </div>
+              ))}
             </div>
 
             <div className={`${classes.controls} ${classes.doorControls}`}>
@@ -438,14 +466,7 @@ export default function ThreeJsPage() {
                 ))}
             </div>
             {/* 벽 색 인풋 받기 */}
-            <input
-              type="color"
-              id="myBestColor"
-              value={ThreeJSCtx.wallColor}
-              onChange={(e) => {
-                wallColorHandler(e);
-              }}
-            />
+            <InputGroup />
           </div>
           </div>
       </div>
