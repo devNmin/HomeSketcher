@@ -16,19 +16,19 @@ const CameraSetup = (props) => {
     camera.zoom = 1.5;
     let x =0, y=0, z=0
     if(props.initCamera === 0){
-      console.log("0 번 카메라")
+      // console.log("0 번 카메라")
       x =0
       y=20
       z=0
     }
     else if(props.initCamera === 1){
-      console.log("1 번 카메라")
+      // console.log("1 번 카메라")
       x= 10
       y= 15
       z= 8
     }
     else if(props.initCamera === 2){
-      console.log("2 번 카메라")
+      // console.log("2 번 카메라")
       x= -10
       y= 15
       z= 8
@@ -36,7 +36,7 @@ const CameraSetup = (props) => {
     }
     
     
-    console.log("point", x + " " + y + " " + z )
+    // console.log("point", x + " " + y + " " + z )
     camera.position.set(x,y,z);
    
 
