@@ -64,41 +64,45 @@ class LoginAPIView(APIView):
             return returnErrorJson("아이디를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
         if user_password is None:
             return returnErrorJson("비밀번호를 입력하세요.", "400", status.HTTP_400_BAD_REQUEST)
-                
-        user1 = User.objects.get(user_email=user_email)
+        
+        try:        
+            user1 = User.objects.get(user_email=user_email)
         # last_login = date.today()
         # print(last_login.strftime("%Y-%m-%d"))
+        except:
+            return returnErrorJson("존재하지 않는 회원입니다.", "400", status.HTTP_400_BAD_REQUEST)
         
-        update_last_login(None, user1)   
-            
-        user = authenticate(
-            request, 
-            id=user1.id,
-            password=user_password,
-        )
-    
-        if user:
-            login_serializer = LoginSerializer(user)
-            
-            token = TokenObtainPairSerializer.get_token(user)
-            refresh_token = str(token)
-            access_token = str(token.access_token)
-            response = Response(
-                {
-                    "user": login_serializer.data,
-                    "token": {
-                        "access": access_token,
-                        "refresh": refresh_token,
-                    },
-                },
-                status=status.HTTP_200_OK,
+        try:
+            update_last_login(None, user1)   
+
+            user = authenticate(
+                request, 
+                id=user1.id,
+                password=user_password,
             )
-            return response
+
+            if user:
+                login_serializer = LoginSerializer(user)
+
+                token = TokenObtainPairSerializer.get_token(user)
+                refresh_token = str(token)
+                access_token = str(token.access_token)
+                response = Response(
+                    {
+                        "user": login_serializer.data,
+                        "token": {
+                            "access": access_token,
+                            "refresh": refresh_token,
+                        },
+                    },
+                    status=status.HTTP_200_OK,
+                )
+                return response
         
-        if user is None:
-            return returnErrorJson("로그인에 실패하였습니다.", "400", status.HTTP_400_BAD_REQUEST)
+        except:
+            return returnErrorJson("로그인 중 오류가 발생했습니다.", "500", status.HTTP_500_INTERNAL_SERVER_ERROR)
   
-# 로그아웃
+# 로그아웃"
 class LogoutAPIView(generics.GenericAPIView):
     serializer_class = RefreshTokenSerializer
     permission_classes = (permissions.IsAuthenticated, )
