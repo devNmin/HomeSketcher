@@ -6,21 +6,10 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export default function ModelT (props)  {
   const setTarget = props.setTarget
-  const setObj = props.setObj
+  // const setObj = props.setObj
   const gltf = useLoader(GLTFLoader, props.objUrl )
   
   const [hovered, setHovered] = useState(false)
-  
-
-  useEffect(()=>{
-    console.log('----useeff in modelT--------',gltf.scene)
-    setObj((prevState) => ({
-      ...prevState,
-      [gltf.scene.uuid]: gltf.scene,
-    }));
-    // setObj((prev) => [...prev, gltf.scene])
-
-  },[])
   
 
   useCursor(hovered)  
