@@ -10,6 +10,10 @@ const Canvas2D = (props) =>{
     const[lastX,setLastX] = useState();
     const[lastY,setLastY] = useState();
 
+    const [cursor, setCursor] = useState('default'); //마우스 포인터 옵션
+    const [rectClick, setRectClick] = useState(false); //방 클릭했을 때 옵션
+    const [roomId, setRoomId] = useState();
+
     let mouseList = props.mouseList
     let roomList = props.roomList
     let isRect = props.isRect
@@ -20,12 +24,24 @@ const Canvas2D = (props) =>{
 
     let threeInfo = props.threeInfo // 3d로 그려줄 방 데이터
 
+    // 방 드래그 드롭 충돌 시 직전 좌표 기억
+    let[beforeFx,setBeforeFx] = useState();
+    let[beforeFy,setBeforeFy] = useState(); //꼭짓점 1 기억
+    let[beforeNx,setBeforeNx] = useState();
+    let[beforeNy,setBeforeNy] = useState(); //꼭짓점 2 기억
+    let[beforeCx,setBeforeCx] = useState(); //센터X 기억
+    let[beforeCy,setBeforeCy] = useState(); //센터y 기억
+    // 방 드래그 드롭 충돌 시 직전 좌표 기억
+
+    let[lastCoords,setLastCoords] = useState([]);
+
     // 배경 이미지 그리기
     const ImageObj = new Image();
     ImageObj.src = "https://png.clipart.me/previews/035/grid-paper-seamless-photoshop-and-illustrator-pattern-30843.png"
        
 
     useEffect(()=>{
+        setMouseCheck(0);
         console.log(mouseList);
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
@@ -49,7 +65,7 @@ const Canvas2D = (props) =>{
 
             drawAll(context);
         },20)
-    },[props.showResults]);
+    },[props.isRect]);
 
 
 
@@ -71,27 +87,28 @@ const Canvas2D = (props) =>{
 
 
     const setXY = ({nativeEvent})=>{
-        setMouseCheck(mouseCheck+1);
+        if(!rectClick){
+            setMouseCheck(mouseCheck+1);
+        }
+        setRectClick(false);
+        // setRoomId(null);
         const {offsetX, offsetY} = nativeEvent;
-        if(isRect && notAllowPointer(offsetX,offsetY)){
+        if(isRect && notAllowPointer(offsetX,offsetY) && !rectClick){
+            setCursor('default');
             setMouseCheck(0);
             removeLine()
             drawAll(ctx)
             alert("사각형 방 그리기는 방 내부에서 지원하지 않습니다.")
             return;    
         }
+        
         ctx.arc(offsetX, offsetY, 8, 0, Math.PI * 2, true);
         ctx.stroke();
         
-        console.log("mouseCheck", mouseCheck)
-        console.log("lastX", lastX)
-        console.log("lastY", lastY)
-        console.log("offsetX", offsetX)
-        console.log("offsetY", offsetY)
         setData(offsetX, offsetY)
         setLastX(offsetX)
         setLastY(offsetY)
-        
+        setCursor('default');
     }
 
     const setData = (offsetX, offsetY)=>{
@@ -116,12 +133,12 @@ const Canvas2D = (props) =>{
                 let leftY = lastY/rate
                 let rightX = offsetX/rate
                 let rightY = offsetY/rate
-
+                
                 if (lastX > offsetX){
                     leftX = offsetX/rate
                     rightX = lastX/rate
                 }
-                if (leftY > offsetY){
+                if (lastY > offsetY){
                     leftY = offsetY/rate
                     rightY = lastY/rate
                 }
@@ -155,13 +172,136 @@ const Canvas2D = (props) =>{
 
     const mouseMove = ({nativeEvent})=>{
         const {offsetX, offsetY} = nativeEvent;
-        if(mouseCheck%2===1 && mouseCheck!==0){
-            removeLine()
-            drawAll(ctx)
-            if(isRect){
-                makeRect(offsetX,offsetY)
-            }
+        setCursor('default')
+        
+        if(rectClick){
+            removeLine();
+            setMouseCheck(0)
+            roomMove(offsetX,offsetY);
+            drawAll(ctx);
+        }
 
+        if(rectClick){ //방 안에 포인터가 들어간다면
+            setCursor('pointer')
+        }else{// 방 밖에 포인터 있으면 그릴 수 있도록
+            if(mouseCheck%2===1 && mouseCheck!==0){
+                removeLine()
+                drawAll(ctx)
+                if(isRect){
+                    makeRect(offsetX,offsetY)
+                }
+    
+            }
+        }
+    }
+
+    //방 충돌 확인(현재 움직이고 있는 좌표 값을 넣어줌)
+    const roomCollison = (fx,fy,nx,ny)=>{
+
+        let leftX = Math.min(fx,nx);
+        let topY = Math.min(fy,ny);
+        let rightX = Math.max(fx,nx);
+        let bottomY = Math.max(fy,ny);
+
+        const length = roomList.length;
+        for(let i = 0; i < length; i++){ //모든 방과 충돌하는지 비교
+            let room = roomList[i];
+            let leftRoomX = Math.min(room.fx,room.nx);
+            let topRoomY = Math.min(room.fy,room.ny);
+            let rightRoomX = Math.max(room.nx,room.fx);
+            let bottomRoomY = Math.max(room.ny,room.fy); //비교하는 방의 꼭짓점 1,2 좌표들. 뭐가 큰지 모르니 큰거 작은거 정해서 그 범위에 꼭짓점 들어가면 안되도록 해줌
+
+            if(//움직이는 방이 다른방 범위 침범한 경우
+                (leftX>leftRoomX && leftX <rightRoomX && topY >topRoomY && topY <bottomRoomY )|| // 꼭짓점 1이 다른 방 범위 침범 좌상단 점
+                (leftX>leftRoomX && leftX <rightRoomX && bottomY >topRoomY && bottomY < bottomRoomY) || //꼭짓점 2가 다른 방 범위 침범 좌하단 점
+                (rightX>leftRoomX && rightX < rightRoomX && topY >topRoomY && topY <bottomRoomY) || //꼭짓점 3이 다른 방 범위 침범 우상단 점
+                (rightX>leftRoomX && rightX < rightRoomX && bottomY >topRoomY && bottomY < bottomRoomY) //꼭짓점 4가 다른 방 범위 침범 우하단 점
+            ){
+                roomList[roomId].fx = beforeFx;
+                roomList[roomId].fy = beforeFy;
+                roomList[roomId].nx = beforeNx;
+                roomList[roomId].ny = beforeNy;
+                roomList[roomId].centerX = beforeCx;
+                roomList[roomId].centerY = beforeCy;
+                threeInfo[roomId].coords = lastCoords;
+            }else if(
+                (leftRoomX >leftX && leftRoomX < rightX && topRoomY >topY && topRoomY < bottomY) ||
+                (leftRoomX >leftX && leftRoomX < rightX && bottomRoomY >topY && bottomRoomY <bottomY) ||
+                (rightRoomX > leftX && rightRoomX < rightX && topRoomY > topY && topRoomY <bottomY ) ||
+                (rightRoomX > leftX && rightRoomX < rightX && bottomRoomY > topY && bottomRoomY <bottomY)
+            ){
+                roomList[roomId].fx = beforeFx;
+                roomList[roomId].fy = beforeFy;
+                roomList[roomId].nx = beforeNx;
+                roomList[roomId].ny = beforeNy;
+                roomList[roomId].centerX = beforeCx;
+                roomList[roomId].centerY = beforeCy;
+                threeInfo[roomId].coords = lastCoords;
+            }
+        }
+
+    }
+
+    const roomMove = (offsetX,offsetY)=>{
+        console.log("방 아이디다 ㅓㄴ임라ㅓㄴ아ㅣㄹ",roomId)
+        let roomX = roomList[roomId].centerX; //방의 중심좌표 X
+        let roomY = roomList[roomId].centerY; //방의 중심좌표 X
+        let moveX = offsetX-roomX; //이동해야할 거리 X
+        let moveY = offsetY-roomY; //이동해야할 거리 Y
+
+
+        // 4개의 꼭짓점 마지막 좌표 기억
+        setBeforeFx(roomList[roomId].fx);
+        setBeforeFy(roomList[roomId].fy);
+        setBeforeNx(roomList[roomId].nx);
+        setBeforeNy(roomList[roomId].ny);
+        //센터 마지막 좌표 기억
+        setBeforeCx(roomList[roomId].centerX);
+        setBeforeCy(roomList[roomId].centerY);
+
+        // 3D 좌표 리스트 기억
+        setLastCoords(threeInfo[roomId].coords);
+        
+
+        // 4개의 꼭짓점 좌표 변경
+        roomList[roomId].fx += moveX;
+        roomList[roomId].fy += moveY;
+        roomList[roomId].nx += moveX;
+        roomList[roomId].ny += moveY;
+        roomList[roomId].centerX = offsetX;
+        roomList[roomId].centerY = offsetY;
+
+        // 3d 좌표 변경
+        let rate = 45;
+        threeInfo[roomId].coords[0].x += moveX/rate;
+        threeInfo[roomId].coords[0].y += moveY/rate;
+        
+        threeInfo[roomId].coords[1].x += moveX/rate;
+        threeInfo[roomId].coords[1].y += moveY/rate;
+        
+        threeInfo[roomId].coords[2].x += moveX/rate;
+        threeInfo[roomId].coords[2].y += moveY/rate;
+        
+        threeInfo[roomId].coords[3].x += moveX/rate;
+        threeInfo[roomId].coords[3].y += moveY/rate;
+
+        roomCollison(roomList[roomId].fx,roomList[roomId].fy,roomList[roomId].nx,roomList[roomId].ny);
+        
+    }
+
+    const ifRoomClick = (offsetX,offsetY)=>{ //방 클릭시 어떤 방인지 지정 -> 방안에 포인터가 있는지 확인
+        const length = roomList.length;
+        for(let i = 0; i < length; i++){
+            let data = roomList[i];
+            let leftX = Math.min(data.fx,data.nx);
+            let rightX = Math.max(data.fx,data.nx);
+            let topY = Math.max(data.fy, data.ny);
+            let bottomY = Math.min(data.fy, data.ny);
+
+            if(offsetX > leftX && offsetX < rightX && offsetY < topY && offsetY > bottomY){
+                setRectClick(true);
+                setRoomId(i);
+            }
         }
     }
 
@@ -215,7 +355,7 @@ const Canvas2D = (props) =>{
 
 
     const makeRect = (offsetX,offsetY)=>{
-        
+        setCursor('crosshair')
         ctx.strokeStyle = "black";
         ctx.lineWidth = 1;
         // if(Math.abs(offsetX+lastX)/2)
@@ -265,7 +405,7 @@ const Canvas2D = (props) =>{
                     textTotext = size*1.5;
                 }
                 let textFirst = "가로: " + (Math.abs(data['nx']-data['fx'])/rate).toFixed(2) +"m";
-                let textSecond = "세로: " + (Math.abs(data['ny']-data['fy'])/rate,2).toFixed(2)+"m";
+                let textSecond = "세로: " + (Math.abs(data['ny']-data['fy'])/rate).toFixed(2)+"m";
                 context.strokeText(textFirst, Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2);
                 context.strokeText(textSecond,Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2+textTotext);
                 context.strokeStyle = "black";
@@ -277,6 +417,10 @@ const Canvas2D = (props) =>{
     }
 
     
+    const clicked = ({nativeEvent})=>{
+        const {offsetX,offsetY} = nativeEvent;
+        ifRoomClick(offsetX,offsetY); //클릭했을 때 방 안이면 클릭됐다고 값 변경해줌
+    }
 
     return(
         <div className = "canvas_wrap">
@@ -287,10 +431,10 @@ const Canvas2D = (props) =>{
                 ref = {canvasRef}
                 // onMouseDown={startDrawing}
                 // onMouseUp={finishDrawing}
-                onMouseDown = {setXY}
+                onMouseUp = {setXY}
                 onMouseMove = {mouseMove}
-                // onMouseMove={drawing}
-                // onMouseLeave={finishDrawing}
+                onMouseDown = {clicked}
+                style={{ cursor: cursor }}
                 
                 ></canvas>
         </div>

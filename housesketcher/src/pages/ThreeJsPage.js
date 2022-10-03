@@ -2,17 +2,14 @@ import React, {
   useEffect,
   useContext,
   useState,
-  useReducer,
   useMemo,
   useRef,
-  Suspense,
 } from 'react';
-import { Canvas, useThree, useFrame } from 'react-three-fiber';
+import { Canvas, useThree} from 'react-three-fiber';
 import { a, useSpring } from '@react-spring/three';
 import { useHistory } from 'react-router-dom';
 // import data from '../components/ThreeJsPage/floplan-data.json';
 import FloorPlan from '../components/ThreeJsPage/FloorPlan';
-import Ground from '../components/ThreeJsPage/Ground';
 
 import ModelT from '../components/ThreeJsPage/Modelt';
 import Model from '../components/ThreeJsPage/Model';
@@ -29,11 +26,10 @@ import Liked from '../components/ThreeJsPage/Liked';
 import Staged from '../components/ThreeJsPage/Staged';
 import axios from '../utils/axios';
 import AuthContext from '../context/AuthContext';
-import RecomFurn from '../components/ThreeJsPage/RecomFurn';
+
 import ItemUX from '../components/ThreeJsPage/ItemUX';
 import ClipLoader from 'react-spinners/ClipLoader';
-import CustomScroll from 'react-custom-scroll';
-import { button } from 'react-bootstrap';
+
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownButton from 'react-bootstrap/DropdownButton';
@@ -76,12 +72,11 @@ export default function ThreeJsPage() {
   let [initCamera, setinitCamera] = useState(0);
   let [downloadFlag, setDownloadFlag] = useState(false);
   let [objList, setObjList] = useState([])
+  let [objPoint, setObjPoint] = useState({})
   let [recomList, setRecomList] = useState([])
   let [isOpen, setIsOpen] = useState(true)
-
-  const makeRoomClick = async () => {
-    console.log('Clicked makeRoom button!');
-  };
+  
+  let [uuidNumber, setuuidNumber] = useState(0);
 
   const getRecomFurnitures = async () => {
     await axios({
@@ -100,6 +95,10 @@ export default function ThreeJsPage() {
       });
   };
 
+  const addObjpoint = (objpoint) => {
+    setObjPoint([...objPoint, objpoint])
+  }
+
   let totalcost = 0;
   objList.forEach((obj) => {
     totalcost += obj.furniture_price;
@@ -115,19 +114,29 @@ export default function ThreeJsPage() {
 
   // 가구 obj 더해주기
   const addobjListHandler = (objUrl) => {
-    console.log(objUrl);
+    // roomList  0 여기에 room number 넣어주면 됨 
+    console.log('roomNumber',roomNumber)
+    console.log('(threeInfo[roomNumber]',threeInfo[roomNumber])
+
+    objUrl['centerX'] = (threeInfo[roomNumber].coords[0]['x']+threeInfo[roomNumber].coords[2]['x'])/2-5.92
+    objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2-4.915
+    console.log('objUrl[centerX]',objUrl['centerX'])
+    console.log('objUrl[centerY]',objUrl['centerY'])
+    setuuidNumber(uuidNumber+1)
+
+
     if (objList.includes(objUrl)) {
       console.log(' 중복');
     } else {
       setObjList([...objList, objUrl]);
       console.log('위의 것을 넣습니다.');
-      console.log(objList);
+
     }
   };
 
   // 가구 obj 제거하기
   const removeobjListHandler = (objUrl) => {
-    console.log('remove', objUrl);
+
     setObjList(objList.filter((obj) => obj.id !== objUrl.id));
   };
 
@@ -143,7 +152,7 @@ export default function ThreeJsPage() {
   };
 
   const changeXHandler = () => {
-    console.log(objList);
+
     if (XXX.current.value !== undefined) {
       setX(parseInt(XXX.current.value));
     }
@@ -165,10 +174,21 @@ export default function ThreeJsPage() {
   };
 
   const { target, setTarget } = useStore();
-  const { mode } = useControls({
-    mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] },
-  });
-  /////
+  
+  // let { mode } = useControls({
+  //   mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] }
+  // });
+
+  let {modeValue} =  { value: 'translate', options: ['translate', 'rotate', 'scale'] }
+
+  function ModelControl(){
+    let { mode } = useControls({
+      mode: { value: 'translate', options: ['translate', 'rotate', 'scale'] }
+    });
+    return mode
+    
+  }
+  ///
 
   //checkIntersect -> 충돌 확인, true일때 충돌난 경우
 
@@ -180,7 +200,35 @@ export default function ThreeJsPage() {
   let [preX, setpreX] = useState(0.0);
   let [preY, setpreY] = useState(0.0);
   let [preZ, setpreZ] = useState(0.0);
+  
   let [preXYZ, setpreXYZ] = useState([]);
+
+  
+  //================2D==================
+  let [roomNumber, setRoomNumber] = useState(0);
+  const [showResults, setShowResults] =useState(false)
+  let [mouseList] = useState([])
+  let [roomList,setRoomList] = useState([])
+  let [threeInfo, setThreeInfo] = useState([])
+
+  let [isRect,setIsRect] = useState(false);
+
+  let newItem = {
+    floors: [
+      {
+        y: 0,
+        doors: [],
+        windows: [],
+        rooms: threeInfo
+      },
+    ],
+  };
+  let animatedFloorPosition = useFloorTransitionAnimation({
+    floors: newItem.floors,
+    currentFloor,
+  });
+
+  //================2D=================
 
   function ObjectChangeHandler(props) {
     const box = new THREE.Box3().setFromObject(props); // 현재 박스
@@ -190,28 +238,41 @@ export default function ThreeJsPage() {
       ...prevState,
       [props.uuid]: box,
     }));
+    console.log('setObjPoint',objPoint)
     let targetBox = objBox[props.uuid];
-    // 벽 충돌
+
+    // 벽 충돌  고쳐야 할 부분
     // x 축 : -6 ~
-    if (-5.92 + (targetBox.max.x - targetBox.min.x) / 2 > props.position.x) {
+    // threeInfo['coords'][0][x]
+    // threeInfo[0] 이건 방번호 0번째임 그래서 이걸 다돌려서 바꿔줘야하나?
+    // threeInfo.map((mapWall)=>{  
+    
+
+    console.log('asdasddddddd',threeInfo.length)
+    
+    if (-5.92 + threeInfo[0]['coords'][0]['x'] + (targetBox.max.x - targetBox.min.x) / 2 >= props.position.x) {
       target.position.x = preX;
     }
-    if (-5.92 + X - (targetBox.max.x - targetBox.min.x) / 2 < props.position.x) {
+    else if (-5.92+ threeInfo[0]['coords'][2]['x'] -(targetBox.max.x - targetBox.min.x) / 2 <= props.position.x) {
       target.position.x = preX;
+    }
+    if (-4.615 + threeInfo[0]['coords'][0]['y'] + (targetBox.max.z - targetBox.min.z) / 2 >= props.position.z) {
+      target.position.z = preZ;
+    }
+    else if (-4.615 + threeInfo[0]['coords'][2]['y'] - (targetBox.max.z - targetBox.min.z) / 2 <= props.position.z) {
+      target.position.z = preZ;
     }
 
-    if (-4.615 + (targetBox.max.z - targetBox.min.z) / 2 > props.position.z) {
-      target.position.z = preZ;
-    }
-    if (-4.615 + Y - (targetBox.max.z - targetBox.min.z) / 2 < props.position.z) {
-      target.position.z = preZ;
-    }
+
     if (target.position.y < 0) {
       target.position.y = preY;
     }
     if (target.position.y + (targetBox.max.y - targetBox.min.y) / 2 > H) {
       target.position.y = preY;
     }
+  // })
+
+    
 
     // Check collision box -> 충돌 확인 // 오브젝트간 충돌
     for (const key in objBox) {
@@ -239,35 +300,52 @@ export default function ThreeJsPage() {
 
   ///
   const ThreeJSCtx = useContext(ThreeJSContext);
+
   function wallColorHandler(e) {
     console.log('이벤트', e.target.value);
     ThreeJSCtx.changeWallColor(e.target.value);
   }
 
-  //================2D==================
-  const [showResults, setShowResults] =useState(false)
-  let [mouseList] = useState([])
-  let [roomList,setRoomList] = useState([])
-  let [threeInfo, setThreeInfo] = useState([])
+  function test(props){
 
-  let [isRect,setIsRect] = useState(false);
+    console.log('test')
+    console.log('test_props',props)
+    console.log(objPoint)
+    
+    console.log('test',objPoint[props.uuid])
+  }
+  
+  let [wallNum, setWallNum] = useState(0);
+  function ttest(){
+    
+    for (let index = 0; index < threeInfo.length; index++) {
+      const element = threeInfo[index]['coords'];
+      console.log(element)
+      for (let i = 0; i < 4;i++){
+        
+        let min = new THREE.Vector3(element[i]['x'], 0, element[i]['y']);
+        let max = new THREE.Vector3(element[i]['x']+0.1, 0, element[i]['y']+0.1);
+        let wall = new THREE.Box3(min, max);
+        
+        let key = 'wallNumber'+wallNum
+        console.log('key',key)
+        setWallNum(wallNum+1)
+        
+        setBox((prevState) => ({
+          ...prevState,
+          [key]: wall,
+        })); 
 
-  let newItem = {
-    floors: [
-      {
-        y: 0,
-        doors: [],
-        windows: [],
-        rooms: threeInfo
-      },
-    ],
-  };
-  let animatedFloorPosition = useFloorTransitionAnimation({
-    floors: newItem.floors,
-    currentFloor,
-  });
+        console.log('for')
+        console.log(objBox)
+        console.log('for')
+      }
+      console.log("밖",objBox)
 
-  //================2D=================
+
+    }
+
+  }
 
   return (
     <div className={classes.three_body}>
@@ -288,12 +366,15 @@ export default function ThreeJsPage() {
               <Dropdown.Item eventKey="2">Room #2</Dropdown.Item>
               <Dropdown.Item eventKey="3">Room #3</Dropdown.Item>          
             </DropdownButton>
-          <button  style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
+          <button onClick={() => test(target)} style={{ width: '45%', marginLeft: '40px'}}>Make room </button>
            
           </div>                      
             <br />
             <br />
 
+            <button style={{ display : 'absolute'}}
+             onClick={() => {setRoomNumber(roomNumber+1)}}
+            >Room number</button>
             <button style={{ display : 'absolute'}}
              onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}}
             >Reset View</button>
@@ -360,13 +441,17 @@ export default function ThreeJsPage() {
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
             <ModelT
+              // position = {[obj.centerX,0,obj.centerY]}
+              position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
+              setObj = {setObjPoint}
               objUrl={obj.glb_url}
               setTarget={setTarget}
             />
           ))}
 
           {/* <Ground/> */}
+          {showResults&&<ModelControl/>}
           <CameraSetup initCamera = {initCamera}/>          
           <ScreenShot  downloadFlag={downloadFlag}/>          
           <ambientLight intensity={0.5} color="#eef" />
@@ -382,12 +467,12 @@ export default function ThreeJsPage() {
           </a.group>
 
           {target && (
-            <TransformControls
+            <TransformControls 
               onChange={(e) => {
                 ObjectChangeHandler(target);
               }}
               object={target}
-              mode={mode}
+              mode= {modeValue}
             />
           )}
           <OrbitControls makeDefault />
@@ -410,7 +495,7 @@ export default function ThreeJsPage() {
               />
             </div>
             <div>
-              <button onClick={() => {setShowResults(!showResults)}}>change</button>
+              <button onClick={() => {setShowResults(!showResults) ; ttest()}}>change</button>
               <button onClick={() => {setIsRect(!isRect)}}>MakeRect</button>
             </div>
             </div>

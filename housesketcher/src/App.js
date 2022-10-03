@@ -11,8 +11,6 @@ import PrivateRoute from './utils/PrivateRoute';
 import NonPrivateRoute from './utils/NonPrivateRoute';
 import TasteAnalysisPage from './pages/TasteAnalysis';
 import ThreeJsPage from './pages/ThreeJsPage';
-import TTTest from './pages/TTTest';
-import NewMind from './pages/NewMind';
 import ScrollToTop from './hooks/ScrollToTop';
 import HomeSketcherAIPage from './pages/HomeSketcherAIPage';
 import { ThemeProvider } from './context/themeProvider';
@@ -50,8 +48,6 @@ function App() {
                     path="/tasteanalysis"
                   />
                   <Route component={ThreeJsPage} exact path="/modeling" />
-                  <Route component={TTTest} exact path="/asd" />
-                  <Route component={NewMind} exact path="/new" />
                   <Route component={HomeSketcherAIPage} exaxt path="/ai" />
                 </Switch>
               </ThreeJSContextProvider>
