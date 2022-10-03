@@ -8,7 +8,7 @@ import { useState } from 'react';
 import LikeFurniture from '../Like/LikeFurniture';
 import classes from './SubCarousel.module.css';
 
-function SubCarousel(props) {
+function SubCarousel() {
   const [populars, setPopulars] = useState([]);
   const [recommends, setRecommends] = useState([]);
   const [mostReviews, setMostReviews] = useState([]);
@@ -24,7 +24,7 @@ function SubCarousel(props) {
       }
     })
     const hotData = await response.data;
-    console.log(hotData);
+    // console.log(hotData);
     setHots(hotData);
   }
 
@@ -80,6 +80,7 @@ function SubCarousel(props) {
     getHots()
   }, []);
   // console.log(populars)
+
   return (
     <div>
       <div

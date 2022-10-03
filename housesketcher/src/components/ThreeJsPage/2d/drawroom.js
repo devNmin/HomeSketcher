@@ -36,7 +36,6 @@ const Canvas2D = (props) =>{
     let[beforeCy,setBeforeCy] = useState(); //센터y 기억
     // 방 드래그 드롭 충돌 시 직전 좌표 기억
 
-    let[lastCoords,setLastCoords] = useState([]);
 
     // 배경 이미지 그리기
     const ImageObj = new Image();
@@ -45,7 +44,6 @@ const Canvas2D = (props) =>{
     function downHandler({ key }) {
         if(key === "Escape"){
             setMouseCheck(0);
-            console.log(mouseList);
             const canvas = canvasRef.current;
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
@@ -70,7 +68,6 @@ const Canvas2D = (props) =>{
 
     useEffect(()=>{
         setMouseCheck(0);
-        console.log(mouseList);
         const canvas = canvasRef.current;
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight;
@@ -94,8 +91,6 @@ const Canvas2D = (props) =>{
 
             drawAll(context);
         },20)
-
-        console.log("tqtqtqtqtq",roomList);
 
         window.addEventListener("keydown", downHandler);
         return () => {
@@ -150,8 +145,10 @@ const Canvas2D = (props) =>{
         setCursor('default');
     }
 
+    //클릭 시 해당 마우스 좌표값을 저장하는 함수
     const setData = (offsetX, offsetY)=>{
         const rate = 45;
+        //두 번째 클릭인 경우 -> 방 생성을 해줌
         if(mouseCheck%2===1 && mouseCheck!==0){
             if(isRect){
                 // setRoomCnt(roomCnt+1);
@@ -198,11 +195,8 @@ const Canvas2D = (props) =>{
                     ]
                 }
     
-                console.log(data)
                 roomList.push(data)
                 threeInfo.push(threeData)
-                // setRoomList((roomList)=>[data,...roomList])
-                console.log(roomList)
             }
             
         }
@@ -210,6 +204,7 @@ const Canvas2D = (props) =>{
         drawAll(ctx)
     }
 
+    //마우스가 움직일 때 실행되는 함수
     const mouseMove = ({nativeEvent})=>{
         const {offsetX, offsetY} = nativeEvent;
         setCursor('default')
@@ -235,14 +230,6 @@ const Canvas2D = (props) =>{
             }
         }
     }
-    const keyDownHandler = event => {
-        console.log('User pressed: ', event.key);
-
-        if (event.key === 'Escape') {
-            event.preventDefault();
-            console.log("ESC")
-        }
-    };
     
 
     //방 충돌 확인(현재 움직이고 있는 좌표 값을 넣어줌)
@@ -400,6 +387,7 @@ const Canvas2D = (props) =>{
                 
             }
 
+            // 3D 좌표값 업데이트
             let rate = 45;
             let tleftX = roomList[roomId].fx/rate
             let tleftY = roomList[roomId].fy/rate
@@ -433,6 +421,7 @@ const Canvas2D = (props) =>{
 
     }
 
+    //드래그 드롭으로 방 움직일 때 좌표 설정 함수
     const roomMove = (offsetX,offsetY)=>{
         let roomX = roomList[roomId].centerX; //방의 중심좌표 X
         let roomY = roomList[roomId].centerY; //방의 중심좌표 X
@@ -449,8 +438,6 @@ const Canvas2D = (props) =>{
         setBeforeCx(roomList[roomId].centerX);
         setBeforeCy(roomList[roomId].centerY);
 
-        // 3D 좌표 리스트 기억
-        setLastCoords(threeInfo[roomId].coords);
         
 
         // 4개의 꼭짓점 좌표 변경
@@ -479,7 +466,8 @@ const Canvas2D = (props) =>{
         
     }
 
-    const ifRoomClick = (offsetX,offsetY)=>{ //방 클릭시 어떤 방인지 지정 -> 방안에 포인터가 있는지 확인
+    //방 클릭시 어떤 방인지 지정 -> 방안에 포인터가 있는지 확인
+    const ifRoomClick = (offsetX,offsetY)=>{ 
         const length = roomList.length;
         for(let i = 0; i < length; i++){
             let data = roomList[i];
@@ -495,6 +483,7 @@ const Canvas2D = (props) =>{
         }
     }
 
+    //포인터가 방 안에 있을 때 확인 여부 true면 안에 있는 것
     const ifPointerInRoom = (offsetX,offsetY)=>{
         const length = roomList.length;
         for(let i = 0; i < length; i++){
@@ -525,8 +514,7 @@ const Canvas2D = (props) =>{
             let rightX = Math.max(data.fx,data.nx);
             let topY = Math.max(data.fy, data.ny);
             let bottomY = Math.min(data.fy, data.ny);
-            console.log("asdlkfjasdlkj",leftX,rightX,topY,bottomY)
-            console.log('offset',offsetX,offsetY)
+            
             if( // 사각형 충돌 시 true 반환
                 mouseCheck%2===1 && mouseCheck!==0  && (
                     (offsetX > leftX && offsetX < rightX && offsetY < topY && offsetY > bottomY) || 
@@ -559,12 +547,12 @@ const Canvas2D = (props) =>{
     }
 
 
+    //사각형 생성. 드래그로 생성할 때 실행
     const makeRect = (offsetX,offsetY)=>{
         setCursor('crosshair')
         ctx.strokeStyle = "black";
         ctx.lineWidth = 1;
-        // if(Math.abs(offsetX+lastX)/2)
-        console.log(Math.abs(offsetX-lastX))
+        
         let size = (Math.abs(offsetX-lastX)+Math.abs(offsetY-lastY))/30
         let textTotext = 20;
         
@@ -574,7 +562,6 @@ const Canvas2D = (props) =>{
             ctx.font = (Math.abs(offsetX-lastX)+Math.abs(offsetY-lastY))/30+'px serif';
             textTotext = size*1.5;
         }
-        // ctx.font = font +'px serif';
         
         let width = (Math.abs(offsetX-lastX)/45).toFixed(2);
         let length = (Math.abs(offsetY-lastY)/45).toFixed(2);
@@ -583,7 +570,7 @@ const Canvas2D = (props) =>{
         let textSecond = "세로: " + length+"m";
         ctx.strokeText(textFirst, Math.abs(offsetX+lastX)/2-size*4, Math.abs(offsetY+lastY)/2);
         ctx.strokeText(textSecond, Math.abs(offsetX+lastX)/2-size*4, Math.abs(offsetY+lastY)/2+textTotext);
-        // ctx.strokeText('Hello world', offsetX, Math.abs(offsetY+lastY)/2);
+        
         ctx.strokeStyle = "black";
         ctx.lineWidth = 8;
         ctx.rect(lastX,lastY,offsetX-lastX,offsetY-lastY);
@@ -593,18 +580,16 @@ const Canvas2D = (props) =>{
     }
 
 
+    // 그림을 다시 모두 그려주는 함수. 여태까지 그렸던 것을 좌표를 기반으로 그려줌
     const drawAll = (context)=>{
         const length = roomList.length;
         const rate = 45;
         for(let i = 0; i < length; i++){
             let data = roomList[i]; //그리는 방 정보
             if(data['isRect']){//직사각형이면
-                console.log("ASDFASDFASDFSADF")
-                console.log("roomList", roomList)
-                console.log('threeInfothreeInfo',threeInfo)
                 context.strokeStyle = "black";
                 context.lineWidth = 1;
-                console.log("ctx", context)
+                
                 let size = (Math.abs(data['nx']-data['fx'])+Math.abs(data['ny']-data['fy']))/30
                 let textTotext = 20;
                 if(Math.abs(data['nx']-data['fx'])<250 || Math.abs(data['ny']-data['fy'])<250){
@@ -631,14 +616,7 @@ const Canvas2D = (props) =>{
         ifRoomClick(offsetX,offsetY); //클릭했을 때 방 안이면 클릭됐다고 값 변경해줌
     }
 
-    const keyPress = e=>{
-        e.preventDefault();
-        alert('asdf')
-    }
-
-    // function keyPress({e}){
-    //     alert('asdf')
-    // }
+    
 
     return(
         <div className = "canvas_wrap">
@@ -650,15 +628,7 @@ const Canvas2D = (props) =>{
                 onMouseUp = {setXY}
                 onMouseMove = {mouseMove}
                 onMouseDown = {clicked}
-                // onKeyPress ={()=>{
-                //     console.log("asdfasdf")
-                //     // keyPress("asdfasdf")
-                // }}
-                
                 style={{ cursor: cursor }}
-
-                
-                // onKeyDown={ keyPress}
                 ></canvas>
         </div>
     );
