@@ -15,42 +15,14 @@ export default function BasicPopover() {
   let [logoutHover, setLogoutHover] = useState(false)
 
   let {user , logoutUser} = useContext(AuthContext)
-  const hisory = useHistory()
+  const history = useHistory()
 
   const retestClickHandler = () => {
-    hisory.push('/tasteanalysis')
+    history.push('/tasteanalysis')
   }
 
   const editClickHandler = () => {
-    new swal({
-      title: 'Edit your profile',
-      input: 'email',
-      inputPlaceholder: 'Example@email.xxx',
-      showCancelButton: true,
-      confirmButtonText: 'Submit',
-      showLoaderOnConfirm: true,
-      preConfirm: (email) => {
-        return new Promise((resolve) => {
-          setTimeout(() => {
-            if (email === 'example@email.com') {
-              swal.showValidationError(
-                'This email is already taken.'
-              )
-            }
-            resolve()
-          }, 2000)
-        })
-      },
-      allowOutsideClick: false
-    }).then((result) => {
-      if (result.value) {
-        swal({
-          type: 'success',
-          title: 'Thank you for subscribe!',
-          html: 'Submitted email: ' + result.value
-        })
-      }
-    })
+    history.push('/editprofile')
   }
 
   
@@ -84,14 +56,18 @@ export default function BasicPopover() {
       >
       <div>
         <Typography sx={{ p: 2 }} >
-            <p  onMouseEnter={() => { setRetestHover(true) }} 	     
-            onMouseLeave={() => { setRetestHover(false) }}  onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer', color : retestHover? '#F3CD58' : null}}>Retest</p>
-            <hr />
-            <p  onMouseEnter={() => { setEditHover(true) }} 	     
-            onMouseLeave={() => { setEditHover(false) }} onClick= {editClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer', color : editHover? '#F3CD58' : null}}>Edit Profile</p>
-            <hr />
-            <p onMouseEnter={() => { setLogoutHover(true) }} 	     
-            onMouseLeave={() => { setLogoutHover(false) }}  onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer',  color : logoutHover? '#F3CD58' : null}}>Logout</p>            
+            <span  onMouseEnter={() => { setRetestHover(true) }} 	     
+            onMouseLeave={() => { setRetestHover(false) }}  onClick={retestClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer', color : retestHover? '#F3CD58' : null}}>Retest</span>
+            <br />
+            <span>--------------</span>
+            <br />
+            <span  onMouseEnter={() => { setEditHover(true) }} 	     
+            onMouseLeave={() => { setEditHover(false) }} onClick= {editClickHandler} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer', color : editHover? '#F3CD58' : null}}>Edit Profile</span>
+            <br />
+            <span>--------------</span>
+            <br />
+            <span onMouseEnter={() => { setLogoutHover(true) }} 	     
+            onMouseLeave={() => { setLogoutHover(false) }}  onClick={logoutUser} style={{ marginTop: '0.5rem', marginBottom : '0.5rem' , cursor:'pointer',  color : logoutHover? '#F3CD58' : null}}>Logout</span>            
         </Typography>
 
       </div>

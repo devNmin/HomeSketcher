@@ -16,6 +16,9 @@ function HomeSketcherAIPage() {
   const BtnClass = isLight ? classes.btn_dark : classes.btn;
   const PopupClass = isLight ? classes.popup_dark : classes.popup;
 
+  
+ 
+
   const responseDataHandler = async () => {
     await axios
       .get('auths/trend')
@@ -28,6 +31,9 @@ function HomeSketcherAIPage() {
   };
   useEffect(() => {
     responseDataHandler();
+    var style = ['padding : 30px 20px', 'margin : 20px 0','background : linear-gradient(#F3CD58, #FFE8F3)',
+    'font-size : 25px','font-weight : bold','text-align : center','color : #ffffff'].join(';');
+  console.log('%c This is AIpage in this page, We will find interior style by your picture and give you some statistics!', style);
   }, []);
 
   if (!responseData) {

@@ -96,7 +96,7 @@ function AIStyle() {
     })
     .then (
       (response) => {
-        console.log(response.data.message);
+        // console.log(response.data.message);
         new swal(
           'Style change complete',
           `before : ${user.user_style} &nbsp;&nbsp;  after : ${style}`,

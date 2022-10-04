@@ -42,7 +42,7 @@ export function ThreeJSContextProvider(props) {
   }
   const modeHandler = (name) => {
     setMode(name)
-    console.log('context', mode)
+    //console.log('context', mode)
   }
 
 

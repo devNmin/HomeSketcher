@@ -566,8 +566,8 @@ const Canvas2D = (props) =>{
         let width = (Math.abs(offsetX-lastX)/45).toFixed(2);
         let length = (Math.abs(offsetY-lastY)/45).toFixed(2);
         
-        let textFirst = "가로: " + width+"m";
-        let textSecond = "세로: " + length+"m";
+        let textFirst = "Width: " + width+"m";
+        let textSecond = "Height: " + length+"m";
         ctx.strokeText(textFirst, Math.abs(offsetX+lastX)/2-size*4, Math.abs(offsetY+lastY)/2);
         ctx.strokeText(textSecond, Math.abs(offsetX+lastX)/2-size*4, Math.abs(offsetY+lastY)/2+textTotext);
         
@@ -598,8 +598,8 @@ const Canvas2D = (props) =>{
                     context.font = (Math.abs(data['nx']-data['fx'])+Math.abs(data['ny']-data['fy']))/30+'px serif';
                     textTotext = size*1.5;
                 }
-                let textFirst = "가로: " + (Math.abs(data['nx']-data['fx'])/rate).toFixed(2) +"m";
-                let textSecond = "세로: " + (Math.abs(data['ny']-data['fy'])/rate).toFixed(2)+"m";
+                let textFirst = "Width: " + (Math.abs(data['nx']-data['fx'])/rate).toFixed(2) +"m";
+                let textSecond = "Height: " + (Math.abs(data['ny']-data['fy'])/rate).toFixed(2)+"m";
                 context.strokeText(textFirst, Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2);
                 context.strokeText(textSecond,Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2+textTotext);
                 context.strokeStyle = "black";

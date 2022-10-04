@@ -18,13 +18,13 @@ const Flooring = ({ coords, isInteractive }) => {
     shape.lineTo(coords[0].x, coords[0].y);
     return shape;
   }, [coords]);
-
+  // THREE.ShapeBufferGeometry has been renamed to THREE.ShapeGeometry.
   return (
     <mesh
       position={[(coords[0].x + coords[2].x) / 2, -1e-3, (coords[0].y + coords[2].y) / 2]}
       rotation={[degreesToRadians(90), 0, 0]}      
     >
-      <shapeBufferGeometry args={[shape]} />
+      <shapeGeometry args={[shape]} />
       <FlooringMaterial />
       <planeGeometry args={[length, height]} />
     </mesh>

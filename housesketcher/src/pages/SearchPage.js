@@ -15,6 +15,9 @@ import classes from './SearchPage.module.css';
 function SearchPage() {
   const searchCtx = useContext(SearchContext);
   const [ThemeMode, toggleTheme] = useTheme();
+  var style = ['padding : 30px 20px', 'margin : 20px 0','background : linear-gradient(#F3CD58, #FFE8F3)',
+  'font-size : 25px','font-weight : bold','text-align : center','color : #ffffff'].join(';');
+  console.log('%c This is Searchpage in this page, you can find all furnitures you want!', style);
   if (searchCtx.isLoading) {
     return (
       <div>
