@@ -15,7 +15,6 @@ const Canvas2D = (props) =>{
     const [rectClick, setRectClick] = useState(false); //방 클릭했을 때 옵션
     const [roomId, setRoomId] = useState();
 
-    let mouseList = props.mouseList
     let roomList = props.roomList
     let isRect = props.isRect
     
@@ -41,30 +40,6 @@ const Canvas2D = (props) =>{
     const ImageObj = new Image();
     ImageObj.src = "https://png.clipart.me/previews/035/grid-paper-seamless-photoshop-and-illustrator-pattern-30843.png"
        
-    function downHandler({ key }) {
-        if(key === "Escape"){
-            setMouseCheck(0);
-            const canvas = canvasRef.current;
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            
-            const context = canvas.getContext("2d");
-
-            ImageObj.onload = function(){
-                context.drawImage(ImageObj, 0, 0, 1500, 1500)
-            }
-            
-            context.strokeStyle = "black"; //선의 색
-            context.lineWidth = 8; //선의 굵기
-            contextRef.current = context;
-            context.scale(10, 5);
-            setCtx(context);
-        
-        
-            removeLine()
-            drawAll(context);
-        }
-    }
 
     useEffect(()=>{
         setMouseCheck(0);
@@ -84,7 +59,6 @@ const Canvas2D = (props) =>{
         context.scale(10, 5);
         setCtx(context);
         
-    
        
         removeLine()
         setTimeout(()=>{
@@ -101,7 +75,29 @@ const Canvas2D = (props) =>{
         
     },[props.valueChange]);
 
+    function downHandler({ key }) {
+        if(key === "Escape"){
+            setMouseCheck(0);
+            const canvas = canvasRef.current;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const context = canvas.getContext("2d");
 
+            ImageObj.onload = function(){
+                context.drawImage(ImageObj, 0, 0, 1500, 1500)
+            }
+            
+            context.strokeStyle = "black"; //선의 색
+            context.lineWidth = 8; //선의 굵기
+            contextRef.current = context;
+            context.scale(10, 5);
+            setCtx(context);
+        
+            removeLine()
+            drawAll(context);
+        }
+    }
 
     const removeLine = ()=>{
         const canvas = canvasRef.current;
