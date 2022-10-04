@@ -50,7 +50,7 @@ const Door = ({
         }
       }}
     >
-      <mesh position={[0, 0, -DOOR_THICKNESS / 2]}>
+      {/* <mesh position={[0, 0, -DOOR_THICKNESS / 2]}>
         <extrudeBufferGeometry
           args={[
             shape,
@@ -62,7 +62,7 @@ const Door = ({
           ]}
         />
         <DoorMaterial {...material} />
-      </mesh>
+      </mesh> */}
     </a.mesh>
   );
 };

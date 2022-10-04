@@ -8,7 +8,7 @@ const CameraSetup = (props) => {
   let { gl, scene, camera } = useThree()
 
   useEffect(() => {
-    gl.gammaFactor = 2.2;
+    // gl.gammaFactor = 2.2;
     gl.outputEncoding = THREE.sRGBEncoding;
 
     // camera.lookAt(7, 1.2, 5);

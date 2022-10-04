@@ -13,7 +13,7 @@ export default  function TasteCompOne(props) {
         axios.get('interests/data/').then(response => {
                 setTasteList(response.data);
             });
-            console.log(tastelist);
+            
     }, []);  
      
     const saveTasteHandler = (enteredtaste) => {

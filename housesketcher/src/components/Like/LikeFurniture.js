@@ -25,8 +25,7 @@ export default function LikeFurniture(props) {
           headers: {
             Authorization: `Bearer ${authTokens.access}`,
           },
-        })
-        .then((res) => console.log(res));
+        })        
     } else {
       setIsLikeHandler(!isLike);
       axios
@@ -34,8 +33,7 @@ export default function LikeFurniture(props) {
           headers: {
             Authorization: `Bearer ${authTokens.access}`,
           },
-        })
-        .then((res) => console.log(res));
+        })        
     }
   };
 

@@ -57,6 +57,7 @@ const Wall = ({ a, b, height, doors = [], windows = [] }) => {
   }, [a, b, height, doors, windows]);
 
   const shape = useMemo(() => {
+    
     const shape = new THREE.Shape();
     shape.moveTo(corners[0][0], corners[0][1]);
     corners.slice(1).forEach((corner) => shape.lineTo(corner[0], corner[1]));
@@ -69,11 +70,36 @@ const Wall = ({ a, b, height, doors = [], windows = [] }) => {
     });
     return shape;
   }, [corners, doorsRelative, windowsRelative]);
+  //three.module.js:49463 THREE.ExtrudeBufferGeometry has been renamed to THREE.ExtrudeGeometry.
+  function WallMesh(){
+    const length = 12, width = 8;
+    const shape = new THREE.Shape();
+    shape.moveTo( 0,0 );
+    shape.lineTo( 0, width );
+    shape.lineTo( length, width );
+    shape.lineTo( length, 0 );
+    shape.lineTo( 0, 0 );
 
+    const extrudeSettings = {
+      steps: 2,
+      depth: 16,
+      bevelEnabled: true,
+      bevelThickness: 1,
+      bevelSize: 1,
+      bevelOffset: 0,
+      bevelSegments: 1
+    };
+
+    const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
+    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const mesh = new THREE.Mesh( geometry, material ) ;
+    
+    return mesh
+  }
   return (
     <mesh position={position} rotation={rotation}>
       <mesh position={[-HALF_WALL_THICKNESS, 0, -HALF_WALL_THICKNESS]}>
-        <extrudeBufferGeometry
+        <extrudeGeometry
           args={[
             shape,
             {

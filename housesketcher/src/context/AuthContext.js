@@ -16,6 +16,7 @@ import { createContext, useState, useEffect } from 'react';
 //   }
 
 import { useHistory } from 'react-router-dom';
+import swal from "sweetalert2";
 
 const AuthContext = createContext();
 
@@ -23,8 +24,11 @@ export default AuthContext;
 
 export const AuthProvider = ({ children }) => {
   // 콜백을 쓰는 이유는 안 쓸 경우 페이지가 로드 될때마다 계속 작동하기 때문에
-  console.log('AuthProvider 들어옴');
   
+  var style = ['padding : 30px 20px', 'margin : 20px 0','background : linear-gradient(#F3CD58, #FFE8F3)',
+    'font-size : 25px','font-weight : bold','text-align : center','color : #ffffff'].join(';');
+   
+
 
   let [user, setUser] = useState(() =>
     localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo')) : null
@@ -43,7 +47,7 @@ export const AuthProvider = ({ children }) => {
 
   let loginUser = async (e) => {
     e.preventDefault();
-    console.log('Form submitted');
+    
     let response = await fetch(BASE_URL + 'auths/login/', {
       method: 'POST',
       headers: {
@@ -55,11 +59,18 @@ export const AuthProvider = ({ children }) => {
       }),
     });
     let data = await response.json();
-    console.log('data :', data.token);
+   
     if (response.status === 200) {
       setAuthTokens(data.token);
       setUser(data.user);
-      console.log(data.user);
+      console.log('%c Welcome to HomeSketcher! Sketch your Dream House on your own!', style);
+      console.log(`
+      |\\_/| 
+      |q p| /} 
+      ( 0 )"""\\ 
+      |"^"\ |
+      ||_/=\\__|`)
+      console.log('Feel Free to join us! ');
       localStorage.setItem('authTokens', JSON.stringify(data.token));
       localStorage.setItem('userInfo', JSON.stringify(data.user));
       if (data.user.user_style === '0') {
@@ -68,7 +79,11 @@ export const AuthProvider = ({ children }) => {
         history.push('/');
       }
     } else {
-      alert('Login Failed!');
+      new swal(
+        'Oops!',
+        '<b style="color:red;">Login Error!</b> Write correct id and password :)',
+        'error'
+      )
     }
   };
 
