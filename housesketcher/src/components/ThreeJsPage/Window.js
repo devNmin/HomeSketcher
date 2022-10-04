@@ -26,7 +26,7 @@ const Window = ({ id, left, right, sill, lintel }) => {
   return (
     <mesh position={[right.x, sill, right.y]} rotation={[0, angle, 0]}>
       <mesh position={[0, 0, -WINDOW_THICKNESS / 2]}>
-        <extrudeBufferGeometry
+        {/* <extrudeBufferGeometry
           args={[
             shape,
             {
@@ -35,7 +35,7 @@ const Window = ({ id, left, right, sill, lintel }) => {
               steps: 1
             }
           ]}
-        />
+        /> */}
         <GlassMaterial />
       </mesh>
     </mesh>

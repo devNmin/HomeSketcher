@@ -114,10 +114,9 @@ export default function ThreeJsPage() {
     objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2+offsetCanvasY
 
     if (objList.includes(objUrl)) {
-      console.log(' 중복');
+      
     } else {
-      setObjList([...objList, objUrl]);
-      console.log('위의 것을 넣습니다.');
+      setObjList([...objList, objUrl]);    
 
     }
   };
@@ -267,7 +266,7 @@ export default function ThreeJsPage() {
   const ThreeJSCtx = useContext(ThreeJSContext);
 
   function wallColorHandler(e) {
-    console.log('이벤트', e.target.value);
+    
     ThreeJSCtx.changeWallColor(e.target.value);
   }
 
@@ -394,7 +393,6 @@ export default function ThreeJsPage() {
           {/* 가구 3D 모델 */}
           {objList.map((obj) => (
             <ModelT
-              // position = {[obj.centerX,0,obj.centerY]}
               position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
               objUrl={obj.glb_url}
@@ -445,11 +443,20 @@ export default function ThreeJsPage() {
                 <div className={clickRoom !== value.num ? classes.display_none : null}>
                   <form>
                     <p className={classes.room_title}>Room {value.num+1}</p>
-                    <label className={classes.room_size_input} htmlFor="x">Width</label>
-                    <input id={`${value.num}`} placeholder={(Math.abs(value.nx-value.fx)/45).toFixed(2)} onChange={(e)=>{changeXHandler(e)}} />
-                    <label className={classes.room_size_input} htmlFor="y">Height</label>
+                    <label className={classes.room_size_input} htmlFor="x" style={{ marginRight : '6px'}}>Width :</label>                    
+                    <input id={`${value.num}`} placeholder={(Math.abs(value.nx-value.fx)/45).toFixed(2)} onChange={(e)=>{changeXHandler(e)}}  />
+                    <label className={classes.room_size_input}>(m)</label>       
+                    <br/>
+                    <label className={classes.room_size_input} htmlFor="y" style={{ marginRight : '4px'}}>Height: </label>
                     <input id={`${value.num}`} placeholder={(Math.abs(value.ny-value.fy)/45).toFixed(2)} onChange={(e)=>{changeYHandler(e)}} />
-                    <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} >적용</button>
+                    <label className={classes.room_size_input}>(m)</label>       
+                    <br/>
+                    <br/> 
+                    <div style={{ display : 'flex', justifyContent: 'center'}}>
+                      <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} style ={{width : '45%', marginRight : '5px'}} >적용</button>
+                      <button  style ={{width : '45%'}} >삭제</button>
+                      
+                    </div>                   
                   </form>
                 </div>
               ))}

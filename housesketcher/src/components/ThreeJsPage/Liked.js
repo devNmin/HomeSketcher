@@ -25,7 +25,7 @@ function Liked(props) {
         setFurnitureList(response.data);
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.data)
       });
   };
   

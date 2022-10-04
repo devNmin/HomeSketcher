@@ -19,7 +19,7 @@ function InputGroup() {
   const floorTextureHandler = (name) => {
     ThreeJSCtx.changeFloorTexture(name);
   };
-  console.log('ThreeJSCtx.floorTexture', ThreeJSCtx.floorTexture);
+  //console.log('ThreeJSCtx.floorTexture', ThreeJSCtx.floorTexture);
   return (
     <div className={classes.display_flex}>
       {/* 벽 색 인풋 받기 */}

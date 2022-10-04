@@ -8,8 +8,8 @@ import logo from '../assets/Logo.png'
 import swal from "sweetalert2";
 
 
-export default function AccountRegisterPage() {
-  const { BASE_URL } = useContext(AuthContext)
+export default function EditProfilePage() {
+  const { BASE_URL , user, logoutUser} = useContext(AuthContext)
   const emailInput = useRef();
   const passwordInput = useRef();
   const passwordCheckInput = useRef();
@@ -18,9 +18,13 @@ export default function AccountRegisterPage() {
   const birthInput = useRef();
   const history = useHistory()
   let [formData, setformData] = useState({
-    gender: ""
+    gender: user.user_gender
   })
-  let [gender, setGender] = useState(null)
+  let [gender, setGender] = useState(user.user_gender == "0" ? 'male' : 'female')
+
+
+
+
 
   // const handleChange = async (event) => {
   //   event.preventDefault()
@@ -35,6 +39,36 @@ export default function AccountRegisterPage() {
   //     gender: value
   //   })
   // }
+  const authTokens = localStorage.getItem('authTokens') ? JSON.parse(localStorage.getItem('authTokens')): null
+  const resignClickHandler = () => {
+    swal.fire({
+      title : 'Do you really really want to resign?',
+      text : 'if you resign, you can not go back',
+      icon : 'warning',
+
+      showCancelButton :true,
+      confirmButtonColor : '#3085d6',
+      cancelButtonColor : '#d33',
+      confirmButtonText : 'Approved',
+      cancelButtonText : 'Cancel',
+      reverseButtons : true
+    }).then(
+      result => {
+        if(result.isConfirmed){
+          swal.fire('Resign Complete', 'Goodbye...', 'success')
+          fetch(BASE_URL + `auths/delete/${user.id}/`, {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + authTokens.access
+            }
+          }).then(res => logoutUser())
+          
+          
+        }
+      }
+    )
+  }
 
   const maleChange = async (event) => {
     event.preventDefault()
@@ -73,7 +107,7 @@ export default function AccountRegisterPage() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    //console.log(formData.gender);
+    console.log(formData.gender);
 
     const emailsubmit = emailInput.current.value;
     const passwordsubmit = passwordInput.current.value;
@@ -83,10 +117,11 @@ export default function AccountRegisterPage() {
     const brithsubmit = birthInput.current.value;
     
 
-    await fetch(BASE_URL + 'auths/signup/', {
-      method: 'POST',
+    await fetch(BASE_URL + 'accounts/update/', {
+      method: 'PUT',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + authTokens.access
       },
       body: JSON.stringify({
         "user_email": emailsubmit,
@@ -101,8 +136,8 @@ export default function AccountRegisterPage() {
     }).then(res => {
       if (res.ok) {
         new swal(
-          'Register Success',
-          'Welcome to HomeSketcher!'
+          'Editing Profile',
+          'Success'
           , 'success'
 
         )
@@ -127,14 +162,13 @@ export default function AccountRegisterPage() {
 
         </div>
         <form>
-
           <div className='Signup'>
             <div>
               {/* 아이디 */}
               <div className={styles.control}>
                 <h5> E-mail </h5>
                 <div className={styles.Email}>
-                  <input type='text' maxLength='30' name='signup_email' ref={emailInput} />
+                  <input type='text' maxLength='20' name='signup_email' ref={emailInput}  defaultValue = {user.user_email}/>
                   <button className={styles.EmailCheck} onClick={emailcheckHandler}>check</button>
                 </div>
               </div>
@@ -154,12 +188,12 @@ export default function AccountRegisterPage() {
               {/* 이름 */}
               <div className={styles.control}>
                 <h5> Name </h5>
-                <input type='text' maxLength='10' name='signup_name' ref={nameInput} />
+                <input type='text' maxLength='10' name='signup_name' ref={nameInput}  defaultValue = {user.user_name}/>
               </div>
 
               <div className={styles.control}>
                 <h5> Nickname </h5>
-                <input type='text' maxLength='10' name='signup_nickname' ref={nicknameInput} />
+                <input type='text' maxLength='10' name='signup_nickname' ref={nicknameInput} defaultValue = {user.user_nickname}/>
               </div>
 
               <div className={styles.actions}>
@@ -175,7 +209,7 @@ export default function AccountRegisterPage() {
                     <input className='mx-2' id="female" type="radio" name="gender" value="1" onChange={handleChange} /> */}           
                 </div>
                 <div style={{ display: 'flex', justifyContent: "start", marginLeft: '45px'}}>
-                  <input type="date" maxLength='6' name='signup_birthday' ref={birthInput} />
+                  <input type="date" maxLength='6' name='signup_birthday' ref={birthInput} defaultValue = {user.user_birth} />
                 </div>
               </div>
               <br />
@@ -185,12 +219,18 @@ export default function AccountRegisterPage() {
               {/* 생년월일 */}
             </div>
           </div>
-          <button onClick={submitHandler} >Sign Up</button>
+          <button onClick={submitHandler} >Edit Profile</button>
         </form>
+        <br />
 
-        <Link className={styles.linkP} to='/login'>
-          <p>Already Have An Account</p>
+
+        <Link className={styles.linkP} to='/loginmain'>
+          <p>Cancel editing profile</p>
         </Link>
+
+        <b onClick = {resignClickHandler} className={styles.linkP} >
+          <p>Click if you want to resign...</p>
+        </b>
       </section>
 
     </div>
