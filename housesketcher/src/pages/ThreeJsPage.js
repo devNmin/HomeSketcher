@@ -219,6 +219,8 @@ export default function ThreeJsPage() {
     currentFloor,
   });
 
+  let [roomNum, setDeleteRoom] = useState();
+
   //================2D=================
 
   function ObjectChangeHandler(props) {
@@ -303,6 +305,24 @@ export default function ThreeJsPage() {
     }
   }
 
+  const removeRoom = (roomNum)=>{
+    let length = roomList.length;
+
+    let newRoomList = [];
+    let newThreeList = [];
+
+    for(let i = 0; i < length; i++){
+      if(roomList[i].num !== roomNum){
+        newRoomList.push(roomList[i]);
+        newThreeList.push(threeInfo[i]);
+      }
+    }
+    setClickRoom(newRoomList[0].num);
+    setRoomList(newRoomList);
+    setThreeInfo(newThreeList);
+    setvalueChange(!valueChange);
+  }
+
   return (
     <div className={classes.three_body}>
       {/* 가구 UX 창 */}
@@ -315,7 +335,7 @@ export default function ThreeJsPage() {
             key= 'Warning'
             id={`dropdown-variants-Warning`}
             variant={'Warning'.toLowerCase()}
-            title={clickRoom ? `Room #${clickRoom+1}`: 'Room List' }
+            title={roomList[0] ? `Room #${clickRoom+1}`: 'Room List' }
             // title={'Room List'}
             style={{ width : '45%'}}
             >
@@ -383,7 +403,7 @@ export default function ThreeJsPage() {
       </div>
 
       <div className={classes.RightItems} style={{ backgroundColor: '#E3E8EC' }}>
-        {!showResults && <Canvas2D  valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
+        {!showResults && <Canvas2D roomNum = {roomNum} valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
         {showResults &&<Canvas 
           // onPointerMissed = 밖에 클릭시 target null로 만들기
           key={`isometric-${false}`}
@@ -454,7 +474,7 @@ export default function ThreeJsPage() {
                     <br/> 
                     <div style={{ display : 'flex', justifyContent: 'center'}}>
                       <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} style ={{width : '45%', marginRight : '5px'}} >적용</button>
-                      <button  style ={{width : '45%'}} >삭제</button>
+                      <button  style ={{width : '45%'}} onClick={(e)=>{e.preventDefault(); removeRoom(value.num)}}>삭제</button>
                       
                     </div>                   
                   </form>
