@@ -59,7 +59,6 @@ const Canvas2D = (props) =>{
         context.scale(10, 5);
         setCtx(context);
         
-       
         removeLine()
         setTimeout(()=>{
 

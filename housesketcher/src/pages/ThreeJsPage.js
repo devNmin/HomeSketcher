@@ -110,6 +110,7 @@ export default function ThreeJsPage() {
   const addobjListHandler = (objUrl) => {
     // roomList  0 여기에 room number 넣어주면 됨 
     // modelT에 position을 넣기위해 centerX,Y를 추가해줌
+    console.log("objUrl",objUrl)
     objUrl['centerX'] = (threeInfo[roomNumber].coords[0]['x']+threeInfo[roomNumber].coords[2]['x'])/2+offsetCanvasX
     objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2+offsetCanvasY
 
@@ -236,10 +237,7 @@ export default function ThreeJsPage() {
     
     // 높이 제한
 
-    if (target.position.y < 0) {
-      target.position.y = preY;
-    }
-    if (target.position.y + (targetBox.max.y - targetBox.min.y) / 2 > 0) {
+    if ((target.position.y < 0) ||(targetBox.max.y > 2.4)) {
       target.position.y = preY;
     }
   // })
@@ -305,23 +303,37 @@ export default function ThreeJsPage() {
     }
   }
 
-  const removeRoom = (roomNum)=>{
-    let length = roomList.length;
+  
 
+  //방 삭제 함수
+  const removeRoom = (roomNum)=>{
+    console.log(roomNum);
+    let length = roomList.length;
+    
     let newRoomList = [];
     let newThreeList = [];
-
+    
     for(let i = 0; i < length; i++){
       if(roomList[i].num !== roomNum){
         newRoomList.push(roomList[i]);
         newThreeList.push(threeInfo[i]);
       }
     }
-    setClickRoom(newRoomList[0].num);
+    //방이 있을 때만 적용
+    if(newRoomList.length>0){
+      setClickRoom(newRoomList[0].num);
+    }else{
+      setClickRoom(roomNum);
+    }
     setRoomList(newRoomList);
     setThreeInfo(newThreeList);
     setvalueChange(!valueChange);
+    
+    console.log(newRoomList)
+    console.log(roomList);
+    
   }
+
 
   return (
     <div className={classes.three_body}>
@@ -331,22 +343,22 @@ export default function ThreeJsPage() {
         <div style={{ padding: '30px' }}>
           <div style={{ display: 'flex' }}>
             <DropdownButton
-            as={ButtonGroup}
-            key= 'Warning'
-            id={`dropdown-variants-Warning`}
-            variant={'Warning'.toLowerCase()}
-            title={roomList[0] ? `Room #${clickRoom+1}`: 'Room List' }
-            // title={'Room List'}
-            style={{ width : '45%'}}
-            >
-            {roomList.map((value) =>(
-              <div>
-                <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num) }} >Room #{value.num+1}</Dropdown.Item>
-              </div>
-            ))}
-              
+                as={ButtonGroup}
+                key= 'Warning'
+                id={`dropdown-variants-Warning`}
+                variant={'Warning'.toLowerCase()}
+                title={clickRoom ? `Room #${clickRoom+1}`: 'Room List' }
+                // title={'Room List'}
+                style={{ width : '45%'}}
+                >
+                {roomList.map((value) =>(
+                  <div>
+                    <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num) }} >Room #{value.num+1}</Dropdown.Item>
+                  </div>
+                ))}
+                  
 
-            </DropdownButton>
+              </DropdownButton>
           <button onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}} style={{ width: '45%', marginLeft: '40px'}}>view change </button>
            
           </div>                      
@@ -406,6 +418,7 @@ export default function ThreeJsPage() {
         {!showResults && <Canvas2D roomNum = {roomNum} valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
         {showResults &&<Canvas 
           // onPointerMissed = 밖에 클릭시 target null로 만들기
+          onPointerMissed={() => setTarget(null)}
           key={`isometric-${false}`}
           orthographic={false}
           invalidateframeloop="false"
@@ -415,6 +428,7 @@ export default function ThreeJsPage() {
             <ModelT
               position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
+              scale = {obj}
               objUrl={obj.glb_url}
               setTarget={setTarget}
             />

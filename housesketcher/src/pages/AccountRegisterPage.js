@@ -10,13 +10,16 @@ import swal from "sweetalert2";
 
 export default function AccountRegisterPage() {
   const { BASE_URL } = useContext(AuthContext)
+  const [emailChecker, setEmailChecker] = useState('');
   const emailInput = useRef();
   const passwordInput = useRef();
   const passwordCheckInput = useRef();
   const nameInput = useRef();
   const nicknameInput = useRef();
   const birthInput = useRef();
-  const history = useHistory()
+  const history = useHistory();
+  const emailCheck = useRef();
+
   let [formData, setformData] = useState({
     gender: ""
   })
@@ -59,16 +62,17 @@ export default function AccountRegisterPage() {
   const emailcheckHandler = async (event) => {
     event.preventDefault();
     const emailsubmit = emailInput.current.value;
-    await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`
-    ).then(res => {
-      alert('사용가능한 이메일입니다')
-
-    }).catch(err => {
-      alert(err.response.data.error);
+    if(emailsubmit.length === 0){
+      alert('이메일 입력해주세요.')
+    }else{
+      await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`
+      ).then(res => {
+        alert('사용가능한 이메일입니다')
+      }).catch(err => {
+        alert(err.response.data.error);
+      }
+      )
     }
-
-    )
-
   }
 
   const submitHandler = async (event) => {
@@ -118,6 +122,15 @@ export default function AccountRegisterPage() {
     })
 
   }
+  const EmailCheckHandler = (e) => {
+    if(e.target.value.length >=3){
+      
+      emailCheck.current.value = "ddd"
+      setEmailChecker("dddd")
+      console.log(emailChecker)
+      alert(emailCheck);
+    }
+  }
 
   return (
     <div>
@@ -134,8 +147,9 @@ export default function AccountRegisterPage() {
               <div className={styles.control}>
                 <h5> E-mail </h5>
                 <div className={styles.Email}>
-                  <input type='text' maxLength='30' name='signup_email' ref={emailInput} />
+                  <input type='text' maxLength='30' name='signup_email' ref={emailInput} onKeyUp={EmailCheckHandler}/>
                   <button className={styles.EmailCheck} onClick={emailcheckHandler}>check</button>
+                  <span ref={emailCheck} value={emailCheck}></span>
                 </div>
               </div>
               {/* 비밀번호 */}

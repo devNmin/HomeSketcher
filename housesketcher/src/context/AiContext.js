@@ -21,7 +21,7 @@ export function AiContextProvider(props) {
         setIsLoding(false);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 

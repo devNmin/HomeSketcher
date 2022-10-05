@@ -107,7 +107,7 @@ export default function EditProfilePage() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formData.gender);
+    // console.log(formData.gender);
 
     const emailsubmit = emailInput.current.value;
     const passwordsubmit = passwordInput.current.value;

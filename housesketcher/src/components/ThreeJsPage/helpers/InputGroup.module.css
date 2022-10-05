@@ -1,3 +1,37 @@
 .display_flex {
   display: flex;
 }
+
+
+.style_div {
+  display:flex;
+  flex-direction: column;
+}
+
+.style_icon {
+  color: black;
+}
+
+.style_inputs {
+  display: none;
+}
+
+.style_div:hover .style_inputs {
+  display: inline-block;
+ 
+}
+
+.object_div {
+  display:flex;
+  flex-direction: column;
+}
+.object_icon {
+
+}
+.object_inputs {
+  display: none;
+}
+
+.object_div:hover .object_inputs{
+  display: block;
+}

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 function ThemeToggle({ toggle, mode }) {
   return (
     <ToggleWrapper onClick={toggle} mode={mode}>
-      {mode === 'dark' ? '🌚' : '🌝'}
+      {mode === 'dark' ? '🌙' : '🌞'}
     </ToggleWrapper>
   );
 }

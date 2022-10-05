@@ -143,7 +143,7 @@ export function FilterContextProvider(props) {
         }
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -196,7 +196,7 @@ export function FilterContextProvider(props) {
         setTotalPage(pages);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -213,7 +213,7 @@ export function FilterContextProvider(props) {
         setTotalPage([]);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
