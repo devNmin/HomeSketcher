@@ -4,14 +4,14 @@ import BASE_URL from './AIBaseUrl';
 import classes from './AIStyle.module.css';
 import LodingText from '../Common/LodingText';
 import axios from '../../utils/axios';
-import swal from "sweetalert2";
+import swal from 'sweetalert2';
 import AuthContext from '../../context/AuthContext';
 import { useHistory } from 'react-router-dom';
 
 const textContext = {
   Natural: [
-    'Natural interior design seeks to',
-    'bring the outdoors in by incorporating natural',
+    'Natural interior design seeks to bring',
+    'the outdoors in by incorporating natural',
     'and nature-inspired materials into the home.',
     'creating a look that is fresh, pure,',
     'authentic, and comfortable.',
@@ -21,8 +21,8 @@ const textContext = {
     'of this wholesome and on-trend design style.',
   ],
   Mediterranean: [
-    'Mediterranean-style interior design',
-    'is a riff on the décor found in countries',
+    'Mediterranean-style interior design is',
+    'a riff on the décor found in countries',
     'that border the Mediterranean Sea.',
     'Whether you’re channeling a warm, carefree summer',
     'in Santorini, Capri, or Ibiza.',
@@ -51,14 +51,14 @@ function AIStyle() {
   const [style, setStyle] = useState(null);
   const [predictValue, setPredictValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const {user} = useContext(AuthContext)
-  const history = useHistory()
+  const { user } = useContext(AuthContext);
+  const history = useHistory();
 
   const imageUpload = async (e) => {
     const file = e.target.files[0];
     if (NotAvailableList.includes(file.type)) {
       const extension = file.type.split('/')[1];
-      alert(`Sorry, "${extension}" is not available filename extension`);
+      alert(`Sorry, "${extension}" is not available`);
       return;
     }
     setIsLoading(true);
@@ -91,32 +91,26 @@ function AIStyle() {
   }
 
   const fixStyleHandler = (result) => {
-    axios.put('interests/userStyleChange/', {
-      style : result
-    })
-    .then (
-      (response) => {
+    axios
+      .put('interests/userStyleChange/', {
+        style: result,
+      })
+      .then((response) => {
         // console.log(response.data.message);
         new swal(
           'Style change complete',
           `before : ${user.user_style} &nbsp;&nbsp;  after : ${style}`,
-          'success',{
-              showCancelButton: true,
-              cancelButtonText: 'cancel',
-              reverseButtons: true,
+          'success',
+          {
+            showCancelButton: true,
+            cancelButtonText: 'cancel',
+            reverseButtons: true,
           }
-          
-        )
-        history.push('/loginmain')
-      }
-    ).catch((err) => 
-    new swal(
-      'Error!',
-      `Please try again or reload the page`,
-      'error'
-    )  );
-    
-  }
+        );
+        history.push('/loginmain');
+      })
+      .catch((err) => new swal('Error!', `Please try again or reload the page`, 'error'));
+  };
   return (
     <div className={classes.display_flex}>
       <div className={classes.left_width}>
@@ -128,7 +122,7 @@ function AIStyle() {
                 return <p className={classes.small_text}>{text}</p>;
               })}
             </div>
-            <button onClick={() => fixStyleHandler(style)}>Save this style</button> 
+            <button onClick={() => fixStyleHandler(style)}>Save this style</button>
           </div>
         ) : (
           <div>

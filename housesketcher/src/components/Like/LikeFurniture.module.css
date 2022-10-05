@@ -3,27 +3,32 @@
   font-weight: bold;
 }
 
-.tooltip_text {
-  display: none;
-  position: absolute;
-  max-width: 80%;
-
-  border-radius: 5px;
-  padding: 5px;
-  font-size: 0.8em;
-  color: white;
-  background: rgba(69, 68, 68, 0.709);
+.tooltip {
+  width: 12rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .tooltip:hover .tooltip_text {
-  display: block;
-}
+  white-space: normal;
+  z-index: 1;
+  position: absolute;
+  left: -1rem;
 
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  color: white;
+  background: rgba(69, 68, 68, 0.709);
+}
 .tag {
-  display: block;
-  margin-top: 0.4rem;
-  margin-left: 0.8rem;
-  text-align: left;
+  margin-top: 0.6rem;
+  text-align: start;
+}
+.tag > p {
+  margin: 0;
+  font-size: small;
 }
 .name_div {
   text-align: left;
@@ -33,3 +38,35 @@
   display: block;
   position: absolute;
 }
+/* card */
+.card_size {
+  width: 14rem;
+  height: 18rem;
+}
+.card_size > a {
+  display: flex;
+  justify-content: center;
+}
+.card_size:hover {
+  box-shadow: 1px 1px 5rem #f3cc5829;
+}
+.img_size {
+  margin: 1rem;
+  width: 10rem;
+  height: 10rem;
+}
+.star_size {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+.star_size:hover {
+  width: 1.4rem;
+  height: 1.4rem;
+  cursor: pointer;
+}
+.star_position {
+  position: absolute;
+  top: 10rem;
+  left: 86%;
+}
+/* style={{ width: '10%', height: '10%', cursor: 'pointer' }} */

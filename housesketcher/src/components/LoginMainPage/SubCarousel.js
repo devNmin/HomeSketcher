@@ -7,26 +7,27 @@ import { useEffect, useContext } from 'react';
 import { useState } from 'react';
 import LikeFurniture from '../Like/LikeFurniture';
 import classes from './SubCarousel.module.css';
+import { width } from '@mui/system';
 
 function SubCarousel() {
   const [populars, setPopulars] = useState([]);
   const [recommends, setRecommends] = useState([]);
   const [mostReviews, setMostReviews] = useState([]);
   const [latests, setLatests] = useState([]);
-  const [hots, setHots] = useState([])
+  const [hots, setHots] = useState([]);
 
   let { BASE_URL, authTokens } = useContext(AuthContext);
 
   const getHots = async () => {
     const response = await axios.get(BASE_URL + 'furnitures/hot/furniture/', {
       headers: {
-        Authorization: `Bearer ${authTokens.access}`
-      }
-    })
+        Authorization: `Bearer ${authTokens.access}`,
+      },
+    });
     const hotData = await response.data;
     // console.log(hotData);
     setHots(hotData);
-  }
+  };
 
   const getPopulars = async () => {
     const response = await axios.get(BASE_URL + 'furnitures/label/rate/', {
@@ -77,106 +78,103 @@ function SubCarousel() {
     getRecommends();
     getMostReviews();
     getLatests();
-    getHots()
+    getHots();
   }, []);
   // console.log(populars)
 
   return (
-    <div>
-      <div
-        style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}
-      >
-        <h1>Latests</h1>
-        <p className={classes.explain_text}>Your recently viewed furnitures</p>
-        <br />
-        {latests.length ? (
-          <CardPanel show={4} populars={latests}>
-            {latests.map((popular) => (
+    <div className={classes.display_flex}>
+      <div className={classes.width}>
+        <div>
+          <h1>Latests</h1>
+          <p className={classes.explain_text}>Your recently viewed furnitures</p>
+          <br />
+          <div>
+            {latests.length ? (
+              <CardPanel show={4} populars={latests}>
+                {latests.map((popular) => (
+                  <LikeFurniture
+                    key={popular.id}
+                    furniture={popular[0]}
+                    addLatest={addLatests}
+                  ></LikeFurniture>
+                ))}
+              </CardPanel>
+            ) : (
+              <div> There aren't any Latests Furniture</div>
+            )}
+          </div>
+        </div>
+
+        <div>
+          <h1>Real time HOTs</h1>
+          <p className={classes.explain_text}>Furnitures with hot clicks in real time</p>
+          <br />
+          {hots ? (
+            <CardPanel show={4} populars={hots}>
+              {hots.map((hot) => (
+                <LikeFurniture
+                  key={hot.id}
+                  furniture={hot}
+                  addLatest={addLatests}
+                ></LikeFurniture>
+              ))}
+            </CardPanel>
+          ) : (
+            <div> There aren't any Real time hot Furniture</div>
+          )}
+        </div>
+
+        <div>
+          <h1>Recommended</h1>
+          <p className={classes.explain_text}>
+            Recommend by your preference style and color
+          </p>
+          <br />
+          {recommends.length ? (
+            <CardPanel show={4} populars={recommends}>
+              {recommends.map((recommend) => (
+                <LikeFurniture
+                  key={recommend.id}
+                  furniture={recommend}
+                  addLatest={addLatests}
+                ></LikeFurniture>
+              ))}
+            </CardPanel>
+          ) : (
+            <div>There aren't any Recommended Furniture</div>
+          )}
+        </div>
+
+        <div>
+          <h1>Most Reviews</h1>
+          <p className={classes.explain_text}>Recommend by number of furniture reviews</p>
+          <br />
+          <CardPanel show={4} populars={mostReviews}>
+            {mostReviews.map((mostReview) => (
+              <LikeFurniture
+                key={mostReview.id}
+                furniture={mostReview}
+                addLatest={addLatests}
+              ></LikeFurniture>
+            ))}
+          </CardPanel>
+        </div>
+
+        <div>
+          <h1>Popular</h1>
+          <p className={classes.explain_text}>Recommend by number of furniture liked</p>
+          <br />
+          <CardPanel show={4} populars={populars}>
+            {populars.map((popular) => (
               <LikeFurniture
                 key={popular.id}
-                furniture={popular[0]}
+                furniture={popular}
                 addLatest={addLatests}
               ></LikeFurniture>
             ))}
           </CardPanel>
-        ) : (
-          <div> There aren't any Latests Furniture</div>
-        )}
-      </div>
-
-      <div style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}>
-        <h1>Real time HOTs</h1>
-        <p className={classes.explain_text}>Furnitures with hot clicks in real time</p>
-          <br />
-          {hots? 
-          <CardPanel
-            show={4}
-            populars={hots}>
-              {hots.map((hot) => (
-                <LikeFurniture key= {hot.id} furniture = {hot} addLatest = {addLatests}>              
-                </LikeFurniture>
-              ))}        
-          </CardPanel>
-          : 
-          <div> There aren't any Real time hot Furniture</div>
-          }
-      </div>
-
-      <div
-        style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}
-      >
-        <h1>Recommended</h1>
-        <p className={classes.explain_text}>
-          Recommend by your preference style and color
-        </p>
-        <br />
-        {recommends.length ? (
-          <CardPanel show={4} populars={recommends}>
-            {recommends.map((recommend) => (
-              <LikeFurniture
-                key={recommend.id}
-                furniture={recommend}
-                addLatest={addLatests}
-              ></LikeFurniture>
-            ))}
-          </CardPanel>
-        ) : (
-          <div>There aren't any Recommended Furniture</div>
-        )}
-      </div>
-
-      <div
-        style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}
-      >
-        <h1>Most Reviews</h1>
-        <p className={classes.explain_text}>Recommend by number of furniture reviews</p>
-        <br />
-        <CardPanel show={4} populars={mostReviews}>
-          {mostReviews.map((mostReview) => (
-            <LikeFurniture
-              key={mostReview.id}
-              furniture={mostReview}
-              addLatest={addLatests}
-            ></LikeFurniture>
-          ))}
-        </CardPanel>
-      </div>
-
-      <div
-        style={{ maxWidth: 1500, marginLeft: 'auto', marginRight: 'auto', marginTop: 64 }}
-      >
-        <h1>Popular</h1>
-        <p className={classes.explain_text}>Recommend by number of furniture liked</p>
-        <br />
-        <CardPanel show={4} populars={populars}>
-          {populars.map((popular) => (
-            <LikeFurniture
-              key={popular.id}
-              furniture={popular}
-              addLatest={addLatests}
-            ></LikeFurniture>
-          ))}
-        </CardPanel>
+        </div>
       </div>
     </div>
   );

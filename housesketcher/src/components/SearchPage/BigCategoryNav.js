@@ -21,14 +21,9 @@ function BigCategoryNav() {
 
   useEffect(() => {
     const changeMainAndSub = async () => {
-      
       await filterCtx.changeMain(bigCategory);
       await filterCtx.getSubCategoryList(bigCategory);
       await filterCtx.getFurnitureList();
-
-      if (filterCtx.furnitureList.length > 0) {
-        
-      }
     };
     changeMainAndSub();
   }, [bigCategory, filterCtx.main]);

@@ -84,10 +84,10 @@ export function FilterContextProvider(props) {
   };
 
   const setMainHandler = (categoryName) => {
-    setMain(categoryName);
     setSub(null);
     setPage(0);
     setSelectedFilters([]);
+    setMain(categoryName);
   };
   // state 최신값을 사용하기 위해서는 useeffect 실행 조건에 main값을 넣어줘야함
 

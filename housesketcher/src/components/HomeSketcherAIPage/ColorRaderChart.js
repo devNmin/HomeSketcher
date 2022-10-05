@@ -71,7 +71,7 @@ const ColorRaderChart = ({ maleData, femaleData, isLight }) => {
 
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
-    <div style={{ width: '60%', height: '35rem', margin: '0 auto' }}>
+    <div style={{ width: '60%', height: '30rem', margin: '0 auto' }}>
       <ResponsiveRadar
         data={data}
         keys={['female', 'male']}
