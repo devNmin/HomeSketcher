@@ -31,6 +31,7 @@
 }
 
 .help {
+  user-select: none;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.1);
   position: absolute;
@@ -53,3 +54,10 @@
 .room_size_input {
   color: black
 }
+.btn_hover:hover {
+  box-shadow: 1px 1px 5px gray;
+}
+
+/* Change 버튼 https://codepen.io/myhappyman/pen/YzGVebe*/
+
+

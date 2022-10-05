@@ -34,7 +34,7 @@ const Flooring = ({ coords, isInteractive }) => {
 const FlooringMaterial = () => {
   const ThreeJSCtx = useContext(ThreeJSContext);
   const ref = useRef();
-  let colorMap = useLoader(TextureLoader, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpryRpUYx_aMC-7sPV9V-1cDf2q5vc-QbWvWqpmdPLWIoJjkq9-qzNNm-d2RWRTktiD08&usqp=CAU');
+  let colorMap = useLoader(TextureLoader, 'https://t3.ftcdn.net/jpg/01/63/88/10/240_F_163881016_H2HzI9JD4JbZVPCVMu6X3Vy91HLSVGqd.jpg');
 
   useEffect(() => {
     ref.current.color.convertSRGBToLinear();

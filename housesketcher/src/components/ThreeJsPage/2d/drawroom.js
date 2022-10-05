@@ -58,6 +58,8 @@ const Canvas2D = (props) =>{
         contextRef.current = context;
         context.scale(10, 5);
         setCtx(context);
+        roomList = props.roomList;
+        threeInfo = props.threeInfo;
         
         removeLine()
         setTimeout(()=>{
@@ -593,8 +595,11 @@ const Canvas2D = (props) =>{
                     context.font = (Math.abs(data['nx']-data['fx'])+Math.abs(data['ny']-data['fy']))/30+'px serif';
                     textTotext = size*1.5;
                 }
+
+                let roomText = "Room #"+(data['num']+1);
                 let textFirst = "Width: " + (Math.abs(data['nx']-data['fx'])/rate).toFixed(2) +"m";
                 let textSecond = "Height: " + (Math.abs(data['ny']-data['fy'])/rate).toFixed(2)+"m";
+                context.strokeText(roomText,Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2-textTotext);
                 context.strokeText(textFirst, Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2);
                 context.strokeText(textSecond,Math.abs(data['nx']+data['fx'])/2-size*4, Math.abs(data['ny']+data['fy'])/2+textTotext);
                 context.strokeStyle = "black";

@@ -1,0 +1,32 @@
+.icon_box {
+  position: absolute;
+  bottom: 4rem;
+  right: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+  cursor: pointer;
+}
+
+.icon_box:hover {
+  box-shadow: 1px 1px 5px gray; 
+}
+.icon_box:hover > * {
+  animation: blink 1s step-start 0s infinite;
+  -webkit-animation: blink 1s step-start 0s infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}

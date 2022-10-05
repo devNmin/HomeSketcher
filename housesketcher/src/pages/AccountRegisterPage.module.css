@@ -156,7 +156,7 @@ input[type=password] {
 }
 
 
-.Email input[type=text] {
+.Email input[type=email] {
   width: 60%;
   background-color: #F5F5F5;
   border: none;
@@ -203,4 +203,8 @@ input[type=password] {
 
 .actions input[type = radio] {
   margin: 0px;
+}
+
+.emailChecker{
+  color: red;
 }

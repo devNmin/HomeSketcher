@@ -1,37 +1,117 @@
 .display_flex {
+  position: absolute;
   display: flex;
+  top: 0px;
+  left: 60%;
+}
+@media ( max-width: 992px ) {
+  .display_flex {
+    top: 95%;
+  }
 }
 
-
-.style_div {
+.display_flex label {
+  font-size: small;
+  line-height: 1rem;
+  margin-left: 1rem;
+  margin-right: 0.2rem;
+}
+.input_div {
   display:flex;
-  flex-direction: column;
+  align-items: center;
 }
-
-.style_icon {
-  color: black;
+/* style */
+.style_div {
+  position: relative;
+  display:flex;
 }
-
+.style_icon_box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+}
+.style_icon_box:hover {
+  box-shadow: 1px 1px 5px gray;
+}
 .style_inputs {
+  position: absolute;
+  top: 3rem;
+  left: -3rem;
   display: none;
-}
+  justify-content: space-around;
+  align-items: center;
 
+  background-color: rgba(226, 226, 226, 0.748);
+  width: 12rem;
+  border-radius : 2rem;
+}
 .style_div:hover .style_inputs {
-  display: inline-block;
+  display: flex;
  
 }
-
+/* object */
 .object_div {
   display:flex;
-  flex-direction: column;
 }
-.object_icon {
-
+.object_icon_box {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+}
+.object_icon_box:hover {
+  box-shadow: 1px 1px 5px gray;
 }
 .object_inputs {
   display: none;
-}
+  position: absolute;
+  flex-direction : column;
+  justify-content: center;
+  align-items: center;
+  top: 3rem;
+  left: 4rem;
+  width: 5rem;
 
+  background-color: rgba(226, 226, 226, 0.748);
+  border-radius : 1rem;
+}
+.object_inputs > p {
+  margin: 0.2rem;
+  font-size: small;
+  user-select: none;
+  cursor: pointer;
+}
+.object_inputs > p:hover {
+  text-shadow: 1px 1px 1px #f3cd58;
+}
 .object_div:hover .object_inputs{
-  display: block;
+  display: flex;
+}
+/* camera */
+.camera_div {
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+  cursor: pointer;
+  transition: all ease 1s;
+}
+.camera_div:hover {
+  box-shadow: 1px 1px 5px gray;
+  transform: rotate( 720deg );
 }
