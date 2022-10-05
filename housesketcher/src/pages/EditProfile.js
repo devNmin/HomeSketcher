@@ -107,7 +107,7 @@ export default function EditProfilePage() {
 
   const submitHandler = async (event) => {
     event.preventDefault();
-    console.log(formData.gender);
+    // console.log(formData.gender);
 
     const emailsubmit = emailInput.current.value;
     const passwordsubmit = passwordInput.current.value;
@@ -168,7 +168,7 @@ export default function EditProfilePage() {
               <div className={styles.control}>
                 <h5> E-mail </h5>
                 <div className={styles.Email}>
-                  <input type='text' maxLength='20' name='signup_email' ref={emailInput}  defaultValue = {user.user_email}/>
+                  <input type='email' maxLength='20' name='signup_email' ref={emailInput}  defaultValue = {user.user_email}/>
                   <button className={styles.EmailCheck} onClick={emailcheckHandler}>check</button>
                 </div>
               </div>

@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
       } else {
         history.push('/');
       }
-    } else {
+    } else {      
       new swal(
         'Oops!',
         '<b style="color:red;">Login Error!</b> Write correct id and password :)',

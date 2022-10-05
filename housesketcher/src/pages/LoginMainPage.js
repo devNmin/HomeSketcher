@@ -15,7 +15,7 @@ function LoginMainPage(props) {
 	return (
 		<div className={styles.LoginMainPage}>
 			<ThemeToggle toggle={toggleTheme} mode={ThemeMode}>
-      </ThemeToggle>
+      		</ThemeToggle>
 			<Navbar />
 			<MainCarousel />
 			<SubCarousel />

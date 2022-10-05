@@ -10,7 +10,7 @@ export default function TasteListFirst(props) {
     // console.log("taste clicked!"+ ' '+id);
     // tastelist.map((taste)=>
     //   taste.id === id?  
-    //     console.log(taste.selected) : console.log('hello')
+    //console.log(taste.selected) : console.log('hello')
     // )
     // setTasteList(
     //   tastelist.map((taste) => 
