@@ -248,6 +248,36 @@ def FurnitureListWithPk(pk_list,user_id):
 
     return furnitures
 
+def FurnitureRandomList(user_id):
+    datas = Furniture.objects.all().order_by('?')[:20]
+    print(datas.count())
+    furnitures = []
+    for data in datas:
+        like = UserLike.objects.filter(user_id=user_id, furniture_id = data.id)
+        res={}
+        res['id'] = data.id
+        res['furniture_name'] = data.furniture_name
+        res['furniture_url'] = data.furniture_url
+        res['furniture_image'] = data.furniture_image
+        res['furniture_price'] = data.furniture_image
+        res['furniture_rating'] = data.furniture_rating
+        res['furniture_review'] = data.furniture_review
+        res['furniture_width'] = data.furniture_width
+        res['furniture_length'] = data.furniture_length
+        res['furniture_height'] = data.furniture_height
+        res['furniture_style'] = data.furniture_style
+        res['furniture_color'] = data.furniture_color
+        res['furniture_main'] = data.furniture_main
+        res['furniture_sub'] = data.furniture_sub
+        res['furniture_real'] = data.furniture_real
+        try:
+            like[0]
+            res['like']=True
+        except:
+            res['like']=False
+        furnitures.append(res)
+    return furnitures
+
 # 가구 추천 API
 class FurnitureRecommendAPIView(APIView):
     permission_classes=[IsAuthenticated]
@@ -277,14 +307,18 @@ class FurnitureHotItemAPIView(APIView):
 
         furniture_pks = furniture_pks[:data_length]
 
-        # print(data_length)
         
         try:
             furnitures = FurnitureListWithPk(furniture_pks,request.user.id) # 가구 리스트 추출  
         except:
             return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)  
 
-        return Response(furnitures)
+        if furnitures :
+            return Response(furnitures,status=status.HTTP_200_OK)
+        else:
+            randomFurnitures = FurnitureRandomList(request.user.id)
+            return Response(randomFurnitures,status=status.HTTP_200_OK)
+
 
 #3d 모델링 페이지 카테고리별 가구 추천 데이터. 스타일 + 컬러로만 최대한 적용
 class FurnitureForThreeAPIView(APIView):
@@ -314,7 +348,11 @@ class FurnitureForThreeAPIView(APIView):
                     furniture['glb_length']=url_data.get(furniture['furniture_sub'])[2]
                     furniture['glb_height']=url_data.get(furniture['furniture_sub'])[3]
                     
+            if res:
+                return Response(res,status=status.HTTP_200_OK)
+            else:
+                randomFurnitures = FurnitureRandomList(request.user.id)
+                return Response(randomFurnitures,status=status.HTTP_200_OK)
                     
-            return Response(res,status=status.HTTP_200_OK)
         except:
             return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
