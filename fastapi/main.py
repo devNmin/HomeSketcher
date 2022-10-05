@@ -46,6 +46,8 @@ def save( user_id:str , save : Item):
     save_dict['threeInfo'] = save.threeInfo
     save_dict['objList'] = save.objList
     save_dict['objBox'] = save.objBox
+    save_dict['wallColor'] = save.wallColor
+    save_dict['floorColor'] = save.floorColor
     
     with open(f'roomInfo/{user_id}.json', 'w', encoding='utf-8') as make_file:
         json.dump(save_dict, make_file, indent="\t")
