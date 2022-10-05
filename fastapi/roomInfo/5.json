@@ -1,0 +1,203 @@
+{
+	"roomList": [
+		{
+			"num": 0,
+			"isRect": true,
+			"fx": 418,
+			"fy": 187,
+			"nx": 784,
+			"ny": 340,
+			"centerX": 601,
+			"centerY": 263.5
+		},
+		{
+			"num": 1,
+			"isRect": true,
+			"fx": 359,
+			"fy": 411,
+			"nx": 702,
+			"ny": 592,
+			"centerX": 530.5,
+			"centerY": 501.5
+		}
+	],
+	"threeInfo": [
+		{
+			"id": "room0",
+			"height": 2,
+			"coords": [
+				{
+					"x": 5.466666666666667,
+					"y": -0.17777777777777715
+				},
+				{
+					"x": 13.599999999999998,
+					"y": -0.17777777777777715
+				},
+				{
+					"x": 13.599999999999998,
+					"y": 3.2222222222222223
+				},
+				{
+					"x": 5.466666666666667,
+					"y": 3.2222222222222223
+				}
+			]
+		},
+		{
+			"id": "room1",
+			"height": 2,
+			"coords": [
+				{
+					"x": 4.155555555555555,
+					"y": 4.8
+				},
+				{
+					"x": 11.777777777777777,
+					"y": 4.8
+				},
+				{
+					"x": 11.777777777777777,
+					"y": 8.822222222222223
+				},
+				{
+					"x": 4.155555555555555,
+					"y": 8.822222222222223
+				}
+			]
+		}
+	],
+	"objList": [
+		{
+			"id": 418,
+			"furniture_name": "FINNALA Sleeper sofa - with chaise/Dalstorp multicolor",
+			"furniture_url": "https://www.ikea.com/us/en/p/finnala-sleeper-sofa-with-chaise-dalstorp-multicolor-s69319430/",
+			"furniture_image": "https://www.ikea.com/us/en/images/products/finnala-sleeper-sofa-with-chaise-dalstorp-multicolor__0725566_pe734950_s5.jpg",
+			"furniture_price": 1119,
+			"furniture_rating": 4.5,
+			"furniture_review": 2,
+			"furniture_width": 40.5,
+			"furniture_length": 69.75,
+			"furniture_height": 11.5,
+			"furniture_style": "Mediterranean",
+			"furniture_color": "red",
+			"furniture_main": "Beds",
+			"furniture_sub": "Sleeper sofas",
+			"furniture_real": 0,
+			"is_dummy": 0,
+			"like": true,
+			"glb_url": "https://firebasestorage.googleapis.com/v0/b/homesketcher-37070.appspot.com/o/obj%2FSleeper%20Sofas.glb?alt=media&token=eyJhbGciOiJSUzI1NiIsImtpZCI6IjU4NWI5MGI1OWM2YjM2ZDNjOTBkZjBlOTEwNDQ1M2U2MmY4ODdmNzciLCJ0eXAiOiJKV1QifQ.eyJuYW1lIjoia21TZWNvbmQiLCJwaWN0dXJlIjoiaHR0cDovL3d3dy5leGFtcGxlLmNvbS8xMjM0NTY3OC9waG90by5wbmciLCJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vaG9tZXNrZXRjaGVyLTM3MDcwIiwiYXVkIjoiaG9tZXNrZXRjaGVyLTM3MDcwIiwiYXV0aF90aW1lIjoxNjY0NTE1MjEwLCJ1c2VyX2lkIjoiZzVnNzJuU1ZmWWd0ZVJBQ3UzWHNTTVBDTzVGMyIsInN1YiI6Imc1ZzcyblNWZllndGVSQUN1M1hzU01QQ081RjMiLCJpYXQiOjE2NjQ1MTUyMTAsImV4cCI6MTY2NDUxODgxMCwiZW1haWwiOiJqbzk1MTEyOEBnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInBob25lX251bWJlciI6Iis4MjEwNjQ4NTU3OTQiLCJmaXJlYmFzZSI6eyJpZGVudGl0aWVzIjp7InBob25lIjpbIis4MjEwNjQ4NTU3OTQiXSwiZW1haWwiOlsiam85NTExMjhAZ21haWwuY29tIl19LCJzaWduX2luX3Byb3ZpZGVyIjoicGFzc3dvcmQifX0.kHObMOJdXIprrwxyazFTaM6ePDOlnX5fRXtAbJUPDA1DGIg31iOp7y0uAGeFjLrZ67yTFkVo30aDicAyEG2ol81eb5oM2c75323ofDCDZeU-AoZVOqZibdk3lzs77qdp1tQA-1Nsq-kkmspSV_RtavL2Ubt-I6KoJASqoXPmtmJUlPcj40m5ehSZ5MCDhbsEk5fVTl3S13NzM16lp8FK75Ib55lEfVWEDYp3_tL7w6iOuN3KRZgMgZupsLGPSwZu42VQgCg3n6gay6YYoWnOYsidD_X931WAOZ1B-yLadLGF4eOuudTIeLmhTTIHrNvck4H6wOTYX329_aRMxwaIPA",
+			"glb_width": 194,
+			"glb_length": 104,
+			"glb_height": 43,
+			"centerX": 3.6133333333333315,
+			"centerY": -3.0927777777777776
+		}
+	],
+	"objBox": {
+		"wallNumber_0_0": {
+			"isBox3": true,
+			"min": {
+				"x": -0.6533333333333331,
+				"y": -2,
+				"z": -4.4927777777777775
+			},
+			"max": {
+				"x": 7.479999999999998,
+				"y": 2,
+				"z": -4.4927777777777775
+			}
+		},
+		"wallNumber_0_1": {
+			"isBox3": true,
+			"min": {
+				"x": 7.479999999999998,
+				"y": -2,
+				"z": -4.4927777777777775
+			},
+			"max": {
+				"x": 7.479999999999998,
+				"y": 2,
+				"z": -1.0927777777777778
+			}
+		},
+		"wallNumber_0_2": {
+			"isBox3": true,
+			"min": {
+				"x": -0.45333333333333314,
+				"y": -2,
+				"z": -1.392777777777778
+			},
+			"max": {
+				"x": 7.779999999999998,
+				"y": 2,
+				"z": -1.2927777777777778
+			}
+		},
+		"wallNumber_0_3": {
+			"isBox3": true,
+			"min": {
+				"x": -0.45333333333333314,
+				"y": -2,
+				"z": -4.792777777777777
+			},
+			"max": {
+				"x": -0.35333333333333317,
+				"y": 2,
+				"z": -1.2927777777777778
+			}
+		},
+		"wallNumber_1_0": {
+			"isBox3": true,
+			"min": {
+				"x": -1.9644444444444449,
+				"y": -2,
+				"z": 0.48499999999999965
+			},
+			"max": {
+				"x": 5.657777777777777,
+				"y": 2,
+				"z": 0.48499999999999965
+			}
+		},
+		"wallNumber_1_1": {
+			"isBox3": true,
+			"min": {
+				"x": 5.657777777777777,
+				"y": -2,
+				"z": 0.48499999999999965
+			},
+			"max": {
+				"x": 5.657777777777777,
+				"y": 2,
+				"z": 4.5072222222222225
+			}
+		},
+		"wallNumber_1_2": {
+			"isBox3": true,
+			"min": {
+				"x": -1.764444444444445,
+				"y": -2,
+				"z": 4.207222222222223
+			},
+			"max": {
+				"x": 5.9577777777777765,
+				"y": 2,
+				"z": 4.307222222222222
+			}
+		},
+		"wallNumber_1_3": {
+			"isBox3": true,
+			"min": {
+				"x": -1.764444444444445,
+				"y": -2,
+				"z": 0.1849999999999996
+			},
+			"max": {
+				"x": -1.6644444444444448,
+				"y": 2,
+				"z": 4.307222222222222
+			}
+		}
+	}
+}
