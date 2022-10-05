@@ -27,7 +27,7 @@ import * as THREE from 'three';
 //////////////////////////
 import ThreeJSContext from '../context/ThreeJSContext.js';
 import InputGroup from '../components/ThreeJsPage/helpers/InputGroup';
-
+import CaptureBtn from '../components/ThreeJsPage/helpers/CaptureBtn'
 ///////2D////////////
 import Canvas2D from '../components/ThreeJsPage/2d/drawroom'
 ////////////////////
@@ -59,19 +59,18 @@ export default function ThreeJsPage() {
       ? JSON.parse(localStorage.getItem('authTokens'))
       : null
   ); // Token 
+  const ThreeJSCtx = useContext(ThreeJSContext);
 
   let currentFloor = 0; // 지금은 1층뿐 복층 건물 이용할때 응용가능 
   let offsetCanvasX = -5.92; // 2D 에서 3D 그려줄 때 생기는 canvas 오차 Offset
   let offsetCanvasY = -4.615; // 2D 에서 3D 그려줄 때 생기는 canvas 오차 Offset
   let [clickRoom, setClickRoom] = useState(0); // 방 넘버 object 클릭시 이용
   let [valueChange, setvalueChange] = useState(false); // 방수치 적용 handler 
-  let [initCamera, setinitCamera] = useState(0); // 카메라 뷰 전환 
-  let [downloadFlag, setDownloadFlag] = useState(false); // DownLoad
-
   let [objList, setObjList] = useState([]) // object 리스트 
   let [recomList, setRecomList] = useState([]) // 추천 리스트
   let [isOpen, setIsOpen] = useState(true) //메뉴 토글 
-  
+
+
   // 추천 아이템 Axios
   const getRecomFurnitures = async () => {
     await axios({
@@ -110,6 +109,8 @@ export default function ThreeJsPage() {
   const addobjListHandler = (objUrl) => {
     // roomList  0 여기에 room number 넣어주면 됨 
     // modelT에 position을 넣기위해 centerX,Y를 추가해줌
+    console.log("objUrl",objUrl)
+    
     objUrl['centerX'] = (threeInfo[roomNumber].coords[0]['x']+threeInfo[roomNumber].coords[2]['x'])/2+offsetCanvasX
     objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2+offsetCanvasY
 
@@ -203,7 +204,7 @@ export default function ThreeJsPage() {
   let [threeInfo, setThreeInfo] = useState([])
 
   let [isRect,setIsRect] = useState(true);
-
+  
   let newItem = {
     floors: [
       {
@@ -214,6 +215,10 @@ export default function ThreeJsPage() {
       },
     ],
   };
+
+  // 조경민 빨리 만들어줘!!
+  // 
+  
   let animatedFloorPosition = useFloorTransitionAnimation({
     floors: newItem.floors,
     currentFloor,
@@ -236,10 +241,7 @@ export default function ThreeJsPage() {
     
     // 높이 제한
 
-    if (target.position.y < 0) {
-      target.position.y = preY;
-    }
-    if (target.position.y + (targetBox.max.y - targetBox.min.y) / 2 > 0) {
+    if ((target.position.y < 0) ||(targetBox.max.y > 2.4)) {
       target.position.y = preY;
     }
   // })
@@ -264,13 +266,6 @@ export default function ThreeJsPage() {
     setpreZ(target.position.z);
   }
 
-  // useContext
-  const ThreeJSCtx = useContext(ThreeJSContext);
-
-  function wallColorHandler(e) {
-    
-    ThreeJSCtx.changeWallColor(e.target.value);
-  }
 
   let [wallNum, setWallNum] = useState(0);
 
@@ -278,12 +273,14 @@ export default function ThreeJsPage() {
     
     for (let index = 0; index < threeInfo.length; index++) {
       const element = threeInfo[index]['coords'];
-      
+      const wallOffset = 0.2
+      const wallOffset2 = 0.1
+      const wallHeight = 2
       // Wall Top , Right 
       for (let i = 0; i < 2;i++){
 
-        let min = new THREE.Vector3(element[i]['x']+offsetCanvasX, -2, element[i]['y']+offsetCanvasY);
-        let max = new THREE.Vector3(element[i+1]['x']+offsetCanvasX, 2, element[i+1]['y']+offsetCanvasY);
+        let min = new THREE.Vector3(element[i]['x']+offsetCanvasX-wallOffset, -wallHeight, element[i]['y']+offsetCanvasY+wallOffset+0.1);
+        let max = new THREE.Vector3(element[i+1]['x']+offsetCanvasX-wallOffset, wallHeight, element[i+1]['y']+offsetCanvasY+wallOffset+0.1);
         let wall = new THREE.Box3(min, max);
         let key = 'wallNumber_'+index+'_'+i
         objBox[key]=wall
@@ -293,8 +290,8 @@ export default function ThreeJsPage() {
       }
       // Wall Bottom, Left
       for (let i = 2; i <4;i++){
-        let max = new THREE.Vector3(element[i]['x']+offsetCanvasX, 2, element[i]['y']+offsetCanvasY);
-        let min = new THREE.Vector3(element[(i+1)%4]['x']+offsetCanvasX, -2, element[(i+1)%4]['y']+offsetCanvasY);
+        let max = new THREE.Vector3(element[i]['x']+offsetCanvasX+wallOffset2, wallHeight, element[i]['y']+offsetCanvasY+wallOffset2);
+        let min = new THREE.Vector3(element[(i+1)%4]['x']+offsetCanvasX, -wallHeight, element[(i+1)%4]['y']+offsetCanvasY);
         let wall = new THREE.Box3(min, max);
         let key = 'wallNumber_'+index+'_'+i
 
@@ -305,23 +302,88 @@ export default function ThreeJsPage() {
     }
   }
 
-  const removeRoom = (roomNum)=>{
-    let length = roomList.length;
+  
 
+  //방 삭제 함수
+  const removeRoom = (roomNum)=>{
+    console.log('start remove',roomNum);
+    let length = roomList.length;
+    
     let newRoomList = [];
     let newThreeList = [];
-
+    
     for(let i = 0; i < length; i++){
       if(roomList[i].num !== roomNum){
         newRoomList.push(roomList[i]);
         newThreeList.push(threeInfo[i]);
       }
     }
-    setClickRoom(newRoomList[0].num);
+    //방이 있을 때만 적용
+    if(newRoomList.length>0){
+      setClickRoom(newRoomList[0].num);
+    }else{
+      // setClickRoom(roomNum);
+      console.log("fffffffff",roomNum);
+    }
     setRoomList(newRoomList);
     setThreeInfo(newThreeList);
     setvalueChange(!valueChange);
+    
+    console.log(newRoomList);
+    console.log(roomList);
+    
   }
+
+  // 내가 설정한 방 정보 저장 -> 1개만 됨
+  const myRoomSave =  async() =>{
+    let userInfo = localStorage.getItem('userInfo')
+    let user_id = JSON.parse(userInfo)['id'];
+    let save_json = {}
+    save_json['roomList'] = roomList
+    save_json['threeInfo'] = threeInfo
+    save_json['objList'] = objList
+    save_json['objBox'] = objBox
+
+    console.log(roomList)
+    await axios({
+      method: 'post',
+      url: 'https://j7b304.p.ssafy.io/fastapi/' + `/myroom/save/`+user_id,
+      data : save_json ,
+      headers:{
+        "Content-Type": "application/json",
+      }
+    })
+    .then((response) => {
+      alert("방 저장 성공!");
+    })
+    .catch((err) => {
+      alert("방 저장 실패! 다시 시도해 주세요");
+    });
+  }
+
+  
+  // 내가 저장한 최신 방 불러오기
+  const myRoomLoad = async()=>{
+      let userInfo = localStorage.getItem('userInfo')
+      let user_id = JSON.parse(userInfo)['id'];
+    
+      await axios({
+        method: 'get',
+        url: 'https://j7b304.p.ssafy.io/fastapi/' + `/myroom/load/${user_id}`,
+      })
+        .then((response) => {
+          let data = response.data;
+          setRoomList(data.roomList);
+          setThreeInfo(data.threeInfo);
+          setObjList(data.objList);
+          setBox(data.objBox);
+          setvalueChange(!valueChange);
+          console.log(roomList);
+        })
+        .catch((err) => {
+          alert("방 불러오기 실패! 다시 시도해 주세요");
+        });
+  };
 
   return (
     <div className={classes.three_body}>
@@ -331,23 +393,32 @@ export default function ThreeJsPage() {
         <div style={{ padding: '30px' }}>
           <div style={{ display: 'flex' }}>
             <DropdownButton
-            as={ButtonGroup}
-            key= 'Warning'
-            id={`dropdown-variants-Warning`}
-            variant={'Warning'.toLowerCase()}
-            title={roomList[0] ? `Room #${clickRoom+1}`: 'Room List' }
-            // title={'Room List'}
-            style={{ width : '45%'}}
-            >
-            {roomList.map((value) =>(
-              <div>
-                <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num) }} >Room #{value.num+1}</Dropdown.Item>
-              </div>
-            ))}
-              
+                onClick={() => {test(); }}
+                as={ButtonGroup}
+                key= 'Warning'
+                id={`dropdown-variants-Warning`}
+                variant={'Warning'.toLowerCase()}
+                title={
+                  clickRoom ? `Room #${clickRoom+1}`: 'Room List' 
+                }
+                // title={
+                //   roomList.length>0 ? `Room #${clickRoom+1}`: 'Room List' 
+                // }
+                // title={'Room List'}
+                style={{ width : '45%'}}
+                >
+                {roomList.map((value) =>(
+                  <div>
+                    <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num) }} >Room #{value.num+1}</Dropdown.Item>
+                  </div>
+                ))}
+                  
 
-            </DropdownButton>
-          <button onClick={() => {setinitCamera(((initCamera+1)%3)); setDownloadFlag(false);}} style={{ width: '45%', marginLeft: '40px'}}>view change </button>
+              </DropdownButton>
+     
+          {/* 여기밑에부분은 테스트용임을 알림니다. */}
+          <button onClick={() => myRoomLoad()} style={{ width: '45%', marginLeft: '40px'}}>Room load </button>
+          <button onClick={() => myRoomSave()} style={{ width: '45%', marginLeft: '40px'}}>Room save </button>
            
           </div>                      
             <br />
@@ -395,9 +466,7 @@ export default function ThreeJsPage() {
             </div>
           ))}
           <br />
-          <button  onClick={() => {setDownloadFlag(!downloadFlag)}}>
-            Capture
-          </button>
+  
           <button style={{ display : 'absolute', marginLeft:'70px'}} onClick={exitHandler}>Exit</button>
         </div>
       </div>
@@ -406,6 +475,7 @@ export default function ThreeJsPage() {
         {!showResults && <Canvas2D roomNum = {roomNum} valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
         {showResults &&<Canvas 
           // onPointerMissed = 밖에 클릭시 target null로 만들기
+          onPointerMissed={() => setTarget(null)}
           key={`isometric-${false}`}
           orthographic={false}
           invalidateframeloop="false"
@@ -415,6 +485,7 @@ export default function ThreeJsPage() {
             <ModelT
               position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
+              scale = {obj}
               objUrl={obj.glb_url}
               setTarget={setTarget}
             />
@@ -422,8 +493,8 @@ export default function ThreeJsPage() {
 
           {/* <Ground/> */}
        
-          <CameraSetup initCamera = {initCamera}/>          
-          <ScreenShot  downloadFlag={downloadFlag}/>          
+          <CameraSetup initCamera = {ThreeJSCtx.initCamera}/>          
+          <ScreenShot  downloadFlag={ThreeJSCtx.downloadFlag}/>          
           <ambientLight intensity={0.5} color="#eef" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
@@ -452,9 +523,9 @@ export default function ThreeJsPage() {
           
           {/* 뷰 + 코너 확인 */}
           <div className={`${classes.controls} ${classes.perspectiveControls}`}>
-            <div>
-              <button onClick={() => {setShowResults(!showResults) ; wallCreate()}}>change</button>
-            </div>
+            <button onClick={() => {setShowResults(!showResults) ; wallCreate()}}>
+              Change
+            </button>
             </div>
 
             {/* 방 수치 변경 */}
@@ -473,8 +544,8 @@ export default function ThreeJsPage() {
                     <br/>
                     <br/> 
                     <div style={{ display : 'flex', justifyContent: 'center'}}>
-                      <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} style ={{width : '45%', marginRight : '5px'}} >적용</button>
-                      <button  style ={{width : '45%'}} onClick={(e)=>{e.preventDefault(); removeRoom(value.num)}}>삭제</button>
+                      <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} style ={{width : '45%', marginRight : '5px'}} className={classes.btn_hover}>apply</button>
+                      <button  style ={{width : '45%'}} onClick={(e)=>{e.preventDefault(); removeRoom(value.num)}} className={classes.btn_hover}>delete</button>
                       
                     </div>                   
                   </form>
@@ -494,6 +565,7 @@ export default function ThreeJsPage() {
             </div>
             {/* 벽 색 인풋 받기 */}
             <InputGroup />
+            <CaptureBtn />
           </div>
           </div>
       </div>

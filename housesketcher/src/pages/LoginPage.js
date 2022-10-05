@@ -13,7 +13,7 @@ function LoginPage() {
         <img src={logo} alt="" />
         <div className={styles.control}>
           <label>Email address</label>
-          <input type="email" name="useremail" placeholder="Enter your email" />
+          <input type="email" name="useremail" placeholder="Enter your email"/>          
         </div>
         <div className={styles.control}>
           <label>Password</label>

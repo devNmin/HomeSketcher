@@ -11,6 +11,10 @@ const ThreeJSContext = createContext({
   changeFloorTexture: () => {},
   mode: '',
   changeMode: () => {},
+  initCamera: 0,
+  setInitCamera: () => {},
+  downloadFlag: false,
+  setDownloadFlag: () => {},
 });
 
 
@@ -22,7 +26,9 @@ export function ThreeJSContextProvider(props) {
   const [roomCnt, setRoomCnt] = useState(0);
   const [floorColor, setFloorColor] = useState('#E5D8B0');
   const [floorTexture, setFloorTexture] = useState('wood');
-  const [mode, setMode] = useState('translate')
+  const [mode, setMode] = useState('translate');
+  const [initCamera, setInitCamera] = useState(0);
+  const [downloadFlag, setDownloadFlag] = useState(false);
 
   const wallColorHandler = (color) => {
     setWallColor(color);
@@ -44,7 +50,13 @@ export function ThreeJSContextProvider(props) {
     setMode(name)
     //console.log('context', mode)
   }
-
+  const initCameraHandler = (value) => {
+    setInitCamera(value)
+  }
+  const downloadFlagHandler = (value) => {
+    setDownloadFlag(value)
+    //ThreeJSCtx
+  }
 
   const context = {
     wallColor: wallColor,
@@ -57,6 +69,10 @@ export function ThreeJSContextProvider(props) {
     changeFloorTexture: floorTextureHandler,
     mode: mode,
     changeMode: modeHandler,
+    initCamera: initCamera,
+    setInitCamera: initCameraHandler,
+    downloadFlag: downloadFlag,
+    setDownloadFlag: downloadFlagHandler,
   };
 
   return (

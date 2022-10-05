@@ -28,7 +28,7 @@ function Navbar(props) {
             <p>3DInterior</p>
           </a>
           <a href="/ai">
-            <p>Style AI(beta)</p>
+            <p>AI assistance</p>
           </a>
         </div>
       )}

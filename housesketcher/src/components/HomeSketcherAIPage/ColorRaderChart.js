@@ -74,7 +74,7 @@ const ColorRaderChart = ({ maleData, femaleData, isLight }) => {
     <div style={{ width: '60%', height: '35rem', margin: '0 auto' }}>
       <ResponsiveRadar
         data={data}
-        keys={['male', 'female']}
+        keys={['female', 'male']}
         indexBy="taste"
         valueFormat=">-.2f"
         margin={{ top: 70, right: 80, bottom: 70, left: 80 }}

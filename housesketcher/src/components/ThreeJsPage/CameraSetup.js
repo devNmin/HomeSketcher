@@ -34,9 +34,6 @@ const CameraSetup = (props) => {
       z= 8
       
     }
-    
-    
-    // console.log("point", x + " " + y + " " + z )
     camera.position.set(x,y,z);
    
 

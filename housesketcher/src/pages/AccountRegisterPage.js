@@ -10,13 +10,15 @@ import swal from "sweetalert2";
 
 export default function AccountRegisterPage() {
   const { BASE_URL } = useContext(AuthContext)
+  const [emailChecker, setEmailChecker] = useState('');
   const emailInput = useRef();
   const passwordInput = useRef();
   const passwordCheckInput = useRef();
   const nameInput = useRef();
   const nicknameInput = useRef();
   const birthInput = useRef();
-  const history = useHistory()
+  const history = useHistory();
+
   let [formData, setformData] = useState({
     gender: ""
   })
@@ -59,16 +61,17 @@ export default function AccountRegisterPage() {
   const emailcheckHandler = async (event) => {
     event.preventDefault();
     const emailsubmit = emailInput.current.value;
-    await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`
-    ).then(res => {
-      alert('사용가능한 이메일입니다')
-
-    }).catch(err => {
-      alert(err.response.data.error);
+    if(emailsubmit.length === 0){
+      alert('이메일 입력해주세요.')
+    }else{
+      await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`
+      ).then(res => {
+        alert('사용가능한 이메일입니다')
+      }).catch(err => {
+        alert(err.response.data.error);
+      }
+      )
     }
-
-    )
-
   }
 
   const submitHandler = async (event) => {
@@ -118,6 +121,25 @@ export default function AccountRegisterPage() {
     })
 
   }
+  const EmailCheckHandler = (e) => {
+    if(e.target.value.length >= 25){
+      setEmailChecker("Email is 25 characters or less.")
+    }else{
+      setEmailChecker("")
+    }
+  }
+  
+  const emailCheckerHandler2 = (e) => {
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    // 검증에 사용할 정규식 변수 regExp에 저장
+  
+    if (e.target.value.match(regExp) != null) {
+      setEmailChecker("")
+    }
+    else {
+      setEmailChecker("Email is 25 characters or less.")
+    }
+  }
 
   return (
     <div>
@@ -134,9 +156,10 @@ export default function AccountRegisterPage() {
               <div className={styles.control}>
                 <h5> E-mail </h5>
                 <div className={styles.Email}>
-                  <input type='text' maxLength='30' name='signup_email' ref={emailInput} />
+                  <input type='email' maxLength='25' name='signup_email' ref={emailInput} onKeyUp={EmailCheckHandler} onBlur={emailCheckerHandler2}/>
                   <button className={styles.EmailCheck} onClick={emailcheckHandler}>check</button>
                 </div>
+                <p className={styles.emailChecker} dangerouslySetInnerHTML={{__html: emailChecker}}></p>
               </div>
               {/* 비밀번호 */}
               <div className={styles.control}>
@@ -175,7 +198,7 @@ export default function AccountRegisterPage() {
                     <input className='mx-2' id="female" type="radio" name="gender" value="1" onChange={handleChange} /> */}           
                 </div>
                 <div style={{ display: 'flex', justifyContent: "start", marginLeft: '45px'}}>
-                  <input type="date" maxLength='6' name='signup_birthday' ref={birthInput} />
+                  <input type="date" maxLength='6' name='signup_birthday' ref={birthInput} /> 
                 </div>
               </div>
               <br />
