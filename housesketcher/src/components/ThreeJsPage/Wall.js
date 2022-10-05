@@ -11,7 +11,7 @@ import ThreeJSContext from '../../context/ThreeJSContext';
 const WALL_THICKNESS = 0.1;
 const HALF_WALL_THICKNESS = WALL_THICKNESS / 2;
 
-const Wall = ({ a, b, height, doors = [], windows = [] }) => {
+const Wall = ({ a, b, height, doors = [], windows = [], color }) => {
   const { position, rotation, corners, doorsRelative, windowsRelative } = useMemo(() => {
     const length = distance(a, b) + WALL_THICKNESS;
     const angleFromAtoB = cartesianToPolar(b, a).angle;
@@ -109,13 +109,13 @@ const Wall = ({ a, b, height, doors = [], windows = [] }) => {
             },
           ]}
         />
-        <WallMaterial />
+        <WallMaterial color={color} />
       </mesh>
     </mesh>
   );
 };
 
-const WallMaterial = () => {
+const WallMaterial = ({color}) => {
   const ref = useRef();
   const ThreeJSCtx = useContext(ThreeJSContext);
 
@@ -127,7 +127,7 @@ const WallMaterial = () => {
     <meshLambertMaterial
       ref={ref}
       roughness={0.5}
-      args={[{ color: ThreeJSCtx.wallColor }]}
+      args={[{ color: color }]}
       castShadow={true}
       receiveShadow={true}
     />

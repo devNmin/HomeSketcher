@@ -59,7 +59,7 @@ const Floor = ({
           isInteractive={isInteractive}
         />
       ))}
-      {/* {floor.doors.map((d) => (
+      {floor.doors.map((d) => (
         <Door
           key={d.id}
           {...d}
@@ -67,10 +67,10 @@ const Floor = ({
           onToggleState={onToggleDoorState}
           isInteractive={isInteractive}
         />
-      ))} */}
-      {/* {floor.windows.map((w) => (
+      ))}
+      {floor.windows.map((w) => (
         <Window key={w.id} {...w} isInteractive={isInteractive} />
-      ))} */}
+      ))}
     </group>
   );
 };

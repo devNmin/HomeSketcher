@@ -14,19 +14,33 @@
 }
 
 .icon_box:hover {
-  box-shadow: 1px 1px 5px gray; 
+  box-shadow: 1px 1px 5px gray;
+  animation-duration: 1.5s;
+  animation-name: flash;
 }
+@keyframes flash {
+  90% {
+    background: #f3cd58;
+  }
+  95% {
+    background-color: white;
+  }
+  100% {
+    box-shadow: 1px 1px 10px white;
+  }
+}
+
 .icon_box:hover > * {
-  animation: blink 1s step-start 0s infinite;
-  -webkit-animation: blink 1s step-start 0s infinite;
+  animation: blink 0.3s step-start 0s 3;
+  -webkit-animation: blink 0.3s step-start 0s 3;
 }
 @keyframes blink {
   50% {
-    opacity: 0.0;
+    opacity: 0;
   }
 }
 @-webkit-keyframes blink {
   50% {
-    opacity: 0.0;
+    opacity: 0;
   }
 }

@@ -15,12 +15,16 @@ const Canvas2D = (props) =>{
     const [rectClick, setRectClick] = useState(false); //방 클릭했을 때 옵션
     const [roomId, setRoomId] = useState();
 
-    let roomList = props.roomList
+    // let roomList = props.roomList
     let isRect = props.isRect
+
+    
     
     
     // let [roomCnt, setRoomCnt] = useState(0);
     const threeJsContext = useContext(ThreeJSContext);
+    let roomList = threeJsContext.roomList;
+    let setRoomList = threeJsContext.changeRoomList;
 
     let[mouseCheck,setMouseCheck] = useState(0);
 
@@ -58,8 +62,6 @@ const Canvas2D = (props) =>{
         contextRef.current = context;
         context.scale(10, 5);
         setCtx(context);
-        roomList = props.roomList;
-        threeInfo = props.threeInfo;
         
         removeLine()
         setTimeout(()=>{
@@ -149,10 +151,14 @@ const Canvas2D = (props) =>{
         if(mouseCheck%2===1 && mouseCheck!==0){
             if(isRect){
                 // setRoomCnt(roomCnt+1);
-                threeJsContext.changeRoomCnt(threeJsContext.roomCnt+1);
+                let roomNum = 0;
+                if(roomList.length>0){
+                    roomNum = roomList[roomList.length-1].num+1;
+                    threeJsContext.changeRoomCnt(roomList[roomList.length-1].num+1)
+                }
                 
                 let data = {
-                    num : threeJsContext.roomCnt,
+                    num : roomNum,
                     isRect : isRect,
                     fx : lastX,
                     fy : lastY,
@@ -182,7 +188,7 @@ const Canvas2D = (props) =>{
                 const threeOffsetX = 172 / rate
                 const threeOffsetY = 195 / rate
                 let threeData = {
-                    id : 'room' + threeJsContext.roomCnt,
+                    id : 'room' + roomNum,
                     height : 2,
                     coords : [
                         { x: leftX-threeOffsetX, y: leftY-threeOffsetY }, // sx sy 
@@ -200,6 +206,8 @@ const Canvas2D = (props) =>{
         removeLine()
         drawAll(ctx)
     }
+
+    
 
     //마우스가 움직일 때 실행되는 함수
     const mouseMove = ({nativeEvent})=>{

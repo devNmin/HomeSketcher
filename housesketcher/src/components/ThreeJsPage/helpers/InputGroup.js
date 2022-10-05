@@ -15,7 +15,7 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 function InputGroup() {
   const ThreeJSCtx = useContext(ThreeJSContext);
   function wallColorHandler(e) {
-    ThreeJSCtx.changeWallColor(e.target.value);
+    ThreeJSCtx.changeWallColor2(e.target.value);
   }
   function floorColorHandler(e) {
     ThreeJSCtx.changeFloorColor(e.target.value);
