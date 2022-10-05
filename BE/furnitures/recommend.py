@@ -250,7 +250,7 @@ def FurnitureListWithPk(pk_list,user_id):
 
 def FurnitureRandomList(user_id):
     datas = Furniture.objects.all().order_by('?')[:20]
-    print(datas.count())
+    
     furnitures = []
     for data in datas:
         like = UserLike.objects.filter(user_id=user_id, furniture_id = data.id)
@@ -291,7 +291,11 @@ class FurnitureRecommendAPIView(APIView):
         except:
             return returnErrorJson(error="DB ERROR",errorCode="500",status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-        return Response(furnitures)
+        if furnitures :
+            return Response(furnitures,status=status.HTTP_200_OK)
+        else:
+            randomFurnitures = FurnitureRandomList(request.user.id)
+            return Response(randomFurnitures,status=status.HTTP_200_OK)
 
 #실시간 인기 아이템
 class FurnitureHotItemAPIView(APIView):

@@ -70,7 +70,7 @@ class LoginAPIView(APIView):
         # last_login = date.today()
         # print(last_login.strftime("%Y-%m-%d"))
         except:
-            return returnErrorJson("존재하지 않는 회원입니다.", "400", status.HTTP_400_BAD_REQUEST)
+            return returnErrorJson("이메일 혹은 비밀번호가 다릅니다.", "400", status.HTTP_400_BAD_REQUEST)
         
         try:
             update_last_login(None, user1)   
@@ -80,10 +80,9 @@ class LoginAPIView(APIView):
                 id=user1.id,
                 password=user_password,
             )
-
+            
             if user:
                 login_serializer = LoginSerializer(user)
-
                 token = TokenObtainPairSerializer.get_token(user)
                 refresh_token = str(token)
                 access_token = str(token.access_token)
@@ -98,7 +97,10 @@ class LoginAPIView(APIView):
                     status=status.HTTP_200_OK,
                 )
                 return response
-        
+                
+            else:
+                return returnErrorJson("이메일 혹은 비밀번호가 다릅니다.", "400", status.HTTP_400_BAD_REQUEST)
+            
         except:
             return returnErrorJson("로그인 중 오류가 발생했습니다.", "500", status.HTTP_500_INTERNAL_SERVER_ERROR)
   
