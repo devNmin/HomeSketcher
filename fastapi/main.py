@@ -14,8 +14,8 @@ class Item(BaseModel):
     threeInfo: list
     objList: list
     objBox: dict
-    wallColor: list 
-    floorColor: list
+    wallColor: dict 
+    # floorColor: list
 
 app = FastAPI()
 
@@ -49,7 +49,7 @@ def save( user_id:str , save : Item):
     save_dict['objList'] = save.objList
     save_dict['objBox'] = save.objBox
     save_dict['wallColor'] = save.wallColor
-    save_dict['floorColor'] = save.floorColor
+    # save_dict['floorColor'] = save.floorColor
     
     with open(f'roomInfo/{user_id}.json', 'w', encoding='utf-8') as make_file:
         json.dump(save_dict, make_file, indent="\t")
