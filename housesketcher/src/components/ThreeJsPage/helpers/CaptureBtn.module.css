@@ -45,20 +45,3 @@
   }
 }
 
-.icon_box2 {
-  position: absolute;
-  bottom: 7.5rem;
-  right: 4rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 2rem;
-  background: #f3cd58;
-  color: white;
-  cursor: pointer;
-}
-.icon_box2:hover {
-  box-shadow: 1px 1px 5px gray;
-}
