@@ -4,7 +4,7 @@
 }
 
 .tooltip {
-  width: 12rem;
+  width: 14rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -28,7 +28,7 @@
 }
 .tag > p {
   margin: 0;
-  font-size: small;
+  font-size: medium;
 }
 .name_div {
   text-align: left;
@@ -40,8 +40,8 @@
 }
 /* card */
 .card_size {
-  width: 14rem;
-  height: 18rem;
+  width: 16rem;
+  height: 22rem;
 }
 .card_size > a {
   display: flex;
@@ -52,21 +52,21 @@
 }
 .img_size {
   margin: 1rem;
-  width: 10rem;
-  height: 10rem;
+  width: 12rem;
+  height: 14rem;
 }
 .star_size {
-  width: 1.2rem;
-  height: 1.2rem;
-}
-.star_size:hover {
   width: 1.4rem;
   height: 1.4rem;
+}
+.star_size:hover {
+  width: 1.6rem;
+  height: 1.6rem;
   cursor: pointer;
 }
 .star_position {
   position: absolute;
-  top: 10rem;
-  left: 86%;
+  top: 14rem;
+  left: 84%;
 }
 /* style={{ width: '10%', height: '10%', cursor: 'pointer' }} */
