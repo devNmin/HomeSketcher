@@ -14,7 +14,7 @@ class Item(BaseModel):
     threeInfo: list
     objList: list
     objBox: dict
-    wallColor: list 
+    wallColor: dict 
     # floorColor: list
 
 app = FastAPI()
