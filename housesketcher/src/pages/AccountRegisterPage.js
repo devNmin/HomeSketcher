@@ -61,12 +61,19 @@ export default function AccountRegisterPage() {
   const emailcheckHandler = async (event) => {
     event.preventDefault();
     const emailsubmit = emailInput.current.value;
+    var regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+    // 검증에 사용할 정규식 변수 regExp에 저장
+  
+    
     if(emailsubmit.length === 0){
-      alert('이메일 입력해주세요.')
-    }else{
+      alert('Please enter your email.')
+    }else if (emailsubmit.match(regExp) == null) {
+      alert('Check your email.')
+    }
+    else{
       await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`
       ).then(res => {
-        alert('사용가능한 이메일입니다')
+        alert('you can use this email')
       }).catch(err => {
         alert(err.response.data.error);
       }
@@ -137,7 +144,7 @@ export default function AccountRegisterPage() {
       setEmailChecker("")
     }
     else {
-      setEmailChecker("Email is 25 characters or less.")
+      setEmailChecker("Your Email is not valid form please check again!")
     }
   }
 

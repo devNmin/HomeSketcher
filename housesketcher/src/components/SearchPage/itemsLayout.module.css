@@ -1,13 +1,21 @@
 .display_flex {
   min-height: 30rem;
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-wrap: wrap;
   justify-content: center;
+}
+.no_search {
+  margin-left: 24%;
+  color: rgb(117, 117, 117);
 }
 .item_container {
   margin: 1rem;
 }
 .blank {
   height: 10rem;
+}
+.width {
+  display: flex;
+  justify-content: center;
 }

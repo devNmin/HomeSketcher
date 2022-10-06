@@ -4,6 +4,7 @@ import { distance, degreesToRadians, cartesianToPolar } from "./geometry";
 
 const GLASS_COLOR = "#66f";
 const GLASS_OPACITY = 0.5;
+// const WINDOW_THICKNESS = 0.05;
 const WINDOW_THICKNESS = 0.05;
 
 const Window = ({ id, left, right, sill, lintel }) => {
@@ -26,7 +27,7 @@ const Window = ({ id, left, right, sill, lintel }) => {
   return (
     <mesh position={[right.x, sill, right.y]} rotation={[0, angle, 0]}>
       <mesh position={[0, 0, -WINDOW_THICKNESS / 2]}>
-        {/* <extrudeBufferGeometry
+        <extrudeBufferGeometry
           args={[
             shape,
             {
@@ -35,7 +36,7 @@ const Window = ({ id, left, right, sill, lintel }) => {
               steps: 1
             }
           ]}
-        /> */}
+        />
         <GlassMaterial />
       </mesh>
     </mesh>

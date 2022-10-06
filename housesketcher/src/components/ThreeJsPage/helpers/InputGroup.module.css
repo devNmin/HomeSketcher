@@ -9,7 +9,14 @@
     top: 95%;
   }
 }
-
+.inputs_box{
+  position: absolute;
+  width: 13rem;
+  height: 4rem;
+  left: -10%;
+  background: rgba(151, 150, 150, 0.457);
+  border-radius: 2rem;
+}
 .display_flex label {
   font-size: small;
   line-height: 1rem;
@@ -20,13 +27,18 @@
   display:flex;
   align-items: center;
 }
+.input_div > input:hover {
+  box-shadow: 1px 1px 1px #f3cd58;
+}
 /* style */
 .style_div {
   position: relative;
   display:flex;
+  margin-top: 0.5rem;
 }
 .style_icon_box {
   display: flex;
+  z-index: 1;
   justify-content: center;
   align-items: center;
   width: 3rem;
@@ -52,13 +64,14 @@
 }
 .style_div:hover .style_inputs {
   display: flex;
- 
 }
 /* object */
 .object_div {
   display:flex;
+  margin-top: 0.5rem;
 }
 .object_icon_box {
+  z-index: 1;
   margin-left: 1rem;
   display: flex;
   justify-content: center;
@@ -78,11 +91,11 @@
   flex-direction : column;
   justify-content: center;
   align-items: center;
-  top: 3rem;
+  top: 3.5rem;
   left: 4rem;
   width: 5rem;
-
-  background-color: rgba(226, 226, 226, 0.748);
+  
+  background-color: rgba(226, 226, 226, 0.628);
   border-radius : 1rem;
 }
 .object_inputs > p {
@@ -99,7 +112,9 @@
 }
 /* camera */
 .camera_div {
+  z-index: 1;
   margin-left: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
