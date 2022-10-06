@@ -24,12 +24,13 @@
 .carousel_content {
   display: flex;
   transition: all 250ms linear;
-  -ms-overflow-style: none;  /* hide scrollbar in IE and Edge */
-  scrollbar-width: none;  /* hide scrollbar in Firefox */
+  -ms-overflow-style: none; /* hide scrollbar in IE and Edge */
+  scrollbar-width: none; /* hide scrollbar in Firefox */
 }
 
 /* hide scrollbar in webkit browser */
-.carousel_content::-webkit-scrollbar, .carousel_content::-webkit-scrollbar {
+.carousel_content::-webkit-scrollbar,
+.carousel_content::-webkit-scrollbar {
   display: none;
 }
 
@@ -54,28 +55,34 @@
   text-align: center;
 }
 
-.left_arrow, .right_arrow {
+.left_arrow,
+.right_arrow {
   position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   z-index: 1;
   top: 50%;
   transform: translateY(-50%);
-  width: 48px;
-  height: 48px;
-  border-radius: 24px;
-  background-color: #F3CD58;
-  border: 1px solid #ddd;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 2rem;
+  background-color: white;
+
+  cursor: pointer;
 }
 
 .left_arrow {
-  left: 20px;
+  left: -1rem;
 }
 
 .right_arrow {
-  right: 20px;
+  right: -1rem;
 }
 
 @media (hover: none) and (pointer: coarse) {
-  .left_arrow, .right_arrow {
-      display: none;
+  .left_arrow,
+  .right_arrow {
+    display: none;
   }
 }

@@ -4,20 +4,22 @@ hr {
 }
 .row_width {
   width: 100%;
+  display: flex;
   justify-content: center;
-  margin-bottom: 5rem;
+  margin-bottom: 4rem;
 }
 .flex_around {
+  width: 67%;
   min-width: 400px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 .display_flex {
   display: flex;
 }
 
 .category_name {
-  width: 30rem;
+  width: 15rem;
   font-size: larger;
   font-weight: bold;
 }

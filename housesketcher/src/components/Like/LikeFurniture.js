@@ -20,20 +20,18 @@ export default function LikeFurniture(props) {
     // islike가 true일 경우 좋아요 취소
     if (islike) {
       setIsLikeHandler(!isLike);
-      axios
-        .delete(BASE_URL + `likes/dislike/${id}`, {
-          headers: {
-            Authorization: `Bearer ${authTokens.access}`,
-          },
-        })        
+      axios.delete(BASE_URL + `likes/dislike/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authTokens.access}`,
+        },
+      });
     } else {
       setIsLikeHandler(!isLike);
-      axios
-        .get(BASE_URL + `likes/like/${id}/`, {
-          headers: {
-            Authorization: `Bearer ${authTokens.access}`,
-          },
-        })        
+      axios.get(BASE_URL + `likes/like/${id}/`, {
+        headers: {
+          Authorization: `Bearer ${authTokens.access}`,
+        },
+      });
     }
   };
 
@@ -66,7 +64,7 @@ export default function LikeFurniture(props) {
 
   const nameSpacer = (name) => {
     if (name.length > 27) {
-      const newname = name.slice(0, 22) + '...';
+      const newname = name.slice(0, 15) + '...';
       return newname;
     } else {
       return name;
@@ -75,12 +73,10 @@ export default function LikeFurniture(props) {
 
   return (
     <div>
-      <Card
-        style={{ width: '18rem', height: '430px', maxHeight: '430px' }}
-        key={furniture.id}
-      >
+      <Card className={classes.card_size} key={furniture.id}>
         <a href={furniture.furniture_url}>
           <Card.Img
+            className={classes.img_size}
             onClick={() => {
               onClickFurnitureHandler(furniture.id);
             }}
@@ -88,14 +84,7 @@ export default function LikeFurniture(props) {
             src={furniture.furniture_image}
           />
         </a>
-        <Card.Body
-          style={{
-            height: '120px',
-            maxHeight: '120px',
-            paddingBottom: '0px',
-            marginTop: '20px',
-          }}
-        >
+        <Card.Body>
           <div
             onMouseEnter={() => {
               setIsMouseOnHandler(true);
@@ -105,7 +94,7 @@ export default function LikeFurniture(props) {
             }}
           >
             <b className={`${classes.tooltip} ${classes.align_left}`}>
-              {nameSpacer(furniture.furniture_name)}
+              {furniture.furniture_name}
               <span className={classes.tooltip_text}>{furniture.furniture_name}</span>
             </b>
           </div>
@@ -113,15 +102,16 @@ export default function LikeFurniture(props) {
             href={`https://www.google.com/search?q=${furniture.furniture_style}+${furniture.furniture_color}+interior`}
             style={{ textDecoration: 'none', cursor: 'pointer' }}
           >
-            <p>
-              {' '}
-              #{furniture.furniture_style} #{furniture.furniture_color}{' '}
-            </p>
+            <div className={classes.tag}>
+              <p>
+                #{furniture.furniture_style} &nbsp; #{furniture.furniture_color}
+              </p>
+            </div>
           </a>
-          <div style={{ textAlign: 'right', marginTop: '20px' }}>
+          <div className={classes.star_position}>
             {isLike ? (
               <img
-                style={{ width: '10%', height: '10%', cursor: 'pointer' }}
+                className={classes.star_size}
                 onClick={() => {
                   likeClickHandler(furniture.id, isLike);
                 }}
@@ -130,7 +120,7 @@ export default function LikeFurniture(props) {
               />
             ) : (
               <img
-                style={{ width: '10%', height: '10%', cursor: 'pointer' }}
+                className={classes.star_size}
                 onClick={() => {
                   likeClickHandler(furniture.id, isLike);
                 }}
