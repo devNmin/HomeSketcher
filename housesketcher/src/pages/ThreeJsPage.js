@@ -31,7 +31,7 @@ import CaptureBtn from '../components/ThreeJsPage/helpers/CaptureBtn'
 ///////2D////////////
 import Canvas2D from '../components/ThreeJsPage/2d/drawroom'
 ////////////////////
-
+import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
 ///////data load (나중에 방 데이터 저장 불러오기 쓸때 참고용)/////////
 // import data from '../components/ThreeJsPage/floplan-data.json';
 const DevTools = () => {
@@ -66,10 +66,12 @@ export default function ThreeJsPage() {
   let offsetCanvasY = -4.615; // 2D 에서 3D 그려줄 때 생기는 canvas 오차 Offset
   let [clickRoom, setClickRoom] = useState(0); // 방 넘버 object 클릭시 이용
   let [valueChange, setvalueChange] = useState(false); // 방수치 적용 handler 
-  let [objList, setObjList] = useState([]) // object 리스트 
+  // let [objList, setObjList] = useState([]) // object 리스트 
   let [recomList, setRecomList] = useState([]) // 추천 리스트
   let [isOpen, setIsOpen] = useState(true) //메뉴 토글 
+  let [urls, setUrls] = useState([])
 
+  let objList = ThreeJSCtx.objList;
 
   // 추천 아이템 Axios
   const getRecomFurnitures = async () => {
@@ -115,24 +117,33 @@ export default function ThreeJsPage() {
     for(let i = 0; i < length; i++){
       
       if(roomList[i].num === roomNumber){
-        
+
         objUrl['centerX'] = (threeInfo[i].coords[0]['x']+threeInfo[i].coords[2]['x'])/2+offsetCanvasX
         objUrl['centerY'] = (threeInfo[i].coords[0]['y']+threeInfo[i].coords[2]['y'])/2+offsetCanvasY
+        // objUrl['rotation'] = {"_x":0 ,"_y": 0, "_z":0}
+        // objUrl['scale'] = {"x":1 ,"y": 1, "z":1}
+
         break;
       }
     }
 
-    if (objList.includes(objUrl)) {
-      
+    if (urls.includes(objUrl.glb_url)) {      
+      alert('Sorry! Same glb file cannot be added to 3D canvas!')  
     } else {
-      setObjList([...objList, objUrl]);    
-
+      let data = objList;
+      data.push(objUrl);
+      // setObjList([...objList, objUrl]);
+      ThreeJSCtx.objListHandler(data);
+      setUrls([...urls, objUrl.glb_url])         
     }
+
   };
 
   // 가구 obj 제거하기
   const removeobjListHandler = (objUrl) => {
-    setObjList(objList.filter((obj) => obj.id !== objUrl.id));
+    // setObjList(objList.filter((obj) => obj.id !== objUrl.id));
+    ThreeJSCtx.objListHandler(objList.filter((obj) => obj.id !== objUrl.id))
+
   };
 
   // toggle function
@@ -196,6 +207,8 @@ export default function ThreeJsPage() {
   // objBox에 setBox를 이용해서 box들을 json 형태로 저장한다.
   let [objBox, setBox] = useState({});
   let [objPosition, setObjPosition] = useState({});
+  // let [objRotation, setObjRotation] = useState({});
+  // let [objScale, setObjScale] = useState({});
 
   //isCollison : 충돌 발생 여부  | setIsCollison : isCollison 토글 시키는 함수
 
@@ -242,8 +255,8 @@ export default function ThreeJsPage() {
   //================2D=================
 
   function ObjectChangeHandler(props) {
-    const box = new THREE.Box3().setFromObject(props); // 현재 박스
     
+    const box = new THREE.Box3().setFromObject(props); // 현재 박스
     
     // setBox -> objBox 리스트. 가구 box들을 저장하는 리스트. 현재 위치를 업데이트 해 줌.
     setBox((prevState) => ({
@@ -256,13 +269,53 @@ export default function ThreeJsPage() {
       [props.uuid]: box,
     }));
     
+    // setObjRotation((prevState) => ({
+    //   ...prevState,
+    //   [props.uuid]: props.rotation,
+    // }));
+    // setObjScale((prevState) => ({
+    //   ...prevState,
+    //   [props.uuid]: props.scale,
+    // }));
+    
     let targetBox = objBox[props.uuid];
     
-    if ((target.position.y < 0) ||(targetBox.max.y > 2.4)) {
+    if (targetBox && ((target.position.y < 0) ||(targetBox.max.y > 2.4))) {
       target.position.y = preY;
     }
   
 
+    // let result2 = Object.entries(objRotation); 
+
+    // for (let index = 0; index < result2.length; index++) {
+    //   // let uuid = result2[index][0]
+    //   let objRotations = result2[index][1]
+    //   console.log("objRotation: ",objRotations)
+    //   objList[index]['rotation'] = objRotations
+    // }
+    // // console.log("후후후",objList)
+    // // ----------------------------------
+    
+    // // console.log("result3" , result3)
+    // let result3 = Object.entries(objScale); 
+    
+    // for (let index = 0; index < result3.length; index++) {
+    //   // let uuid = result3[index][0]
+    //   let objScales = result3[index][1]
+    //   // console.log("objBoxPosition: ", objScales)
+    //   objList[index]['scale'] = objScales
+    // }
+
+
+
+    // setObjRotation((prevState) => ({
+    //   ...prevState,
+    //   [props.uuid]: props.rotation,
+    // }));
+    // setObjScale((prevState) => ({
+    //   ...prevState,
+    //   [props.uuid]: props.scale,
+    // }));
     
     // 벽 충돌 포함
     // Check collision box -> 충돌 확인 // 오브젝트간 충돌
@@ -364,13 +417,32 @@ export default function ThreeJsPage() {
 
     let wallColor = ThreeJSCtx.wallColor2;
 
-    var result = Object.entries(objPosition); 
+
+    let result = Object.entries(objPosition);  //objPosition 0 1 2 3 4 5 
     for (let index = 0; index < result.length; index++) {
       let uuid = result[index][0]
       let objBoxPosition = objBox[uuid]
+      
       objList[index]['centerX'] = (objBoxPosition.max.x+objBoxPosition.min.x)/2
       objList[index]['centerY'] = (objBoxPosition.max.z+objBoxPosition.min.z)/2
+      break
     }
+
+      
+    // let result2 = Object.entries(objRotation);
+    // for (let index = 0; index < result2.length; index++) {
+    //   let objRotations = result2[index][1]
+    //   console.log("objRotation: ",objRotations)
+    //   objList[index]['rotation'] = objRotations
+    // }
+    
+    // let result3 = Object.entries(objScale); 
+    
+    // for (let index = 0; index < result3.length; index++) {
+      
+    //   let objScales = result3[index][1]
+    //   objList[index]['scale'] = objScales
+    // }
 
     let save_json = {}
     save_json['roomList'] = roomList
@@ -378,8 +450,6 @@ export default function ThreeJsPage() {
     save_json['objList'] = objList
     save_json['objBox'] = objBox
     save_json['wallColor'] = wallColor;
-    // save_json['floorColor'] = "floorColor";
-    // save_json['floorTexture'] = floorTexture;
     
     await axios({
       method: 'post',
@@ -400,9 +470,14 @@ export default function ThreeJsPage() {
 
   
   // 내가 저장한 최신 방 불러오기
-  const myRoomLoad = async()=>{
+  const myRoomLoad = async(modelHouse)=>{
       let userInfo = localStorage.getItem('userInfo')
       let user_id = JSON.parse(userInfo)['id'];
+
+      //true 이면 모델하우스 예시를 뽑아오도록 바꿈
+      if(modelHouse){
+        user_id = 30; //모델하우스 파일명을 넣어줌
+      }
     
       await axios({
         method: 'get',
@@ -419,7 +494,10 @@ export default function ThreeJsPage() {
           setShowResults(false)
           setRoomList(data.roomList);
           setThreeInfo(data.threeInfo);
-          setObjList(data.objList);
+          // setObjList(data.objList);
+          ThreeJSCtx.objListHandler(data.objList);
+          // setObjRotation(data.objList.rotation);
+          // setObjScale(data.objList.scale);
           setBox(data.objBox);
           wallCreate(); 
           setvalueChange(!valueChange);
@@ -464,7 +542,7 @@ export default function ThreeJsPage() {
           {/* 여기밑에부분은 테스트용임을 알림니다. */}
           <div style={{ width: '45%' }}>
             <button onClick={() => myRoomSave()} className={classes.save_load}>Save</button>
-            <button onClick={() => myRoomLoad()} className={`${classes.save_load} ${classes.margin_top}`}>Load</button>
+            <button onClick={() => myRoomLoad(false)} className={`${classes.save_load} ${classes.margin_top}`}>Load</button>
           </div> 
           </div>                      
             <br />
@@ -532,7 +610,8 @@ export default function ThreeJsPage() {
             <ModelT
               position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
-              scale = {obj}
+              // scale = {[obj.scale.x,obj.scale.y,obj.scale.z]}
+              // rotation = {[obj.rotation._x,obj.rotation._y,obj.rotation._z]}
               objUrl={obj.glb_url}
               setTarget={setTarget}
             />
@@ -582,6 +661,13 @@ export default function ThreeJsPage() {
               }}>
               Change
             </button>
+            <button className={classes.model_house} onClick={(e)=>{
+              e.preventDefault();
+              myRoomLoad(true);
+            }}>ModelHouse</button>
+           
+              
+           
             </div>
 
             {/* 방 수치 변경 */}
@@ -608,7 +694,8 @@ export default function ThreeJsPage() {
                 </div>
               ))}
             </div>
-
+            
+            
             <div className={`${classes.controls} ${classes.doorControls}`}>
               {newItem.floors[currentFloor].doors
                 .filter(({ direction }) => direction !== 0)
@@ -622,6 +709,7 @@ export default function ThreeJsPage() {
             {/* 벽 색 인풋 받기 */}
             <InputGroup />
             <CaptureBtn />
+            
           </div>
           </div>
       </div>
