@@ -131,7 +131,7 @@ const Canvas2D = (props) =>{
             setMouseCheck(0);
             removeLine()
             drawAll(ctx)
-            alert("사각형 방 그리기는 방 내부에서 지원하지 않습니다.")
+            alert("You can not draw room in other rooms.")
             return;    
         }
         

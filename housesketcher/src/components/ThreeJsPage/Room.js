@@ -37,7 +37,7 @@ const Room = ({
           key={`${id}-wall-[${wall.a.x},${wall.a.y}],[${wall.b.x},${wall.b.y}]`}
           {...wall}
           isInteractive={isInteractive}
-          
+          //id room0 room1 rooom2 
           color={ThreeJSCtx.wallColor2[Number(id.substr(4, id.length-4))]}
           
         />:null

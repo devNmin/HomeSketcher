@@ -84,7 +84,7 @@ export default function ThreeJsPage() {
         setRecomList(Object.entries(response.data));
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -108,12 +108,19 @@ export default function ThreeJsPage() {
   const addobjListHandler = (objUrl) => {
     // roomList  0 여기에 room number 넣어주면 됨 
     // modelT에 position을 넣기위해 centerX,Y를 추가해줌
-    console.log("objUrl",objUrl)
     
     // uuid를 추가해줘야하는데 방법이 없을까? target을 클릭을 안해서 uuid도 모름 
     // 따라서 obj클릭쪽에서 업데이트를 해줘야하는데 어떤 objurl인지 매칭이안됨
-    objUrl['centerX'] = (threeInfo[roomNumber].coords[0]['x']+threeInfo[roomNumber].coords[2]['x'])/2+offsetCanvasX
-    objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2+offsetCanvasY
+    let length = roomList.length;
+    for(let i = 0; i < length; i++){
+      
+      if(roomList[i].num === roomNumber){
+        
+        objUrl['centerX'] = (threeInfo[i].coords[0]['x']+threeInfo[i].coords[2]['x'])/2+offsetCanvasX
+        objUrl['centerY'] = (threeInfo[i].coords[0]['y']+threeInfo[i].coords[2]['y'])/2+offsetCanvasY
+        break;
+      }
+    }
 
     if (objList.includes(objUrl)) {
       
@@ -320,32 +327,33 @@ export default function ThreeJsPage() {
 
   //방 삭제 함수
   const removeRoom = (roomNum)=>{
-    console.log('start remove',roomNum);
     let length = roomList.length;
     
     let newRoomList = [];
     let newThreeList = [];
+    let newColorJson = {};
+
     
     for(let i = 0; i < length; i++){
       if(roomList[i].num !== roomNum){
         newRoomList.push(roomList[i]);
         newThreeList.push(threeInfo[i]);
+        newColorJson[roomList[i].num] = ThreeJSCtx.wallColor2[roomList[i].num];
       }
     }
     //방이 있을 때만 적용
     if(newRoomList.length>0){
       setClickRoom(newRoomList[0].num);
-    }else{
-      // setClickRoom(roomNum);
-      console.log("fffffffff",roomNum);
     }
+    // else{
+      // setClickRoom(roomNum);
+      // console.log("fffffffff",roomNum);
+    // }
     setRoomList(newRoomList);
     setThreeInfo(newThreeList);
+    ThreeJSCtx.wallListHander(newColorJson)
     
     setvalueChange(!valueChange);
-    
-    console.log(newRoomList);
-    console.log(roomList);
     
   }
 
@@ -355,8 +363,6 @@ export default function ThreeJsPage() {
     let user_id = JSON.parse(userInfo)['id'];
 
     let wallColor = ThreeJSCtx.wallColor2;
-    let floorColor = ThreeJSCtx.floorColor;
-    // let floorTexture = ThreeJSCtx.floorTexture;
 
     var result = Object.entries(objPosition); 
     for (let index = 0; index < result.length; index++) {
@@ -371,12 +377,10 @@ export default function ThreeJsPage() {
     save_json['threeInfo'] = threeInfo
     save_json['objList'] = objList
     save_json['objBox'] = objBox
-    save_json['wallColor'] = "wallColor";
-    save_json['floorColor'] = "floorColor";
+    save_json['wallColor'] = wallColor;
+    // save_json['floorColor'] = "floorColor";
     // save_json['floorTexture'] = floorTexture;
-    console.log("save_json",save_json)
-
-    console.log(roomList)
+    
     await axios({
       method: 'post',
       url: 'https://j7b304.p.ssafy.io/fastapi/' + `myroom/save/`+user_id,
@@ -387,10 +391,10 @@ export default function ThreeJsPage() {
       }
     })
     .then((response) => {
-      alert("방 저장 성공!");
+      alert("Room save success");
     })
     .catch((err) => {
-      alert("방 저장 실패! 다시 시도해 주세요");
+      alert("Room save failed! Try again Please");
     });
   }
 
@@ -411,19 +415,17 @@ export default function ThreeJsPage() {
         .then((response) => {
           let data = response.data;
           ThreeJSCtx.changeRoomCnt(data.roomList[data.roomList.length-1].num+1)
+          ThreeJSCtx.wallListHander(data.wallColor)
           setShowResults(false)
           setRoomList(data.roomList);
           setThreeInfo(data.threeInfo);
           setObjList(data.objList);
           setBox(data.objBox);
           wallCreate(); 
-          ThreeJSCtx.changeFloorColor(data.floorColor);
-          ThreeJSCtx.changeWallColor(data.wallColor);
           setvalueChange(!valueChange);
-          // ThreeJSCtx.changeFloorTexture(data.floorTexture);
         })
         .catch((err) => {
-          alert("방 불러오기 실패! 다시 시도해 주세요");
+          alert("Room Loading failed! please try again");
         });
   };
   
@@ -540,7 +542,7 @@ export default function ThreeJsPage() {
        
           <CameraSetup initCamera = {ThreeJSCtx.initCamera}/>          
           <ScreenShot  downloadFlag={ThreeJSCtx.downloadFlag}/>          
-          <ambientLight intensity={0.5} color="#eef" />
+          <ambientLight intensity={0.5} color="#eeeeff" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
 
@@ -574,11 +576,9 @@ export default function ThreeJsPage() {
                 e.preventDefault(); 
                 setShowResults(!showResults) ; 
                 wallCreate();  
-                ThreeJSCtx.changeFloorColor(ThreeJSCtx.floorColor);
-                ThreeJSCtx.changeWallColor(ThreeJSCtx.wallColor);
-                setTimeout(() => {
-                  setvalueChange(!valueChange);
-                }, 100);
+                setvalueChange(!valueChange);
+                // setTimeout(() => {
+                // }, 100);
               }}>
               Change
             </button>

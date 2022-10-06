@@ -95,7 +95,7 @@ export default function EditProfilePage() {
     const emailsubmit = emailInput.current.value;
     await axios.get(BASE_URL + `accounts/check/email/${emailsubmit}/`
     ).then(res => {
-      alert('사용가능한 이메일입니다')
+      alert('you can use this email!')
 
     }).catch(err => {
       alert(err.response.data.error);

@@ -20,9 +20,9 @@ function InputGroup() {
   function floorColorHandler(e) {
     ThreeJSCtx.changeFloorColor(e.target.value);
   }
-  const floorTextureHandler = (name) => {
-    ThreeJSCtx.changeFloorTexture(name);
-  };
+  // const floorTextureHandler = (name) => {
+  //   ThreeJSCtx.changeFloorTexture(name);
+  // };
 
 
 
@@ -31,6 +31,7 @@ function InputGroup() {
   //console.log('ThreeJSCtx.floorTexture', ThreeJSCtx.floorTexture);
   return (
     <div className={classes.display_flex}>
+      <div className={classes.inputs_box}></div>
       <div className={classes.style_div}>
         <div className={classes.style_icon_box}>
           <ColorLensOutlinedIcon fontSize="large" />
@@ -41,7 +42,7 @@ function InputGroup() {
             <input
               type="color"
               id="wallColor"
-              value={ThreeJSCtx.wallColor}
+              // value={ThreeJSCtx.wallColor}
               onChange={(e) => {
                 wallColorHandler(e);
               }}

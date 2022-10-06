@@ -6,7 +6,7 @@ const Corner = ({ coord }) => {
       <boxBufferGeometry args={[0.25, 0.25, 0.25]} />
       <meshLambertMaterial
         roughness={0.5}
-        color={"red"}
+        // color={"red"}
         opacity={0.75}
         transparent={true}
       />
