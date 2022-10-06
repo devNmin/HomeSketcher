@@ -25,7 +25,11 @@ const ThreeJSContext = createContext({
   threeInfo:[],
   setThreeInfo: ()=>{},
   //roomList, threeInfo
-  wallListHander: ()=> {}
+  wallListHander: ()=> {},
+
+  //objList
+  objList:[],
+  setObjList:()=>{},
 });
 
 
@@ -49,6 +53,14 @@ export function ThreeJSContextProvider(props) {
   const [roomList,setRoomList] = useState([]);
   const [threeInfo,setThreeInfo] = useState([]);
   //roomList, threeInfo
+
+  //objList
+  const [objList, setObjList] = useState([]) // object 리스트 
+
+  //objList
+  const objListHandler = (objList)=>{
+    setObjList(objList);
+  }
 
   //roomList, threeInfo
   const roomListHandler = (room) =>{
@@ -127,6 +139,10 @@ export function ThreeJSContextProvider(props) {
     changeThreeInfo : threeInfoHandler,
     wallListHander: wallListHander,
     //roomList, threeInfo
+
+    //objList
+    objList:objList,
+    objListHandler:objListHandler,
   };
 
   return (
