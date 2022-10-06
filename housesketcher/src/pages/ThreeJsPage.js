@@ -84,7 +84,7 @@ export default function ThreeJsPage() {
         setRecomList(Object.entries(response.data));
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
 
@@ -102,17 +102,25 @@ export default function ThreeJsPage() {
       setLoading(false);
     }, 1000);
 
-
   }, []);
 
   // 가구 obj 더해주기
   const addobjListHandler = (objUrl) => {
     // roomList  0 여기에 room number 넣어주면 됨 
     // modelT에 position을 넣기위해 centerX,Y를 추가해줌
-    console.log("objUrl",objUrl)
     
-    objUrl['centerX'] = (threeInfo[roomNumber].coords[0]['x']+threeInfo[roomNumber].coords[2]['x'])/2+offsetCanvasX
-    objUrl['centerY'] = (threeInfo[roomNumber].coords[0]['y']+threeInfo[roomNumber].coords[2]['y'])/2+offsetCanvasY
+    // uuid를 추가해줘야하는데 방법이 없을까? target을 클릭을 안해서 uuid도 모름 
+    // 따라서 obj클릭쪽에서 업데이트를 해줘야하는데 어떤 objurl인지 매칭이안됨
+    let length = roomList.length;
+    for(let i = 0; i < length; i++){
+      
+      if(roomList[i].num === roomNumber){
+        
+        objUrl['centerX'] = (threeInfo[i].coords[0]['x']+threeInfo[i].coords[2]['x'])/2+offsetCanvasX
+        objUrl['centerY'] = (threeInfo[i].coords[0]['y']+threeInfo[i].coords[2]['y'])/2+offsetCanvasY
+        break;
+      }
+    }
 
     if (objList.includes(objUrl)) {
       
@@ -187,6 +195,7 @@ export default function ThreeJsPage() {
 
   // objBox에 setBox를 이용해서 box들을 json 형태로 저장한다.
   let [objBox, setBox] = useState({});
+  let [objPosition, setObjPosition] = useState({});
 
   //isCollison : 충돌 발생 여부  | setIsCollison : isCollison 토글 시키는 함수
 
@@ -199,12 +208,17 @@ export default function ThreeJsPage() {
   let [roomNumber, setRoomNumber] = useState(0);
   const [showResults, setShowResults] =useState(false)
   let [mouseList] = useState([])
-  let [roomList,setRoomList] = useState([])
+  // let [roomList,setRoomList] = useState([])
+  let roomList = ThreeJSCtx.roomList;
+  let setRoomList = ThreeJSCtx.changeRoomList;
+  let threeInfo = ThreeJSCtx.threeInfo;
+  let setThreeInfo = ThreeJSCtx.changeThreeInfo;
 
-  let [threeInfo, setThreeInfo] = useState([])
+  // let [threeInfo, setThreeInfo] = useState([])
 
   let [isRect,setIsRect] = useState(true);
   
+
   let newItem = {
     floors: [
       {
@@ -215,8 +229,7 @@ export default function ThreeJsPage() {
       },
     ],
   };
-
-  // 조경민 빨리 만들어줘!!
+  
   // 
   
   let animatedFloorPosition = useFloorTransitionAnimation({
@@ -230,21 +243,25 @@ export default function ThreeJsPage() {
 
   function ObjectChangeHandler(props) {
     const box = new THREE.Box3().setFromObject(props); // 현재 박스
-
+    
+    
     // setBox -> objBox 리스트. 가구 box들을 저장하는 리스트. 현재 위치를 업데이트 해 줌.
     setBox((prevState) => ({
       ...prevState,
       [props.uuid]: box,
     }));
-    let targetBox = objBox[props.uuid];
-
     
-    // 높이 제한
-
+    setObjPosition((prevState) => ({
+      ...prevState,
+      [props.uuid]: box,
+    }));
+    
+    let targetBox = objBox[props.uuid];
+    
     if ((target.position.y < 0) ||(targetBox.max.y > 2.4)) {
       target.position.y = preY;
     }
-  // })
+  
 
     
     // 벽 충돌 포함
@@ -264,6 +281,9 @@ export default function ThreeJsPage() {
     setpreX(target.position.x);
     setpreY(target.position.y);
     setpreZ(target.position.z);
+
+    
+ 
   }
 
 
@@ -300,37 +320,40 @@ export default function ThreeJsPage() {
         
       }
     }
+
   }
 
   
 
   //방 삭제 함수
   const removeRoom = (roomNum)=>{
-    console.log('start remove',roomNum);
     let length = roomList.length;
     
     let newRoomList = [];
     let newThreeList = [];
+    let newColorJson = {};
+
     
     for(let i = 0; i < length; i++){
       if(roomList[i].num !== roomNum){
         newRoomList.push(roomList[i]);
         newThreeList.push(threeInfo[i]);
+        newColorJson[roomList[i].num] = ThreeJSCtx.wallColor2[roomList[i].num];
       }
     }
     //방이 있을 때만 적용
     if(newRoomList.length>0){
       setClickRoom(newRoomList[0].num);
-    }else{
-      // setClickRoom(roomNum);
-      console.log("fffffffff",roomNum);
     }
+    // else{
+      // setClickRoom(roomNum);
+      // console.log("fffffffff",roomNum);
+    // }
     setRoomList(newRoomList);
     setThreeInfo(newThreeList);
-    setvalueChange(!valueChange);
+    ThreeJSCtx.wallListHander(newColorJson)
     
-    console.log(newRoomList);
-    console.log(roomList);
+    setvalueChange(!valueChange);
     
   }
 
@@ -338,26 +361,40 @@ export default function ThreeJsPage() {
   const myRoomSave =  async() =>{
     let userInfo = localStorage.getItem('userInfo')
     let user_id = JSON.parse(userInfo)['id'];
+
+    let wallColor = ThreeJSCtx.wallColor2;
+
+    var result = Object.entries(objPosition); 
+    for (let index = 0; index < result.length; index++) {
+      let uuid = result[index][0]
+      let objBoxPosition = objBox[uuid]
+      objList[index]['centerX'] = (objBoxPosition.max.x+objBoxPosition.min.x)/2
+      objList[index]['centerY'] = (objBoxPosition.max.z+objBoxPosition.min.z)/2
+    }
+
     let save_json = {}
     save_json['roomList'] = roomList
     save_json['threeInfo'] = threeInfo
     save_json['objList'] = objList
     save_json['objBox'] = objBox
-
-    console.log(roomList)
+    save_json['wallColor'] = wallColor;
+    // save_json['floorColor'] = "floorColor";
+    // save_json['floorTexture'] = floorTexture;
+    
     await axios({
       method: 'post',
-      url: 'https://j7b304.p.ssafy.io/fastapi/' + `/myroom/save/`+user_id,
+      url: 'https://j7b304.p.ssafy.io/fastapi/' + `myroom/save/`+user_id,
       data : save_json ,
       headers:{
         "Content-Type": "application/json",
+        'Access-Control-Allow-Origin': '*',
       }
     })
     .then((response) => {
-      alert("방 저장 성공!");
+      alert("Room save success");
     })
     .catch((err) => {
-      alert("방 저장 실패! 다시 시도해 주세요");
+      alert("Room save failed! Try again Please");
     });
   }
 
@@ -369,21 +406,29 @@ export default function ThreeJsPage() {
     
       await axios({
         method: 'get',
-        url: 'https://j7b304.p.ssafy.io/fastapi/' + `/myroom/load/${user_id}`,
+        url: 'https://j7b304.p.ssafy.io/fastapi/' + `myroom/load/${user_id}`,
+        headers:{
+          "Content-Type": "application/json",
+          'Access-Control-Allow-Origin': '*',
+        }
       })
         .then((response) => {
           let data = response.data;
+          ThreeJSCtx.changeRoomCnt(data.roomList[data.roomList.length-1].num+1)
+          ThreeJSCtx.wallListHander(data.wallColor)
+          setShowResults(false)
           setRoomList(data.roomList);
           setThreeInfo(data.threeInfo);
           setObjList(data.objList);
           setBox(data.objBox);
+          wallCreate(); 
           setvalueChange(!valueChange);
-          console.log(roomList);
         })
         .catch((err) => {
-          alert("방 불러오기 실패! 다시 시도해 주세요");
+          alert("Room Loading failed! please try again");
         });
   };
+  
 
   return (
     <div className={classes.three_body}>
@@ -393,7 +438,7 @@ export default function ThreeJsPage() {
         <div style={{ padding: '30px' }}>
           <div style={{ display: 'flex' }}>
             <DropdownButton
-                onClick={() => {test(); }}
+                // onClick={() => {test(); }}
                 as={ButtonGroup}
                 key= 'Warning'
                 id={`dropdown-variants-Warning`}
@@ -409,7 +454,7 @@ export default function ThreeJsPage() {
                 >
                 {roomList.map((value) =>(
                   <div>
-                    <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num) }} >Room #{value.num+1}</Dropdown.Item>
+                    <Dropdown.Item onClick={()=> {setClickRoom(value.num); setRoomNumber(value.num); ThreeJSCtx.changeRoomNum(value.num) }} >Room #{value.num+1}</Dropdown.Item>
                   </div>
                 ))}
                   
@@ -417,9 +462,10 @@ export default function ThreeJsPage() {
               </DropdownButton>
      
           {/* 여기밑에부분은 테스트용임을 알림니다. */}
-          <button onClick={() => myRoomLoad()} style={{ width: '45%', marginLeft: '40px'}}>Room load </button>
-          <button onClick={() => myRoomSave()} style={{ width: '45%', marginLeft: '40px'}}>Room save </button>
-           
+          <div style={{ width: '45%' }}>
+            <button onClick={() => myRoomSave()} className={classes.save_load}>Save</button>
+            <button onClick={() => myRoomLoad()} className={`${classes.save_load} ${classes.margin_top}`}>Load</button>
+          </div> 
           </div>                      
             <br />
             <br />
@@ -466,8 +512,9 @@ export default function ThreeJsPage() {
             </div>
           ))}
           <br />
-  
-          <button style={{ display : 'absolute', marginLeft:'70px'}} onClick={exitHandler}>Exit</button>
+          <div style={{ display: 'flex', justifyContent: 'center' }}>
+            <button onClick={exitHandler}>Exit</button>
+          </div>
         </div>
       </div>
 
@@ -495,7 +542,7 @@ export default function ThreeJsPage() {
        
           <CameraSetup initCamera = {ThreeJSCtx.initCamera}/>          
           <ScreenShot  downloadFlag={ThreeJSCtx.downloadFlag}/>          
-          <ambientLight intensity={0.5} color="#eef" />
+          <ambientLight intensity={0.5} color="#eeeeff" />
           <pointLight position={[20, 10, -10]} decay={1} castShadow={true} />
           <pointLight position={[-20, 20, 5]} decay={1} castShadow={true} />
 
@@ -523,7 +570,16 @@ export default function ThreeJsPage() {
           
           {/* 뷰 + 코너 확인 */}
           <div className={`${classes.controls} ${classes.perspectiveControls}`}>
-            <button onClick={() => {setShowResults(!showResults) ; wallCreate()}}>
+            <button
+              className={classes.change_btn} 
+              onClick={(e) => {
+                e.preventDefault(); 
+                setShowResults(!showResults) ; 
+                wallCreate();  
+                setvalueChange(!valueChange);
+                // setTimeout(() => {
+                // }, 100);
+              }}>
               Change
             </button>
             </div>
@@ -544,8 +600,8 @@ export default function ThreeJsPage() {
                     <br/>
                     <br/> 
                     <div style={{ display : 'flex', justifyContent: 'center'}}>
-                      <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} style ={{width : '45%', marginRight : '5px'}} className={classes.btn_hover}>apply</button>
-                      <button  style ={{width : '45%'}} onClick={(e)=>{e.preventDefault(); removeRoom(value.num)}} className={classes.btn_hover}>delete</button>
+                      <button onClick={(e) => {e.preventDefault();setvalueChange(!valueChange)}} style ={{width : '45%', marginRight : '5px'}} >apply</button>
+                      <button  style ={{width : '45%'}} onClick={(e)=>{e.preventDefault(); removeRoom(value.num)}} >delete</button>
                       
                     </div>                   
                   </form>

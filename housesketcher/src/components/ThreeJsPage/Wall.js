@@ -11,11 +11,15 @@ import ThreeJSContext from '../../context/ThreeJSContext';
 const WALL_THICKNESS = 0.1;
 const HALF_WALL_THICKNESS = WALL_THICKNESS / 2;
 
-const Wall = ({ a, b, height, doors = [], windows = [] }) => {
+const Wall = ({ a, b, height, doors = [], windows = [], color }) => {
   const { position, rotation, corners, doorsRelative, windowsRelative } = useMemo(() => {
     const length = distance(a, b) + WALL_THICKNESS;
     const angleFromAtoB = cartesianToPolar(b, a).angle;
-
+    // console.log("color", color)
+    // if(color === ""){
+    //   console.log('colorcolorcolor')
+    //   color= '#ffffff'
+    // }
     return {
       position: [a.x, 0, a.y],
       rotation: [0, degreesToRadians(-angleFromAtoB), 0],
@@ -91,11 +95,12 @@ const Wall = ({ a, b, height, doors = [], windows = [] }) => {
     };
 
     const geometry = new THREE.ExtrudeGeometry( shape, extrudeSettings );
-    const material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+    const material = new THREE.MeshBasicMaterial( { color: '0x00ff00' } );
     const mesh = new THREE.Mesh( geometry, material ) ;
     
     return mesh
   }
+
   return (
     <mesh position={position} rotation={rotation}>
       <mesh position={[-HALF_WALL_THICKNESS, 0, -HALF_WALL_THICKNESS]}>
@@ -109,13 +114,13 @@ const Wall = ({ a, b, height, doors = [], windows = [] }) => {
             },
           ]}
         />
-        <WallMaterial />
+        <WallMaterial color={color} />
       </mesh>
     </mesh>
   );
 };
 
-const WallMaterial = () => {
+const WallMaterial = ({color}) => {
   const ref = useRef();
   const ThreeJSCtx = useContext(ThreeJSContext);
 
@@ -127,7 +132,7 @@ const WallMaterial = () => {
     <meshLambertMaterial
       ref={ref}
       roughness={0.5}
-      args={[{ color: ThreeJSCtx.wallColor }]}
+      color={color}
       castShadow={true}
       receiveShadow={true}
     />

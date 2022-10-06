@@ -207,4 +207,7 @@ input[type=password] {
 
 .emailChecker{
   color: red;
+  display : flex;
+  justify-content: start;
+  margin-left: 40px;
 }

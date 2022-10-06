@@ -14,8 +14,8 @@
 }
 .small_text {
   color: gray;
-  font-size: small;
-  line-height: 2%;
+  font-size: medium;
+  line-height: 20%;
 }
 /* 복붙 */
 .wrapper {

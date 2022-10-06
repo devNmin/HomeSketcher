@@ -1,8 +1,6 @@
 import { createContext, useState } from 'react';
 
 const ThreeJSContext = createContext({
-  wallColor: '',
-  changeWallColor: () => {},
   roomCnt : 0,
   changeRoomCnt : ()=>{},
   floorColor: '',
@@ -15,6 +13,19 @@ const ThreeJSContext = createContext({
   setInitCamera: () => {},
   downloadFlag: false,
   setDownloadFlag: () => {},
+  ///
+  wallColor2: {},
+  changeWallColor2: () => {},
+  roomNum: 0,
+  changeRoomNum: () => {},
+
+  //roomList, threeInfo
+  roomList:[],
+  setRoomList : ()=> {},
+  threeInfo:[],
+  setThreeInfo: ()=>{},
+  //roomList, threeInfo
+  wallListHander: ()=> {}
 });
 
 
@@ -22,17 +33,49 @@ const ThreeJSContext = createContext({
 
 export function ThreeJSContextProvider(props) {
   
-  const [wallColor, setWallColor] = useState('#a39b9b');
+
   const [roomCnt, setRoomCnt] = useState(0);
   const [floorColor, setFloorColor] = useState('#E5D8B0');
   const [floorTexture, setFloorTexture] = useState('wood');
   const [mode, setMode] = useState('translate');
   const [initCamera, setInitCamera] = useState(0);
   const [downloadFlag, setDownloadFlag] = useState(false);
+  ///
+  const [wallColor2, setWallColor2] = useState({});
+  const [wallColor, setWallColor] = useState('#FAFAFA');
+  const [roomNum, setRoomNum] = useState(0);
 
-  const wallColorHandler = (color) => {
-    setWallColor(color);
+  //roomList, threeInfo
+  const [roomList,setRoomList] = useState([]);
+  const [threeInfo,setThreeInfo] = useState([]);
+  //roomList, threeInfo
+
+  //roomList, threeInfo
+  const roomListHandler = (room) =>{
+    
+    setRoomList(room);
+  }
+  const threeInfoHandler = (three) =>{
+    setThreeInfo(three);
+  }
+
+  ///
+  const wallColorHandler2 = (color) => {
+
+    setWallColor2((prevState) => ({
+      ...prevState,
+      [roomNum]: color,
+    }));
+    // wallColor2[roomNum] = color;
+  
+    // setWallColor2(wallColor2);
   };
+  const wallListHander = (dict) => {
+    setWallColor2(dict)
+  }
+  const roomNumHandler = (num) => {
+    setRoomNum(num)
+  }
   const floorColorHandler = (color) => {
     setFloorColor(color);
   };
@@ -59,8 +102,6 @@ export function ThreeJSContextProvider(props) {
   }
 
   const context = {
-    wallColor: wallColor,
-    changeWallColor: wallColorHandler,
     roomCnt: roomCnt,
     changeRoomCnt : roomCntHandler,
     floorColor: floorColor,
@@ -73,6 +114,19 @@ export function ThreeJSContextProvider(props) {
     setInitCamera: initCameraHandler,
     downloadFlag: downloadFlag,
     setDownloadFlag: downloadFlagHandler,
+
+    wallColor2: wallColor2,
+    changeWallColor2: wallColorHandler2,
+    roomNum: roomNum,
+    changeRoomNum: roomNumHandler,
+
+    //roomList, threeInfo
+    roomList: roomList,
+    changeRoomList : roomListHandler,
+    threeInfo: threeInfo,
+    changeThreeInfo : threeInfoHandler,
+    wallListHander: wallListHander,
+    //roomList, threeInfo
   };
 
   return (

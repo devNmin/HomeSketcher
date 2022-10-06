@@ -13,24 +13,26 @@ function ItemsLayout() {
   if (!items.length) {
     return (
       <div className={classes.display_flex}>
-        <h2>No results were found for your search</h2>
+        <h2 className={classes.no_search}>No results were found for your search</h2>
       </div>
     );
   }
   return (
     <>
-      <div className={classes.display_flex}>
-        {items.map((item) => {
-          return (
-            <div  key={item.id} className={classes.item_container}>
-              <LikeFurniture
-                key={item.id}
-                furniture={item}
-                onClick={() => {}}
-              ></LikeFurniture>
-            </div>
-          );
-        })}
+      <div className={classes.width}>
+        <div className={classes.display_flex}>
+          {items.map((item) => {
+            return (
+              <div key={item.id} className={classes.item_container}>
+                <LikeFurniture
+                  key={item.id}
+                  furniture={item}
+                  onClick={() => {}}
+                ></LikeFurniture>
+              </div>
+            );
+          })}
+        </div>
       </div>
       <Pagnation></Pagnation>
       <div className={classes.blank}></div>

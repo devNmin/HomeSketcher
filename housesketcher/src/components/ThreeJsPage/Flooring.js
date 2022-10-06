@@ -43,7 +43,8 @@ const FlooringMaterial = () => {
       <meshLambertMaterial
         ref={ref}
         roughness={0.5}
-        color={ThreeJSCtx.floorColor}
+        // color={ThreeJSCtx.floorColor}
+        color={"#FAFAFA"}
         side={THREE.DoubleSide}
         map={ThreeJSCtx.floorTexture? colorMap :null}
       />

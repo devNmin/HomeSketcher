@@ -26,7 +26,7 @@ function HomeSketcherAIPage() {
         setResponseData(response.data);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   };
   useEffect(() => {

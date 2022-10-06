@@ -5,3 +5,15 @@
   margin-top: 0.6rem;
   font-size: large;
 }
+
+.display_flex {
+  display: flex;
+  justify-content: center;
+}
+
+.width {
+  width: 80%;
+}
+.width > div {
+  margin-top: 6rem;
+}
