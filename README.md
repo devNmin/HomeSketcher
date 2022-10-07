@@ -207,7 +207,7 @@
 
 ## 시나리오
 
-<img width="2811" alt="시연 시나리오" src="https://user-images.githubusercontent.com/53360337/193832809-58556ab5-a30c-4b1c-bdb0-535084afe44d.png">
+<img width="2811" alt="시연 시나리오 (2)" src="https://user-images.githubusercontent.com/53360337/194444031-e706b336-d1de-410c-9c90-0e827f355ba0.png">
 
 <br>
 
