@@ -476,7 +476,7 @@ export default function ThreeJsPage() {
 
       //true 이면 모델하우스 예시를 뽑아오도록 바꿈
       if(modelHouse){
-        user_id = 30; //모델하우스 파일명을 넣어줌
+        user_id = 17; //모델하우스 파일명을 넣어줌
       }
     
       await axios({
