@@ -1,11 +1,11 @@
 import { createContext, useState } from 'react';
 
 const ThreeJSContext = createContext({
-  roomCnt : 0,
-  changeRoomCnt : ()=>{},
+  roomCnt: 0,
+  changeRoomCnt: () => {},
   floorColor: '',
   changeFloorColor: () => {},
-  floorTexture: null,      
+  floorTexture: null,
   changeFloorTexture: () => {},
   mode: '',
   changeMode: () => {},
@@ -20,24 +20,19 @@ const ThreeJSContext = createContext({
   changeRoomNum: () => {},
 
   //roomList, threeInfo
-  roomList:[],
-  setRoomList : ()=> {},
-  threeInfo:[],
-  setThreeInfo: ()=>{},
+  roomList: [],
+  setRoomList: () => {},
+  threeInfo: [],
+  setThreeInfo: () => {},
   //roomList, threeInfo
-  wallListHander: ()=> {},
+  wallListHander: () => {},
 
   //objList
-  objList:[],
-  setObjList:()=>{},
+  objList: [],
+  setObjList: () => {},
 });
 
-
-
-
 export function ThreeJSContextProvider(props) {
-  
-
   const [roomCnt, setRoomCnt] = useState(0);
   const [floorColor, setFloorColor] = useState('#E5D8B0');
   const [floorTexture, setFloorTexture] = useState('wood');
@@ -50,45 +45,44 @@ export function ThreeJSContextProvider(props) {
   const [roomNum, setRoomNum] = useState(0);
 
   //roomList, threeInfo
-  const [roomList,setRoomList] = useState([]);
-  const [threeInfo,setThreeInfo] = useState([]);
+  const [roomList, setRoomList] = useState([]);
+  const [threeInfo, setThreeInfo] = useState([]);
   //roomList, threeInfo
 
   //objList
-  const [objList, setObjList] = useState([]) // object 리스트 
+  const [objList, setObjList] = useState([]); // object 리스트
 
   //objList
-  const objListHandler = (objList)=>{
+  const objListHandler = (objList) => {
     setObjList(objList);
-  }
+  };
 
   //roomList, threeInfo
-  const roomListHandler = (room) =>{
-    
+  const roomListHandler = (room) => {
     setRoomList(room);
-  }
-  const threeInfoHandler = (three) =>{
+  };
+  const threeInfoHandler = (three) => {
     setThreeInfo(three);
-  }
+  };
 
   ///
   const wallColorHandler2 = (color) => {
-
     setWallColor2((prevState) => ({
       ...prevState,
       [roomNum]: color,
     }));
     // wallColor2[roomNum] = color;
-  
+
     // setWallColor2(wallColor2);
   };
   const wallListHander = (dict) => {
-    setWallColor2(dict)
-  }
+    setWallColor2(dict);
+  };
   const roomNumHandler = (num) => {
-    setRoomNum(num)
-  }
+    setRoomNum(num);
+  };
   const floorColorHandler = (color) => {
+    console.log('색입력');
     setFloorColor(color);
   };
   const floorTextureHandler = (texture) => {
@@ -98,27 +92,27 @@ export function ThreeJSContextProvider(props) {
       setFloorTexture(null);
     }
   };
-  const roomCntHandler = (roomCnt)=>{
-    setRoomCnt(roomCnt)
-  }
+  const roomCntHandler = (roomCnt) => {
+    setRoomCnt(roomCnt);
+  };
   const modeHandler = (name) => {
-    setMode(name)
+    setMode(name);
     //console.log('context', mode)
-  }
+  };
   const initCameraHandler = (value) => {
-    setInitCamera(value)
-  }
+    setInitCamera(value);
+  };
   const downloadFlagHandler = (value) => {
-    setDownloadFlag(value)
+    setDownloadFlag(value);
     //ThreeJSCtx
-  }
+  };
 
   const context = {
     roomCnt: roomCnt,
-    changeRoomCnt : roomCntHandler,
+    changeRoomCnt: roomCntHandler,
     floorColor: floorColor,
     changeFloorColor: floorColorHandler,
-    floorTexture: floorTexture,      
+    floorTexture: floorTexture,
     changeFloorTexture: floorTextureHandler,
     mode: mode,
     changeMode: modeHandler,
@@ -134,15 +128,15 @@ export function ThreeJSContextProvider(props) {
 
     //roomList, threeInfo
     roomList: roomList,
-    changeRoomList : roomListHandler,
+    changeRoomList: roomListHandler,
     threeInfo: threeInfo,
-    changeThreeInfo : threeInfoHandler,
+    changeThreeInfo: threeInfoHandler,
     wallListHander: wallListHander,
     //roomList, threeInfo
 
     //objList
-    objList:objList,
-    objListHandler:objListHandler,
+    objList: objList,
+    objListHandler: objListHandler,
   };
 
   return (

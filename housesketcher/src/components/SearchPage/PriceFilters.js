@@ -31,7 +31,7 @@ function PriceFilters() {
 
   return (
     <div>
-      <hr />
+      <hr className={classes.categoryHr} />
       <div className={classes.category_line}>
         <p className={classes.category_name}>Price</p>
         <form className={classes.row}>

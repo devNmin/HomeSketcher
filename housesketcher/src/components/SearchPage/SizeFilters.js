@@ -50,7 +50,7 @@ function SizeFilters() {
 
   return (
     <div>
-      <hr />
+      <hr className={classes.categoryHr} />
       <div className={classes.category_line}>
         <p className={classes.category_name}>Size</p>
         <form className={classes.row}>
