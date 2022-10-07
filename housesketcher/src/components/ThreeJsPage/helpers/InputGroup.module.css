@@ -1,0 +1,132 @@
+.display_flex {
+  position: absolute;
+  display: flex;
+  top: 0px;
+  left: 60%;
+}
+@media ( max-width: 992px ) {
+  .display_flex {
+    top: 95%;
+  }
+}
+.inputs_box{
+  position: absolute;
+  width: 13rem;
+  height: 4rem;
+  left: -10%;
+  background: rgba(151, 150, 150, 0.457);
+  border-radius: 2rem;
+}
+.display_flex label {
+  font-size: small;
+  line-height: 1rem;
+  margin-left: 1rem;
+  margin-right: 0.2rem;
+}
+.input_div {
+  display:flex;
+  align-items: center;
+}
+.input_div > input:hover {
+  box-shadow: 1px 1px 1px #f3cd58;
+}
+/* style */
+.style_div {
+  position: relative;
+  display:flex;
+  margin-top: 0.5rem;
+}
+.style_icon_box {
+  display: flex;
+  z-index: 1;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+}
+.style_icon_box:hover {
+  box-shadow: 1px 1px 5px gray;
+}
+.style_inputs {
+  position: absolute;
+  top: 3rem;
+  left: -3rem;
+  display: none;
+  justify-content: space-around;
+  align-items: center;
+
+  background-color: rgba(226, 226, 226, 0.748);
+  width: 12rem;
+  border-radius : 2rem;
+}
+.style_div:hover .style_inputs {
+  display: flex;
+}
+/* object */
+.object_div {
+  display:flex;
+  margin-top: 0.5rem;
+}
+.object_icon_box {
+  z-index: 1;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+}
+.object_icon_box:hover {
+  box-shadow: 1px 1px 5px gray;
+}
+.object_inputs {
+  display: none;
+  position: absolute;
+  flex-direction : column;
+  justify-content: center;
+  align-items: center;
+  top: 3.5rem;
+  left: 4rem;
+  width: 5rem;
+  
+  background-color: rgba(226, 226, 226, 0.628);
+  border-radius : 1rem;
+}
+.object_inputs > p {
+  margin: 0.2rem;
+  font-size: small;
+  user-select: none;
+  cursor: pointer;
+}
+.object_inputs > p:hover {
+  text-shadow: 1px 1px 1px #f3cd58;
+}
+.object_div:hover .object_inputs{
+  display: flex;
+}
+/* camera */
+.camera_div {
+  z-index: 1;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 2rem;
+  background: #f3cd58;
+  color: white;
+  cursor: pointer;
+  transition: all ease 1s;
+}
+.camera_div:hover {
+  box-shadow: 1px 1px 5px gray;
+  transform: rotate( 720deg );
+}

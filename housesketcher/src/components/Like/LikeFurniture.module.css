@@ -1,0 +1,72 @@
+.tooltip {
+  display: block;
+  font-weight: bold;
+}
+
+.tooltip {
+  width: 14rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tooltip:hover .tooltip_text {
+  white-space: normal;
+  z-index: 1;
+  position: absolute;
+  left: -1rem;
+
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 0.8rem;
+  color: white;
+  background: rgba(69, 68, 68, 0.709);
+}
+.tag {
+  margin-top: 0.6rem;
+  text-align: start;
+}
+.tag > p {
+  margin: 0;
+  font-size: medium;
+}
+.name_div {
+  text-align: left;
+  margin-left: 0.8rem;
+}
+.like_div {
+  display: block;
+  position: absolute;
+}
+/* card */
+.card_size {
+  width: 16rem;
+  height: 22rem;
+}
+.card_size > a {
+  display: flex;
+  justify-content: center;
+}
+.card_size:hover {
+  box-shadow: 1px 1px 5rem #f3cc5829;
+}
+.img_size {
+  margin: 1rem;
+  width: 12rem;
+  height: 14rem;
+}
+.star_size {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+.star_size:hover {
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+}
+.star_position {
+  position: absolute;
+  top: 14rem;
+  left: 84%;
+}
+/* style={{ width: '10%', height: '10%', cursor: 'pointer' }} */

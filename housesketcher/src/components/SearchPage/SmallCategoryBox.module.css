@@ -1,0 +1,110 @@
+.categoryHr {
+  margin: 0;
+  width: 100%;
+}
+
+.container {
+  margin-top: 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 700px;
+}
+
+.category_box {
+  width: 50rem;
+  border: 1px solid black;
+  margin-bottom: 1.6rem;
+}
+
+.category_line {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+}
+
+.category_name {
+  width: 8rem;
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 0;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.row_justify_between {
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row input {
+  width: 7rem;
+  margin-left: 1.2rem;
+  margin-right: 1rem;
+  text-align: end;
+}
+.row label {
+  width: 2.4rem;
+  font-size: small;
+}
+.item {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+.item > p {
+  cursor: pointer;
+  width: 10rem;
+  margin-left: 1.2rem;
+  font-size: small;
+}
+
+::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+input::placeholder {
+  margin-right: 0.2rem;
+}
+
+.request_button {
+  width: 80%;
+  background-color: #f3cd58;
+  color: white;
+  border: 0;
+  height: 2rem;
+  line-height: 1rem;
+  margin-right: 1rem;
+}
+
+.styleName_row {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+.styleName_row > p {
+  width: 8rem;
+  margin-left: 1.2rem;
+  cursor: pointer;
+  line-height: 1rem;
+  font-size: small;
+}
+
+.bold {
+  font-weight: bold;
+}
