@@ -97,6 +97,11 @@ function AIStyle() {
       })
       .then((response) => {
         // console.log(response.data.message);
+        if (localStorage.getItem('userInfo')) {
+          let info = JSON.parse(localStorage.getItem('userInfo'));
+          info.user_style = style;
+          localStorage.setItem('userInfo', JSON.stringify(info));
+        }
         new swal(
           'Style change complete',
           `before : ${user.user_style} &nbsp;&nbsp;  after : ${style}`,
