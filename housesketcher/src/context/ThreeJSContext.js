@@ -82,7 +82,6 @@ export function ThreeJSContextProvider(props) {
     setRoomNum(num);
   };
   const floorColorHandler = (color) => {
-    console.log('색입력');
     setFloorColor(color);
   };
   const floorTextureHandler = (texture) => {
