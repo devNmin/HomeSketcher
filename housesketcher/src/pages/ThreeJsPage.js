@@ -34,6 +34,10 @@ import Canvas2D from '../components/ThreeJsPage/2d/drawroom'
 import ChairOutlinedIcon from '@mui/icons-material/ChairOutlined';
 ///////data load (나중에 방 데이터 저장 불러오기 쓸때 참고용)/////////
 // import data from '../components/ThreeJsPage/floplan-data.json';
+// 설명
+import Joyride from "react-joyride";
+import {stepsss} from '../components/joyride/steps'
+
 const DevTools = () => {
   const { scene, renderer } = useThree();
 
@@ -120,7 +124,7 @@ export default function ThreeJsPage() {
 
         objUrl['centerX'] = (threeInfo[i].coords[0]['x']+threeInfo[i].coords[2]['x'])/2+offsetCanvasX
         objUrl['centerY'] = (threeInfo[i].coords[0]['y']+threeInfo[i].coords[2]['y'])/2+offsetCanvasY
-        // objUrl['rotation'] = {"_x":0 ,"_y": 0, "_z":0}
+        objUrl['rotation'] = {"x":0 ,"y": 0, "z":0}
         // objUrl['scale'] = {"x":1 ,"y": 1, "z":1}
 
         break;
@@ -143,6 +147,7 @@ export default function ThreeJsPage() {
   const removeobjListHandler = (objUrl) => {
     // setObjList(objList.filter((obj) => obj.id !== objUrl.id));
     ThreeJSCtx.objListHandler(objList.filter((obj) => obj.id !== objUrl.id))
+    
 
   };
 
@@ -207,8 +212,7 @@ export default function ThreeJsPage() {
   // objBox에 setBox를 이용해서 box들을 json 형태로 저장한다.
   let [objBox, setBox] = useState({});
   let [objPosition, setObjPosition] = useState({});
-  // let [objRotation, setObjRotation] = useState({});
-  // let [objScale, setObjScale] = useState({});
+
 
   //isCollison : 충돌 발생 여부  | setIsCollison : isCollison 토글 시키는 함수
 
@@ -268,11 +272,7 @@ export default function ThreeJsPage() {
       ...prevState,
       [props.uuid]: box,
     }));
-    
-    // setObjRotation((prevState) => ({
-    //   ...prevState,
-    //   [props.uuid]: props.rotation,
-    // }));
+
     // setObjScale((prevState) => ({
     //   ...prevState,
     //   [props.uuid]: props.scale,
@@ -284,38 +284,8 @@ export default function ThreeJsPage() {
       target.position.y = preY;
     }
   
-
-    // let result2 = Object.entries(objRotation); 
-
-    // for (let index = 0; index < result2.length; index++) {
-    //   // let uuid = result2[index][0]
-    //   let objRotations = result2[index][1]
-    //   console.log("objRotation: ",objRotations)
-    //   objList[index]['rotation'] = objRotations
-    // }
-    // // console.log("후후후",objList)
-    // // ----------------------------------
     
-    // // console.log("result3" , result3)
-    // let result3 = Object.entries(objScale); 
     
-    // for (let index = 0; index < result3.length; index++) {
-    //   // let uuid = result3[index][0]
-    //   let objScales = result3[index][1]
-    //   // console.log("objBoxPosition: ", objScales)
-    //   objList[index]['scale'] = objScales
-    // }
-
-
-
-    // setObjRotation((prevState) => ({
-    //   ...prevState,
-    //   [props.uuid]: props.rotation,
-    // }));
-    // setObjScale((prevState) => ({
-    //   ...prevState,
-    //   [props.uuid]: props.scale,
-    // }));
     
     // 벽 충돌 포함
     // Check collision box -> 충돌 확인 // 오브젝트간 충돌
@@ -419,20 +389,22 @@ export default function ThreeJsPage() {
 
 
     let result = Object.entries(objPosition);  //objPosition 0 1 2 3 4 5 
+
     for (let index = 0; index < result.length; index++) {
       let uuid = result[index][0]
       let objBoxPosition = objBox[uuid]
-      
+    
+
       objList[index]['centerX'] = (objBoxPosition.max.x+objBoxPosition.min.x)/2
       objList[index]['centerY'] = (objBoxPosition.max.z+objBoxPosition.min.z)/2
-      break
+
     }
 
       
     // let result2 = Object.entries(objRotation);
     // for (let index = 0; index < result2.length; index++) {
     //   let objRotations = result2[index][1]
-    //   console.log("objRotation: ",objRotations)
+      
     //   objList[index]['rotation'] = objRotations
     // }
     
@@ -488,6 +460,8 @@ export default function ThreeJsPage() {
         }
       })
         .then((response) => {
+          
+          // console.log(JSON.stringify(response.data))
           let data = response.data;
           ThreeJSCtx.changeRoomCnt(data.roomList[data.roomList.length-1].num+1)
           ThreeJSCtx.wallListHander(data.wallColor)
@@ -496,6 +470,10 @@ export default function ThreeJsPage() {
           setThreeInfo(data.threeInfo);
           // setObjList(data.objList);
           ThreeJSCtx.objListHandler(data.objList);
+
+          // {objList.map((obj) => (
+            
+          // ))}
           // setObjRotation(data.objList.rotation);
           // setObjScale(data.objList.scale);
           setBox(data.objBox);
@@ -506,18 +484,36 @@ export default function ThreeJsPage() {
           alert("Room Loading failed! please try again");
         });
   };
-  
 
+//#f3cd58
   return (
     <div className={classes.three_body}>
       {/* 가구 UX 창 */}
-
+      <Joyride steps={stepsss} run continuous 
+        styles={{
+          options: {
+            arrowColor: '#ffff',
+            backgroundColor: '#ffff',
+            overlayColor: 'rgba(0, 0, 0, 0.5)',
+            primaryColor: '#f3cd58',
+            textColor: '#000000',
+            zIndex: 1000,
+          },
+          buttonClose:{
+            display:'none',
+          },
+          buttonSkip:{
+            width:100,
+          }
+        }}
+      />
       <div className={classes.LeftItems} style={{ overflowY: 'scroll' }}>
         <div style={{ padding: '30px' }}>
           <div style={{ display: 'flex' }}>
             <DropdownButton
                 // onClick={() => {test(); }}
                 as={ButtonGroup}
+                data-joyride="room"
                 key= 'Warning'
                 id={`dropdown-variants-Warning`}
                 variant={'Warning'.toLowerCase()}
@@ -540,9 +536,9 @@ export default function ThreeJsPage() {
               </DropdownButton>
      
           {/* 여기밑에부분은 테스트용임을 알림니다. */}
-          <div style={{ width: '45%' }}>
-            <button onClick={() => myRoomSave()} className={classes.save_load}>Save</button>
-            <button onClick={() => myRoomLoad(false)} className={`${classes.save_load} ${classes.margin_top}`}>Load</button>
+          <div style={{ width: '45%' }} >
+            <button data-joyride="save" onClick={() => myRoomSave()} className={classes.save_load}>Save</button>
+            <button data-joyride="load" onClick={() => myRoomLoad(false)} className={`${classes.save_load} ${classes.margin_top}`}>Load</button>
           </div> 
           </div>                      
             <br />
@@ -551,7 +547,7 @@ export default function ThreeJsPage() {
             <button style={{ width: '100%'}}>Staged Furnitures</button>
             <Staged furnitures = {objList} removeObj ={removeobjListHandler}/>
             <br />
-            <div style={{display : 'flex', justifyContent: 'center'}}>
+            <div data-joyride="totalPrice" style={{display : 'flex', justifyContent: 'center'}}>
               Total Cost : {totalcost} $
             </div>
             <br />
@@ -596,8 +592,9 @@ export default function ThreeJsPage() {
         </div>
       </div>
 
-      <div className={classes.RightItems} style={{ backgroundColor: '#E3E8EC' }}>
-        {!showResults && <Canvas2D roomNum = {roomNum} valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
+      <div className={classes.RightItems} style={{ backgroundColor: '#E3E8EC' }} data-joyride="favourites">
+        {!showResults && <Canvas2D  className="test" roomNum = {roomNum} valueChange ={valueChange} threeInfo = {threeInfo} showResults = {showResults} roomList = {roomList} setRoomList={setRoomList} isRect = {isRect} mouseList = {mouseList} ></Canvas2D>}
+        
         {showResults &&<Canvas 
           // onPointerMissed = 밖에 클릭시 target null로 만들기
           onPointerMissed={() => setTarget(null)}
@@ -611,7 +608,6 @@ export default function ThreeJsPage() {
               position = {[obj.centerX,0,obj.centerY]}
               onPointerMissed={() => setTarget(null)}
               // scale = {[obj.scale.x,obj.scale.y,obj.scale.z]}
-              // rotation = {[obj.rotation._x,obj.rotation._y,obj.rotation._z]}
               objUrl={obj.glb_url}
               setTarget={setTarget}
             />
@@ -635,7 +631,7 @@ export default function ThreeJsPage() {
 
           {target && (
             <TransformControls 
-              onChange={(e) => {
+              onChange={() => {
                 ObjectChangeHandler(target);
               }}
               object={target}
@@ -648,19 +644,29 @@ export default function ThreeJsPage() {
         <div>
           
           {/* 뷰 + 코너 확인 */}
-          <div className={`${classes.controls} ${classes.perspectiveControls}`}>
-            <button
-              className={classes.change_btn} 
-              onClick={(e) => {
-                e.preventDefault(); 
-                setShowResults(!showResults) ; 
-                wallCreate();  
-                setvalueChange(!valueChange);
-                // setTimeout(() => {
-                // }, 100);
-              }}>
-              Change
-            </button>
+          <div className={`${classes.controls} ${classes.perspectiveControls}`} data-joyride="viewChange" >
+            {!showResults &&<button
+                className={classes.change_btn} 
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  setShowResults(!showResults) ; 
+                  wallCreate();  
+                  setvalueChange(!valueChange);
+                }}>
+                3D
+              </button>
+            }
+            {showResults &&<button
+                className={classes.change_btn} 
+                onClick={(e) => {
+                  e.preventDefault(); 
+                  setShowResults(!showResults) ; 
+                  wallCreate();  
+                  setvalueChange(!valueChange);
+                }}>
+                2D
+              </button>
+            }
             <button className={classes.model_house} onClick={(e)=>{
               e.preventDefault();
               myRoomLoad(true);
@@ -671,7 +677,7 @@ export default function ThreeJsPage() {
             </div>
 
             {/* 방 수치 변경 */}
-            <div className={classes.help}>
+            <div className={classes.help} >
               {roomList.map(value => (
                 <div className={clickRoom !== value.num ? classes.display_none : null}>
                   <form>
@@ -709,7 +715,6 @@ export default function ThreeJsPage() {
             {/* 벽 색 인풋 받기 */}
             <InputGroup />
             <CaptureBtn />
-            
           </div>
           </div>
       </div>

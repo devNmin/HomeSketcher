@@ -9,7 +9,8 @@ import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 // const textures = {
 //   wood: 'https://www.psdgraphics.com/wp-content/uploads/2013/05/basketball-floor-texture.jpg',
 // };
-
+import {stepsss} from '../../joyride/steps'
+import Joyride from "react-joyride";
 
 
 function InputGroup() {
@@ -34,7 +35,7 @@ function InputGroup() {
       <div className={classes.inputs_box}></div>
       <div className={classes.style_div}>
         <div className={classes.style_icon_box}>
-          <ColorLensOutlinedIcon fontSize="large" />
+          <ColorLensOutlinedIcon data-joyride="colorChange" fontSize="large" />
         </div>
         <div className={classes.style_inputs}>
           <div className={classes.input_div}>
@@ -84,7 +85,7 @@ function InputGroup() {
       </div>
       <div className={classes.object_div}>
         <div className={classes.object_icon_box}>
-          <LivingOutlinedIcon fontSize="large" />
+          <LivingOutlinedIcon data-joyride="furnitureControl" fontSize="large" />
         </div>
         <div className={classes.object_inputs}>
           <p onClick={()=>ThreeJSCtx.changeMode('translate')}>Translate</p>
@@ -94,7 +95,7 @@ function InputGroup() {
       </div>
       <div className={classes.camera_div}>
         <div onClick={() => {ThreeJSCtx.setInitCamera(((ThreeJSCtx.initCamera+1)%3)); ThreeJSCtx.setDownloadFlag(false);}}>
-          <RemoveRedEyeOutlinedIcon fontSize="large"  />
+          <RemoveRedEyeOutlinedIcon  data-joyride="cameraPosition" fontSize="large" />
         </div>
       </div>
     </div>
