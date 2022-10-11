@@ -15,11 +15,11 @@ const StyleList = [
 
 function StyleFilters() {
   const searchCtx = useContext(SearchContext);
-  const [styleName, setStyleName] = useState(null);
+  const [style, setStyle] = useState(null);
 
   useEffect(() => {
-    searchCtx.changeStyle(styleName);
-  }, [styleName]);
+    searchCtx.changeStyle(style);
+  }, [style]);
 
   return (
     <div>
@@ -32,8 +32,9 @@ function StyleFilters() {
               <p
                 key={styleName}
                 onClick={() => {
-                  setStyleName(styleName);
+                  setStyle(styleName);
                 }}
+                className={styleName === style ? classes.bold : null}
               >
                 {styleName}
               </p>
