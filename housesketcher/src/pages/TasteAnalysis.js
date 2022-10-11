@@ -61,7 +61,9 @@ function TasteAnalysisPage() {
               reverseButtons: true,
             }
           );
-          history.push('/loginmain').then(() => window.scrollTo(0, 0));
+          history.push('/loginmain');
+          //   .then(() => window.scrollTo(0, 0)); ==>> 오류 떠서 지움!
+          //error uncaught (in promise) typeerror cannot read property of undefined (reading 'then')
         });
     }
   };
